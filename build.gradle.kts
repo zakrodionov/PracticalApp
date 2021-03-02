@@ -22,6 +22,7 @@ allprojects {
 
 plugins {
     id(Plugins.detekt_plugin).version(Versions.detektVersion)
+    id(Plugins.ktlint_plugin).version(Versions.ktlintVersion)
 }
 
 detekt {
