@@ -1,9 +1,5 @@
 import Versions.kotlinVersion
 
-object Versions {
-    const val kotlinVersion = "1.4.31"
-}
-
 object Libs {
     //AndroidX
     const val androidx_app_compat = "androidx.appcompat:appcompat:1.2.0"

@@ -19,6 +19,7 @@ import Libs.kotlin_stdlib
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id(Plugins.detekt_plugin)
 }
 
 android {

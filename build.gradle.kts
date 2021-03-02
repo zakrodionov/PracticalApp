@@ -20,6 +20,23 @@ allprojects {
     }
 }
 
+plugins {
+    id(Plugins.detekt_plugin).version(Versions.detektVersion)
+}
+
+detekt {
+    buildUponDefaultConfig = true // preconfigure defaults
+    allRules = false
+    config =
+        files("$projectDir/config/detekt.yml") // point to your custom config defining rules to run, overwriting default behavior
+    baseline = file("$projectDir/config/baseline.xml") // a way of suppressing issues before introducing detekt
+
+    reports {
+        html.enabled = true
+        txt.enabled = true
+    }
+}
+
 tasks.register<Delete>("clean") {
     delete(rootProject.buildDir)
 }
