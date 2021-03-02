@@ -19,3 +19,5 @@ local.properties
 /.idea/jarRepositories.xml
 /.idea/gradle.xml
 /.idea/compiler.xml
+/buildSrc/build
+/buildSrc/.gradle
