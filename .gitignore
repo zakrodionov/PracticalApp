@@ -9,6 +9,7 @@
 /.idea/assetWizardSettings.xml
 .DS_Store
 /build
+/app/release
 /captures
 .externalNativeBuild
 .cxx
@@ -21,4 +22,5 @@ local.properties
 /.idea/compiler.xml
 /buildSrc/build
 /buildSrc/.gradle
-!/keystore.properties
+/keystore.properties
+/practicalapp.jks
