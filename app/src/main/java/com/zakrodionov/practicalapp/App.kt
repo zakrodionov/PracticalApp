@@ -8,6 +8,8 @@ import com.facebook.flipper.plugins.inspector.DescriptorMapping
 import com.facebook.flipper.plugins.inspector.InspectorFlipperPlugin
 import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
 import com.facebook.soloader.SoLoader
+import timber.log.Timber
+import timber.log.Timber.DebugTree
 
 class App : Application() {
 
@@ -15,6 +17,7 @@ class App : Application() {
         super.onCreate()
 
         setupFlipper()
+        setupTimber()
     }
 
     private fun setupFlipper() {
@@ -26,5 +29,9 @@ class App : Application() {
             client.addPlugin(InspectorFlipperPlugin(this, DescriptorMapping.withDefaults()))
             client.start()
         }
+    }
+
+    private fun setupTimber() {
+        if (BuildConfig.DEBUG) Timber.plant(DebugTree())
     }
 }
