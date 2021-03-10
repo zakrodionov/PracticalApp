@@ -12,6 +12,10 @@ import Libs.androidx_core
 import Libs.androidx_fragment
 import Libs.androidx_material
 import Libs.espresso_core
+import Libs.flipper
+import Libs.flipper_network
+import Libs.flipper_no_op
+import Libs.flipper_soloader
 import Libs.junit
 import Libs.junit_ext
 import Libs.kotlin_stdlib
@@ -61,9 +65,16 @@ dependencies {
     androidTestImplementation(junit_ext)
     androidTestImplementation(espresso_core)
 
+    // AndroidX
     implementation(androidx_core)
     implementation(androidx_app_compat)
     implementation(androidx_material)
     implementation(androidx_constraintlayout)
     implementation(androidx_fragment)
+
+    // Flipper
+    debugImplementation(flipper)
+    debugImplementation(flipper_network)
+    debugImplementation(flipper_soloader)
+    releaseImplementation(flipper_no_op)
 }

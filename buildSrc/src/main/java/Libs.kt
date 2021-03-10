@@ -1,3 +1,4 @@
+import Versions.flipperVersion
 import Versions.kotlinVersion
 
 object Libs {
@@ -10,6 +11,12 @@ object Libs {
 
     //Kotlin
     const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+
+    // Flipper
+    const val flipper = "com.facebook.flipper:flipper:$flipperVersion"
+    const val flipper_network = "com.facebook.flipper:flipper-network-plugin:$flipperVersion"
+    const val flipper_no_op = "com.facebook.flipper:flipper-noop:$flipperVersion"
+    const val flipper_soloader = "com.facebook.soloader:soloader:0.10.1"
 
     //Test
     const val junit = "junit:junit:4.+"
