@@ -6,9 +6,9 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master, develop, feature/** ]
+    branches: [ master, main, dev, develop, feature/**, fix/** ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, main, dev, develop, feature/**, fix/** ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -26,7 +26,7 @@ jobs:
       with: {java-version: 1.8}
     - name: Make gradlew executable
       run: chmod +x ./gradlew
-    - name: Run unit tests
-      run: ./gradlew detekt
+    - name: Run linters':' detekt, ktlint
+      run: ./gradlew detekt && ./gradlew ktlintCheck 
     
       
