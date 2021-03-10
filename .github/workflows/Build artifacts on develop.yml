@@ -1,0 +1,29 @@
+name: Build artifacts on develop
+
+on:
+  pull_request:
+    branches:
+      branches: [ develop ]
+
+jobs:
+  build_apk_aab:
+    name: Build develop artifacts
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with: { java-version: 1.8 }
+      - name: Build develop APK and AAB
+        run: |
+          ./gradlew assembleDebug
+          ./gradlew bundleDebug
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-debug.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+      - name: Upload AAB Bundle
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-debug.aab
+          path: app/build/outputs/bundle/debug/app-debug.aab
