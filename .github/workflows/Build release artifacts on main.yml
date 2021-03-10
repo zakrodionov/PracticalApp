@@ -25,13 +25,13 @@ jobs:
         run: chmod +x ./gradlew
       - name: Prepare Secret Files
         run: |
-              echo "${{ secrets.KEYSTORE }}" > alvareztech.jks.asc
+              echo "${{ secrets.KEYSTORE }}" > practicalapp.jks.asc
               gpg -d --passphrase "${{ secrets.KEYSTORE_PASSPHRASE }}" --batch practicalapp.jks.asc > practicalapp.jks
 
-      - name: Build develop APK and AAB
-         run: |
-           ./gradlew assembleRelease
-           ./gradlew bundleRelease
+      - name: Build release APK and AAB
+        run: |
+          ./gradlew assembleDebug
+          ./gradlew bundleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v2
