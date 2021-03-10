@@ -7,7 +7,9 @@ object AndroidConfig {
     const val BUILD_TOOLS_VERSION = "30.0.3"
 
     const val VERSION_CODE = 1
-    const val VERSION_NAME = "0.01"
+    const val VERSION_NAME = "0.0.1"
 
     const val TEST_INSTRUMENTATION_RUNNER = "androidx.test.runner.AndroidJUnitRunner"
+
+    const val APK_NAME = "Practical App-$VERSION_NAME"
 }

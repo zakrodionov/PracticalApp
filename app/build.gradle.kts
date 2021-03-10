@@ -1,3 +1,4 @@
+import AndroidConfig.APK_NAME
 import AndroidConfig.APPLICATION_ID
 import AndroidConfig.BUILD_TOOLS_VERSION
 import AndroidConfig.COMPILE_SDK_VERSION
@@ -40,12 +41,21 @@ android {
         versionCode = VERSION_CODE
         versionName = VERSION_NAME
 
+        setProperty("archivesBaseName", APK_NAME)
+
         testInstrumentationRunner = TEST_INSTRUMENTATION_RUNNER
     }
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            versionNameSuffix = "release"
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+
+        getByName("debug") {
+            versionNameSuffix = "debug"
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
