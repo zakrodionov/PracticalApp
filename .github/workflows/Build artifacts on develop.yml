@@ -2,8 +2,7 @@ name: Build artifacts on develop
 
 on:
   pull_request:
-    branches:
-      branches: [ develop ]
+    branches: [ develop ]
 
 jobs:
   build_apk_aab:
