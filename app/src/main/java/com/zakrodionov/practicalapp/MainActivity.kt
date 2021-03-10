@@ -3,7 +3,7 @@ package com.zakrodionov.practicalapp
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : AppCompatActivity() { //sdfsdfsdfsdfs dffsd fsdfsd fsf
+class MainActivity : AppCompatActivity() { //sdfsdfsdfsdfs dffsd fsdfsd fsfdddd
     val a="sdfsdfsdfsdfs dffsd fsdfsd fsfsdfsdfsdfsdfs dffsd fsdfsd fsfsdfsdfsdfsdfs dffsd fsdfsd fsfsdfsdfsdfsdfs dffsd fsdfsd fsfsdfsdfsdfsdfs dffsd fsdfsd fsfsdfsdfsdfsdfs dffsd fsdfsd fsfsdfsdfsdfsdfs dffsd fsdfsd fsfsdfsdfsdfsdfs dffsd fsdfsd fsfsdfsdfsdfsdfs dffsd fsdfsd fsfsdfsdfsdfsdfs dffsd fsdfsd fsfsdfsdfsdfsdfs dffsd fsdfsd fsfsdfsdfsdfsdfs dffsd fsdfsd fsfsdfsdfsdfsdfs dffsd fsdfsd fsfsdfsdfsdfsdfs dffsd fsdfsd fsfsdfsdfsdfsdfs dffsd fsdfsd fsfsdfsdfsdfsdfs dffsd fsdfsd fsf"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
