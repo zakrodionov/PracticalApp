@@ -1,3 +1,4 @@
+import AndroidConfig.APK_NAME
 import AndroidConfig.APPLICATION_ID
 import AndroidConfig.BUILD_TOOLS_VERSION
 import AndroidConfig.COMPILE_SDK_VERSION
@@ -19,6 +20,10 @@ import Libs.flipper_soloader
 import Libs.junit
 import Libs.junit_ext
 import Libs.kotlin_stdlib
+import Libs.leak_canary
+import Libs.timber
+import java.io.FileInputStream
+import java.util.*
 
 plugins {
     id("com.android.application")
@@ -38,12 +43,48 @@ android {
         versionCode = VERSION_CODE
         versionName = VERSION_NAME
 
+        setProperty("archivesBaseName", APK_NAME)
+
         testInstrumentationRunner = TEST_INSTRUMENTATION_RUNNER
+    }
+
+    signingConfigs {
+        create("release") {
+            val keystorePropertiesFile = rootProject.file("keystore.properties")
+
+            if (keystorePropertiesFile.exists()) {
+                with(Properties()) {
+                    load(FileInputStream(keystorePropertiesFile))
+
+                    storeFile = rootProject.file(this["RELEASE_STORE_FILE"] as String)
+                    storePassword = this["RELEASE_STORE_PASSWORD"] as String
+                    keyAlias = this["RELEASE_KEY_ALIAS"] as String
+                    keyPassword = this["RELEASE_KEY_PASSWORD"] as String
+                }
+            } else {
+                storeFile = file("SIGNING_KEY")
+                storePassword = System.getenv("RELEASE_STORE_PASSWORD") as String
+                keyAlias = System.getenv("RELEASE_KEY_ALIAS") as String
+                keyPassword = System.getenv("RELEASE_KEY_PASSWORD") as String
+            }
+
+            isV1SigningEnabled = true
+            isV2SigningEnabled = true
+        }
     }
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            versionNameSuffix = "release"
+            isMinifyEnabled = true
+            isShrinkResources = true
+            signingConfig = signingConfigs["release"]
+
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+
+        getByName("debug") {
+            versionNameSuffix = "debug"
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -77,4 +118,8 @@ dependencies {
     debugImplementation(flipper_network)
     debugImplementation(flipper_soloader)
     releaseImplementation(flipper_no_op)
+
+    implementation(timber)
+
+    debugImplementation(leak_canary)
 }

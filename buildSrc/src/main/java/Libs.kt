@@ -18,6 +18,10 @@ object Libs {
     const val flipper_no_op = "com.facebook.flipper:flipper-noop:$flipperVersion"
     const val flipper_soloader = "com.facebook.soloader:soloader:0.10.1"
 
+    const val timber = "com.jakewharton.timber:timber:4.7.1"
+
+    const val leak_canary = "com.squareup.leakcanary:leakcanary-android:2.6"
+
     //Test
     const val junit = "junit:junit:4.+"
     const val junit_ext = "androidx.test.ext:junit:1.1.2"
