@@ -19,6 +19,8 @@ import Libs.flipper_soloader
 import Libs.junit
 import Libs.junit_ext
 import Libs.kotlin_stdlib
+import Libs.leak_canary
+import Libs.timber
 
 plugins {
     id("com.android.application")
@@ -77,4 +79,8 @@ dependencies {
     debugImplementation(flipper_network)
     debugImplementation(flipper_soloader)
     releaseImplementation(flipper_no_op)
+
+    implementation(timber)
+
+    debugImplementation(leak_canary)
 }
