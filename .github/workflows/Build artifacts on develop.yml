@@ -1,4 +1,4 @@
-name: Build_artifacts_on_develop
+name: Build artifacts on develop
 
 on:
   pull_request:
