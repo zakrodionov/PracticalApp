@@ -36,6 +36,8 @@ object Libs {
     const val hyperion_shared_preferences = "com.willowtreeapps.hyperion:hyperion-shared-preferences:$hyperionVersion"
     const val hyperion_timber = "com.willowtreeapps.hyperion:hyperion-timber:$hyperionVersion"
 
+    const val okhttp = "com.squareup.okhttp3:okhttp:4.9.0"
+
     //Test
     const val junit = "junit:junit:4.+"
     const val junit_ext = "androidx.test.ext:junit:1.1.2"

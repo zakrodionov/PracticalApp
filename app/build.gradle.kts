@@ -31,6 +31,7 @@ import Libs.junit
 import Libs.junit_ext
 import Libs.kotlin_stdlib
 import Libs.leak_canary
+import Libs.okhttp
 import Libs.timber
 import java.io.FileInputStream
 import java.util.Properties
@@ -138,4 +139,6 @@ dependencies {
     debugImplementation(hyperion_phoenix)
     debugImplementation(hyperion_shared_preferences)
     debugImplementation(hyperion_timber)
+
+    implementation(okhttp)
 }
