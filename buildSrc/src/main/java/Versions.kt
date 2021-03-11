@@ -5,5 +5,5 @@ object Versions {
     const val ktlintVersion = "10.0.0"
 
     const val flipperVersion = "0.79.1"
-    const val hyperionVersion = "0.9.30"
+    const val hyperionVersion = "0.9.31"
 }
