@@ -1,7 +1,6 @@
 package com.zakrodionov.practicalapp
 
 import android.app.Application
-import com.facebook.flipper.android.AndroidFlipperClient
 
 class App : Application() {
 
@@ -12,6 +11,6 @@ class App : Application() {
     }
 
     private fun setupFlipper() {
-        FlipperInitializer.initFlipperPlugins(this, AndroidFlipperClient.getInstance(this))
+        FlipperInitializer.initFlipperPlugins(this)
     }
 }
