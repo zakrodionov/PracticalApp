@@ -29,6 +29,7 @@ import Libs.hyperion_timber
 import Libs.junit
 import Libs.junit_ext
 import Libs.kotlin_stdlib
+import Libs.okhttp
 
 plugins {
     id("com.android.application")
@@ -99,4 +100,6 @@ dependencies {
     debugImplementation(hyperion_phoenix)
     debugImplementation(hyperion_shared_preferences)
     debugImplementation(hyperion_timber)
+
+    implementation(okhttp)
 }

@@ -5,12 +5,7 @@ import com.facebook.flipper.core.FlipperClient
 
 object FlipperInitializer {
 
-    interface InitializationResult {
-        // val okHttpClient: OkHttpClient?
-    }
+    val interceptor: Interceptor? = null
 
-    fun initFlipperPlugins(context: Context, client: FlipperClient): InitializationResult {
-        // Setup OkHttpClient
-        return object : InitializationResult {}
-    }
+    fun initFlipperPlugins(context: Context, client: FlipperClient) = Unit
 }
