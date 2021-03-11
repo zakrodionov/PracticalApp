@@ -16,6 +16,16 @@ import Libs.flipper
 import Libs.flipper_network
 import Libs.flipper_no_op
 import Libs.flipper_soloader
+import Libs.hyperion_attr
+import Libs.hyperion_build_config
+import Libs.hyperion_core
+import Libs.hyperion_crash
+import Libs.hyperion_disk
+import Libs.hyperion_geiger_counter
+import Libs.hyperion_measurement
+import Libs.hyperion_phoenix
+import Libs.hyperion_shared_preferences
+import Libs.hyperion_timber
 import Libs.junit
 import Libs.junit_ext
 import Libs.kotlin_stdlib
@@ -77,4 +87,16 @@ dependencies {
     debugImplementation(flipper_network)
     debugImplementation(flipper_soloader)
     releaseImplementation(flipper_no_op)
+
+    // Hyperion
+    debugImplementation(hyperion_core)
+    debugImplementation(hyperion_attr)
+    debugImplementation(hyperion_build_config)
+    debugImplementation(hyperion_crash)
+    debugImplementation(hyperion_disk)
+    debugImplementation(hyperion_geiger_counter)
+    debugImplementation(hyperion_measurement)
+    debugImplementation(hyperion_phoenix)
+    debugImplementation(hyperion_shared_preferences)
+    debugImplementation(hyperion_timber)
 }
