@@ -10,6 +10,16 @@ import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
 import com.facebook.soloader.SoLoader
 import okhttp3.Interceptor
 
+//  Usage interceptor
+//  val client: OkHttpClient = OkHttpClient.Builder()
+//        .apply {
+//            FlipperInitializer.interceptor?.let { addInterceptor(it) }
+//        }
+//        .connectTimeout(60, TimeUnit.SECONDS)
+//        .readTimeout(60, TimeUnit.SECONDS)
+//        .writeTimeout(10, TimeUnit.MINUTES)
+//        .build()
+
 object FlipperInitializer {
 
     private val networkFlipperPlugin: NetworkFlipperPlugin by lazy {
