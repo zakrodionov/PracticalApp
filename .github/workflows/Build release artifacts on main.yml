@@ -2,16 +2,9 @@ name: Build release artifacts on main
 
 on:
   pull_request:
-    branches: [ develop ]
+    branches: [ main ]
   push:
-    branches: [ develop ]
-
-env:
-  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-  KEYSTORE_FILE: ${{ secrets.KEYSTORE_FILE }}
-  KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-  RELEASE_SIGN_KEY_ALIAS: ${{ secrets.RELEASE_SIGN_KEY_ALIAS }}
-  RELEASE_SIGN_KEY_PASSWORD: ${{ secrets.RELEASE_SIGN_KEY_PASSWORD }}
+    branches: [ main ]
 
 jobs:
   build_apk_aab:
@@ -21,20 +14,30 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v1
         with: { java-version: 1.8 }
+        
       - name: "Make gradlew executable"
         run: chmod +x ./gradlew
+        
       - name: Prepare Secret Files
         run: |
-              echo "${{ secrets.KEYSTORE }}" > alvareztech.jks.asc
+              echo "${{ secrets.KEYSTORE }}" > practicalapp.jks.asc
               gpg -d --passphrase "${{ secrets.KEYSTORE_PASSPHRASE }}" --batch practicalapp.jks.asc > practicalapp.jks
+              echo "${{ secrets.KEYSTORE_PROPERTIES }}" > keystore.properties.asc
+              gpg -d --passphrase "${{ secrets.KEYSTORE_PASSPHRASE }}" --batch keystore.properties.asc > keystore.properties
 
-      - name: Build develop APK and AAB
-         run: |
-           ./gradlew assembleRelease
-           ./gradlew bundleRelease
+      - name: Build release APK and AAB
+        run: |
+          ./gradlew assembleRelease
+          ./gradlew bundleRelease
 
       - name: Upload APK
         uses: actions/upload-artifact@v2
         with:
           name: app-release.apk
-          path: app/build/outputs/apk/release/app-release.apk
+          path: app/build/outputs/apk/release/*release.apk
+
+      - name: Upload Aab
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-release.aab
+          path: app/build/outputs/bundle/release/*release.aab

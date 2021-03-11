@@ -1,4 +1,5 @@
 import Versions.flipperVersion
+import Versions.hyperionVersion
 import Versions.kotlinVersion
 
 object Libs {
@@ -12,6 +13,7 @@ object Libs {
     //Kotlin
     const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
+    // Inspect & Debug tools
     // Flipper
     const val flipper = "com.facebook.flipper:flipper:$flipperVersion"
     const val flipper_network = "com.facebook.flipper:flipper-network-plugin:$flipperVersion"
@@ -21,6 +23,18 @@ object Libs {
     const val timber = "com.jakewharton.timber:timber:4.7.1"
 
     const val leak_canary = "com.squareup.leakcanary:leakcanary-android:2.6"
+
+    // Hyperion
+    const val hyperion_core = "com.willowtreeapps.hyperion:hyperion-core:$hyperionVersion"
+    const val hyperion_attr = "com.willowtreeapps.hyperion:hyperion-attr:$hyperionVersion"
+    const val hyperion_build_config = "com.willowtreeapps.hyperion:hyperion-build-config:$hyperionVersion"
+    const val hyperion_crash = "com.willowtreeapps.hyperion:hyperion-crash:$hyperionVersion"
+    const val hyperion_disk = "com.willowtreeapps.hyperion:hyperion-disk:$hyperionVersion"
+    const val hyperion_geiger_counter = "com.willowtreeapps.hyperion:hyperion-geiger-counter:$hyperionVersion"
+    const val hyperion_measurement = "com.willowtreeapps.hyperion:hyperion-measurement:$hyperionVersion"
+    const val hyperion_phoenix = "com.willowtreeapps.hyperion:hyperion-phoenix:$hyperionVersion"
+    const val hyperion_shared_preferences = "com.willowtreeapps.hyperion:hyperion-shared-preferences:$hyperionVersion"
+    const val hyperion_timber = "com.willowtreeapps.hyperion:hyperion-timber:$hyperionVersion"
 
     //Test
     const val junit = "junit:junit:4.+"

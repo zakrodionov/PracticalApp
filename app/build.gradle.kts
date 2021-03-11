@@ -17,13 +17,23 @@ import Libs.flipper
 import Libs.flipper_network
 import Libs.flipper_no_op
 import Libs.flipper_soloader
+import Libs.hyperion_attr
+import Libs.hyperion_build_config
+import Libs.hyperion_core
+import Libs.hyperion_crash
+import Libs.hyperion_disk
+import Libs.hyperion_geiger_counter
+import Libs.hyperion_measurement
+import Libs.hyperion_phoenix
+import Libs.hyperion_shared_preferences
+import Libs.hyperion_timber
 import Libs.junit
 import Libs.junit_ext
 import Libs.kotlin_stdlib
 import Libs.leak_canary
 import Libs.timber
 import java.io.FileInputStream
-import java.util.*
+import java.util.Properties
 
 plugins {
     id("com.android.application")
@@ -51,21 +61,15 @@ android {
     signingConfigs {
         create("release") {
             val keystorePropertiesFile = rootProject.file("keystore.properties")
-
             if (keystorePropertiesFile.exists()) {
-                with(Properties()) {
-                    load(FileInputStream(keystorePropertiesFile))
+                val keystoreProperties = Properties().apply { load(FileInputStream(keystorePropertiesFile)) }
 
+                with(keystoreProperties) {
                     storeFile = rootProject.file(this["RELEASE_STORE_FILE"] as String)
                     storePassword = this["RELEASE_STORE_PASSWORD"] as String
                     keyAlias = this["RELEASE_KEY_ALIAS"] as String
                     keyPassword = this["RELEASE_KEY_PASSWORD"] as String
                 }
-            } else {
-                storeFile = file("SIGNING_KEY")
-                storePassword = System.getenv("RELEASE_STORE_PASSWORD") as String
-                keyAlias = System.getenv("RELEASE_KEY_ALIAS") as String
-                keyPassword = System.getenv("RELEASE_KEY_PASSWORD") as String
             }
 
             isV1SigningEnabled = true
@@ -75,7 +79,7 @@ android {
 
     buildTypes {
         getByName("release") {
-            versionNameSuffix = "release"
+            versionNameSuffix = "-release"
             isMinifyEnabled = true
             isShrinkResources = true
             signingConfig = signingConfigs["release"]
@@ -84,7 +88,7 @@ android {
         }
 
         getByName("debug") {
-            versionNameSuffix = "debug"
+            versionNameSuffix = "-debug"
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -122,4 +126,16 @@ dependencies {
     implementation(timber)
 
     debugImplementation(leak_canary)
+
+    // Hyperion
+    debugImplementation(hyperion_core)
+    debugImplementation(hyperion_attr)
+    debugImplementation(hyperion_build_config)
+    debugImplementation(hyperion_crash)
+    debugImplementation(hyperion_disk)
+    debugImplementation(hyperion_geiger_counter)
+    debugImplementation(hyperion_measurement)
+    debugImplementation(hyperion_phoenix)
+    debugImplementation(hyperion_shared_preferences)
+    debugImplementation(hyperion_timber)
 }
