@@ -1,7 +1,6 @@
 package com.zakrodionov.practicalapp
 
 import android.app.Application
-import com.facebook.flipper.android.AndroidFlipperClient
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
@@ -15,7 +14,7 @@ class App : Application() {
     }
 
     private fun setupFlipper() {
-        FlipperInitializer.initFlipperPlugins(this, AndroidFlipperClient.getInstance(this))
+        FlipperInitializer.initFlipperPlugins(this)
     }
 
     private fun setupTimber() {
