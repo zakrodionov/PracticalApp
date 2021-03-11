@@ -1,11 +1,12 @@
 package com.zakrodionov.practicalapp
 
 import android.content.Context
-import com.facebook.flipper.core.FlipperClient
+import okhttp3.Interceptor
 
+// No-op for release
 object FlipperInitializer {
 
     val interceptor: Interceptor? = null
 
-    fun initFlipperPlugins(context: Context, client: FlipperClient) = Unit
+    fun initFlipperPlugins(context: Context) = Unit
 }
