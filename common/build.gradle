@@ -1,0 +1,5 @@
+apply from: '../common-lib-build.gradle'
+
+dependencies {
+    implementation(Libs.timber)
+}

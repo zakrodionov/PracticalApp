@@ -39,6 +39,7 @@ import java.util.Properties
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("kotlin-kapt")
     id(Plugins.detekt_plugin)
     id(Plugins.ktlint_plugin)
 }
@@ -100,7 +101,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
@@ -141,4 +142,6 @@ dependencies {
     debugImplementation(hyperion_timber)
 
     implementation(okhttp)
+
+    implementation(project(":common"))
 }
