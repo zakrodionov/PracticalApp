@@ -23,6 +23,8 @@ class FlowModoRouter(val appModo: Modo, val flowModo: Modo) {
 
     fun backTo(screenId: String) = flowModo.backTo(screenId)
 
+    fun startFlow(screen: Screen) = appModo.forward(screen)
+
     fun finishFlow() = appModo.back()
 
     fun init(bundle: Bundle?, firstScreen: Screen) = flowModo.init(bundle, firstScreen)
