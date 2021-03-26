@@ -5,7 +5,7 @@ import androidx.lifecycle.SavedStateHandle
 import com.github.terrakok.modo.Modo
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
 import com.zakrodionov.practicalapp.app.core.navigation.launchFullScreenFlow
-import com.zakrodionov.practicalapp.app.ui.Screens
+import com.zakrodionov.practicalapp.app.ui.login.loginFlow
 import com.zakrodionov.practicalapp.data.local.ApplicationSettings
 import com.zakrodionov.practicalapp.data.local.ApplicationSettings.Companion.KEY_IS_LOGGED
 import kotlinx.coroutines.Dispatchers
@@ -57,6 +57,6 @@ class AboutViewModel(
     }
 
     private fun navigateToLoginFlow() {
-        modo.launchFullScreenFlow(Screens.loginFlow())
+        modo.launchFullScreenFlow(loginFlow())
     }
 }

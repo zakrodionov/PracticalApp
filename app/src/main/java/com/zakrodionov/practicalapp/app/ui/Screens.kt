@@ -4,13 +4,10 @@ import androidx.annotation.DrawableRes
 import com.github.terrakok.modo.android.AppScreen
 import com.github.terrakok.modo.android.MultiAppScreen
 import com.zakrodionov.practicalapp.R
-import com.zakrodionov.practicalapp.app.core.navigation.SINGLE_STACK_FLOW
 import com.zakrodionov.practicalapp.app.ui.Screens.AboutScreen
 import com.zakrodionov.practicalapp.app.ui.Screens.FavoriteScreen
 import com.zakrodionov.practicalapp.app.ui.Screens.PostsScreen
 import com.zakrodionov.practicalapp.app.ui.about.AboutFragment
-import com.zakrodionov.practicalapp.app.ui.login.email.EmailFragment
-import com.zakrodionov.practicalapp.app.ui.login.password.PasswordFragment
 import com.zakrodionov.practicalapp.app.ui.postDetails.ArgsPostDetail
 import com.zakrodionov.practicalapp.app.ui.postDetails.PostDetailsFragment
 import com.zakrodionov.practicalapp.app.ui.posts.PostsFragment
@@ -35,19 +32,6 @@ object Screens {
     @Parcelize
     class AboutScreen : AppScreen("AboutScreen") {
         override fun create() = AboutFragment()
-    }
-
-    fun loginFlow(firstScreen: AppScreen = EmailScreen()) =
-        MultiAppScreen("LoginFlow-$SINGLE_STACK_FLOW", listOf(firstScreen), 0)
-
-    @Parcelize
-    class EmailScreen : AppScreen("EmailScreen") {
-        override fun create() = EmailFragment()
-    }
-
-    @Parcelize
-    class PasswordScreen : AppScreen("PasswordScreen") {
-        override fun create() = PasswordFragment()
     }
 
     fun multiStack() = MultiAppScreen("MultiStack", Tab.values().map { it.appScreen }, 0)
