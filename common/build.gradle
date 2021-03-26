@@ -1,0 +1,17 @@
+apply from: '../common-lib-build.gradle'
+
+dependencies {
+    implementation(Libs.androidx_core)
+    implementation(Libs.androidx_app_compat)
+    implementation(Libs.androidx_fragment)
+    implementation(Libs.androidx_material)
+    implementation(Libs.coroutines)
+    implementation(Libs.timber)
+    implementation(Libs.moshi)
+    implementation(Libs.retrofit)
+    implementation(Libs.okhttp_logging_interceptor)
+    implementation(Libs.adapter_delegates)
+
+    api(Libs.state_delegator)
+    api(Libs.coil)
+}

@@ -1,0 +1,89 @@
+package com.zakrodionov.common.extensions
+
+import android.content.Context
+import android.graphics.drawable.Drawable
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ImageSpan
+import android.view.View
+import android.widget.TextView
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.widget.TextViewCompat
+
+fun TextView.setTextOrHide(value: String?) {
+    if (value.isNullOrEmpty()) {
+        gone()
+    } else {
+        show()
+        text = value
+    }
+}
+
+fun TextView.setTextOrHide(value: String?, predicate: () -> Boolean) {
+    if (value?.isNotEmpty() == true && predicate.invoke()) {
+        show()
+        text = value
+    } else {
+        gone()
+    }
+}
+
+fun TextView.setTextOrHideParent(value: String?, parent: View?) {
+    if (value.isNullOrEmpty()) {
+        parent?.gone()
+    } else {
+        parent?.show()
+        text = value
+    }
+}
+
+fun TextView.setTextCompatColor(@ColorRes color: Int) =
+    setTextColor(ContextCompat.getColor(context, color))
+
+fun TextView.setTextAppearanceCompat(textStyle: Int) =
+    TextViewCompat.setTextAppearance(this, textStyle)
+
+fun TextView.setBackgroundTintColor(@ColorInt color: Int?) {
+    color?.let {
+        DrawableCompat.setTint(DrawableCompat.wrap(background).mutate(), it)
+    }
+}
+
+fun TextView.setBackgroundTintColorRes(@ColorRes color: Int) {
+    DrawableCompat.setTint(
+        DrawableCompat.wrap(background).mutate(),
+        context.getCompatColor(color)
+    )
+}
+
+fun TextView.setTextColorFromResources(context: Context, @ColorRes color: Int) {
+    setTextColor(ContextCompat.getColor(context, color))
+}
+
+fun TextView.startDrawable(@DrawableRes id: Int = 0) {
+    setCompoundDrawablesWithIntrinsicBounds(id, 0, 0, 0)
+}
+
+val TextView.textString get() = text.toString()
+
+fun TextView.setStartImageSpan(string: String?, drawable: Drawable?, countSpace: Int = 3) =
+    string?.let {
+        val stringWithSpace = if (drawable != null) " ".repeat(countSpace).plus(it) else it
+
+        val ssb = SpannableString(stringWithSpace)
+        drawable?.let {
+            it.setBounds(0, 0, it.intrinsicWidth, it.intrinsicHeight)
+            ssb.setSpan(
+                ImageSpan(it, ImageSpan.ALIGN_BASELINE),
+                0,
+                1,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
+
+        text = ssb
+    }

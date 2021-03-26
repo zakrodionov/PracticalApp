@@ -51,3 +51,16 @@ repositories {
 6. *Note. Use in project  `classpath(Plugins.android_gradle_plugin)` without imports because of a bug.
 
 [Link](https://proandroiddev.com/gradle-groovy-to-kotlin-dsl-in-15-minutes-d3129aff227e "Link")
+
+
+Можно группировать зависимости в extension, например
+
+```kotlin
+fun DependencyHandlerScope.androidX() {
+    "implementation"(androidx_core)
+    "implementation"(androidx_app_compat)
+    "implementation"(androidx_material)
+    "implementation"(androidx_constraintlayout)
+    "implementation"(androidx_fragment)
+}
+```
