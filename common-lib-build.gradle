@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize'
 apply plugin: Plugins.detekt_plugin
 apply plugin: Plugins.ktlint_plugin
 
@@ -28,10 +29,22 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+
+        coreLibraryDesugaringEnabled true
     }
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
+    dependencies {
+        implementation(Libs.viewbinding_property_delegate)
+
+        coreLibraryDesugaring(Libs.desugar_jdk)
     }
 
 }

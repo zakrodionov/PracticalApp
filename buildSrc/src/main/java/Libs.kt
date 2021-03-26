@@ -1,17 +1,46 @@
+import Versions.adapterDelegatesVersion
 import Versions.flipperVersion
 import Versions.hyperionVersion
+import Versions.koinVersion
 import Versions.kotlinVersion
+import Versions.lifecycleVersion
+import Versions.modoVersion
+import Versions.moshiVersion
+import Versions.mviOrbitVersion
+import Versions.retrofitVersion
 
 object Libs {
     //AndroidX
-    const val androidx_app_compat = "androidx.appcompat:appcompat:1.2.0"
+    const val androidx_app_compat = "androidx.appcompat:appcompat:1.3.0-rc01"
     const val androidx_material = "com.google.android.material:material:1.3.0"
-    const val androidx_core = "androidx.core:core-ktx:1.3.2"
+    const val androidx_core = "androidx.core:core-ktx:1.5.0-rc01"
     const val androidx_constraintlayout = "androidx.constraintlayout:constraintlayout:2.0.4"
-    const val androidx_fragment = "androidx.fragment:fragment-ktx:1.3.0"
+    const val androidx_fragment = "androidx.fragment:fragment-ktx:1.3.2"
 
     //Kotlin
     const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3"
+
+    //Networking
+    const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    const val retrofit_moshi = "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+    const val moshi = "com.squareup.moshi:moshi:$moshiVersion"
+    const val moshi_codegen = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
+    const val okhttp_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:4.9.1"
+
+    //Lifecycle
+    const val lifecycle_extensions = "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    const val lifecycle_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+    const val lifecycle_viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+
+    // Koin
+    const val koin = "io.insert-koin:koin-android:$koinVersion"
+    const val koin_test = "io.insert-koin:koin-test:$koinVersion"
+
+    // Orbit Mvi
+    const val orbit_mvi = "org.orbit-mvi:orbit-core:$mviOrbitVersion"
+    const val orbit_mvi_vm = "org.orbit-mvi:orbit-viewmodel:$mviOrbitVersion"
+    const val orbit_mvi_test = "org.orbit-mvi:orbit-test:$mviOrbitVersion"
 
     // Inspect & Debug tools
     // Flipper
@@ -37,6 +66,22 @@ object Libs {
     const val hyperion_timber = "com.willowtreeapps.hyperion:hyperion-timber:$hyperionVersion"
 
     const val okhttp = "com.squareup.okhttp3:okhttp:4.9.0"
+
+    const val desugar_jdk = "com.android.tools:desugar_jdk_libs:1.1.5"
+
+    const val viewbinding_property_delegate = "com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.4.5"
+
+    //AdapterDelegates
+    const val adapter_delegates = "com.hannesdorfmann:adapterdelegates4:$adapterDelegatesVersion"
+    const val adapter_delegates_dsl =
+        "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:$adapterDelegatesVersion"
+
+    const val modo = "com.github.terrakok:modo:$modoVersion"
+    const val modo_android = "com.github.terrakok:modo-render-android-fm:$modoVersion"
+
+    const val coil = "io.coil-kt:coil:1.1.1"
+
+    const val state_delegator = "com.redmadrobot:state-delegator:1.7"
 
     //Test
     const val junit = "junit:junit:4.+"

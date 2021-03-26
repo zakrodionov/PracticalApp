@@ -1,0 +1,20 @@
+<resources>
+    <string name="ok">ОК</string>
+    <string name="cancel">Отмена</string>
+    <string name="close">Закрыть</string>
+    <string name="attention">Внимание!</string>
+
+    <string name="error_file_larger_than_max_size">Размер файла не должен превышать %d мб</string>
+
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="default_notification_channel_name">Общие уведомления</string>
+    <string name="default_notification_title">Уведомление PracticalApp</string>
+
+    <string name="error">Error</string>
+    <string name="unknown_error">Unknown Error</string>
+    <string name="no_internet_connection_error">No internet connection</string>
+
+    <string name="title_error">Title Error</string>
+    <string name="try_again">Try again</string>
+
+</resources>

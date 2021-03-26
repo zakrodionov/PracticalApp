@@ -12,6 +12,8 @@ import Libs.androidx_constraintlayout
 import Libs.androidx_core
 import Libs.androidx_fragment
 import Libs.androidx_material
+import Libs.coroutines
+import Libs.desugar_jdk
 import Libs.espresso_core
 import Libs.flipper
 import Libs.flipper_network
@@ -29,10 +31,26 @@ import Libs.hyperion_shared_preferences
 import Libs.hyperion_timber
 import Libs.junit
 import Libs.junit_ext
+import Libs.koin
+import Libs.koin_test
 import Libs.kotlin_stdlib
 import Libs.leak_canary
+import Libs.lifecycle_extensions
+import Libs.lifecycle_livedata
+import Libs.lifecycle_viewmodel
+import Libs.modo
+import Libs.modo_android
+import Libs.moshi
+import Libs.moshi_codegen
 import Libs.okhttp
+import Libs.okhttp_logging_interceptor
+import Libs.orbit_mvi
+import Libs.orbit_mvi_test
+import Libs.orbit_mvi_vm
+import Libs.retrofit
+import Libs.retrofit_moshi
 import Libs.timber
+import Libs.viewbinding_property_delegate
 import java.io.FileInputStream
 import java.util.Properties
 
@@ -40,6 +58,7 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-kapt")
+    id("kotlin-parcelize")
     id(Plugins.detekt_plugin)
     id(Plugins.ktlint_plugin)
 }
@@ -87,17 +106,23 @@ android {
             signingConfig = signingConfigs["release"]
 
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+
+            buildConfigField("String", "API_URL", AndroidConfig.API_DEBUG_URL)
         }
 
         getByName("debug") {
             versionNameSuffix = "-debug"
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+
+            buildConfigField("String", "API_URL", AndroidConfig.API_DEBUG_URL)
         }
     }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+
+        isCoreLibraryDesugaringEnabled = true
     }
 
     kotlinOptions {
@@ -110,7 +135,10 @@ android {
 }
 
 dependencies {
+    implementation(project(":common"))
+
     implementation(kotlin_stdlib)
+    implementation(coroutines)
 
     testImplementation(junit)
     androidTestImplementation(junit_ext)
@@ -123,6 +151,29 @@ dependencies {
     implementation(androidx_constraintlayout)
     implementation(androidx_fragment)
 
+    // Koin
+    implementation(koin)
+    testImplementation(koin_test)
+
+    // Networking
+    implementation(retrofit)
+    implementation(retrofit_moshi)
+    implementation(moshi)
+    kapt(moshi_codegen)
+    implementation(okhttp)
+    implementation(okhttp_logging_interceptor)
+
+    // Lifecycle
+    implementation(lifecycle_extensions)
+    implementation(lifecycle_livedata)
+    implementation(lifecycle_viewmodel)
+
+    // Orbit Mvi
+    implementation(orbit_mvi)
+    implementation(orbit_mvi_vm)
+    testImplementation(orbit_mvi_test)
+
+    // region Debug Tools
     // Flipper
     debugImplementation(flipper)
     debugImplementation(flipper_network)
@@ -144,8 +195,17 @@ dependencies {
     debugImplementation(hyperion_phoenix)
     debugImplementation(hyperion_shared_preferences)
     debugImplementation(hyperion_timber)
+    // endregion
 
-    implementation(okhttp)
+    coreLibraryDesugaring(desugar_jdk)
 
-    implementation(project(":common"))
+    implementation(viewbinding_property_delegate)
+
+    // AdapterDelegates
+    implementation(Libs.adapter_delegates)
+    implementation(Libs.adapter_delegates_dsl)
+
+    // Modo
+    implementation(modo)
+    implementation(modo_android)
 }
