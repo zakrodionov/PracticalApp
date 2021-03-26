@@ -6,9 +6,9 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.terrakok.modo.Modo
 import com.github.terrakok.modo.forward
 import com.zakrodionov.practicalapp.R
-import com.zakrodionov.practicalapp.app.ui.Screens
 import com.zakrodionov.practicalapp.app.ui.StubFragment
 import com.zakrodionov.practicalapp.app.ui.StubViewModel
+import com.zakrodionov.practicalapp.app.ui.login.PasswordScreen
 import com.zakrodionov.practicalapp.databinding.FragmentEmailBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -27,6 +27,6 @@ class EmailFragment : StubFragment(R.layout.fragment_email) {
 
 class EmailViewModel(private val modo: Modo) : StubViewModel() {
     fun nextScreen() {
-        modo.forward(Screens.PasswordScreen())
+        modo.forward(PasswordScreen())
     }
 }
