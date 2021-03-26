@@ -3,8 +3,8 @@ package com.zakrodionov.practicalapp.app.ui.about
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import androidx.lifecycle.SavedStateHandle
 import com.github.terrakok.modo.Modo
-import com.github.terrakok.modo.externalForward
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
+import com.zakrodionov.practicalapp.app.core.navigation.launchFullScreenFlow
 import com.zakrodionov.practicalapp.app.ui.Screens
 import com.zakrodionov.practicalapp.data.local.ApplicationSettings
 import com.zakrodionov.practicalapp.data.local.ApplicationSettings.Companion.KEY_IS_LOGGED
@@ -57,6 +57,6 @@ class AboutViewModel(
     }
 
     private fun navigateToLoginFlow() {
-        modo.externalForward(Screens.LoginFlowScreen())
+        modo.launchFullScreenFlow(Screens.loginFlow())
     }
 }

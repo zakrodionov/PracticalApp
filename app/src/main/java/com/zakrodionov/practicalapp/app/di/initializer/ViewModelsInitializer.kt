@@ -2,6 +2,8 @@ package com.zakrodionov.practicalapp.app.di.initializer
 
 import com.zakrodionov.practicalapp.app.ui.FavoriteViewModel
 import com.zakrodionov.practicalapp.app.ui.about.AboutViewModel
+import com.zakrodionov.practicalapp.app.ui.login.email.EmailViewModel
+import com.zakrodionov.practicalapp.app.ui.login.password.PasswordViewModel
 import com.zakrodionov.practicalapp.app.ui.postDetails.PostDetailViewModel
 import com.zakrodionov.practicalapp.app.ui.posts.PostsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -15,6 +17,9 @@ object ViewModelsInitializer : Initializer {
             viewModel { FavoriteViewModel() }
             viewModel { AboutViewModel(get(), get(), get()) }
             viewModel { parameters -> PostDetailViewModel(get(), get(), parameters.get()) }
+
+            viewModel { PasswordViewModel(get()) }
+            viewModel { EmailViewModel(get()) }
         }
     }
 }

@@ -20,17 +20,9 @@ import com.zakrodionov.common.extensions.showToast
 import com.zakrodionov.common.ui.ShowAction
 import com.zakrodionov.practicalapp.R
 import kotlinx.coroutines.flow.collect
-import org.koin.android.ext.android.getKoin
-import org.koin.android.scope.AndroidScopeComponent
-import org.koin.core.annotation.KoinInternalApi
-import org.koin.core.scope.Scope
 
 abstract class BaseFragment<STATE : Any, SIDE_EFFECT : Any>(@LayoutRes contentLayoutId: Int) :
-    Fragment(contentLayoutId), AndroidScopeComponent {
-
-    @OptIn(KoinInternalApi::class)
-    override val scope: Scope
-        get() = (parentFragment as? AndroidScopeComponent)?.scope ?: getKoin().getRootScope()
+    Fragment(contentLayoutId) {
 
     abstract val viewModel: BaseViewModel<STATE, SIDE_EFFECT>
     abstract val binding: ViewBinding

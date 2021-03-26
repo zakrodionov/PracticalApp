@@ -3,8 +3,9 @@ package com.zakrodionov.practicalapp.app.ui.login.email
 import android.os.Bundle
 import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.github.terrakok.modo.Modo
+import com.github.terrakok.modo.forward
 import com.zakrodionov.practicalapp.R
-import com.zakrodionov.practicalapp.app.core.navigation.FlowModoRouter
 import com.zakrodionov.practicalapp.app.ui.Screens
 import com.zakrodionov.practicalapp.app.ui.StubFragment
 import com.zakrodionov.practicalapp.app.ui.StubViewModel
@@ -24,8 +25,8 @@ class EmailFragment : StubFragment(R.layout.fragment_email) {
     }
 }
 
-class EmailViewModel(private val flowModoRouter: FlowModoRouter) : StubViewModel() {
+class EmailViewModel(private val modo: Modo) : StubViewModel() {
     fun nextScreen() {
-        flowModoRouter.forward(Screens.PasswordScreen())
+        modo.forward(Screens.PasswordScreen())
     }
 }
