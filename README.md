@@ -1,4 +1,4 @@
-# PracticalApp
+# PracticalApp  [![Build](https://github.com/zakrodionov/PracticalApp/actions/workflows/Build.yml/badge.svg)](https://github.com/zakrodionov/PracticalApp/actions/workflows/Build.yml)
 
 PracticalApp - пример архитектуры приложения для коммерческой/аутсорс разработки. Основные цели: простота ведения и поддержания кода, использования инструментов, которые не требуют
 длительного изучения (Android Jetpack, Koin, Mvi-Orbit, Coroutines). Принципы Clean Architecture придерживаются, но не строго и без фанатизма, не в ущерб производительности (без абстракций ради абстракций).
