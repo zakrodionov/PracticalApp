@@ -43,6 +43,10 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
         }
     }
 
+    override fun clearViews() {
+        binding.rvPosts.adapter = null
+    }
+
     override fun sideEffect(event: PostsEvent) {
         when (event) {
             is PostsEvent.ShowEvent -> handleShowAction(event.showAction)
