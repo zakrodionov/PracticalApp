@@ -9,7 +9,7 @@ object Versions {
     const val libsVersionsPluginVersion = "0.38.0"
 
     const val flipperVersion = "0.82.0"
-    const val hyperionVersion = "0.9.31"
+    const val hyperionVersion = "0.9.32"
 
     const val koinVersion = "3.0.1-beta-1"
     const val mviOrbitVersion = "3.0.1"
