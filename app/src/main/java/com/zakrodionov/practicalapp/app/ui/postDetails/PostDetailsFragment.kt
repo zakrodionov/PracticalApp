@@ -7,6 +7,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.load
 import com.redmadrobot.lib.sd.base.State
 import com.redmadrobot.lib.sd.base.StateDelegate
+import com.zakrodionov.common.extensions.ifNotNull
 import com.zakrodionov.common.extensions.initialArguments
 import com.zakrodionov.common.extensions.setTextOrHide
 import com.zakrodionov.common.extensions.withInitialArguments
@@ -50,7 +51,10 @@ class PostDetailsFragment : BaseFragment<PostDetailsState, PostDetailsEvent>(R.l
         with(binding) {
             tvTitle.setTextOrHide(state.post?.text)
             ivPhoto.load(state.post?.image)
-            binding.progressBar.isVisible = state.isLoading
+            progressBar.isVisible = state.isLoading
+            state.error.ifNotNull { error ->
+                layoutError.tvTitle.text = error.message.getText(requireContext())
+            }
         }
         screenState.currentState = state.screenState
     }
