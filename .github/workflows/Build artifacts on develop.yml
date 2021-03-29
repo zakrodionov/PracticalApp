@@ -1,8 +1,6 @@
 name: Build artifacts on develop
 
 on:
-  pull_request:
-    branches: [ develop ]
   push:
     branches: [ develop ]
 

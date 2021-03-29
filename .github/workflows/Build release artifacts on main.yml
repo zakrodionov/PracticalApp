@@ -1,8 +1,6 @@
 name: Build release artifacts on main
 
 on:
-  pull_request:
-    branches: [ main ]
   push:
     branches: [ main ]
 
