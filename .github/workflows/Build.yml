@@ -29,16 +29,16 @@ jobs:
       run: chmod +x ./gradlew
 
     - name: Generate cache key
-        run: ./checksum.sh checksum.txt
+      run: ./checksum.sh checksum.txt
 
     - uses: actions/cache@v2
-        continue-on-error: true # continue if the cache restore/upload fails
-        with:
-          path: |
-            ~/.gradle/caches/modules-*
-            ~/.gradle/caches/jars-*
-            ~/.gradle/caches/build-cache-*
-          key: ${{ runner.os }}-gradle-${{ hashFiles('checksum.txt') }}
+      continue-on-error: true # continue if the cache restore/upload fails
+      with:
+        path: |
+          ~/.gradle/caches/modules-*
+          ~/.gradle/caches/jars-*
+          ~/.gradle/caches/build-cache-*
+        key: ${{ runner.os }}-gradle-${{ hashFiles('checksum.txt') }}
 
     - name: "Run linters: detekt, ktlint"
       run: ./gradlew detekt && ./gradlew ktlintCheck
