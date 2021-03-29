@@ -1,9 +1,9 @@
 package com.zakrodionov.practicalapp.app.ui
 
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import com.github.terrakok.modo.android.AppScreen
 import com.github.terrakok.modo.android.MultiAppScreen
-import com.zakrodionov.common.ui.models.ResourceString.Res
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.ui.Screens.AboutScreen
 import com.zakrodionov.practicalapp.app.ui.Screens.FavoriteScreen
@@ -38,8 +38,8 @@ object Screens {
     fun multiStack() = MultiAppScreen("MultiStack", Tab.values().map { it.appScreen }, 0)
 }
 
-enum class Tab(val appScreen: AppScreen, val title: Res, @DrawableRes val icon: Int) {
-    POSTS(PostsScreen(), Res(R.string.posts), R.drawable.ic_list),
-    FAVORITE(FavoriteScreen(), Res(R.string.favorite), R.drawable.ic_favorite),
-    ABOUT(AboutScreen(), Res(R.string.about), R.drawable.ic_about)
+enum class Tab(val appScreen: AppScreen, @StringRes val title: Int, @DrawableRes val icon: Int) {
+    POSTS(PostsScreen(), R.string.posts, R.drawable.ic_list),
+    FAVORITE(FavoriteScreen(), R.string.favorite, R.drawable.ic_favorite),
+    ABOUT(AboutScreen(), R.string.about, R.drawable.ic_about)
 }
