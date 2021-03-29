@@ -49,7 +49,11 @@ gpg -c --armor keystore.properties
 
 
 
-Для локльной подписи .apk достаточно в корневую папку добавить practicalapp.jks и keystore.properties, и запустить подпись.
+Для локальной подписи .apk достаточно в корневую папку добавить practicalapp.jks и keystore.properties, и запустить подпись.
+
+Для использования cache нужно добавить скрипт **checksum.sh** и сдeлать его исполняемым `git update-index --chmod=+x checksum.sh`
+
+Стригеррить CI можно командой `git commit --allow-empty -m "Trigger Build"`
 
 На всякий случай **надо добавить эти файлы в .gitignore**, чтобы случайно не запушить в git.
 
