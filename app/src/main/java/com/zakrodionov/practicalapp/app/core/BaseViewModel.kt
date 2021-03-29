@@ -21,3 +21,4 @@ abstract class BaseViewModel<STATE : Any, SIDE_EFFECT : Any> : ViewModel(), Cont
     open fun onNonCriticalError(baseError: BaseError) = Unit
     open fun onContentError(baseError: BaseError) = Unit
 }
+//"sdfsdf"
