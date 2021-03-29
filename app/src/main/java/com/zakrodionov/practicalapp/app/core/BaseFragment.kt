@@ -52,7 +52,14 @@ abstract class BaseFragment<STATE : Any, SIDE_EFFECT : Any>(@LayoutRes contentLa
         }
     }
 
+    override fun onDestroyView() {
+        clearViews()
+        super.onDestroyView()
+    }
+
     open fun setupViews(view: View, savedInstanceState: Bundle?) = Unit
+
+    open fun clearViews() = Unit
 
     abstract fun sideEffect(event: SIDE_EFFECT)
 
