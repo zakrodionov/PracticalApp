@@ -7,6 +7,8 @@ import AndroidConfig.TARGET_SDK_VERSION
 import AndroidConfig.TEST_INSTRUMENTATION_RUNNER
 import AndroidConfig.VERSION_CODE
 import AndroidConfig.VERSION_NAME
+import Libs.adapter_delegates
+import Libs.adapter_delegates_dsl
 import Libs.androidx_app_compat
 import Libs.androidx_constraintlayout
 import Libs.androidx_core
@@ -202,8 +204,8 @@ dependencies {
     implementation(viewbinding_property_delegate)
 
     // AdapterDelegates
-    implementation(Libs.adapter_delegates)
-    implementation(Libs.adapter_delegates_dsl)
+    implementation(adapter_delegates)
+    implementation(adapter_delegates_dsl)
 
     // Modo
     implementation(modo)
