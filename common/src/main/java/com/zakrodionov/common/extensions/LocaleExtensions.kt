@@ -3,7 +3,7 @@ package com.zakrodionov.common.extensions
 import android.content.res.Resources
 import androidx.core.os.ConfigurationCompat
 import java.time.ZoneId
-import java.util.*
+import java.util.Locale
 
 // Default Locale of your application
 val currentLocale: Locale get() = Locale.getDefault()
@@ -12,4 +12,3 @@ val currentLocale: Locale get() = Locale.getDefault()
 val currentDeviceLocale: Locale get() = ConfigurationCompat.getLocales(Resources.getSystem().configuration)[0]
 
 val currentZoneId: ZoneId = ZoneId.systemDefault()
-
