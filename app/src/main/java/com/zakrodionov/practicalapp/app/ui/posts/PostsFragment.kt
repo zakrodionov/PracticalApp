@@ -7,6 +7,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.redmadrobot.lib.sd.base.State
 import com.redmadrobot.lib.sd.base.StateDelegate
+import com.zakrodionov.common.extensions.ifNotNull
 import com.zakrodionov.common.extensions.setData
 import com.zakrodionov.common.extensions.setup
 import com.zakrodionov.common.ui.ScreenState
@@ -19,6 +20,10 @@ import com.zakrodionov.practicalapp.databinding.FragmentPostsBinding
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
 
 class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_posts) {
+
+    companion object {
+        fun newInstance() = PostsFragment()
+    }
 
     override val viewModel: PostsViewModel by stateViewModel()
     override val binding: FragmentPostsBinding by viewBinding(FragmentPostsBinding::bind)
@@ -55,7 +60,12 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
 
     override fun render(state: PostsState) {
         adapter.setData(state.posts)
-        binding.progressBar.isVisible = state.isLoading
+        with(binding) {
+            progressBar.isVisible = state.isLoading
+            state.error.ifNotNull { error ->
+                layoutError.tvTitle.text = error.message.getText(requireContext())
+            }
+        }
         screenState.currentState = state.screenState
     }
 }

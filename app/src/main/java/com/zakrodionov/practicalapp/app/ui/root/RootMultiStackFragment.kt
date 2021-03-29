@@ -28,7 +28,7 @@ class RootMultiStackFragment : MultiStackFragmentImpl() {
         } else {
             return LayoutInflater.from(context).inflate(R.layout.layout_tab, parent, false).apply {
                 findViewById<ImageView>(R.id.ivIcon).setImageResource(Tab.values()[index].icon)
-                findViewById<TextView>(R.id.tvTitle).text = Tab.values()[index].title
+                findViewById<TextView>(R.id.tvTitle).text = Tab.values()[index].title.getText(requireContext())
                 setOnClickListener {
                     val currentScreen = modo.state.chain.lastOrNull()
                     if (currentScreen is MultiScreen) {
