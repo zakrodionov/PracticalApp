@@ -6,7 +6,8 @@ import android.widget.Toast
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.addRepeatingJob
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.zakrodionov.common.dialogs.CommonDialog.Companion.TAG_COMMON_DIALOG
@@ -43,11 +44,11 @@ abstract class BaseFragment<STATE : Any, SIDE_EFFECT : Any>(@LayoutRes contentLa
         super.onViewCreated(view, savedInstanceState)
         setupViews(view, savedInstanceState)
 
-        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+        viewLifecycleOwner.addRepeatingJob(Lifecycle.State.STARTED) {
             viewModel.container.sideEffectFlow.collect { sideEffect(it) }
         }
 
-        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+        viewLifecycleOwner.addRepeatingJob(Lifecycle.State.STARTED) {
             viewModel.container.stateFlow.collect { render(it) }
         }
     }

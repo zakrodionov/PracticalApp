@@ -39,6 +39,7 @@ import Libs.kotlin_stdlib
 import Libs.leak_canary
 import Libs.lifecycle_extensions
 import Libs.lifecycle_livedata
+import Libs.lifecycle_runtime_ktx
 import Libs.lifecycle_viewmodel
 import Libs.modo
 import Libs.modo_android
@@ -169,6 +170,7 @@ dependencies {
     implementation(lifecycle_extensions)
     implementation(lifecycle_livedata)
     implementation(lifecycle_viewmodel)
+    implementation(lifecycle_runtime_ktx)
 
     // Orbit Mvi
     implementation(orbit_mvi)

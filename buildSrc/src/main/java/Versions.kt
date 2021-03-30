@@ -14,7 +14,7 @@ object Versions {
     const val koinVersion = "3.0.1-beta-1"
     const val mviOrbitVersion = "3.0.1"
 
-    const val lifecycleVersion = "2.3.1"
+    const val lifecycleVersion = "2.4.0-alpha01"
 
     const val adapterDelegatesVersion = "4.3.0"
     const val modoVersion = "0.6.1"
