@@ -58,14 +58,19 @@ abstract class BaseFragment<STATE : Any, SIDE_EFFECT : Any>(@LayoutRes contentLa
         super.onDestroyView()
     }
 
+    // Метод для инициализации вью
     open fun setupViews(view: View, savedInstanceState: Bundle?) = Unit
 
+    // Метод для очищения колбэков, ресурсов связанных с вью
     open fun clearViews() = Unit
 
+    // Обрабатываем sideEffect`ы от viewModel
     abstract fun sideEffect(event: SIDE_EFFECT)
 
+    // Обрабатываем state от viewModel
     abstract fun render(state: STATE)
 
+    // Используется для отображения базовых диалогов, снекбаров, тоастов
     open fun handleShowAction(showAction: ShowAction) {
         when (showAction) {
             is ShowAction.ShowDialog -> {
