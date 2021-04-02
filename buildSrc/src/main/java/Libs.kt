@@ -38,6 +38,25 @@ object Libs {
     const val koin = "io.insert-koin:koin-android:$koinVersion"
     const val koin_test = "io.insert-koin:koin-test:$koinVersion"
 
+    // Compose TODO
+//    const val compose = implementation("androidx.compose.ui:ui:$composeVer")
+//    const val compose = // Tooling support (Previews, etc.)
+//    const val compose = implementation("androidx.compose.ui:ui-tooling:$composeVer")
+//    const val compose = // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+//    const val compose = implementation("androidx.compose.foundation:foundation:$composeVer")
+//    const val compose = // Material Design
+//    const val compose = implementation("androidx.compose.material:material:$composeVer")
+//    const val compose = // Material design icons
+//    const val compose = implementation("androidx.compose.material:material-icons-core:$composeVer")
+//    const val compose = implementation("androidx.compose.material:material-icons-extended:$composeVer")
+//    const val compose = // Integration with activities
+//    const val compose = implementation("androidx.activity:activity-compose:1.3.0-alpha05")
+//    const val compose = // Integration with ViewModels
+//    const val compose = implementation("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha05")
+//    const val compose = // Integration with observables
+//    const val compose = implementation("androidx.compose.runtime:runtime-livedata:$composeVer")
+//    const val compose = implementation("androidx.compose.runtime:runtime-rxjava2:$composeVer")
+
     // Orbit Mvi
     const val orbit_mvi = "org.orbit-mvi:orbit-core:$mviOrbitVersion"
     const val orbit_mvi_vm = "org.orbit-mvi:orbit-viewmodel:$mviOrbitVersion"
