@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:gravity="center"
-        android:textColor="@color/purple_700"
+        android:textColor="@color/primaryLightColor"
         android:textSize="40sp"
         tools:text="Login" />
 
