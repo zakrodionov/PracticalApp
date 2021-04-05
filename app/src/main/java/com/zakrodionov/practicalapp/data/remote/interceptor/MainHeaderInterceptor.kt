@@ -11,7 +11,7 @@ class MainHeaderInterceptor(
     override fun intercept(chain: Interceptor.Chain): Response {
         val newRequest = chain.request()
             .newBuilder()
-            .header("app-id", "6059b71861d6972ad9b55718") // Todo Test api
+            .header("app-id", "606b5b499129d5822c058cd0") // Todo Test api
             .apply {
                 if (applicationSettings.token.isNotBlank()) {
                     addHeader("Authorization", "Bearer ${applicationSettings.token}")

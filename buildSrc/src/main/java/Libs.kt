@@ -1,5 +1,6 @@
 import Versions.adapterDelegatesVersion
 import Versions.flipperVersion
+import Versions.glideVersion
 import Versions.hyperionVersion
 import Versions.koinVersion
 import Versions.kotlinVersion
@@ -84,6 +85,10 @@ object Libs {
     const val coil = "io.coil-kt:coil:1.1.1"
 
     const val state_delegator = "com.redmadrobot:state-delegator:1.7"
+
+    //Glide
+    const val glide = "com.github.bumptech.glide:glide:$glideVersion"
+    const val glide_compiler = "com.github.bumptech.glide:compiler:$glideVersion"
 
     //Test
     const val junit = "junit:junit:4.+"

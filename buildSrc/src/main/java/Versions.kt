@@ -18,4 +18,7 @@ object Versions {
 
     const val adapterDelegatesVersion = "4.3.0"
     const val modoVersion = "0.6.1"
+
+    const val glideVersion = "4.12.0"
+
 }

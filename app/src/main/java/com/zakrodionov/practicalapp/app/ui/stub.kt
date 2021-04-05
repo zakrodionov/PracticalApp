@@ -2,16 +2,25 @@ package com.zakrodionov.practicalapp.app.ui
 
 import androidx.annotation.LayoutRes
 import com.zakrodionov.practicalapp.R
+import com.zakrodionov.practicalapp.app.core.BaseError
 import com.zakrodionov.practicalapp.app.core.BaseFragment
+import com.zakrodionov.practicalapp.app.core.BaseState
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
-import org.orbitmvi.orbit.Container
-import org.orbitmvi.orbit.viewmodel.container
+import kotlinx.parcelize.Parcelize
 
-abstract class StubViewModel : BaseViewModel<Unit, Unit>() {
-    override val container: Container<Unit, Unit> = container(Unit)
+@Parcelize
+data class StubState(
+    override val error: BaseError? = null,
+    override val isLoading: Boolean = false
+) : BaseState<StubState> {
+    override fun applyError(error: BaseError): StubState = copy(error = error)
 }
 
-abstract class StubFragment(@LayoutRes layout: Int = R.layout.fragment_stub) : BaseFragment<Unit, Unit>(layout) {
+abstract class StubViewModel : BaseViewModel<StubState, Unit>() {
+    override fun getInitialState() = StubState()
+}
+
+abstract class StubFragment(@LayoutRes layout: Int = R.layout.fragment_stub) : BaseFragment<StubState, Unit>(layout) {
     override fun sideEffect(event: Unit) = Unit
-    override fun render(state: Unit) = Unit
+    override fun render(state: StubState) = Unit
 }

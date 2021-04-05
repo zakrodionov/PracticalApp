@@ -22,8 +22,10 @@ import com.zakrodionov.common.ui.ShowAction
 import com.zakrodionov.practicalapp.R
 import kotlinx.coroutines.flow.collect
 
-abstract class BaseBottomSheetDialogFragment<STATE : Any, SIDE_EFFECT : Any>(@LayoutRes contentLayoutId: Int) :
-    FixedBottomSheetDialogFragment(contentLayoutId) {
+@Suppress("TooManyFunctions")
+abstract class BaseBottomSheetDialogFragment<STATE : BaseState<STATE>, SIDE_EFFECT : Any>(
+    @LayoutRes contentLayoutId: Int
+) : FixedBottomSheetDialogFragment(contentLayoutId) {
 
     abstract val viewModel: BaseViewModel<STATE, SIDE_EFFECT>
     abstract val binding: ViewBinding
@@ -45,11 +47,15 @@ abstract class BaseBottomSheetDialogFragment<STATE : Any, SIDE_EFFECT : Any>(@La
         setupViews(view, savedInstanceState)
 
         viewLifecycleOwner.addRepeatingJob(Lifecycle.State.STARTED) {
-            viewModel.container.sideEffectFlow.collect { sideEffect(it) }
+            viewModel.stateFlow.collect { render(it) }
         }
 
         viewLifecycleOwner.addRepeatingJob(Lifecycle.State.STARTED) {
-            viewModel.container.stateFlow.collect { render(it) }
+            viewModel.eventFlow.collect { sideEffect(it) }
+        }
+
+        viewLifecycleOwner.addRepeatingJob(Lifecycle.State.STARTED) {
+            viewModel.showEventFlow.collect { showEvent(it) }
         }
     }
 
@@ -58,13 +64,22 @@ abstract class BaseBottomSheetDialogFragment<STATE : Any, SIDE_EFFECT : Any>(@La
         super.onDestroyView()
     }
 
+    // Метод для инициализации вью
     open fun setupViews(view: View, savedInstanceState: Bundle?) = Unit
 
+    // Метод для очищения колбэков, ресурсов связанных с вью
     open fun clearViews() = Unit
 
+    // Обрабатываем state от viewModel
+    abstract fun render(state: STATE)
+
+    // Обрабатываем sideEffect`ы от viewModel
     abstract fun sideEffect(event: SIDE_EFFECT)
 
-    abstract fun render(state: STATE)
+    // Обрабатываем showEvent от viewModel
+    open fun showEvent(showEvent: BaseViewModel.ShowEvent) {
+        handleShowAction(showEvent.showAction)
+    }
 
     open fun handleShowAction(showAction: ShowAction) {
         when (showAction) {

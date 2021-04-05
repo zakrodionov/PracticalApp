@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
-import coil.load
 import com.zakrodionov.common.R
+import com.zakrodionov.common.extensions.load
 
 class LoopingPhotoAdapter(private val onPhotoClick: (String) -> Unit) : PagerAdapter() {
 

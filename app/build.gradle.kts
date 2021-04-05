@@ -48,9 +48,6 @@ import Libs.moshi
 import Libs.moshi_codegen
 import Libs.okhttp
 import Libs.okhttp_logging_interceptor
-import Libs.orbit_mvi
-import Libs.orbit_mvi_test
-import Libs.orbit_mvi_vm
 import Libs.retrofit
 import Libs.retrofit_moshi
 import Libs.timber
@@ -173,11 +170,6 @@ dependencies {
     implementation(lifecycle_livedata)
     implementation(lifecycle_viewmodel)
     implementation(lifecycle_runtime_ktx)
-
-    // Orbit Mvi
-    implementation(orbit_mvi)
-    implementation(orbit_mvi_vm)
-    testImplementation(orbit_mvi_test)
 
     // region Debug Tools
     // Flipper
