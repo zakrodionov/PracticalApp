@@ -16,11 +16,8 @@ fun <T : RecyclerView.ViewHolder> RecyclerView.setup(
     layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context),
     disableChangeAnimation: Boolean = false,
     disableAllAnimation: Boolean = false,
-    clipToPadding: Boolean = false,
-    hasStableId: Boolean = true
+    clipToPadding: Boolean = false
 ) {
-    adapter.setHasStableIds(hasStableId)
-
     this.layoutManager = layoutManager
     this.adapter = adapter
     this.clipToPadding = clipToPadding
