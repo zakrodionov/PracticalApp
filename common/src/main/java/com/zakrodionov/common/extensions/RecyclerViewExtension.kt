@@ -3,6 +3,12 @@ package com.zakrodionov.common.extensions
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
+import com.hannesdorfmann.adapterdelegates4.AbsDelegationAdapter
+
+fun <T> AbsDelegationAdapter<T>.setData(data: T) {
+    items = data
+    notifyDataSetChanged()
+}
 
 @Suppress("LongParameterList")
 fun <T : RecyclerView.ViewHolder> RecyclerView.setup(
