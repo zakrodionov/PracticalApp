@@ -8,8 +8,6 @@ import com.zakrodionov.common.ui.ShowAction.ShowDialog
 import com.zakrodionov.common.ui.ShowAction.ShowSnackbar
 import com.zakrodionov.practicalapp.app.core.BaseError
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
-import com.zakrodionov.practicalapp.app.core.onFailure
-import com.zakrodionov.practicalapp.app.core.onSuccess
 import com.zakrodionov.practicalapp.app.ui.Screens
 import com.zakrodionov.practicalapp.app.ui.postDetails.ArgsPostDetail
 import com.zakrodionov.practicalapp.app.ui.posts.PostsEvent.ShowEvent
@@ -26,23 +24,9 @@ class PostsViewModel(
 ) : BaseViewModel<PostsState, PostsEvent>() {
 
     override val container = container<PostsState, PostsEvent>(PostsState(), savedStateHandle) { state ->
-        if (state.posts == null) {
-            loadPosts()
-        }
     }
 
-    fun loadPosts() = intent {
-        reduce { state.copy(isLoading = true) }
-        postRepository
-            .getPosts()
-            .onSuccess { posts ->
-                reduce { state.copy(posts = posts, error = null) }
-            }
-            .onFailure {
-                handleError(it)
-            }
-        reduce { state.copy(isLoading = false) }
-    }
+    val posts = postRepository.getPosts()
 
     fun navigateToPost(postId: String?) {
         postId.ifNotNull {

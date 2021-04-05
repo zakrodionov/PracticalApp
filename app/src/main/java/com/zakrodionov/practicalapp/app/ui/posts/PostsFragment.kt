@@ -2,22 +2,21 @@ package com.zakrodionov.practicalapp.app.ui.posts
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
-import com.redmadrobot.lib.sd.base.State
 import com.redmadrobot.lib.sd.base.StateDelegate
-import com.zakrodionov.common.extensions.ifNotNull
-import com.zakrodionov.common.extensions.setData
 import com.zakrodionov.common.extensions.setup
 import com.zakrodionov.common.ui.ScreenState
-import com.zakrodionov.common.ui.ScreenState.CONTENT
-import com.zakrodionov.common.ui.ScreenState.ERROR
-import com.zakrodionov.common.ui.ScreenState.STUB
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.BaseFragment
 import com.zakrodionov.practicalapp.databinding.FragmentPostsBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.filter
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
+import timber.log.Timber
 
 class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_posts) {
 
@@ -29,7 +28,7 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
     override val binding: FragmentPostsBinding by viewBinding(FragmentPostsBinding::bind)
 
     private val adapter by lazy {
-        ListDelegationAdapter(postDelegate { viewModel.navigateToPost(it.id) })
+        PostsAdapter { viewModel.navigateToPost(it.id) }
     }
 
     // Для упрощения работы с вью на экране где много состояний удобно использовать библиотеку StateDelegate
@@ -37,20 +36,46 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
     private lateinit var screenState: StateDelegate<ScreenState>
 
     override fun setupViews(view: View, savedInstanceState: Bundle?) = with(binding) {
-        screenState = StateDelegate(
-            State(CONTENT, binding.srlPosts),
-            State(STUB, binding.layoutEmptyStub.root),
-            State(ERROR, binding.layoutError.root),
+//        screenState = StateDelegate(
+//            State(CONTENT, binding.srlPosts),
+//            State(STUB, binding.layoutEmptyStub.root),
+//            State(ERROR, binding.layoutError.root),
+//        )
+
+        rvPosts.setup(
+            adapter.withLoadStateHeaderAndFooter(
+                header = PostsLoadStateAdapter { adapter.retry() },
+                footer = PostsLoadStateAdapter { adapter.retry() }
+            )
         )
 
-        rvPosts.setup(adapter)
         srlPosts.setOnRefreshListener {
-            viewModel.loadPosts()
+            adapter.refresh()
         }
 
-        layoutError.btnTryAgain.setOnClickListener {
-            viewModel.loadPosts()
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            adapter.loadStateFlow.collectLatest { loadStates ->
+                Timber.d(loadStates.toString())
+                binding.srlPosts.isRefreshing = loadStates.refresh is LoadState.Loading
+            }
         }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewModel.posts.collectLatest {
+                adapter.submitData(it)
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            adapter.loadStateFlow
+                // Only emit when REFRESH LoadState for RemoteMediator changes.
+                .distinctUntilChangedBy { it.refresh }
+                // Only react to cases where Remote REFRESH completes i.e., NotLoading.
+                .filter { it.refresh is LoadState.NotLoading }
+                .collect { binding.rvPosts.scrollToPosition(0) }
+        }
+
+        Unit
     }
 
     override fun clearViews() {
@@ -63,19 +88,5 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
         }
     }
 
-    override fun render(state: PostsState) {
-        adapter.setData(state.posts)
-        with(binding) {
-            if (srlPosts.isRefreshing) {
-                srlPosts.isRefreshing = state.isLoading
-            } else {
-                progressBar.isVisible = state.isLoading
-            }
-
-            state.error.ifNotNull { error ->
-                layoutError.tvTitle.text = error.message.getText(requireContext())
-            }
-        }
-        screenState.currentState = state.screenState
-    }
+    override fun render(state: PostsState)  = Unit
 }

@@ -8,4 +8,5 @@
     <string name="stub">Stub</string>
     <string name="posts">Posts</string>
     <string name="about">About</string>
+    <string name="retry">Retry</string>
 </resources>

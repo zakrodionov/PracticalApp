@@ -24,23 +24,23 @@
             android:paddingVertical="10dp" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <include
-        android:id="@+id/layoutEmptyStub"
-        layout="@layout/layout_empty_stub" />
+<!--    <include-->
+<!--        android:id="@+id/layoutEmptyStub"-->
+<!--        layout="@layout/layout_empty_stub" />-->
 
-    <include
-        android:id="@+id/layoutError"
-        layout="@layout/layout_error" />
+<!--    <include-->
+<!--        android:id="@+id/layoutError"-->
+<!--        layout="@layout/layout_error" />-->
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:theme="@style/ProgressBar.Theme"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <ProgressBar-->
+<!--        android:id="@+id/progressBar"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:theme="@style/ProgressBar.Theme"-->
+<!--        android:visibility="gone"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
