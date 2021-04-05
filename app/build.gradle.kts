@@ -214,8 +214,4 @@ dependencies {
     // Modo
     implementation(modo)
     implementation(modo_android)
-
-    val paging_version = "3.0.0-beta02"
-    implementation("androidx.paging:paging-runtime:$paging_version") // TODO
-    implementation("com.hannesdorfmann:adapterdelegates4-pagination:4.3.0")
 }

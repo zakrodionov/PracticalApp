@@ -3,7 +3,7 @@ package com.zakrodionov.practicalapp.domain.model
 import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import com.zakrodionov.practicalapp.app.core.rv.DiffItem
+import com.zakrodionov.common.ui.rv.DiffItem
 import kotlinx.parcelize.Parcelize
 
 @JsonClass(generateAdapter = true)
@@ -56,7 +56,7 @@ data class Posts(
             val title: String?
         ) : Parcelable
 
-        override val itemId: Long
-            get() = id.hashCode().toLong()
+        override val itemId: String
+            get() = id.orEmpty()
     }
 }

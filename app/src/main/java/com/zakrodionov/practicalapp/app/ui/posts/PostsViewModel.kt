@@ -8,6 +8,8 @@ import com.zakrodionov.common.ui.ShowAction.ShowDialog
 import com.zakrodionov.common.ui.ShowAction.ShowSnackbar
 import com.zakrodionov.practicalapp.app.core.BaseError
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
+import com.zakrodionov.practicalapp.app.core.onFailure
+import com.zakrodionov.practicalapp.app.core.onSuccess
 import com.zakrodionov.practicalapp.app.ui.Screens
 import com.zakrodionov.practicalapp.app.ui.postDetails.ArgsPostDetail
 import com.zakrodionov.practicalapp.app.ui.posts.PostsEvent.ShowEvent
@@ -24,9 +26,29 @@ class PostsViewModel(
 ) : BaseViewModel<PostsState, PostsEvent>() {
 
     override val container = container<PostsState, PostsEvent>(PostsState(), savedStateHandle) { state ->
+        if (state.posts == null) {
+            loadPosts()
+        }
     }
 
-    val posts = postRepository.getPosts()
+    fun loadPosts(refresh: Boolean = false) = intent {
+        if (!state.isLoading) {
+            reduce { state.copy(isLoading = true) }
+
+            if (refresh) reduce { state.copy(page = 0) }
+
+            postRepository
+                .getPosts(state.page)
+                .onSuccess { posts ->
+                    val newPosts = if (refresh) posts else state.posts.orEmpty().plus(posts)
+                    reduce { state.copy(posts = newPosts, error = null, page = state.increasePage()) }
+                }
+                .onFailure {
+                    handleError(it)
+                }
+            reduce { state.copy(isLoading = false) }
+        }
+    }
 
     fun navigateToPost(postId: String?) {
         postId.ifNotNull {
