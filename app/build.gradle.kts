@@ -7,8 +7,6 @@ import AndroidConfig.TARGET_SDK_VERSION
 import AndroidConfig.TEST_INSTRUMENTATION_RUNNER
 import AndroidConfig.VERSION_CODE
 import AndroidConfig.VERSION_NAME
-import Libs.adapter_delegates
-import Libs.adapter_delegates_dsl
 import Libs.androidx_app_compat
 import Libs.androidx_constraint_layout
 import Libs.androidx_core
@@ -18,6 +16,15 @@ import Libs.androidx_swipe_refresh_layout
 import Libs.coroutines
 import Libs.desugar_jdk
 import Libs.espresso_core
+import Libs.fast_adapter
+import Libs.fast_adapter_binding
+import Libs.fast_adapter_diff
+import Libs.fast_adapter_drag
+import Libs.fast_adapter_paged
+import Libs.fast_adapter_scroll
+import Libs.fast_adapter_swipe
+import Libs.fast_adapter_ui
+import Libs.fast_adapter_utils
 import Libs.flipper
 import Libs.flipper_network
 import Libs.flipper_no_op
@@ -207,22 +214,18 @@ dependencies {
 
     implementation(viewbinding_property_delegate)
 
-    // AdapterDelegates
-    implementation(adapter_delegates)
-    implementation(adapter_delegates_dsl)
-
     // Modo
     implementation(modo)
     implementation(modo_android)
 
-    val latestFastAdapterRelease = "5.3.5" // TODO
-    implementation("com.mikepenz:fastadapter:$latestFastAdapterRelease")
-    implementation("com.mikepenz:fastadapter-extensions-binding:$latestFastAdapterRelease") // view binding helpers
-    implementation("com.mikepenz:fastadapter-extensions-diff:$latestFastAdapterRelease") // diff util helpers
-    implementation("com.mikepenz:fastadapter-extensions-drag:$latestFastAdapterRelease") // drag support
-    implementation("com.mikepenz:fastadapter-extensions-paged:$latestFastAdapterRelease") // paging support
-    implementation("com.mikepenz:fastadapter-extensions-scroll:$latestFastAdapterRelease") // scroll helpers
-    implementation("com.mikepenz:fastadapter-extensions-swipe:$latestFastAdapterRelease") // swipe support
-    implementation("com.mikepenz:fastadapter-extensions-ui:$latestFastAdapterRelease") // pre-defined ui components
-    implementation("com.mikepenz:fastadapter-extensions-utils:$latestFastAdapterRelease") // needs the `expandable`, `drag` and `scroll` extension.
+    // FastAdapter
+    implementation(fast_adapter)
+    implementation(fast_adapter_binding)
+    implementation(fast_adapter_diff)
+    implementation(fast_adapter_drag)
+    implementation(fast_adapter_paged)
+    implementation(fast_adapter_scroll)
+    implementation(fast_adapter_swipe)
+    implementation(fast_adapter_ui)
+    implementation(fast_adapter_utils)
 }

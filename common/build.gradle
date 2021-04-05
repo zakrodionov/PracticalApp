@@ -10,7 +10,6 @@ dependencies {
     implementation(Libs.moshi)
     implementation(Libs.retrofit)
     implementation(Libs.okhttp_logging_interceptor)
-    implementation(Libs.adapter_delegates)
 
     api(Libs.state_delegator)
     api(Libs.coil)

@@ -3,7 +3,6 @@ package com.zakrodionov.practicalapp.domain.model
 import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import com.zakrodionov.practicalapp.app.core.rv.DisplayableItem
 import kotlinx.parcelize.Parcelize
 
 @JsonClass(generateAdapter = true)
@@ -38,7 +37,7 @@ data class Posts(
         val tags: List<String?>?,
         @Json(name = "text")
         val text: String?
-    ) : Parcelable, DisplayableItem {
+    ) : Parcelable {
         @JsonClass(generateAdapter = true)
         @Parcelize
         data class Owner(

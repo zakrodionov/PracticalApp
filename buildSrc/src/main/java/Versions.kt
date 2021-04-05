@@ -18,4 +18,6 @@ object Versions {
 
     const val adapterDelegatesVersion = "4.3.0"
     const val modoVersion = "0.6.1"
+
+    const val fastAdapterVersion = "5.3.5"
 }

@@ -1,4 +1,5 @@
 import Versions.adapterDelegatesVersion
+import Versions.fastAdapterVersion
 import Versions.flipperVersion
 import Versions.hyperionVersion
 import Versions.koinVersion
@@ -85,6 +86,17 @@ object Libs {
 
     const val state_delegator = "com.redmadrobot:state-delegator:1.7"
 
+    // FastAdapter
+    const val fast_adapter = "com.mikepenz:fastadapter:$fastAdapterVersion"
+    const val fast_adapter_binding = "com.mikepenz:fastadapter-extensions-binding:$fastAdapterVersion"
+    const val fast_adapter_diff = "com.mikepenz:fastadapter-extensions-diff:$fastAdapterVersion"
+    const val fast_adapter_drag = "com.mikepenz:fastadapter-extensions-drag:$fastAdapterVersion"
+    const val fast_adapter_paged = "com.mikepenz:fastadapter-extensions-paged:$fastAdapterVersion"
+    const val fast_adapter_scroll = "com.mikepenz:fastadapter-extensions-scroll:$fastAdapterVersion"
+    const val fast_adapter_swipe = "com.mikepenz:fastadapter-extensions-swipe:$fastAdapterVersion"
+    const val fast_adapter_ui = "com.mikepenz:fastadapter-extensions-ui:$fastAdapterVersion"
+    const val fast_adapter_utils = "com.mikepenz:fastadapter-extensions-utils:$fastAdapterVersion"
+    
     //Test
     const val junit = "junit:junit:4.+"
     const val junit_ext = "androidx.test.ext:junit:1.1.2"
