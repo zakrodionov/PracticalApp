@@ -1,6 +1,5 @@
 package com.zakrodionov.practicalapp.app.ui.postDetails
 
-import android.os.Parcelable
 import com.zakrodionov.common.ui.ScreenState
 import com.zakrodionov.common.ui.ScreenState.CONTENT
 import com.zakrodionov.common.ui.ScreenState.ERROR
@@ -15,12 +14,14 @@ data class PostDetailsState(
     val post: Post? = null,
     override val error: BaseError? = null,
     override val isLoading: Boolean = false
-) : Parcelable, BaseState {
+) : BaseState<PostDetailsState> {
     val screenState: ScreenState
         get() = when {
             error != null -> ERROR
             else -> CONTENT
         }
+
+    override fun applyError(error: BaseError): PostDetailsState = copy(error = error)
 }
 
 sealed class PostDetailsEvent {
