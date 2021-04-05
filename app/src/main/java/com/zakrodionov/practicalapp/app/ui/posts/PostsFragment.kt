@@ -38,11 +38,16 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
 
     override fun setupViews(view: View, savedInstanceState: Bundle?) = with(binding) {
         screenState = StateDelegate(
-            State(CONTENT, binding.rvPosts),
+            State(CONTENT, binding.srlPosts),
             State(STUB, binding.layoutEmptyStub.root),
             State(ERROR, binding.layoutError.root),
         )
+
         rvPosts.setup(adapter)
+        srlPosts.setOnRefreshListener {
+            viewModel.loadPosts()
+        }
+
         layoutError.btnTryAgain.setOnClickListener {
             viewModel.loadPosts()
         }
@@ -61,7 +66,12 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
     override fun render(state: PostsState) {
         adapter.setData(state.posts)
         with(binding) {
-            progressBar.isVisible = state.isLoading
+            if (srlPosts.isRefreshing) {
+                srlPosts.isRefreshing = state.isLoading
+            } else {
+                progressBar.isVisible = state.isLoading
+            }
+
             state.error.ifNotNull { error ->
                 layoutError.tvTitle.text = error.message.getText(requireContext())
             }

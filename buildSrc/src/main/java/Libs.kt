@@ -14,8 +14,9 @@ object Libs {
     const val androidx_app_compat = "androidx.appcompat:appcompat:1.3.0-rc01"
     const val androidx_material = "com.google.android.material:material:1.3.0"
     const val androidx_core = "androidx.core:core-ktx:1.5.0-rc01"
-    const val androidx_constraintlayout = "androidx.constraintlayout:constraintlayout:2.0.4"
+    const val androidx_constraint_layout = "androidx.constraintlayout:constraintlayout:2.0.4"
     const val androidx_fragment = "androidx.fragment:fragment-ktx:1.3.2"
+    const val androidx_swipe_refresh_layout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     //Kotlin
     const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"

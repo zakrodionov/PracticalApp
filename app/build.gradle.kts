@@ -10,10 +10,11 @@ import AndroidConfig.VERSION_NAME
 import Libs.adapter_delegates
 import Libs.adapter_delegates_dsl
 import Libs.androidx_app_compat
-import Libs.androidx_constraintlayout
+import Libs.androidx_constraint_layout
 import Libs.androidx_core
 import Libs.androidx_fragment
 import Libs.androidx_material
+import Libs.androidx_swipe_refresh_layout
 import Libs.coroutines
 import Libs.desugar_jdk
 import Libs.espresso_core
@@ -151,8 +152,9 @@ dependencies {
     implementation(androidx_core)
     implementation(androidx_app_compat)
     implementation(androidx_material)
-    implementation(androidx_constraintlayout)
+    implementation(androidx_constraint_layout)
     implementation(androidx_fragment)
+    implementation(androidx_swipe_refresh_layout)
 
     // Koin
     implementation(koin)
