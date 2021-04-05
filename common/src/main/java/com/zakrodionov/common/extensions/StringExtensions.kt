@@ -80,3 +80,5 @@ fun String.formatPhone(defaultCountryIso: String = currentLocale.country): Strin
 
     return phone
 }
+
+fun String.idFromString(): Long = hashCode().toLong()

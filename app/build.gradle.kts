@@ -214,4 +214,15 @@ dependencies {
     // Modo
     implementation(modo)
     implementation(modo_android)
+
+    val latestFastAdapterRelease = "5.3.5" // TODO
+    implementation("com.mikepenz:fastadapter:$latestFastAdapterRelease")
+    implementation("com.mikepenz:fastadapter-extensions-binding:$latestFastAdapterRelease") // view binding helpers
+    implementation("com.mikepenz:fastadapter-extensions-diff:$latestFastAdapterRelease") // diff util helpers
+    implementation("com.mikepenz:fastadapter-extensions-drag:$latestFastAdapterRelease") // drag support
+    implementation("com.mikepenz:fastadapter-extensions-paged:$latestFastAdapterRelease") // paging support
+    implementation("com.mikepenz:fastadapter-extensions-scroll:$latestFastAdapterRelease") // scroll helpers
+    implementation("com.mikepenz:fastadapter-extensions-swipe:$latestFastAdapterRelease") // swipe support
+    implementation("com.mikepenz:fastadapter-extensions-ui:$latestFastAdapterRelease") // pre-defined ui components
+    implementation("com.mikepenz:fastadapter-extensions-utils:$latestFastAdapterRelease") // needs the `expandable`, `drag` and `scroll` extension.
 }

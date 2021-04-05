@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
+import com.mikepenz.fastadapter.adapters.FastItemAdapter
+import com.mikepenz.fastadapter.binding.listeners.addClickListener
+import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import com.redmadrobot.lib.sd.base.State
 import com.redmadrobot.lib.sd.base.StateDelegate
 import com.zakrodionov.common.extensions.ifNotNull
-import com.zakrodionov.common.extensions.setData
 import com.zakrodionov.common.extensions.setup
 import com.zakrodionov.common.ui.ScreenState
 import com.zakrodionov.common.ui.ScreenState.CONTENT
@@ -17,6 +18,7 @@ import com.zakrodionov.common.ui.ScreenState.STUB
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.BaseFragment
 import com.zakrodionov.practicalapp.databinding.FragmentPostsBinding
+import com.zakrodionov.practicalapp.databinding.ItemPostBinding
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
 
 class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_posts) {
@@ -29,7 +31,7 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
     override val binding: FragmentPostsBinding by viewBinding(FragmentPostsBinding::bind)
 
     private val adapter by lazy {
-        ListDelegationAdapter(postDelegate { viewModel.navigateToPost(it.id) })
+        FastItemAdapter<PostItem>()
     }
 
     // Для упрощения работы с вью на экране где много состояний удобно использовать библиотеку StateDelegate
@@ -43,13 +45,21 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
             State(ERROR, binding.layoutError.root),
         )
 
-        rvPosts.setup(adapter)
+        setupPostRv()
+
         srlPosts.setOnRefreshListener {
             viewModel.loadPosts()
         }
 
         layoutError.btnTryAgain.setOnClickListener {
             viewModel.loadPosts()
+        }
+    }
+
+    private fun setupPostRv() = with(binding) {
+        rvPosts.setup(adapter)
+        adapter.addClickListener<ItemPostBinding, PostItem>({ it.root }) { _, _, _, item ->
+            viewModel.navigateToPost(item.post.id)
         }
     }
 
@@ -64,7 +74,8 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
     }
 
     override fun render(state: PostsState) {
-        adapter.setData(state.posts)
+        FastAdapterDiffUtil[adapter.itemAdapter] = state.posts?.map { PostItem(it) }.orEmpty()
+
         with(binding) {
             if (srlPosts.isRefreshing) {
                 srlPosts.isRefreshing = state.isLoading
