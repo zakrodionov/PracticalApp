@@ -12,7 +12,7 @@ import kotlinx.parcelize.Parcelize
 data class StubState(
     override val error: BaseError? = null,
     override val isLoading: Boolean = false
-) : BaseState<StubState> {
+) : BaseState {
     override fun applyError(error: BaseError): StubState = copy(error = error)
 }
 

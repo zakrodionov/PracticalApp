@@ -9,7 +9,7 @@ data class AboutState(
     val isLogged: Boolean = false,
     override val error: BaseError? = null,
     override val isLoading: Boolean = false
-) : BaseState<AboutState> {
+) : BaseState {
     override fun applyError(error: BaseError): AboutState = copy(error = error)
 }
 

@@ -14,7 +14,7 @@ data class PostDetailsState(
     val post: Post? = null,
     override val error: BaseError? = null,
     override val isLoading: Boolean = false
-) : BaseState<PostDetailsState> {
+) : BaseState {
     val screenState: ScreenState
         get() = when {
             error != null -> ERROR

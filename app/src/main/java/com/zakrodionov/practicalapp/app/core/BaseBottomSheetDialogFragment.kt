@@ -23,7 +23,7 @@ import com.zakrodionov.practicalapp.R
 import kotlinx.coroutines.flow.collect
 
 @Suppress("TooManyFunctions")
-abstract class BaseBottomSheetDialogFragment<STATE : BaseState<STATE>, SIDE_EFFECT : Any>(
+abstract class BaseBottomSheetDialogFragment<STATE : BaseState, SIDE_EFFECT : Any>(
     @LayoutRes contentLayoutId: Int
 ) : FixedBottomSheetDialogFragment(contentLayoutId) {
 

@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 // Если нужно чтоб state переживал "убийство" процесса приложения
 // прокидываем savedStateHandle для сохранения стейта в bundle
 @Suppress("TooManyFunctions")
-abstract class BaseViewModel<STATE : BaseState<STATE>, EVENT : Any>(
+abstract class BaseViewModel<STATE : BaseState, EVENT : Any>(
     private val savedStateHandle: SavedStateHandle? = null
 ) : ViewModel() {
 
@@ -83,8 +83,9 @@ abstract class BaseViewModel<STATE : BaseState<STATE>, EVENT : Any>(
         postShowEvent(ShowEvent(ShowAction.ShowSnackbar(baseError.message)))
     }
 
+    @Suppress("UNCHECKED_CAST")
     open suspend fun onContentError(baseError: BaseError) {
-        reduce { state.applyError(error = baseError) }
+        reduce { state.applyError(error = baseError) as STATE }
     }
 
     data class ShowEvent(val showAction: ShowAction)

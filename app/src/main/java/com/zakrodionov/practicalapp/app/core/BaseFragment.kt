@@ -23,7 +23,7 @@ import com.zakrodionov.practicalapp.R
 import kotlinx.coroutines.flow.collect
 
 @Suppress("TooManyFunctions")
-abstract class BaseFragment<STATE : BaseState<STATE>, SIDE_EFFECT : Any>(@LayoutRes contentLayoutId: Int) :
+abstract class BaseFragment<STATE : BaseState, SIDE_EFFECT : Any>(@LayoutRes contentLayoutId: Int) :
     Fragment(contentLayoutId) {
 
     abstract val viewModel: BaseViewModel<STATE, SIDE_EFFECT>
