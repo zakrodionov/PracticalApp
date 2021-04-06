@@ -7,13 +7,9 @@ import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 class AsyncListDifferProgressAdapter(vararg delegate: AdapterDelegate<List<DiffItem>>) :
     AsyncListDifferDelegationAdapter<DiffItem>(DiffCallback, *delegate, loadingDelegate()) {
 
-    override fun setItems(items: MutableList<DiffItem>?) {
-        if (items.isNullOrEmpty()) {
-            super.setItems(items)
-        } else {
-            if (items.contains(LoadingItem)) items.remove(LoadingItem)
-            super.setItems(items)
-        }
+    override fun setItems(newItems: MutableList<DiffItem>?) {
+        if (items.contains(LoadingItem)) items.remove(LoadingItem)
+        super.setItems(newItems)
     }
 
     fun showLoading() {
