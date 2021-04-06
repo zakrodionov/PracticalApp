@@ -2,6 +2,7 @@ package com.zakrodionov.practicalapp.app.ui.posts
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -77,7 +78,8 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
                 layoutError.tvTitle.text = error.message.getText(requireContext())
             }
 
-            srlPosts.isVisible = state.screenState == CONTENT
+            rvPosts.isVisible = state.screenState == CONTENT
+            srlPosts.isGone = state.screenState == ERROR
             layoutError.root.isVisible = state.screenState == ERROR
             layoutEmptyStub.root.isVisible = state.screenState == STUB
         }
