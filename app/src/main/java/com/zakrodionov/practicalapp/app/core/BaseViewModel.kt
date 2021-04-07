@@ -5,12 +5,16 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zakrodionov.common.ui.ShowAction
+import com.zakrodionov.common.ui.ShowAction.ShowDialog
+import com.zakrodionov.common.ui.ShowAction.ShowSnackbar
 import com.zakrodionov.practicalapp.app.core.ImportanceError.CONTENT_ERROR
 import com.zakrodionov.practicalapp.app.core.ImportanceError.CRITICAL_ERROR
 import com.zakrodionov.practicalapp.app.core.ImportanceError.NON_CRITICAL_ERROR
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 // Если нужно чтоб state переживал "убийство" процесса приложения
@@ -25,11 +29,15 @@ abstract class BaseViewModel<STATE : BaseState, EVENT : Any>(
         const val KEY_STATE = "KEY_STATE"
     }
 
-    val stateFlow = MutableStateFlow<STATE>(restoreState())
-    val eventFlow = MutableSharedFlow<EVENT>()
+    private val _stateFlow = MutableStateFlow<STATE>(restoreState())
+    val stateFlow = _stateFlow.asStateFlow()
+
+    private val _eventFlow = MutableSharedFlow<EVENT>()
+    val eventFlow = _eventFlow.asSharedFlow()
 
     // Общие ShowEvent события для toast, alert, dialog
-    val showEventFlow = MutableSharedFlow<ShowEvent>()
+    private val _showEventFlow = MutableSharedFlow<ShowEvent>()
+    val showEventFlow = _showEventFlow.asSharedFlow()
 
     abstract fun getInitialState(): STATE
 
@@ -39,19 +47,19 @@ abstract class BaseViewModel<STATE : BaseState, EVENT : Any>(
         setSavedStateProvider()
     }
 
-    suspend fun reduce(state: () -> STATE) {
-        stateFlow.emit(state())
+    protected suspend fun reduce(state: () -> STATE) {
+        _stateFlow.emit(state())
     }
 
-    suspend fun postEvent(event: EVENT) {
-        eventFlow.emit(event)
+    protected suspend fun postEvent(event: EVENT) {
+        _eventFlow.emit(event)
     }
 
-    suspend fun postShowEvent(showEvent: ShowEvent) {
-        showEventFlow.emit(showEvent)
+    protected suspend fun postShowEvent(showEvent: ShowEvent) {
+        _showEventFlow.emit(showEvent)
     }
 
-    fun launchUi(block: suspend () -> Unit) = viewModelScope.launch(Dispatchers.Main) {
+    protected fun launchUi(block: suspend () -> Unit) = viewModelScope.launch(Dispatchers.Main) {
         block.invoke()
     }
 
@@ -76,11 +84,11 @@ abstract class BaseViewModel<STATE : BaseState, EVENT : Any>(
     }
 
     open suspend fun onCriticalError(baseError: BaseError) {
-        postShowEvent(ShowEvent(ShowAction.ShowDialog(baseError.title, baseError.message)))
+        postShowEvent(ShowEvent(ShowDialog(baseError.title, baseError.message)))
     }
 
     open suspend fun onNonCriticalError(baseError: BaseError) {
-        postShowEvent(ShowEvent(ShowAction.ShowSnackbar(baseError.message)))
+        postShowEvent(ShowEvent(ShowSnackbar(baseError.message)))
     }
 
     @Suppress("UNCHECKED_CAST")
