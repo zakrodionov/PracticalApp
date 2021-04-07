@@ -26,3 +26,9 @@ suspend fun <INPUT : Any, OUTPUT : Any> Result<INPUT>.then(block: suspend (INPUT
         is Result.Success -> block.invoke(data)
         is Result.Failure -> Result.Failure(baseError)
     }
+
+fun <INPUT : Any> Result<INPUT>.mapError(mapError: (BaseError) -> BaseError): Result<INPUT> =
+    when (this) {
+        is Result.Success -> this
+        is Result.Failure -> Result.Failure(mapError(baseError))
+    }
