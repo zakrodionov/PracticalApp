@@ -237,4 +237,6 @@ dependencies {
     // Integration with observables
     implementation("androidx.compose.runtime:runtime-livedata:$composeVersion")
     implementation("androidx.compose.runtime:runtime-rxjava2:$composeVersion")
+
+    implementation("dev.chrisbanes.accompanist:accompanist-glide:0.6.2")
 }

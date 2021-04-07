@@ -13,7 +13,9 @@ import com.zakrodionov.practicalapp.app.core.onSuccess
 import com.zakrodionov.practicalapp.app.ui.Screens
 import com.zakrodionov.practicalapp.app.ui.postDetails.ArgsPostDetail
 import com.zakrodionov.practicalapp.app.ui.posts.PostsEvent.ShowEvent
+import com.zakrodionov.practicalapp.domain.model.Posts
 import com.zakrodionov.practicalapp.domain.repository.PostRepository
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
