@@ -13,12 +13,12 @@ object ViewModelsInitializer : Initializer {
 
     override fun initialize(appModule: Module) {
         appModule.apply {
-            viewModel { PostsViewModel(get(), get(), get()) }
+            viewModel { PostsViewModel(get(), get()) }
             viewModel { FavoriteViewModel() }
-            viewModel { AboutViewModel(get(), get(), get()) }
+            viewModel { AboutViewModel(get(), get()) }
             viewModel { parameters -> PostDetailViewModel(get(), get(), parameters.get()) }
 
-            viewModel { PasswordViewModel(get()) }
+            viewModel { PasswordViewModel(get(), get()) }
             viewModel { EmailViewModel(get()) }
         }
     }

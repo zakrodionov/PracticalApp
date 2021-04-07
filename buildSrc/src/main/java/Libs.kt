@@ -99,7 +99,8 @@ object Libs {
         "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:$adapterDelegatesVersion"
 
     const val modo = "com.github.terrakok:modo:$modoVersion"
-    const val modo_android = "com.github.terrakok:modo-render-android-fm:$modoVersion"
+    const val modo_android = "com.github.terrakok:modo-render-android-fm:$modoVersion" // TODO delete
+    const val modo_android_compose = "com.github.terrakok:modo-android-compose:$modoVersion"
 
     const val coil = "io.coil-kt:coil:1.1.1"
 

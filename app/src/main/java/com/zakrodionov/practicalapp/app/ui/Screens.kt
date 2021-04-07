@@ -17,7 +17,7 @@ import kotlinx.parcelize.Parcelize
 object Screens {
     @Parcelize
     class PostsScreen : AppScreen("PostsScreen") {
-        override fun create() = PostsFragment.newInstance()
+        override fun create() = PostsFragment()
     }
 
     @Parcelize

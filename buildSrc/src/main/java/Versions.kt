@@ -1,5 +1,5 @@
 object Versions {
-    const val kotlinVersion = "1.4.32"
+    const val kotlinVersion = "1.4.31"
 
     const val retrofitVersion = "2.9.0"
     const val moshiVersion = "1.11.0"

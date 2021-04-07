@@ -11,11 +11,11 @@ import com.zakrodionov.practicalapp.app.ui.Screens
 import com.zakrodionov.practicalapp.app.ui.postDetails.ArgsPostDetail
 import com.zakrodionov.practicalapp.domain.repository.PostRepository
 
+// Todo return SavedStateHandle when Koin will be fixed
 class PostsViewModel(
-    savedStateHandle: SavedStateHandle,
     private val postRepository: PostRepository,
     private val modo: Modo
-) : BaseViewModel<PostsState, PostsEvent>(savedStateHandle) {
+) : BaseViewModel<PostsState, PostsEvent>() {
 
     override fun getInitialState(): PostsState = PostsState()
 

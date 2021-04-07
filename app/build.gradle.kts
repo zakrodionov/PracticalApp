@@ -44,6 +44,7 @@ import Libs.lifecycle_runtime_ktx
 import Libs.lifecycle_viewmodel
 import Libs.modo
 import Libs.modo_android
+import Libs.modo_android_compose
 import Libs.moshi
 import Libs.moshi_codegen
 import Libs.okhttp
@@ -53,6 +54,7 @@ import Libs.retrofit_moshi
 import Libs.timber
 import Libs.viewbinding_property_delegate
 import Versions.composeVersion
+import Versions.koinVersion
 import java.io.FileInputStream
 import java.util.Properties
 
@@ -188,17 +190,17 @@ dependencies {
 
     debugImplementation(leak_canary)
 
-    // Hyperion
-    debugImplementation(hyperion_core)
-    debugImplementation(hyperion_attr)
-    debugImplementation(hyperion_build_config)
-    debugImplementation(hyperion_crash)
-    debugImplementation(hyperion_disk)
-    debugImplementation(hyperion_geiger_counter)
-    debugImplementation(hyperion_measurement)
-    debugImplementation(hyperion_phoenix)
-    debugImplementation(hyperion_shared_preferences)
-    debugImplementation(hyperion_timber)
+    // Hyperion todo compose crash
+//    debugImplementation(hyperion_core)
+//    debugImplementation(hyperion_attr)
+//    debugImplementation(hyperion_build_config)
+//    debugImplementation(hyperion_crash)
+//    debugImplementation(hyperion_disk)
+//    debugImplementation(hyperion_geiger_counter)
+//    debugImplementation(hyperion_measurement)
+//    debugImplementation(hyperion_phoenix)
+//    debugImplementation(hyperion_shared_preferences)
+//    debugImplementation(hyperion_timber)
     // endregion
 
     coreLibraryDesugaring(desugar_jdk)
@@ -212,8 +214,9 @@ dependencies {
     // Modo
     implementation(modo)
     implementation(modo_android)
+    //implementation(Libs.modo_android_compose)
 
-    // Compose todo
+    // Compose todo clean code and delete unused libs
     implementation("androidx.compose.ui:ui:$composeVersion")
     // Tooling support (Previews, etc.)
     implementation("androidx.compose.ui:ui-tooling:$composeVersion")
@@ -233,4 +236,6 @@ dependencies {
     implementation("androidx.compose.runtime:runtime-rxjava2:$composeVersion")
 
     implementation("dev.chrisbanes.accompanist:accompanist-glide:0.6.2")
+
+    implementation ("io.insert-koin:koin-androidx-compose:3.0.1-beta-1")
 }

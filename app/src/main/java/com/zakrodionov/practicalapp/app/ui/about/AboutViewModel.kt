@@ -9,11 +9,11 @@ import com.zakrodionov.practicalapp.app.ui.login.loginFlow
 import com.zakrodionov.practicalapp.data.local.ApplicationSettings
 import com.zakrodionov.practicalapp.data.local.ApplicationSettings.Companion.KEY_IS_LOGGED
 
+// Todo return SavedStateHandle when Koin will be fixed
 class AboutViewModel(
-    savedStateHandle: SavedStateHandle,
     private val applicationSettings: ApplicationSettings,
     private val modo: Modo
-) : BaseViewModel<AboutState, AboutEvent>(savedStateHandle) {
+) : BaseViewModel<AboutState, AboutEvent>() {
 
     override fun getInitialState(): AboutState = AboutState()
 
