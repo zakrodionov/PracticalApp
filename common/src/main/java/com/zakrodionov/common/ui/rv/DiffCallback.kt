@@ -1,4 +1,4 @@
-package com.zakrodionov.practicalapp.app.core.rv
+package com.zakrodionov.common.ui.rv
 
 import androidx.recyclerview.widget.DiffUtil
 

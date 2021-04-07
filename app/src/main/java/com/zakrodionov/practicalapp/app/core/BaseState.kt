@@ -1,6 +1,10 @@
 package com.zakrodionov.practicalapp.app.core
 
-interface BaseState {
+import android.os.Parcelable
+
+interface BaseState : Parcelable {
     val error: BaseError?
     val isLoading: Boolean
+
+    fun applyError(error: BaseError): BaseState
 }

@@ -8,8 +8,8 @@ import com.zakrodionov.practicalapp.domain.repository.PostRepository
 
 class PostRepositoryImpl(private val executor: Executor, private val apiPost: ApiPost) : PostRepository {
 
-    override suspend fun getPosts(): Result<List<Post>> = executor.execute {
-        apiPost.getPosts().posts.orEmpty()
+    override suspend fun getPosts(page: Int): Result<List<Post>> = executor.execute {
+        apiPost.getPosts(page).posts.orEmpty()
     }
 
     override suspend fun getPost(id: String): Result<Post> = executor.execute {

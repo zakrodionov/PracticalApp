@@ -10,6 +10,7 @@ fun <T> AbsDelegationAdapter<T>.setData(data: T) {
     notifyDataSetChanged()
 }
 
+@Suppress("LongParameterList")
 fun <T : RecyclerView.ViewHolder> RecyclerView.setup(
     adapter: RecyclerView.Adapter<T>,
     layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context),

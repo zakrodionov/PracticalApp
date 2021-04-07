@@ -8,20 +8,16 @@ import com.zakrodionov.practicalapp.app.core.navigation.launchFullScreenFlow
 import com.zakrodionov.practicalapp.app.ui.login.loginFlow
 import com.zakrodionov.practicalapp.data.local.ApplicationSettings
 import com.zakrodionov.practicalapp.data.local.ApplicationSettings.Companion.KEY_IS_LOGGED
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import org.orbitmvi.orbit.Container
-import org.orbitmvi.orbit.syntax.simple.intent
-import org.orbitmvi.orbit.syntax.simple.reduce
-import org.orbitmvi.orbit.viewmodel.container
 
 class AboutViewModel(
     savedStateHandle: SavedStateHandle,
     private val applicationSettings: ApplicationSettings,
     private val modo: Modo
-) : BaseViewModel<AboutState, AboutEvent>() {
+) : BaseViewModel<AboutState, AboutEvent>(savedStateHandle) {
 
-    override val container: Container<AboutState, AboutEvent> = container(AboutState(), savedStateHandle) {
+    override fun getInitialState(): AboutState = AboutState()
+
+    init {
         getIsLogged()
     }
 
@@ -35,7 +31,7 @@ class AboutViewModel(
         subscribePreferences()
     }
 
-    private fun getIsLogged() = intent {
+    private fun getIsLogged() = launchUi {
         reduce { state.copy(isLogged = applicationSettings.isLogged) }
     }
 
@@ -48,8 +44,8 @@ class AboutViewModel(
         super.onCleared()
     }
 
-    fun loginOrLogout() = intent {
-        withContext(Dispatchers.Main) { if (state.isLogged) logout() else navigateToLoginFlow() }
+    fun loginOrLogout() = launchUi {
+        if (state.isLogged) logout() else navigateToLoginFlow()
     }
 
     private fun logout() {

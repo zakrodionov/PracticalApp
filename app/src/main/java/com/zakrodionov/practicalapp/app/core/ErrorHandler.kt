@@ -2,6 +2,7 @@ package com.zakrodionov.practicalapp.app.core
 
 import com.zakrodionov.common.utils.net.NetworkHandler
 import retrofit2.HttpException
+import timber.log.Timber
 import java.net.SocketTimeoutException
 
 interface ErrorHandler {
@@ -12,6 +13,7 @@ class ErrorHandlerImpl(private val networkHandler: NetworkHandler) : ErrorHandle
 
     @Suppress("ReturnCount")
     override fun getError(throwable: Throwable): BaseError {
+        Timber.e(throwable)
         when {
             withoutNetworkConnection() -> {
                 return NetworkConnectionError()

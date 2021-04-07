@@ -36,7 +36,7 @@ Flipper, Hyperion позволяют перехватить вызовы сет�
 
 • Retrofit, Coroutines, Moshi, OkHttp
 
-• Android ViewModel, Mvi-Orbit
+• Android ViewModel
 
 • Koin
 
@@ -44,13 +44,11 @@ Flipper, Hyperion позволяют перехватить вызовы сет�
 
 • Adapter Delegates 4
 
-• Coil
+• Glide
 
 • ViewBinding
 
 • Desugar Jdk (Java 8 time)
 
 • Flipper, Hyperion, Timber, LeakCanary
-
-• State Delegator
 
