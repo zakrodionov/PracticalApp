@@ -47,7 +47,7 @@ abstract class BaseViewModel<STATE : BaseState, EVENT : Any>(
         setSavedStateProvider()
     }
 
-    protected suspend fun reduce(state: () -> STATE) {
+    protected suspend fun reduce(state: suspend () -> STATE) {
         _stateFlow.emit(state())
     }
 
