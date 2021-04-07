@@ -13,6 +13,21 @@ sealed class BaseError(open val importanceError: ImportanceError = NON_CRITICAL_
     open val message: ResourceString = ResourceString.Res(R.string.unknown_error)
 
     abstract fun applyImportance(importanceError: ImportanceError): BaseError
+
+    /**
+     * Меняем важность ошибки, например если выключен интернет и мы добавляем товар в избранное
+     * незачем показывать модальное вью ошибки, как при загрузки списка товаров
+     * Пример использования:
+     * postRepository
+     *  .addToFavorite(post.id)
+     *  .mapError { it.mapContentErrorImportance() }
+     *  .onSuccess{}
+     *  .onFailure {}
+     * */
+    fun mapContentErrorImportance(to: ImportanceError = NON_CRITICAL_ERROR): BaseError = when (importanceError) {
+        CONTENT_ERROR -> applyImportance(to)
+        else -> this
+    }
 }
 
 // Ошибка может отображаться и как состояние, и как событие
