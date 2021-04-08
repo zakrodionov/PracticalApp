@@ -19,7 +19,7 @@ object Versions {
     const val adapterDelegatesVersion = "4.3.0"
     const val modoVersion = "0.6.1"
 
-    const val composeVersion = "1.0.0-beta03"
+    const val composeVersion = "1.0.0-beta04"
 
     const val glideVersion = "4.12.0"
 
