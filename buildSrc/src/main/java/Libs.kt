@@ -54,7 +54,7 @@ object Libs {
 
     const val timber = "com.jakewharton.timber:timber:4.7.1"
 
-    const val leak_canary = "com.squareup.leakcanary:leakcanary-android:2.6"
+    const val leak_canary = "com.squareup.leakcanary:leakcanary-android:2.7"
 
     // Hyperion
     const val hyperion_core = "com.willowtreeapps.hyperion:hyperion-core:$hyperionVersion"
