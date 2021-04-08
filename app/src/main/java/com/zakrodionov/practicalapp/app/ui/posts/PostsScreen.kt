@@ -23,9 +23,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.google.accompanist.glide.GlideImage
 import com.zakrodionov.practicalapp.app.core.BaseComposeFragment
 import com.zakrodionov.practicalapp.domain.model.Posts.Post
-import dev.chrisbanes.accompanist.glide.GlideImage
 import org.koin.androidx.compose.getStateViewModel
 import org.koin.androidx.compose.getViewModel
 
