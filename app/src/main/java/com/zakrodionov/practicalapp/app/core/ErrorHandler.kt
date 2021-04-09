@@ -1,6 +1,6 @@
 package com.zakrodionov.practicalapp.app.core
 
-import com.zakrodionov.common.utils.net.NetworkHandler
+import com.zakrodionov.common.utils.net.ConnectionService
 import retrofit2.HttpException
 import timber.log.Timber
 import java.net.SocketTimeoutException
@@ -9,7 +9,7 @@ interface ErrorHandler {
     fun getError(throwable: Throwable): BaseError
 }
 
-class ErrorHandlerImpl(private val networkHandler: NetworkHandler) : ErrorHandler {
+class ErrorHandlerImpl(private val connectionService: ConnectionService) : ErrorHandler {
 
     @Suppress("ReturnCount")
     override fun getError(throwable: Throwable): BaseError {
@@ -33,5 +33,5 @@ class ErrorHandlerImpl(private val networkHandler: NetworkHandler) : ErrorHandle
         return UnknownError()
     }
 
-    private fun withoutNetworkConnection() = !networkHandler.isConnected
+    private fun withoutNetworkConnection() = !connectionService.hasConnection()
 }
