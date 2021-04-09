@@ -7,7 +7,7 @@ import java.time.ZoneId
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 
-val dtfHoursMinutes by lazy { DateTimeFormatter.ofPattern("HH:mm", currentLocale) }
+val dtfHoursMinutes get() = DateTimeFormatter.ofPattern("HH:mm")
 
 // Use for parse date like a '19:07'
 fun String.parseLocalTime(): LocalTime = LocalTime.parse(this, dtfHoursMinutes)
@@ -37,10 +37,5 @@ fun String.parseTimeWithTimezone(zoneId: ZoneId): LocalDateTime =
         .atZone(ZoneOffset.UTC)
         .withZoneSameInstant(zoneId)
         .toLocalDateTime()
-
-fun LocalDateTime.applyTimezone(zoneId: ZoneId): LocalDate = LocalDateTime.of(toLocalDate(), toLocalTime())
-    .atZone(ZoneOffset.UTC)
-    .withZoneSameInstant(zoneId)
-    .toLocalDate()
 
 fun LocalDate.parseToLocalDateTime(): LocalDateTime = atTime(0, 0)

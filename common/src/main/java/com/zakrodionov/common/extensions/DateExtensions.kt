@@ -17,30 +17,49 @@ import java.time.format.DateTimeFormatter.ISO_ZONED_DATE_TIME
 import java.time.temporal.WeekFields
 import java.util.Locale
 
-val weekFields = WeekFields.of(currentLocale)
+val weekFields get() = WeekFields.of(currentLocale)
+
+/*
+Внимание! Если в приложение реализуется смена языка, то DateTimeFormatter следует инициализировать после каждой
+смены языка, например можно обернуть в object и изменять как var поля.
+*/
+
+/*
+На уровне ViewModel, Interactor, Repository и т.д., лучше оперирывать OffsetDateTime или ZonedDateTime
+и только на уровне вью мапить к LocalDateTime и отображать время
+так при смене часового пояса на вью будет отображаться корректное время*/
+
+/*
+Для эффективного маппинга большого кол-ва дат, чтобы избежать лишние создание объектов, лучше выносить DateTimeFormatter
+в отдельное поле, например:
+fun showAllUserDates() {
+    val formatter = dtfDate
+    textView.text = userDates.map { it.format(formatter) }.joinToString()
+}
+*/
 
 // Популярные форматы
-// Внимание! Если в приложение реализуется смена языка, то DateTimeFormatter следует инициализировать после каждой
-// смены языка, например можно обернуть в object и изменять как var поля.
-val dtfDate by lazy { DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm", currentLocale) }
-val dtfDateFullMonth by lazy { DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm", currentLocale) }
-val dtfDateFullMonthComma by lazy { DateTimeFormatter.ofPattern("dd MMMM yyyy, HH:mm", currentLocale) }
-val dtfDateFullMonthWithoutTime by lazy { DateTimeFormatter.ofPattern("dd MMMM yyyy", currentLocale) }
-val dtfDateFullMonthWithoutYear by lazy { DateTimeFormatter.ofPattern("dd MMMM HH:mm", currentLocale) }
-val dtfDayTimeFullMonth by lazy { DateTimeFormatter.ofPattern("dd MMMM HH:mm", currentLocale) }
-val dtfOnlyTime by lazy { DateTimeFormatter.ofPattern("HH:mm", currentLocale) }
-val dtfOnlyDate by lazy { DateTimeFormatter.ofPattern("dd MM yyyy", currentLocale) }
-val dtfOnlyDateDots by lazy { DateTimeFormatter.ofPattern("dd.MM.yyyy", currentLocale) }
-val dtfOnlyDateFirstYear by lazy { DateTimeFormatter.ofPattern("yyyy-MM-dd", currentLocale) }
-val dtfWithOffset by lazy { DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssxxx", currentLocale) }
-val dtfOnlyDateDash by lazy { DateTimeFormatter.ofPattern("yyyy-MM-dd", currentLocale) }
-val dtfPeriod by lazy { DateTimeFormatter.ofPattern("MM.yyyy", currentLocale) }
+val dtfDate get() = DateTimeFormatter.ofPattern("dd MM yyyy", currentLocale)
+val dtfTime get() = DateTimeFormatter.ofPattern("HH:mm", currentLocale)
+val dtfDateTime get() = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm", currentLocale)
 
-val dtfDayFullMonth by lazy { DateTimeFormatter.ofPattern("dd MMMM", currentLocale) }
-val dtfDayShortMonth by lazy { DateTimeFormatter.ofPattern("dd MMM", currentLocale) }
+val dtfDateDots get() = DateTimeFormatter.ofPattern("dd.MM.yyyy", currentLocale)
+val dtfDateDash get() = DateTimeFormatter.ofPattern("yyyy-MM-dd", currentLocale)
 
-val dtfDayOfWeek by lazy { DateTimeFormatter.ofPattern("EEEE", currentLocale) }
-val dtfDayOfWeekShort by lazy { DateTimeFormatter.ofPattern("EEE", currentLocale) }
+val dtfDateFullMonth get() = DateTimeFormatter.ofPattern("dd MMMM yyyy", currentLocale)
+val dtfDateTimeFullMonth get() = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm", currentLocale)
+val dtfDateTimeFullMonthComma get() = DateTimeFormatter.ofPattern("dd MMMM yyyy, HH:mm", currentLocale)
+val dtfDateTimeFullMonthWithoutYear get() = DateTimeFormatter.ofPattern("dd MMMM HH:mm", currentLocale)
+
+val dtfDateFirstYear get() = DateTimeFormatter.ofPattern("yyyy-MM-dd", currentLocale)
+val dtfDateTimeWithOffset get() = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssxxx", currentLocale)
+val dtfPeriod get() = DateTimeFormatter.ofPattern("MM.yyyy", currentLocale)
+
+val dtfDayFullMonth get() = DateTimeFormatter.ofPattern("dd MMMM", currentLocale)
+val dtfDayShortMonth get() = DateTimeFormatter.ofPattern("dd MMM", currentLocale)
+
+val dtfDayOfWeek get() = DateTimeFormatter.ofPattern("EEEE", currentLocale)
+val dtfDayOfWeekShort get() = DateTimeFormatter.ofPattern("EEE", currentLocale)
 
 fun String.parseOffsetDateTime(formatter: DateTimeFormatter = ISO_OFFSET_DATE_TIME): OffsetDateTime {
     val odt = OffsetDateTime.parse(this, formatter)
@@ -74,32 +93,30 @@ fun LocalDateTime?.format(pattern: String, locale: Locale = currentLocale) =
 
 fun String?.changeDateFormat(
     sourceFormatter: DateTimeFormatter,
-    targetFormatter: DateTimeFormatter = dtfOnlyDate
+    targetFormatter: DateTimeFormatter
 ): String {
-    this?.let {
-        return LocalDate.parse(it, sourceFormatter).format(targetFormatter)
-    } ?: return ""
+    this?.let { return LocalDate.parse(it, sourceFormatter).format(targetFormatter) } ?: return ""
 }
 
-fun String?.parseOnlyDateFirstYear() =
-    if (this.isNullOrEmpty()) {
-        LocalDate.now()
-    } else {
-        tryOrReturnDefault({ LocalDate.parse(this, dtfOnlyDateFirstYear) }, default = { LocalDate.now() })
-    }
-
-fun String?.parseOnlyDate() =
+fun String?.parseDateFirstYear() =
     if (isNullOrEmpty()) {
         LocalDate.now()
     } else {
-        tryOrReturnDefault({ LocalDate.parse(this, dtfOnlyDate) }, default = { LocalDate.now() })
+        tryOrReturnDefault({ LocalDate.parse(this, dtfDateFirstYear) }, default = { LocalDate.now() })
     }
 
-fun String?.parseOnlyTime() =
+fun String?.parseDate() =
+    if (isNullOrEmpty()) {
+        LocalDate.now()
+    } else {
+        tryOrReturnDefault({ LocalDate.parse(this, dtfDate) }, default = { LocalDate.now() })
+    }
+
+fun String?.parseTime() =
     if (isNullOrEmpty()) {
         LocalTime.now()
     } else {
-        tryOrReturnDefault({ LocalTime.parse(this, dtfOnlyTime) }, default = { LocalTime.now() })
+        tryOrReturnDefault({ LocalTime.parse(this, dtfTime) }, default = { LocalTime.now() })
     }
 
 fun OffsetDateTime.toLocaleDateTimeApplyZone(zoneId: ZoneId = currentZoneId): LocalDateTime =
@@ -141,3 +158,8 @@ fun LocalDateTime.numberOfDays(zoneId: ZoneId): Long {
     val dueDate = this.toLocalDate()
     return Duration.between(dueDate.atStartOfDay(), nowDate.atStartOfDay()).toDays()
 }
+
+fun LocalDateTime.applyTimezone(zoneId: ZoneId): LocalDate = LocalDateTime.of(toLocalDate(), toLocalTime())
+    .atZone(ZoneOffset.UTC)
+    .withZoneSameInstant(zoneId)
+    .toLocalDate()

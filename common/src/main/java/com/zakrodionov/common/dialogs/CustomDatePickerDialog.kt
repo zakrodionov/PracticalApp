@@ -10,8 +10,8 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import com.zakrodionov.common.R
 import com.zakrodionov.common.extensions.addZeroPrefixMonth
-import com.zakrodionov.common.extensions.parseOnlyDate
-import com.zakrodionov.common.extensions.parseOnlyDateFirstYear
+import com.zakrodionov.common.extensions.parseDate
+import com.zakrodionov.common.extensions.parseDateFirstYear
 
 class CustomDatePickerDialog : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
@@ -25,7 +25,7 @@ class CustomDatePickerDialog : DialogFragment(), DatePickerDialog.OnDateSetListe
         val stringDate = arguments?.getString(ARG_DATE)
         val minDate = arguments?.getLong(ARG_MIN_DATE)
 
-        val date = if (reverseFormat) stringDate.parseOnlyDateFirstYear() else stringDate.parseOnlyDate()
+        val date = if (reverseFormat) stringDate.parseDateFirstYear() else stringDate.parseDate()
 
         val dialog = DatePickerDialog(
             requireContext(),

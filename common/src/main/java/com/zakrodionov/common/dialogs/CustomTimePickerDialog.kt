@@ -10,7 +10,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import com.zakrodionov.common.R
 import com.zakrodionov.common.extensions.addZeroPrefixMonth
-import com.zakrodionov.common.extensions.parseOnlyTime
+import com.zakrodionov.common.extensions.parseTime
 
 class CustomTimePickerDialog : DialogFragment(), TimePickerDialog.OnTimeSetListener {
 
@@ -20,7 +20,7 @@ class CustomTimePickerDialog : DialogFragment(), TimePickerDialog.OnTimeSetListe
         payload = arguments?.getParcelable(ARG_PAYLOAD)
 
         val stringTime = arguments?.getString(ARG_TIME)
-        val time = stringTime.parseOnlyTime()
+        val time = stringTime.parseTime()
 
         return TimePickerDialog(activity, R.style.AlertDialog_Theme, this, time.hour, time.minute, true)
     }
