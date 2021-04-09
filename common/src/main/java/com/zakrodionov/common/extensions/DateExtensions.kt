@@ -20,11 +20,6 @@ import java.util.Locale
 val weekFields get() = WeekFields.of(currentLocale)
 
 /*
-Внимание! Если в приложение реализуется смена языка, то DateTimeFormatter следует инициализировать после каждой
-смены языка, например можно обернуть в object и изменять как var поля.
-*/
-
-/*
 На уровне ViewModel, Interactor, Repository и т.д., лучше оперирывать OffsetDateTime или ZonedDateTime
 и только на уровне вью мапить к LocalDateTime и отображать время
 так при смене часового пояса на вью будет отображаться корректное время*/
