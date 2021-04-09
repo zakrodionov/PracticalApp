@@ -13,6 +13,7 @@ import java.time.ZoneOffset
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME
+import java.time.format.DateTimeFormatter.ISO_ZONED_DATE_TIME
 import java.time.temporal.WeekFields
 import java.util.Locale
 
@@ -41,7 +42,12 @@ val dtfDayShortMonth by lazy { DateTimeFormatter.ofPattern("dd MMM", currentLoca
 val dtfDayOfWeek by lazy { DateTimeFormatter.ofPattern("EEEE", currentLocale) }
 val dtfDayOfWeekShort by lazy { DateTimeFormatter.ofPattern("EEE", currentLocale) }
 
-fun String.parseDate(formatter: DateTimeFormatter = ISO_OFFSET_DATE_TIME): ZonedDateTime {
+fun String.parseOffsetDateTime(formatter: DateTimeFormatter = ISO_OFFSET_DATE_TIME): OffsetDateTime {
+    val odt = OffsetDateTime.parse(this, formatter)
+    return odt
+}
+
+fun String.parseZonedDateTime(formatter: DateTimeFormatter = ISO_ZONED_DATE_TIME): ZonedDateTime {
     val zdt = ZonedDateTime.parse(this, formatter)
     return zdt
 }
@@ -96,12 +102,11 @@ fun String?.parseOnlyTime() =
         tryOrReturnDefault({ LocalTime.parse(this, dtfOnlyTime) }, default = { LocalTime.now() })
     }
 
-// Use for parse date like a '2020-12-11T17:30:00+00:00'
-fun String.parseOffsetDateTime(): OffsetDateTime =
-    OffsetDateTime.parse(this, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-
 fun OffsetDateTime.toLocaleDateTimeApplyZone(zoneId: ZoneId = currentZoneId): LocalDateTime =
     LocalDateTime.ofInstant(toInstant(), zoneId)
+
+fun ZonedDateTime.toLocaleDateTimeApplyZone(zoneId: ZoneId = currentZoneId): ZonedDateTime =
+    ZonedDateTime.ofInstant(toInstant(), zoneId)
 
 // Use for parse date like a '2020-12-28'
 fun String.parseLocalDate(): LocalDate = LocalDate.parse(this, DateTimeFormatter.ISO_LOCAL_DATE)
