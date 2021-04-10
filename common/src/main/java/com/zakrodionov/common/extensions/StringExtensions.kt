@@ -68,6 +68,7 @@ fun String?.parseColor(): Int? {
     }
 }
 
+@Suppress("DEPRECATION")
 fun String.formatPhone(defaultCountryIso: String = currentLocale.country): String {
     var phone = this
     if (defaultCountryIso == "RU" && !phone.startsWith("8") && !phone.startsWith("+7"))

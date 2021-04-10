@@ -1,7 +1,6 @@
 package com.zakrodionov.common.extensions
 
 import android.graphics.Rect
-import android.os.Handler
 import android.view.View
 import android.widget.ScrollView
 import androidx.core.widget.NestedScrollView
@@ -29,7 +28,7 @@ fun NestedScrollView.scrollToBottom() {
 }
 
 fun NestedScrollView.scrollToBottomWithDelay(delay: Long) {
-    Handler().postDelayed({ this.scrollToBottom() }, delay)
+    postDelayed({ scrollToBottom() }, delay)
 }
 
 fun ScrollView.scrollToBottom(targetChildId: Int) {

@@ -40,7 +40,6 @@ class CommonDialog : DialogFragment() {
             val message = arguments?.getString(MESSAGE_KEY)
             val messageTextAppearance =
                 arguments?.getInt(MESSAGE_APPEARANCE_KEY) ?: DEFAULT_VALUE_KEY
-            val withHtml = arguments?.getBoolean(WITH_HTML_KEY) ?: false
 
             tvTitle.setTextOrHide(title)
             tvMessage.setTextOrHide(message)
@@ -52,32 +51,29 @@ class CommonDialog : DialogFragment() {
     }
 
     private fun setupButtons(builder: AlertDialog.Builder) {
-        with(binding) {
-            val tag = arguments?.getString(TAG_KEY)
-            val reverse = arguments?.getBoolean(REVERSE_KEY) ?: false
-            val payload: Parcelable? = arguments?.getParcelable(PAYLOAD_KEY)
+        val tag = arguments?.getString(TAG_KEY)
+        val payload: Parcelable? = arguments?.getParcelable(PAYLOAD_KEY)
 
-            var positiveButton = arguments?.getInt(BTN_POSITIVE_KEY)
-            var negativeButton = arguments?.getInt(BTN_NEGATIVE_KEY)
+        var positiveButton = arguments?.getInt(BTN_POSITIVE_KEY)
+        var negativeButton = arguments?.getInt(BTN_NEGATIVE_KEY)
 
-            if (positiveButton == null || positiveButton == DEFAULT_VALUE_KEY) {
-                positiveButton = R.string.ok
-            }
+        if (positiveButton == null || positiveButton == DEFAULT_VALUE_KEY) {
+            positiveButton = R.string.ok
+        }
 
-            if (negativeButton == null || negativeButton == DEFAULT_VALUE_KEY) {
-                negativeButton = R.string.cancel
-            }
+        if (negativeButton == null || negativeButton == DEFAULT_VALUE_KEY) {
+            negativeButton = R.string.cancel
+        }
 
-            val isNegativeVisible = arguments?.getBoolean(NEGATIVE_VISIBLE_KEY) ?: true
+        val isNegativeVisible = arguments?.getBoolean(NEGATIVE_VISIBLE_KEY) ?: true
 
-            builder.setPositiveButton(positiveButton) { _, _ ->
-                cancelAndSendResult(CommonDialogEvent(DialogButton.OK, payload, tag))
-            }
+        builder.setPositiveButton(positiveButton) { _, _ ->
+            cancelAndSendResult(CommonDialogEvent(DialogButton.OK, payload, tag))
+        }
 
-            if (isNegativeVisible) {
-                builder.setNegativeButton(negativeButton) { _, _ ->
-                    cancelAndSendResult(CommonDialogEvent(DialogButton.CANCEL, payload, tag))
-                }
+        if (isNegativeVisible) {
+            builder.setNegativeButton(negativeButton) { _, _ ->
+                cancelAndSendResult(CommonDialogEvent(DialogButton.CANCEL, payload, tag))
             }
         }
     }

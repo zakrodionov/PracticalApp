@@ -16,7 +16,7 @@ fun File.contentUri(context: Context): Uri =
     FileProvider.getUriForFile(context, context.authority, this)
 
 fun Context.getFileName(uri: Uri): String? = when (uri.scheme) {
-    ContentResolver.SCHEME_FILE -> File(uri.path).name
+    ContentResolver.SCHEME_FILE -> File(uri.path ?: "").name
     ContentResolver.SCHEME_CONTENT -> getCursorContent(uri)
     else -> null
 }

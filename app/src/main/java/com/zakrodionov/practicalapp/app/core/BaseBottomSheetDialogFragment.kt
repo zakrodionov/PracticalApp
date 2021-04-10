@@ -13,7 +13,6 @@ import com.zakrodionov.common.dialogs.CommonDialog.Companion.TAG_COMMON_DIALOG
 import com.zakrodionov.common.dialogs.FixedBottomSheetDialogFragment
 import com.zakrodionov.common.extensions.getCompatColor
 import com.zakrodionov.common.extensions.hideKeyboard
-import com.zakrodionov.common.extensions.setStatusBarColor
 import com.zakrodionov.common.extensions.setStatusBarLightMode
 import com.zakrodionov.common.extensions.showDialog
 import com.zakrodionov.common.extensions.showSnackbar
@@ -35,15 +34,13 @@ abstract class BaseBottomSheetDialogFragment<STATE : BaseState, SIDE_EFFECT : An
 
     private var snackBar: Snackbar? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        activity?.setStatusBarColor(requireContext().getCompatColor(statusBarColor))
-        activity?.setStatusBarLightMode(statusBarLightMode)
-    }
-
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        activity?.window?.statusBarColor = requireContext().getCompatColor(statusBarColor)
+        activity?.window?.setStatusBarLightMode(statusBarLightMode, view)
+
         setupViews(view, savedInstanceState)
 
         viewLifecycleOwner.addRepeatingJob(Lifecycle.State.STARTED) {
