@@ -15,9 +15,7 @@ class PostDetailViewModel(
     savedStateHandle: SavedStateHandle,
     private val postRepository: PostRepository,
     private val args: ArgsPostDetail
-) : BaseViewModel<PostDetailsState, PostDetailsEvent>(savedStateHandle) {
-
-    override fun getInitialState(): PostDetailsState = PostDetailsState()
+) : BaseViewModel<PostDetailsState, PostDetailsEvent>(PostDetailsState(), savedStateHandle) {
 
     init {
         if (state.post == null) loadPostDetails()

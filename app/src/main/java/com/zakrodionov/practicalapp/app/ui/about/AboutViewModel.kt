@@ -13,9 +13,7 @@ class AboutViewModel(
     savedStateHandle: SavedStateHandle,
     private val applicationSettings: ApplicationSettings,
     private val modo: Modo
-) : BaseViewModel<AboutState, AboutEvent>(savedStateHandle) {
-
-    override fun getInitialState(): AboutState = AboutState()
+) : BaseViewModel<AboutState, AboutEvent>(AboutState(), savedStateHandle) {
 
     init {
         getIsLogged()

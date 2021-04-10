@@ -16,9 +16,7 @@ data class StubState(
     override fun applyError(error: BaseError): StubState = copy(error = error)
 }
 
-abstract class StubViewModel : BaseViewModel<StubState, Unit>() {
-    override fun getInitialState() = StubState()
-}
+abstract class StubViewModel : BaseViewModel<StubState, Unit>(StubState())
 
 abstract class StubFragment(@LayoutRes layout: Int = R.layout.fragment_stub) : BaseFragment<StubState, Unit>(layout) {
     override fun sideEffect(event: Unit) = Unit

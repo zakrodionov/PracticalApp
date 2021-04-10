@@ -21,6 +21,7 @@ import kotlinx.coroutines.launch
 // прокидываем savedStateHandle для сохранения стейта в bundle
 @Suppress("TooManyFunctions")
 abstract class BaseViewModel<STATE : BaseState, EVENT : Any>(
+    initialState: STATE,
     private val savedStateHandle: SavedStateHandle? = null
 ) : ViewModel() {
 
@@ -29,7 +30,7 @@ abstract class BaseViewModel<STATE : BaseState, EVENT : Any>(
         const val KEY_STATE = "KEY_STATE"
     }
 
-    private val _stateFlow = MutableStateFlow<STATE>(restoreState())
+    private val _stateFlow = MutableStateFlow<STATE>(restoreState() ?: initialState)
     val stateFlow = _stateFlow.asStateFlow()
 
     private val _eventFlow = MutableSharedFlow<EVENT>()
@@ -38,8 +39,6 @@ abstract class BaseViewModel<STATE : BaseState, EVENT : Any>(
     // Общие ShowEvent события для toast, alert, dialog
     private val _showEventFlow = MutableSharedFlow<ShowEvent>()
     val showEventFlow = _showEventFlow.asSharedFlow()
-
-    abstract fun getInitialState(): STATE
 
     val state: STATE get() = stateFlow.value
 
@@ -63,10 +62,9 @@ abstract class BaseViewModel<STATE : BaseState, EVENT : Any>(
         block.invoke()
     }
 
-    private fun restoreState(): STATE {
+    private fun restoreState(): STATE? {
         val bundle = savedStateHandle?.get<Bundle>(BUNDLE_STATE)
-        val restoredState = bundle?.getParcelable<STATE>(KEY_STATE)
-        return restoredState ?: getInitialState()
+        return bundle?.getParcelable(KEY_STATE)
     }
 
     private fun setSavedStateProvider() {

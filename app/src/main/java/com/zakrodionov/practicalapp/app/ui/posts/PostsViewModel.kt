@@ -15,9 +15,7 @@ class PostsViewModel(
     savedStateHandle: SavedStateHandle,
     private val postRepository: PostRepository,
     private val modo: Modo
-) : BaseViewModel<PostsState, PostsEvent>(savedStateHandle) {
-
-    override fun getInitialState(): PostsState = PostsState()
+) : BaseViewModel<PostsState, PostsEvent>(PostsState(), savedStateHandle) {
 
     init {
         if (state.posts == null) loadPosts()
