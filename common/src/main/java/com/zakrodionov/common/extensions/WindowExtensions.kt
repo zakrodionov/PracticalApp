@@ -6,7 +6,7 @@ import androidx.core.view.WindowInsetsControllerCompat
 
 fun Window.setStatusBarLightMode(
     isLightMode: Boolean,
-    view: View
+    view: View = decorView
 ) {
     WindowInsetsControllerCompat(this, view).isAppearanceLightStatusBars = isLightMode
 }

@@ -38,7 +38,7 @@ abstract class BaseFragment<STATE : BaseState, SIDE_EFFECT : Any>(@LayoutRes con
         super.onViewCreated(view, savedInstanceState)
 
         activity?.window?.statusBarColor = requireContext().getCompatColor(statusBarColor)
-        activity?.window?.setStatusBarLightMode(statusBarLightMode, view)
+        activity?.window?.setStatusBarLightMode(statusBarLightMode)
 
         setupViews(view, savedInstanceState)
 
