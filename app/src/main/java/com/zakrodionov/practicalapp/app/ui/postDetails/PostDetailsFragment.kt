@@ -32,11 +32,7 @@ class PostDetailsFragment : BaseFragment<PostDetailsState, PostDetailsEvent>(R.l
         }
     }
 
-    override fun sideEffect(event: PostDetailsEvent) {
-        when (event) {
-            is PostDetailsEvent.ShowEvent -> handleShowAction(event.showAction)
-        }
-    }
+    override fun sideEffect(event: PostDetailsEvent) = Unit
 
     override fun render(state: PostDetailsState) {
         with(binding) {

@@ -3,7 +3,6 @@ package com.zakrodionov.practicalapp.app.ui.postDetails
 import com.zakrodionov.common.ui.ScreenState
 import com.zakrodionov.common.ui.ScreenState.CONTENT
 import com.zakrodionov.common.ui.ScreenState.ERROR
-import com.zakrodionov.common.ui.ShowAction
 import com.zakrodionov.practicalapp.app.core.BaseError
 import com.zakrodionov.practicalapp.app.core.BaseState
 import com.zakrodionov.practicalapp.domain.model.Posts.Post
@@ -24,6 +23,4 @@ data class PostDetailsState(
     override fun applyError(error: BaseError): PostDetailsState = copy(error = error)
 }
 
-sealed class PostDetailsEvent {
-    data class ShowEvent(val showAction: ShowAction) : PostDetailsEvent()
-}
+sealed class PostDetailsEvent

@@ -20,13 +20,14 @@ import com.zakrodionov.common.extensions.showSnackbar
 import com.zakrodionov.common.extensions.showToast
 import com.zakrodionov.common.ui.ShowAction
 import com.zakrodionov.practicalapp.R
+import com.zakrodionov.practicalapp.app.core.IBaseViewModel.ShowEvent
 import kotlinx.coroutines.flow.collect
 
 @Suppress("TooManyFunctions")
-abstract class BaseFragment<STATE : BaseState, SIDE_EFFECT : Any>(@LayoutRes contentLayoutId: Int) :
+abstract class BaseFragment<STATE : Any, SIDE_EFFECT : Any>(@LayoutRes contentLayoutId: Int) :
     Fragment(contentLayoutId) {
 
-    abstract val viewModel: BaseViewModel<STATE, SIDE_EFFECT>
+    abstract val viewModel: IBaseViewModel<STATE, SIDE_EFFECT>
     abstract val binding: ViewBinding
 
     open val statusBarColor = R.color.color_statusbar
@@ -76,7 +77,7 @@ abstract class BaseFragment<STATE : BaseState, SIDE_EFFECT : Any>(@LayoutRes con
     abstract fun sideEffect(event: SIDE_EFFECT)
 
     // Обрабатываем showEvent от viewModel
-    open fun showEvent(showEvent: BaseViewModel.ShowEvent) {
+    open fun showEvent(showEvent: ShowEvent) {
         handleShowAction(showEvent.showAction)
     }
 
