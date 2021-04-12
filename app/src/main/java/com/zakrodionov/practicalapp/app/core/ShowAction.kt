@@ -1,7 +1,8 @@
 package com.zakrodionov.practicalapp.app.core
 
 import android.os.Parcelable
-import com.zakrodionov.common.ui.models.ResourceString
+import androidx.annotation.StyleRes
+import com.zakrodionov.common.core.ResourceString
 
 sealed class ShowAction {
     data class ShowToast(val message: ResourceString) : ShowAction()
@@ -12,6 +13,11 @@ sealed class ShowAction {
         val btnPositiveText: ResourceString? = null,
         val btnNegativeText: ResourceString? = null,
         val showBtnNegative: Boolean = false,
-        val payload: Parcelable? = null
+        val payload: Parcelable? = null,
+        val tag: String? = null,
+        val reverse: Boolean = false,
+        val cancelable: Boolean = false,
+        @StyleRes val messageTextAppearance: Int? = null,
+        @StyleRes val theme: Int? = null
     ) : ShowAction()
 }

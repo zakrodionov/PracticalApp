@@ -1,4 +1,4 @@
-package com.zakrodionov.common.ui.models
+package com.zakrodionov.common.core
 
 import android.app.Activity
 import android.content.Context

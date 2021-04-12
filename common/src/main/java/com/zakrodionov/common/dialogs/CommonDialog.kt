@@ -10,10 +10,10 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import com.zakrodionov.common.R
+import com.zakrodionov.common.core.ResourceString
 import com.zakrodionov.common.databinding.DialogCommonBinding
 import com.zakrodionov.common.extensions.setTextAppearanceCompat
 import com.zakrodionov.common.extensions.setTextOrHide
-import com.zakrodionov.common.ui.models.ResourceString
 import kotlinx.parcelize.Parcelize
 
 @Suppress("TooManyFunctions")
@@ -24,7 +24,7 @@ class CommonDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         _binding = DialogCommonBinding.inflate(LayoutInflater.from(context))
-        val theme = arguments?.getInt(THEME_KEY) ?: R.style.AlertDialog_Theme
+        val theme = arguments?.getInt(THEME_KEY).takeIf { it != DEFAULT_VALUE_KEY } ?: R.style.AlertDialog_Theme
         val builder = AlertDialog.Builder(requireContext(), theme)
         builder.setView(binding.root)
 
@@ -38,13 +38,12 @@ class CommonDialog : DialogFragment() {
         with(binding) {
             val title = arguments?.getParcelable<ResourceString>(TITLE_KEY)
             val message = arguments?.getParcelable<ResourceString>(MESSAGE_KEY)
-            val messageTextAppearance =
-                arguments?.getInt(MESSAGE_APPEARANCE_KEY) ?: DEFAULT_VALUE_KEY
+            val messageTextAppearance = arguments?.getInt(MESSAGE_APPEARANCE_KEY).takeIf { it != DEFAULT_VALUE_KEY }
 
             tvTitle.setTextOrHide(title?.getText(requireContext()))
             tvMessage.setTextOrHide(message?.getText(requireContext()))
 
-            if (messageTextAppearance != DEFAULT_VALUE_KEY) {
+            if (messageTextAppearance != null) {
                 tvMessage.setTextAppearanceCompat(messageTextAppearance)
             }
         }
@@ -106,7 +105,7 @@ class CommonDialog : DialogFragment() {
         private var negativeVisible: Boolean = false
         private var cancelable: Boolean = false
         private var withHtml: Boolean = false
-        private var theme: Int = R.style.AlertDialog_Theme
+        private var theme: Int? = null
 
         fun title(title: ResourceString?): Builder {
             this.title = title
@@ -118,12 +117,12 @@ class CommonDialog : DialogFragment() {
             return this
         }
 
-        fun messageTextAppearance(@StyleRes textAppearance: Int): Builder {
+        fun messageTextAppearance(@StyleRes textAppearance: Int?): Builder {
             this.messageTextAppearance = textAppearance
             return this
         }
 
-        fun payload(payload: Parcelable): Builder {
+        fun payload(payload: Parcelable?): Builder {
             this.payload = payload
             return this
         }
@@ -163,7 +162,7 @@ class CommonDialog : DialogFragment() {
             return this
         }
 
-        fun theme(theme: Int): Builder {
+        fun theme(theme: Int?): Builder {
             this.theme = theme
             return this
         }
@@ -183,7 +182,7 @@ class CommonDialog : DialogFragment() {
             args.putParcelable(BTN_POSITIVE_KEY, btnPositive)
             args.putParcelable(BTN_NEGATIVE_KEY, btnNegative)
             args.putBoolean(WITH_HTML_KEY, withHtml)
-            args.putInt(THEME_KEY, theme)
+            args.putInt(THEME_KEY, theme ?: DEFAULT_VALUE_KEY)
 
             instance.arguments = args
             return instance
@@ -208,6 +207,7 @@ class CommonDialog : DialogFragment() {
         const val WITH_HTML_KEY = "WITH_HTML_KEY"
         const val THEME_KEY = "THEME_KEY"
 
+        // Because we can't put null int to bundle
         const val DEFAULT_VALUE_KEY = 0
     }
 }

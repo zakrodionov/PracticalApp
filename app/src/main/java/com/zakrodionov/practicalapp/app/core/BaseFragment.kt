@@ -87,7 +87,12 @@ abstract class BaseFragment<STATE : BaseState, SIDE_EFFECT : Any>(@LayoutRes con
                     message = showAction.message,
                     btnPositiveText = showAction.btnPositiveText,
                     btnNegativeText = showAction.btnNegativeText,
-                    showBtnNegative = showAction.showBtnNegative
+                    showBtnNegative = showAction.showBtnNegative,
+                    payload = showAction.payload,
+                    reverse = showAction.reverse,
+                    cancelable = showAction.cancelable,
+                    messageTextAppearance = showAction.messageTextAppearance,
+                    theme = showAction.theme
                 )
             }
             is ShowAction.ShowToast -> {

@@ -1,7 +1,7 @@
 package com.zakrodionov.practicalapp.app.core
 
 import android.os.Parcelable
-import com.zakrodionov.common.ui.models.ResourceString
+import com.zakrodionov.common.core.ResourceString
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.ImportanceError.CONTENT_ERROR
 import com.zakrodionov.practicalapp.app.core.ImportanceError.CRITICAL_ERROR
