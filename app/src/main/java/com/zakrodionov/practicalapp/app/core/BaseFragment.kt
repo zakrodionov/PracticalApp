@@ -17,7 +17,6 @@ import com.zakrodionov.common.extensions.setStatusBarLightMode
 import com.zakrodionov.common.extensions.showDialog
 import com.zakrodionov.common.extensions.showSnackbar
 import com.zakrodionov.common.extensions.showToast
-import com.zakrodionov.common.ui.ShowAction
 import com.zakrodionov.practicalapp.R
 import kotlinx.coroutines.flow.collect
 
@@ -82,9 +81,13 @@ abstract class BaseFragment<STATE : BaseState, SIDE_EFFECT : Any>(@LayoutRes con
         when (showAction) {
             is ShowAction.ShowDialog -> {
                 showDialog(
-                    message = showAction.message.getText(this),
                     fragmentManager = childFragmentManager,
-                    tag = TAG_COMMON_DIALOG
+                    tag = TAG_COMMON_DIALOG,
+                    title = showAction.title.getText(this),
+                    message = showAction.message.getText(this),
+                    btnPositiveText = showAction.btnPositiveText,
+                    btnNegativeText = showAction.btnNegativeText,
+                    showBtnNegative = showAction.showBtnNegative
                 )
             }
             is ShowAction.ShowToast -> {

@@ -17,7 +17,6 @@ import com.zakrodionov.common.extensions.setStatusBarLightMode
 import com.zakrodionov.common.extensions.showDialog
 import com.zakrodionov.common.extensions.showSnackbar
 import com.zakrodionov.common.extensions.showToast
-import com.zakrodionov.common.ui.ShowAction
 import com.zakrodionov.practicalapp.R
 import kotlinx.coroutines.flow.collect
 

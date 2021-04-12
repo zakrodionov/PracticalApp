@@ -10,13 +10,13 @@ import com.zakrodionov.common.extensions.hide
 import com.zakrodionov.common.extensions.ifNotNull
 import com.zakrodionov.common.extensions.setup
 import com.zakrodionov.common.extensions.show
-import com.zakrodionov.common.ui.ScreenState.CONTENT
-import com.zakrodionov.common.ui.ScreenState.ERROR
-import com.zakrodionov.common.ui.ScreenState.STUB
 import com.zakrodionov.common.ui.rv.AsyncListDifferProgressAdapter
 import com.zakrodionov.common.ui.rv.EndlessScroll
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.BaseFragment
+import com.zakrodionov.practicalapp.app.core.ScreenState.CONTENT
+import com.zakrodionov.practicalapp.app.core.ScreenState.ERROR
+import com.zakrodionov.practicalapp.app.core.ScreenState.STUB
 import com.zakrodionov.practicalapp.databinding.FragmentPostsBinding
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
 

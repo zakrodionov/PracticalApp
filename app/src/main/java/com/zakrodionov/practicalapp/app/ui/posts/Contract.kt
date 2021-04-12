@@ -1,11 +1,11 @@
 package com.zakrodionov.practicalapp.app.ui.posts
 
-import com.zakrodionov.common.ui.ScreenState
-import com.zakrodionov.common.ui.ScreenState.CONTENT
-import com.zakrodionov.common.ui.ScreenState.ERROR
-import com.zakrodionov.common.ui.ScreenState.STUB
 import com.zakrodionov.practicalapp.app.core.BaseError
 import com.zakrodionov.practicalapp.app.core.BaseState
+import com.zakrodionov.practicalapp.app.core.ScreenState
+import com.zakrodionov.practicalapp.app.core.ScreenState.CONTENT
+import com.zakrodionov.practicalapp.app.core.ScreenState.ERROR
+import com.zakrodionov.practicalapp.app.core.ScreenState.STUB
 import com.zakrodionov.practicalapp.domain.model.Posts.Post
 import kotlinx.parcelize.Parcelize
 

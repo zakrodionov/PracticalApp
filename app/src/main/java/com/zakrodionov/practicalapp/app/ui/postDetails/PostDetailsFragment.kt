@@ -9,10 +9,10 @@ import com.zakrodionov.common.extensions.initialArguments
 import com.zakrodionov.common.extensions.load
 import com.zakrodionov.common.extensions.setTextOrHide
 import com.zakrodionov.common.extensions.withInitialArguments
-import com.zakrodionov.common.ui.ScreenState.CONTENT
-import com.zakrodionov.common.ui.ScreenState.ERROR
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.BaseFragment
+import com.zakrodionov.practicalapp.app.core.ScreenState.CONTENT
+import com.zakrodionov.practicalapp.app.core.ScreenState.ERROR
 import com.zakrodionov.practicalapp.databinding.FragmentPostDetailBinding
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
 import org.koin.core.parameter.parametersOf

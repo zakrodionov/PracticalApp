@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Parcelable
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -59,9 +60,9 @@ fun <T : Parcelable> Fragment.initialArguments(): T {
 }
 /*endregion*/
 
-fun DialogFragment.showIfNotAlreadyShown(fragmentManager: FragmentManager, tag: String) {
+fun DialogFragment.showIfNotAlreadyShown(fragmentManager: FragmentManager, tag: String, now: Boolean = true) {
     if (fragmentManager.findFragmentByTag(tag) == null) {
-        show(fragmentManager, tag)
+        if (now) showNow(fragmentManager, tag) else show(fragmentManager, tag)
     }
 }
 
@@ -72,15 +73,22 @@ fun DialogFragment.showWithPreventMultiple(fragmentManager: FragmentManager, tag
 }
 
 // TODO add all params
+@Suppress("LongParameterList")
 fun showDialog(
-    title: String = "",
-    message: String,
     fragmentManager: FragmentManager,
-    tag: String
+    tag: String,
+    title: String = "",
+    message: String = "",
+    @StringRes btnPositiveText: Int? = null,
+    @StringRes btnNegativeText: Int? = null,
+    showBtnNegative: Boolean = false
 ) {
     CommonDialog.Builder()
         .title(title)
         .message(message)
+        .btnPositive(btnPositiveText)
+        .btnNegative(btnNegativeText)
+        .negativeVisible(showBtnNegative)
         .build()
         .showWithPreventMultiple(fragmentManager, tag)
 }

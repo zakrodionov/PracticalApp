@@ -4,12 +4,11 @@ import android.os.Bundle
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zakrodionov.common.ui.ShowAction
-import com.zakrodionov.common.ui.ShowAction.ShowDialog
-import com.zakrodionov.common.ui.ShowAction.ShowSnackbar
 import com.zakrodionov.practicalapp.app.core.ImportanceError.CONTENT_ERROR
 import com.zakrodionov.practicalapp.app.core.ImportanceError.CRITICAL_ERROR
 import com.zakrodionov.practicalapp.app.core.ImportanceError.NON_CRITICAL_ERROR
+import com.zakrodionov.practicalapp.app.core.ShowAction.ShowDialog
+import com.zakrodionov.practicalapp.app.core.ShowAction.ShowSnackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow

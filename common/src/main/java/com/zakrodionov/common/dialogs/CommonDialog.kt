@@ -128,12 +128,12 @@ class CommonDialog : DialogFragment() {
             return this
         }
 
-        fun btnPositive(@StringRes btnPositive: Int): Builder {
+        fun btnPositive(@StringRes btnPositive: Int?): Builder {
             this.btnPositive = btnPositive
             return this
         }
 
-        fun btnNegative(@StringRes btnNegative: Int): Builder {
+        fun btnNegative(@StringRes btnNegative: Int?): Builder {
             this.btnNegative = btnNegative
             return this
         }

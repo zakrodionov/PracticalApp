@@ -1,5 +1,5 @@
 
-package com.zakrodionov.common.ui
+package com.zakrodionov.practicalapp.app.core
 
 // Модальные состояния экрана
 enum class ScreenState {
