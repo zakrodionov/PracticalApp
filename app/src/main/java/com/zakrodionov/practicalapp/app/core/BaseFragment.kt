@@ -82,7 +82,7 @@ abstract class BaseFragment<STATE : BaseState, SIDE_EFFECT : Any>(@LayoutRes con
             is ShowAction.ShowDialog -> {
                 showDialog(
                     fragmentManager = childFragmentManager,
-                    tag = TAG_COMMON_DIALOG,
+                    tag = showAction.tag ?: TAG_COMMON_DIALOG,
                     title = showAction.title,
                     message = showAction.message,
                     btnPositiveText = showAction.btnPositiveText,
