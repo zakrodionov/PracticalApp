@@ -16,6 +16,17 @@ import com.zakrodionov.common.extensions.setTextAppearanceCompat
 import com.zakrodionov.common.extensions.setTextOrHide
 import kotlinx.parcelize.Parcelize
 
+/**
+ * How to handle result: define fragmentResultListener in activity/fragment
+ * on childFragmentManager or supportFragmentManager(just type setFragmentResultListener())
+ *
+ * childFragmentManager.setFragmentResultListener(RK_COMMON_DIALOG, this@PostsFragment) { requestKey, bundle ->
+ *     val result = bundle.getParcelable<CommonDialogEvent>(ARG_COMMON_DIALOG_EVENT)
+ *     when {
+ *         result?.tag == MY_TAG && result?.button == DialogButton.OK -> { /*do some action*/ }
+ *     }
+ * }
+ * */
 @Suppress("TooManyFunctions")
 class CommonDialog : DialogFragment() {
 
@@ -104,7 +115,6 @@ class CommonDialog : DialogFragment() {
         private var reverse: Boolean = false
         private var negativeVisible: Boolean = false
         private var cancelable: Boolean = false
-        private var withHtml: Boolean = false
         private var theme: Int? = null
 
         fun title(title: ResourceString?): Builder {
@@ -157,11 +167,6 @@ class CommonDialog : DialogFragment() {
             return this
         }
 
-        fun withHtml(withHtml: Boolean): Builder {
-            this.withHtml = withHtml
-            return this
-        }
-
         fun theme(theme: Int?): Builder {
             this.theme = theme
             return this
@@ -181,7 +186,6 @@ class CommonDialog : DialogFragment() {
             args.putBoolean(NEGATIVE_VISIBLE_KEY, negativeVisible)
             args.putParcelable(BTN_POSITIVE_KEY, btnPositive)
             args.putParcelable(BTN_NEGATIVE_KEY, btnNegative)
-            args.putBoolean(WITH_HTML_KEY, withHtml)
             args.putInt(THEME_KEY, theme ?: DEFAULT_VALUE_KEY)
 
             instance.arguments = args
