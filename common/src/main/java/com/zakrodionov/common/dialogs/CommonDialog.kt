@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.LayoutInflater
-import androidx.annotation.StringRes
 import androidx.annotation.StyleRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
@@ -14,6 +13,7 @@ import com.zakrodionov.common.R
 import com.zakrodionov.common.databinding.DialogCommonBinding
 import com.zakrodionov.common.extensions.setTextAppearanceCompat
 import com.zakrodionov.common.extensions.setTextOrHide
+import com.zakrodionov.common.ui.models.ResourceString
 import kotlinx.parcelize.Parcelize
 
 @Suppress("TooManyFunctions")
@@ -36,13 +36,13 @@ class CommonDialog : DialogFragment() {
 
     private fun setupTexts() {
         with(binding) {
-            val title = arguments?.getString(TITLE_KEY)
-            val message = arguments?.getString(MESSAGE_KEY)
+            val title = arguments?.getParcelable<ResourceString>(TITLE_KEY)
+            val message = arguments?.getParcelable<ResourceString>(MESSAGE_KEY)
             val messageTextAppearance =
                 arguments?.getInt(MESSAGE_APPEARANCE_KEY) ?: DEFAULT_VALUE_KEY
 
-            tvTitle.setTextOrHide(title)
-            tvMessage.setTextOrHide(message)
+            tvTitle.setTextOrHide(title?.getText(requireContext()))
+            tvMessage.setTextOrHide(message?.getText(requireContext()))
 
             if (messageTextAppearance != DEFAULT_VALUE_KEY) {
                 tvMessage.setTextAppearanceCompat(messageTextAppearance)
@@ -54,25 +54,25 @@ class CommonDialog : DialogFragment() {
         val tag = arguments?.getString(TAG_KEY)
         val payload: Parcelable? = arguments?.getParcelable(PAYLOAD_KEY)
 
-        var positiveButton = arguments?.getInt(BTN_POSITIVE_KEY)
-        var negativeButton = arguments?.getInt(BTN_NEGATIVE_KEY)
+        var positiveButton = arguments?.getParcelable<ResourceString>(BTN_POSITIVE_KEY)
+        var negativeButton = arguments?.getParcelable<ResourceString>(BTN_NEGATIVE_KEY)
 
-        if (positiveButton == null || positiveButton == DEFAULT_VALUE_KEY) {
-            positiveButton = R.string.ok
+        if (positiveButton == null) {
+            positiveButton = ResourceString.Res(R.string.ok)
         }
 
-        if (negativeButton == null || negativeButton == DEFAULT_VALUE_KEY) {
-            negativeButton = R.string.cancel
+        if (negativeButton == null) {
+            negativeButton = ResourceString.Res(R.string.cancel)
         }
 
         val isNegativeVisible = arguments?.getBoolean(NEGATIVE_VISIBLE_KEY) ?: true
 
-        builder.setPositiveButton(positiveButton) { _, _ ->
+        builder.setPositiveButton(positiveButton.getText(requireContext())) { _, _ ->
             cancelAndSendResult(CommonDialogEvent(DialogButton.OK, payload, tag))
         }
 
         if (isNegativeVisible) {
-            builder.setNegativeButton(negativeButton) { _, _ ->
+            builder.setNegativeButton(negativeButton.getText(requireContext())) { _, _ ->
                 cancelAndSendResult(CommonDialogEvent(DialogButton.CANCEL, payload, tag))
             }
         }
@@ -95,25 +95,25 @@ class CommonDialog : DialogFragment() {
 
     class Builder {
 
-        private var title: String? = null
-        private var message: String? = null
+        private var title: ResourceString? = null
+        private var message: ResourceString? = null
         private var messageTextAppearance: Int? = null
         private var tag: String? = null
         private var payload: Parcelable? = null
-        private var btnPositive: Int? = null
-        private var btnNegative: Int? = null
+        private var btnPositive: ResourceString? = null
+        private var btnNegative: ResourceString? = null
         private var reverse: Boolean = false
         private var negativeVisible: Boolean = false
         private var cancelable: Boolean = false
         private var withHtml: Boolean = false
         private var theme: Int = R.style.AlertDialog_Theme
 
-        fun title(title: String?): Builder {
+        fun title(title: ResourceString?): Builder {
             this.title = title
             return this
         }
 
-        fun message(message: String?): Builder {
+        fun message(message: ResourceString?): Builder {
             this.message = message
             return this
         }
@@ -128,12 +128,12 @@ class CommonDialog : DialogFragment() {
             return this
         }
 
-        fun btnPositive(@StringRes btnPositive: Int?): Builder {
+        fun btnPositive(btnPositive: ResourceString?): Builder {
             this.btnPositive = btnPositive
             return this
         }
 
-        fun btnNegative(@StringRes btnNegative: Int?): Builder {
+        fun btnNegative(btnNegative: ResourceString?): Builder {
             this.btnNegative = btnNegative
             return this
         }
@@ -172,16 +172,16 @@ class CommonDialog : DialogFragment() {
             val instance = CommonDialog()
             val args = Bundle()
 
-            args.putString(TITLE_KEY, title)
-            args.putString(MESSAGE_KEY, message)
+            args.putParcelable(TITLE_KEY, title)
+            args.putParcelable(MESSAGE_KEY, message)
             args.putInt(MESSAGE_APPEARANCE_KEY, messageTextAppearance ?: DEFAULT_VALUE_KEY)
             args.putParcelable(PAYLOAD_KEY, payload)
             args.putString(TAG_KEY, tag)
             args.putBoolean(REVERSE_KEY, reverse)
             args.putBoolean(CANCELABLE_KEY, cancelable)
             args.putBoolean(NEGATIVE_VISIBLE_KEY, negativeVisible)
-            args.putInt(BTN_POSITIVE_KEY, btnPositive ?: DEFAULT_VALUE_KEY)
-            args.putInt(BTN_NEGATIVE_KEY, btnNegative ?: DEFAULT_VALUE_KEY)
+            args.putParcelable(BTN_POSITIVE_KEY, btnPositive)
+            args.putParcelable(BTN_NEGATIVE_KEY, btnNegative)
             args.putBoolean(WITH_HTML_KEY, withHtml)
             args.putInt(THEME_KEY, theme)
 

@@ -5,7 +5,6 @@ import android.content.Context
 import android.os.Parcelable
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.annotation.StringRes
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -13,6 +12,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.zakrodionov.common.R
 import com.zakrodionov.common.dialogs.CommonDialog
+import com.zakrodionov.common.ui.models.ResourceString
 
 val Fragment.appContext: Context get() = requireActivity().applicationContext
 
@@ -77,10 +77,10 @@ fun DialogFragment.showWithPreventMultiple(fragmentManager: FragmentManager, tag
 fun showDialog(
     fragmentManager: FragmentManager,
     tag: String,
-    title: String = "",
-    message: String = "",
-    @StringRes btnPositiveText: Int? = null,
-    @StringRes btnNegativeText: Int? = null,
+    title: ResourceString? = null,
+    message: ResourceString? = null,
+    btnPositiveText: ResourceString? = null,
+    btnNegativeText: ResourceString? = null,
     showBtnNegative: Boolean = false
 ) {
     CommonDialog.Builder()

@@ -77,13 +77,18 @@ abstract class BaseBottomSheetDialogFragment<STATE : BaseState, SIDE_EFFECT : An
         handleShowAction(showEvent.showAction)
     }
 
+    // Используется для отображения базовых диалогов, снекбаров, тоастов
     open fun handleShowAction(showAction: ShowAction) {
         when (showAction) {
             is ShowAction.ShowDialog -> {
                 showDialog(
-                    message = showAction.message.getText(this),
                     fragmentManager = childFragmentManager,
-                    tag = TAG_COMMON_DIALOG
+                    tag = TAG_COMMON_DIALOG,
+                    title = showAction.title,
+                    message = showAction.message,
+                    btnPositiveText = showAction.btnPositiveText,
+                    btnNegativeText = showAction.btnNegativeText,
+                    showBtnNegative = showAction.showBtnNegative
                 )
             }
             is ShowAction.ShowToast -> {
