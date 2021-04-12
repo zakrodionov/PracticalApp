@@ -12,7 +12,7 @@ sealed class ShowAction {
         val message: ResourceString? = null,
         val btnPositiveText: ResourceString? = null,
         val btnNegativeText: ResourceString? = null,
-        val showBtnNegative: Boolean = false,
+        val showBtnNegative: Boolean = btnNegativeText != null,
         val payload: Parcelable? = null,
         val tag: String? = null,
         val reverse: Boolean = false,
