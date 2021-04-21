@@ -1,7 +1,7 @@
 package com.zakrodionov.practicalapp.app.core
 
 import android.os.Parcelable
-import com.zakrodionov.common.core.ResourceString
+import com.zakrodionov.common.core.TextResource
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.ImportanceError.CONTENT_ERROR
 import com.zakrodionov.practicalapp.app.core.ImportanceError.CRITICAL_ERROR
@@ -9,8 +9,8 @@ import com.zakrodionov.practicalapp.app.core.ImportanceError.NON_CRITICAL_ERROR
 import kotlinx.parcelize.Parcelize
 
 sealed class BaseError(open val importanceError: ImportanceError = NON_CRITICAL_ERROR) : Parcelable {
-    open val title: ResourceString = ResourceString.Res(R.string.error)
-    open val message: ResourceString = ResourceString.Res(R.string.unknown_error)
+    open val title: TextResource = TextResource.fromStringId(R.string.error)
+    open val message: TextResource = TextResource.fromStringId(R.string.unknown_error)
 
     abstract fun applyImportance(importanceError: ImportanceError): BaseError
 
@@ -44,14 +44,14 @@ enum class ImportanceError {
 
 @Parcelize
 data class NetworkConnectionError(override val importanceError: ImportanceError = CONTENT_ERROR) : BaseError() {
-    override val message: ResourceString get() = ResourceString.Res(R.string.no_internet_connection_error)
+    override val message: TextResource get() = TextResource.fromStringId(R.string.no_internet_connection_error)
     override fun applyImportance(importanceError: ImportanceError): BaseError = copy(importanceError = importanceError)
 }
 
 @Parcelize
 data class HttpError(
     val code: Int = 0,
-    val status: ResourceString = ResourceString.empty,
+    val status: TextResource = TextResource.empty,
     override val importanceError: ImportanceError = CRITICAL_ERROR
 ) : BaseError() {
     override fun applyImportance(importanceError: ImportanceError): BaseError = copy(importanceError = importanceError)

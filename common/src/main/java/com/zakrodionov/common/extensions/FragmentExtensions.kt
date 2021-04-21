@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.zakrodionov.common.R
-import com.zakrodionov.common.core.ResourceString
+import com.zakrodionov.common.core.TextResource
 import com.zakrodionov.common.dialogs.CommonDialog
 
 val Fragment.appContext: Context get() = requireActivity().applicationContext
@@ -77,10 +77,10 @@ fun DialogFragment.showWithPreventMultiple(fragmentManager: FragmentManager, tag
 fun showDialog(
     fragmentManager: FragmentManager,
     tag: String,
-    title: ResourceString? = null,
-    message: ResourceString? = null,
-    btnPositiveText: ResourceString? = null,
-    btnNegativeText: ResourceString? = null,
+    title: TextResource? = null,
+    message: TextResource? = null,
+    btnPositiveText: TextResource? = null,
+    btnNegativeText: TextResource? = null,
     showBtnNegative: Boolean = false,
     reverse: Boolean = false,
     cancelable: Boolean = false,

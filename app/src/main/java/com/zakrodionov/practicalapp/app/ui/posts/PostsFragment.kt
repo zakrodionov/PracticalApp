@@ -5,6 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
+import com.zakrodionov.common.core.asString
 import com.zakrodionov.common.extensions.hide
 import com.zakrodionov.common.extensions.hideIf
 import com.zakrodionov.common.extensions.ifNotNull
@@ -80,7 +81,7 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
             }
 
             state.error.ifNotNull { error ->
-                layoutError.tvTitle.text = error.message.getText(requireContext())
+                layoutError.tvTitle.text = error.message.asString(resources)
             }
 
             rvPosts.showIf { state.screenState == CONTENT }

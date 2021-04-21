@@ -2,12 +2,13 @@ package com.zakrodionov.practicalapp.app.ui.postDetails
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.zakrodionov.common.core.asString
 import com.zakrodionov.common.extensions.ifNotNull
 import com.zakrodionov.common.extensions.initialArguments
 import com.zakrodionov.common.extensions.load
 import com.zakrodionov.common.extensions.setTextOrHide
+import com.zakrodionov.common.extensions.showIf
 import com.zakrodionov.common.extensions.withInitialArguments
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.BaseFragment
@@ -42,14 +43,14 @@ class PostDetailsFragment : BaseFragment<PostDetailsState, PostDetailsEvent>(R.l
         with(binding) {
             tvTitle.setTextOrHide(state.post?.text)
             ivPhoto.load(state.post?.image)
-            progressBar.isVisible = state.isLoading
+            progressBar.showIf { state.isLoading }
 
             state.error.ifNotNull { error ->
-                layoutError.tvTitle.text = error.message.getText(requireContext())
+                layoutError.tvTitle.text = error.message.asString(resources)
             }
 
-            llContent.isVisible = state.screenState == CONTENT
-            layoutError.root.isVisible = state.screenState == ERROR
+            llContent.showIf { state.screenState == CONTENT }
+            layoutError.root.showIf { state.screenState == ERROR }
         }
     }
 }

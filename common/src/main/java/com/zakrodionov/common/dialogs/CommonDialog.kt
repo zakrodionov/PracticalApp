@@ -10,7 +10,8 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import com.zakrodionov.common.R
-import com.zakrodionov.common.core.ResourceString
+import com.zakrodionov.common.core.TextResource
+import com.zakrodionov.common.core.asString
 import com.zakrodionov.common.databinding.DialogCommonBinding
 import com.zakrodionov.common.extensions.setTextAppearanceCompat
 import com.zakrodionov.common.extensions.setTextOrHide
@@ -47,12 +48,12 @@ class CommonDialog : DialogFragment() {
 
     private fun setupTexts() {
         with(binding) {
-            val title = arguments?.getParcelable<ResourceString>(TITLE_KEY)
-            val message = arguments?.getParcelable<ResourceString>(MESSAGE_KEY)
+            val title = arguments?.getParcelable<TextResource>(TITLE_KEY)
+            val message = arguments?.getParcelable<TextResource>(MESSAGE_KEY)
             val messageTextAppearance = arguments?.getInt(MESSAGE_APPEARANCE_KEY).takeIf { it != DEFAULT_VALUE_KEY }
 
-            tvTitle.setTextOrHide(title?.getText(requireContext()))
-            tvMessage.setTextOrHide(message?.getText(requireContext()))
+            tvTitle.setTextOrHide(title?.asString(resources))
+            tvMessage.setTextOrHide(message?.asString(resources))
 
             if (messageTextAppearance != null) {
                 tvMessage.setTextAppearanceCompat(messageTextAppearance)
@@ -64,25 +65,25 @@ class CommonDialog : DialogFragment() {
         val tag = arguments?.getString(TAG_KEY)
         val payload: Parcelable? = arguments?.getParcelable(PAYLOAD_KEY)
 
-        var positiveButton = arguments?.getParcelable<ResourceString>(BTN_POSITIVE_KEY)
-        var negativeButton = arguments?.getParcelable<ResourceString>(BTN_NEGATIVE_KEY)
+        var positiveButton = arguments?.getParcelable<TextResource>(BTN_POSITIVE_KEY)
+        var negativeButton = arguments?.getParcelable<TextResource>(BTN_NEGATIVE_KEY)
 
         if (positiveButton == null) {
-            positiveButton = ResourceString.Res(R.string.ok)
+            positiveButton = TextResource.fromStringId(R.string.ok)
         }
 
         if (negativeButton == null) {
-            negativeButton = ResourceString.Res(R.string.cancel)
+            negativeButton = TextResource.fromStringId(R.string.cancel)
         }
 
         val isNegativeVisible = arguments?.getBoolean(NEGATIVE_VISIBLE_KEY) ?: true
 
-        builder.setPositiveButton(positiveButton.getText(requireContext())) { _, _ ->
+        builder.setPositiveButton(positiveButton.asString(resources)) { _, _ ->
             cancelAndSendResult(CommonDialogEvent(DialogButton.OK, payload, tag))
         }
 
         if (isNegativeVisible) {
-            builder.setNegativeButton(negativeButton.getText(requireContext())) { _, _ ->
+            builder.setNegativeButton(negativeButton.asString(resources)) { _, _ ->
                 cancelAndSendResult(CommonDialogEvent(DialogButton.CANCEL, payload, tag))
             }
         }
@@ -105,24 +106,24 @@ class CommonDialog : DialogFragment() {
 
     class Builder {
 
-        private var title: ResourceString? = null
-        private var message: ResourceString? = null
+        private var title: TextResource? = null
+        private var message: TextResource? = null
         private var messageTextAppearance: Int? = null
         private var tag: String? = null
         private var payload: Parcelable? = null
-        private var btnPositive: ResourceString? = null
-        private var btnNegative: ResourceString? = null
+        private var btnPositive: TextResource? = null
+        private var btnNegative: TextResource? = null
         private var reverse: Boolean = false
         private var negativeVisible: Boolean = false
         private var cancelable: Boolean = false
         private var theme: Int? = null
 
-        fun title(title: ResourceString?): Builder {
+        fun title(title: TextResource?): Builder {
             this.title = title
             return this
         }
 
-        fun message(message: ResourceString?): Builder {
+        fun message(message: TextResource?): Builder {
             this.message = message
             return this
         }
@@ -137,12 +138,12 @@ class CommonDialog : DialogFragment() {
             return this
         }
 
-        fun btnPositive(btnPositive: ResourceString?): Builder {
+        fun btnPositive(btnPositive: TextResource?): Builder {
             this.btnPositive = btnPositive
             return this
         }
 
-        fun btnNegative(btnNegative: ResourceString?): Builder {
+        fun btnNegative(btnNegative: TextResource?): Builder {
             this.btnNegative = btnNegative
             return this
         }

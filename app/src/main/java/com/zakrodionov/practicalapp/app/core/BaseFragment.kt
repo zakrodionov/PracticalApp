@@ -11,6 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.addRepeatingJob
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
+import com.zakrodionov.common.core.asString
 import com.zakrodionov.common.dialogs.CommonDialog.Companion.TAG_COMMON_DIALOG
 import com.zakrodionov.common.extensions.getCompatColor
 import com.zakrodionov.common.extensions.hideKeyboard
@@ -97,12 +98,12 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
                 )
             }
             is ShowAction.ShowToast -> {
-                showToast(showAction.message.getText(this), Toast.LENGTH_LONG)
+                showToast(showAction.message.asString(resources), Toast.LENGTH_LONG)
             }
             is ShowAction.ShowSnackbar -> {
                 view?.let {
                     snackBar?.dismiss()
-                    snackBar = showSnackbar(it, showAction.message.getText(this))
+                    snackBar = showSnackbar(it, showAction.message.asString(resources))
                 }
             }
         }
