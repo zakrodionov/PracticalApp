@@ -1,7 +1,7 @@
 package com.zakrodionov.practicalapp.app.ui.posts
 
+import android.os.Parcelable
 import com.zakrodionov.practicalapp.app.core.BaseError
-import com.zakrodionov.practicalapp.app.core.BaseState
 import com.zakrodionov.practicalapp.app.core.ScreenState
 import com.zakrodionov.practicalapp.app.core.ScreenState.CONTENT
 import com.zakrodionov.practicalapp.app.core.ScreenState.ERROR
@@ -13,9 +13,9 @@ import kotlinx.parcelize.Parcelize
 data class PostsState(
     val posts: List<Post>? = null,
     val page: Int = 0,
-    override val error: BaseError? = null,
-    override val isLoading: Boolean = false
-) : BaseState {
+    val error: BaseError? = null,
+    val isLoading: Boolean = false
+) : Parcelable {
     val screenState: ScreenState
         get() = when {
             error != null -> ERROR
@@ -25,8 +25,6 @@ data class PostsState(
         }
 
     fun increasePage() = page + 1
-
-    override fun applyError(error: BaseError): PostsState = copy(error = error)
 }
 
 sealed class PostsEvent

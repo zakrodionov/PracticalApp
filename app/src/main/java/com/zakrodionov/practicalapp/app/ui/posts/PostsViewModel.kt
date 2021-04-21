@@ -4,7 +4,13 @@ import androidx.lifecycle.SavedStateHandle
 import com.github.terrakok.modo.Modo
 import com.github.terrakok.modo.externalForward
 import com.zakrodionov.common.extensions.ifNotNull
+import com.zakrodionov.practicalapp.app.core.BaseError
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
+import com.zakrodionov.practicalapp.app.core.ImportanceError.CONTENT_ERROR
+import com.zakrodionov.practicalapp.app.core.ImportanceError.CRITICAL_ERROR
+import com.zakrodionov.practicalapp.app.core.ImportanceError.NON_CRITICAL_ERROR
+import com.zakrodionov.practicalapp.app.core.ShowAction.ShowDialog
+import com.zakrodionov.practicalapp.app.core.ShowAction.ShowSnackbar
 import com.zakrodionov.practicalapp.app.core.onFailure
 import com.zakrodionov.practicalapp.app.core.onSuccess
 import com.zakrodionov.practicalapp.app.ui.Screens
@@ -21,7 +27,7 @@ class PostsViewModel(
         if (state.posts == null) loadPosts()
     }
 
-    fun loadPosts(refresh: Boolean = false) = launchUi {
+    fun loadPosts(refresh: Boolean = false) = launch {
         if (!state.isLoading) {
             reduce { state.copy(isLoading = true) }
 
@@ -43,6 +49,14 @@ class PostsViewModel(
     fun navigateToPost(postId: String?) {
         postId.ifNotNull {
             modo.externalForward(Screens.PostDetailScreen(ArgsPostDetail(it)))
+        }
+    }
+
+    override suspend fun handleError(baseError: BaseError) {
+        when (baseError.importanceError) {
+            CRITICAL_ERROR -> postShowEvent(ShowEvent(ShowDialog(baseError.title, baseError.message)))
+            NON_CRITICAL_ERROR -> postShowEvent(ShowEvent(ShowSnackbar(baseError.message)))
+            CONTENT_ERROR -> reduce { state.copy(error = baseError) }
         }
     }
 }

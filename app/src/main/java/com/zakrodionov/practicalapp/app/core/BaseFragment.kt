@@ -1,6 +1,7 @@
 package com.zakrodionov.practicalapp.app.core
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.CallSuper
@@ -21,7 +22,7 @@ import com.zakrodionov.practicalapp.R
 import kotlinx.coroutines.flow.collect
 
 @Suppress("TooManyFunctions")
-abstract class BaseFragment<STATE : BaseState, SIDE_EFFECT : Any>(@LayoutRes contentLayoutId: Int) :
+abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes contentLayoutId: Int) :
     Fragment(contentLayoutId) {
 
     abstract val viewModel: BaseViewModel<STATE, SIDE_EFFECT>

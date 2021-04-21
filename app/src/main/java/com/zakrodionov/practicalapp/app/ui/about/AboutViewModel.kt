@@ -3,7 +3,13 @@ package com.zakrodionov.practicalapp.app.ui.about
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import androidx.lifecycle.SavedStateHandle
 import com.github.terrakok.modo.Modo
+import com.zakrodionov.practicalapp.app.core.BaseError
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
+import com.zakrodionov.practicalapp.app.core.ImportanceError.CONTENT_ERROR
+import com.zakrodionov.practicalapp.app.core.ImportanceError.CRITICAL_ERROR
+import com.zakrodionov.practicalapp.app.core.ImportanceError.NON_CRITICAL_ERROR
+import com.zakrodionov.practicalapp.app.core.ShowAction.ShowDialog
+import com.zakrodionov.practicalapp.app.core.ShowAction.ShowSnackbar
 import com.zakrodionov.practicalapp.app.core.navigation.launchFullScreenFlow
 import com.zakrodionov.practicalapp.app.ui.login.loginFlow
 import com.zakrodionov.practicalapp.data.local.ApplicationSettings
@@ -29,7 +35,7 @@ class AboutViewModel(
         subscribePreferences()
     }
 
-    private fun getIsLogged() = launchUi {
+    private fun getIsLogged() = launch {
         reduce { state.copy(isLogged = applicationSettings.isLogged) }
     }
 
@@ -42,7 +48,7 @@ class AboutViewModel(
         super.onCleared()
     }
 
-    fun loginOrLogout() = launchUi {
+    fun loginOrLogout() = launch {
         if (state.isLogged) logout() else navigateToLoginFlow()
     }
 
@@ -52,5 +58,13 @@ class AboutViewModel(
 
     private fun navigateToLoginFlow() {
         modo.launchFullScreenFlow(loginFlow())
+    }
+
+    override suspend fun handleError(baseError: BaseError) {
+        when (baseError.importanceError) {
+            CRITICAL_ERROR -> postShowEvent(ShowEvent(ShowDialog(baseError.title, baseError.message)))
+            NON_CRITICAL_ERROR -> postShowEvent(ShowEvent(ShowSnackbar(baseError.message)))
+            CONTENT_ERROR -> reduce { state.copy(error = baseError) }
+        }
     }
 }
