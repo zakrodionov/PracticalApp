@@ -1,17 +1,17 @@
 package com.zakrodionov.practicalapp.app.ui.posts
 
 import android.os.Parcelable
+import com.zakrodionov.common.ui.rv.DiffItem
 import com.zakrodionov.practicalapp.app.core.BaseError
 import com.zakrodionov.practicalapp.app.core.ScreenState
 import com.zakrodionov.practicalapp.app.core.ScreenState.CONTENT
 import com.zakrodionov.practicalapp.app.core.ScreenState.ERROR
 import com.zakrodionov.practicalapp.app.core.ScreenState.STUB
-import com.zakrodionov.practicalapp.domain.model.Posts.Post
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class PostsState(
-    val posts: List<Post>? = null,
+    val posts: List<DiffItem>? = null,
     val page: Int = 0,
     val error: BaseError? = null,
     val isLoading: Boolean = false

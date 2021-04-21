@@ -2,16 +2,18 @@ package com.zakrodionov.practicalapp.app.ui.posts
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.zakrodionov.common.extensions.hide
+import com.zakrodionov.common.extensions.hideIf
 import com.zakrodionov.common.extensions.ifNotNull
 import com.zakrodionov.common.extensions.setup
 import com.zakrodionov.common.extensions.show
-import com.zakrodionov.common.ui.rv.AsyncListDifferProgressAdapter
+import com.zakrodionov.common.extensions.showIf
+import com.zakrodionov.common.ui.rv.DiffCallback
 import com.zakrodionov.common.ui.rv.EndlessScroll
+import com.zakrodionov.common.ui.rv.loadingDelegate
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.BaseFragment
 import com.zakrodionov.practicalapp.app.core.ScreenState.CONTENT
@@ -30,7 +32,11 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
     override val binding: FragmentPostsBinding by viewBinding(FragmentPostsBinding::bind)
 
     private val adapter by lazy {
-        AsyncListDifferProgressAdapter(postDelegate { viewModel.navigateToPost(it.id) })
+        AsyncListDifferDelegationAdapter(
+            DiffCallback,
+            loadingDelegate(),
+            postDelegate { viewModel.navigateToPost(it.id) }
+        )
     }
 
     override fun setupViews(view: View, savedInstanceState: Bundle?) = with(binding) {
@@ -64,24 +70,23 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
     override fun render(state: PostsState) {
         adapter.items = state.posts
         with(binding) {
-            if (state.isLoading) {
-                if (srlPosts.isRefreshing) return
-                if (state.page > 0) adapter.showLoading() else progressBar.show()
-            }
-
-            if (!state.isLoading) {
-                srlPosts.isRefreshing = false
-                progressBar.hide()
+            when {
+                state.isLoading && srlPosts.isRefreshing -> return
+                state.isLoading -> progressBar.show()
+                else -> {
+                    srlPosts.isRefreshing = false
+                    progressBar.hide()
+                }
             }
 
             state.error.ifNotNull { error ->
                 layoutError.tvTitle.text = error.message.getText(requireContext())
             }
 
-            rvPosts.isVisible = state.screenState == CONTENT
-            srlPosts.isGone = state.screenState == ERROR
-            layoutError.root.isVisible = state.screenState == ERROR
-            layoutEmptyStub.root.isVisible = state.screenState == STUB
+            rvPosts.showIf { state.screenState == CONTENT }
+            srlPosts.hideIf { state.screenState == ERROR }
+            layoutError.root.showIf { state.screenState == ERROR }
+            layoutEmptyStub.root.showIf { state.screenState == STUB }
         }
     }
 }

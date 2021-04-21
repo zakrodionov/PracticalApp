@@ -5,6 +5,7 @@ import android.os.Parcelable
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -52,7 +53,7 @@ abstract class BaseViewModel<STATE : Parcelable, EVENT : Any>(
         _showEventFlow.emit(showEvent)
     }
 
-    protected fun launch(block: suspend () -> Unit) = viewModelScope.launch {
+    protected fun launch(block: suspend () -> Unit): Job = viewModelScope.launch {
         block.invoke()
     }
 

@@ -37,6 +37,14 @@ fun View.show() = run { visibility = View.VISIBLE }
 
 fun View.gone() = run { visibility = View.GONE }
 
+inline fun View.showIf(invisibleMode: Int = View.GONE, condition: View.() -> Boolean) {
+    visibility = if (condition()) View.VISIBLE else invisibleMode
+}
+
+inline fun View.hideIf(invisibleMode: Int = View.GONE, condition: View.() -> Boolean) {
+    visibility = if (condition()) invisibleMode else View.VISIBLE
+}
+
 fun View.showKeyboard() {
     this.requestFocus()
     val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

@@ -1,5 +1,7 @@
 package com.zakrodionov.common.ui.rv
 
-interface DiffItem : DisplayableItem {
+import android.os.Parcelable
+
+interface DiffItem : DisplayableItem, Parcelable {
     val itemId: String
 }

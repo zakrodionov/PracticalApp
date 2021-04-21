@@ -38,7 +38,7 @@ data class Posts(
         val tags: List<String?>?,
         @Json(name = "text")
         val text: String?
-    ) : Parcelable, DiffItem {
+    ) : DiffItem {
         @JsonClass(generateAdapter = true)
         @Parcelize
         data class Owner(

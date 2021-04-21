@@ -4,6 +4,8 @@ import androidx.lifecycle.SavedStateHandle
 import com.github.terrakok.modo.Modo
 import com.github.terrakok.modo.externalForward
 import com.zakrodionov.common.extensions.ifNotNull
+import com.zakrodionov.common.ui.rv.addLoadingItem
+import com.zakrodionov.common.ui.rv.removeLoadingItem
 import com.zakrodionov.practicalapp.app.core.BaseError
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
 import com.zakrodionov.practicalapp.app.core.ImportanceError.CONTENT_ERROR
@@ -16,6 +18,7 @@ import com.zakrodionov.practicalapp.app.core.onSuccess
 import com.zakrodionov.practicalapp.app.ui.Screens
 import com.zakrodionov.practicalapp.app.ui.postDetails.ArgsPostDetail
 import com.zakrodionov.practicalapp.domain.repository.PostRepository
+import kotlinx.coroutines.Job
 
 class PostsViewModel(
     savedStateHandle: SavedStateHandle,
@@ -23,26 +26,37 @@ class PostsViewModel(
     private val modo: Modo
 ) : BaseViewModel<PostsState, PostsEvent>(PostsState(), savedStateHandle) {
 
+    private var loadingPostsJob: Job = Job()
+
     init {
-        if (state.posts == null) loadPosts()
+        if (state.posts == null) loadPosts(initial = true)
     }
 
-    fun loadPosts(refresh: Boolean = false) = launch {
-        if (!state.isLoading) {
-            reduce { state.copy(isLoading = true) }
+    fun loadPosts(refresh: Boolean = false, initial: Boolean = false) {
+        if (loadingPostsJob.isCompleted || initial) {
+            loadingPostsJob = launch {
+                if (refresh) reduce { state.copy(page = 0) }
 
-            if (refresh) reduce { state.copy(page = 0) }
+                if (state.page > 0) {
+                    reduce { state.copy(posts = state.posts?.addLoadingItem()) }
+                } else {
+                    reduce { state.copy(isLoading = true) }
+                }
 
-            postRepository
-                .getPosts(state.page)
-                .onSuccess { posts ->
-                    val newPosts = if (refresh) posts else state.posts.orEmpty().plus(posts)
-                    reduce { state.copy(posts = newPosts, error = null, page = state.increasePage()) }
-                }
-                .onFailure {
-                    handleError(it)
-                }
-            reduce { state.copy(isLoading = false) }
+                postRepository
+                    .getPosts(state.page)
+                    .onSuccess { posts ->
+                        val newPosts = if (refresh) posts else state.posts.orEmpty().plus(posts).removeLoadingItem()
+                        reduce { state.copy(posts = newPosts, error = null, page = state.increasePage()) }
+                    }
+                    .onFailure {
+                        reduce {
+                            state.copy(posts = state.posts?.removeLoadingItem())
+                        }
+                        handleError(it)
+                    }
+                reduce { state.copy(isLoading = false) }
+            }
         }
     }
 
