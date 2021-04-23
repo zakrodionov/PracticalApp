@@ -14,6 +14,7 @@ import Libs.androidx_constraint_layout
 import Libs.androidx_core
 import Libs.androidx_fragment
 import Libs.androidx_material
+import Libs.androidx_security_crypto
 import Libs.androidx_swipe_refresh_layout
 import Libs.cicerone
 import Libs.coroutines
@@ -150,6 +151,7 @@ dependencies {
     implementation(androidx_constraint_layout)
     implementation(androidx_fragment)
     implementation(androidx_swipe_refresh_layout)
+    implementation(androidx_security_crypto)
 
     // Koin
     implementation(koin)

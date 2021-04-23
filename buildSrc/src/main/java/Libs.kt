@@ -18,6 +18,7 @@ object Libs {
     const val androidx_constraint_layout = "androidx.constraintlayout:constraintlayout:2.0.4"
     const val androidx_fragment = "androidx.fragment:fragment-ktx:1.3.2"
     const val androidx_swipe_refresh_layout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    const val androidx_security_crypto = "androidx.security:security-crypto:1.0.0"
 
     //Kotlin
     const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
