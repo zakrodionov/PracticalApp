@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
 import com.github.terrakok.cicerone.Command
 import com.github.terrakok.cicerone.Router
+import com.zakrodionov.practicalapp.app.core.navigation.BackTabStrategy.BACK_TO_DEFAULT_TAB
 import com.zakrodionov.practicalapp.app.core.navigation.BackTabStrategy.BACK_TO_FIRST_TAB
 import com.zakrodionov.practicalapp.app.core.navigation.BackTabStrategy.BY_SHOW_ORDER
 import com.zakrodionov.practicalapp.app.core.navigation.BackTabStrategy.NONE
@@ -19,6 +20,7 @@ object ReselectTab : Command
 
 enum class BackTabStrategy {
     BACK_TO_FIRST_TAB,
+    BACK_TO_DEFAULT_TAB,
     BY_SHOW_ORDER,
     NONE
 }
@@ -82,7 +84,7 @@ class TabFlowRouter(private val backTabStrategy: BackTabStrategy = BY_SHOW_ORDER
     }
 
     override fun resetAllTabsAndReopenCurrentTab() {
-        resetAllTabsAndOpenNewTab(_selectedTab.value ?: firstTab)
+        resetAllTabsAndOpenNewTab(_selectedTab.value ?: Tab.DEFAULT_TAB)
     }
 
     override fun resetAllTabsAndOpenNewTab(tab: Tab) {
@@ -105,6 +107,13 @@ class TabFlowRouter(private val backTabStrategy: BackTabStrategy = BY_SHOW_ORDER
                     closeTabFlow()
                 } else {
                     switchTab(firstTab)
+                }
+            }
+            BACK_TO_DEFAULT_TAB -> {
+                if (selectedTab() == Tab.DEFAULT_TAB) {
+                    closeTabFlow()
+                } else {
+                    switchTab(Tab.DEFAULT_TAB)
                 }
             }
             BY_SHOW_ORDER -> {

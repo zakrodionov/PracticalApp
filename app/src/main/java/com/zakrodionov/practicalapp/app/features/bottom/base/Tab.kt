@@ -21,6 +21,8 @@ enum class Tab(val menuItemId: Int) {
     abstract fun getFragment(): Fragment
 
     companion object {
+        val DEFAULT_TAB = POSTS
+
         private val mapByItemId = values().associateBy(Tab::menuItemId)
         private val mapByName = values().associateBy(Tab::name)
 
