@@ -64,7 +64,7 @@ abstract class BaseFlowFragment(
             if (needBack) {
                 when {
                     childFragmentManager.backStackEntryCount <= 1 &&
-                        requireActivity().supportFragmentManager.backStackEntryCount <= 1 -> {
+                        requireActivity().supportFragmentManager.backStackEntryCount < 1 -> {
 
                         if (parentFragment is TabHost) {
                             (parentFragment as TabHost).onBackTab()
