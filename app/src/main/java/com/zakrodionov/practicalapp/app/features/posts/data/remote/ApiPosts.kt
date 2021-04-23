@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface ApiPost {
+interface ApiPosts {
 
     @GET(PATH_GET_POSTS)
     suspend fun getPosts(@Query("page") page: Int, @Query("limit") limit: Int = DEFAULT_PAGE_SIZE): Posts

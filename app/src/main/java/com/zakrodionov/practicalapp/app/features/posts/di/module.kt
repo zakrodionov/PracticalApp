@@ -5,7 +5,7 @@ import com.zakrodionov.practicalapp.app.core.navigation.FlowRouter
 import com.zakrodionov.practicalapp.app.di.DIQualifiers
 import com.zakrodionov.practicalapp.app.di.initializer.NetInitializer.NAME_MAIN_RETROFIT
 import com.zakrodionov.practicalapp.app.features.posts.data.PostRepositoryImpl
-import com.zakrodionov.practicalapp.app.features.posts.data.remote.ApiPost
+import com.zakrodionov.practicalapp.app.features.posts.data.remote.ApiPosts
 import com.zakrodionov.practicalapp.app.features.posts.domain.PostRepository
 import com.zakrodionov.practicalapp.app.features.posts.ui.postDetails.PostDetailViewModel
 import com.zakrodionov.practicalapp.app.features.posts.ui.postsList.PostsViewModel
@@ -26,7 +26,7 @@ val postsModule = module {
 
     single<PostRepository> { PostRepositoryImpl(get(), get()) }
 
-    single<ApiPost> { get<Retrofit>(named(NAME_MAIN_RETROFIT)).create(ApiPost::class.java) }
+    single<ApiPosts> { get<Retrofit>(named(NAME_MAIN_RETROFIT)).create(ApiPosts::class.java) }
 
     // region Flow navigation
     single(ciceroneQualifier) {
