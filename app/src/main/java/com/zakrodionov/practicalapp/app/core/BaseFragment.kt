@@ -20,17 +20,23 @@ import com.zakrodionov.common.extensions.showDialog
 import com.zakrodionov.common.extensions.showSnackbar
 import com.zakrodionov.common.extensions.showToast
 import com.zakrodionov.practicalapp.R
+import com.zakrodionov.practicalapp.app.core.navigation.AnimationScreen
+import com.zakrodionov.practicalapp.app.core.navigation.BackButtonListener
+import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy
+import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.SLIDE_HORIZONTAL
 import kotlinx.coroutines.flow.collect
 
 @Suppress("TooManyFunctions")
 abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes contentLayoutId: Int) :
-    Fragment(contentLayoutId) {
+    Fragment(contentLayoutId), BackButtonListener, AnimationScreen {
 
     abstract val viewModel: BaseViewModel<STATE, SIDE_EFFECT>
     abstract val binding: ViewBinding
 
     open val statusBarColor = R.color.color_statusbar
     open val statusBarLightMode = false
+
+    override val screenAnimationStrategy: ScreenAnimationStrategy = SLIDE_HORIZONTAL
 
     private var snackBar: Snackbar? = null
 
@@ -113,6 +119,8 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
         super.onStop()
         view?.hideKeyboard()
     }
+
+    override fun onBackPressed(): Boolean = true
 
     open fun loadData() {}
 }

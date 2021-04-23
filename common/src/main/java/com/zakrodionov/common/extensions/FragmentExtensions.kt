@@ -17,6 +17,9 @@ import com.zakrodionov.common.dialogs.CommonDialog
 
 val Fragment.appContext: Context get() = requireActivity().applicationContext
 
+fun Fragment.getCurrentFragment(): Fragment? =
+    childFragmentManager.fragments.firstOrNull { !it.isHidden }
+
 fun Fragment.showToast(text: String?, length: Int = Toast.LENGTH_SHORT) {
     text?.let {
         requireContext().toast(text, length)

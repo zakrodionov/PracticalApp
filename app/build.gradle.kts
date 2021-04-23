@@ -15,6 +15,7 @@ import Libs.androidx_core
 import Libs.androidx_fragment
 import Libs.androidx_material
 import Libs.androidx_swipe_refresh_layout
+import Libs.cicerone
 import Libs.coroutines
 import Libs.desugar_jdk
 import Libs.espresso_core
@@ -25,7 +26,6 @@ import Libs.flipper_soloader
 import Libs.hyperion_attr
 import Libs.hyperion_build_config
 import Libs.hyperion_core
-import Libs.hyperion_crash
 import Libs.hyperion_disk
 import Libs.hyperion_geiger_counter
 import Libs.hyperion_measurement
@@ -42,8 +42,6 @@ import Libs.lifecycle_extensions
 import Libs.lifecycle_livedata
 import Libs.lifecycle_runtime_ktx
 import Libs.lifecycle_viewmodel
-import Libs.modo
-import Libs.modo_android
 import Libs.moshi
 import Libs.moshi_codegen
 import Libs.okhttp
@@ -186,7 +184,6 @@ dependencies {
     debugImplementation(hyperion_core)
     debugImplementation(hyperion_attr)
     debugImplementation(hyperion_build_config)
-    debugImplementation(hyperion_crash)
     debugImplementation(hyperion_disk)
     debugImplementation(hyperion_geiger_counter)
     debugImplementation(hyperion_measurement)
@@ -203,7 +200,6 @@ dependencies {
     implementation(adapter_delegates)
     implementation(adapter_delegates_dsl)
 
-    // Modo
-    implementation(modo)
-    implementation(modo_android)
+    // Cicerone
+    implementation(cicerone)
 }

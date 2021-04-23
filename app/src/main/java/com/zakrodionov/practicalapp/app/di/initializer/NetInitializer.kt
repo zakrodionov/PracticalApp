@@ -7,9 +7,8 @@ import com.zakrodionov.common.utils.net.ConnectionServiceImpl
 import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.FlipperInitializer
 import com.zakrodionov.practicalapp.app.core.dispatchers.DispatchersProvider
-import com.zakrodionov.practicalapp.data.remote.ApiPost
-import com.zakrodionov.practicalapp.data.remote.interceptor.MainHeaderInterceptor
-import com.zakrodionov.practicalapp.data.remote.interceptor.MainTokenAuthenticator
+import com.zakrodionov.practicalapp.app.environment.interceptors.MainHeaderInterceptor
+import com.zakrodionov.practicalapp.app.environment.interceptors.MainTokenAuthenticator
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.module.Module
@@ -23,8 +22,14 @@ object NetInitializer : Initializer {
 
     private const val TIMEOUT = 30L
     private const val MAX_REQUESTS_PER_HOST = 10
+
+    // For common api
     private const val NAME_MAIN_OK_HTTP = "mainOkHttp"
-    private const val NAME_MAIN_RETROFIT = "mainRetrofit"
+    const val NAME_MAIN_RETROFIT = "mainRetrofit"
+
+    // For refresh token
+    // private const val NAME_OAUTH_OK_HTTP = "oauthOkHttp"
+    // const val NAME_OAUTH_RETROFIT = "oauthRetrofit"
 
     override fun initialize(appModule: Module) {
         appModule.apply {
@@ -37,8 +42,6 @@ object NetInitializer : Initializer {
 
             single(named(NAME_MAIN_OK_HTTP)) { buildMainOkHttp(get(), get()) }
             single(named(NAME_MAIN_RETROFIT)) { buildMainRetrofit(get()) }
-
-            single { buildApiPost(get(named(NAME_MAIN_RETROFIT))) }
         }
     }
 
@@ -75,10 +78,5 @@ object NetInitializer : Initializer {
             .client(get(named(NAME_MAIN_OK_HTTP)))
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
-    }
-
-    // start build APIs
-    private fun buildApiPost(retrofit: Retrofit): ApiPost {
-        return retrofit.create(ApiPost::class.java)
     }
 }

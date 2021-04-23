@@ -9,7 +9,6 @@ import com.zakrodionov.practicalapp.app.core.dispatchers.DispatchersProviderImpl
 import com.zakrodionov.practicalapp.app.core.eventbus.EventBus
 import com.zakrodionov.practicalapp.app.core.eventbus.EventProvider
 import com.zakrodionov.practicalapp.app.core.eventbus.EventPublisher
-import com.zakrodionov.practicalapp.app.core.navigation.buildModo
 import org.koin.core.module.Module
 
 object CoreInitializer : Initializer {
@@ -19,8 +18,6 @@ object CoreInitializer : Initializer {
             single<DispatchersProvider> { DispatchersProviderImpl }
             single<ErrorHandler> { ErrorHandlerImpl(get()) }
             single<Executor> { ExecutorImpl(get(), get()) }
-
-            single { buildModo(get()) }
 
             val eventBus = EventBus()
             single<EventProvider> { eventBus }

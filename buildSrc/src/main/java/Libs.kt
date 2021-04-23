@@ -79,8 +79,7 @@ object Libs {
     const val adapter_delegates_dsl =
         "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:$adapterDelegatesVersion"
 
-    const val modo = "com.github.terrakok:modo:$modoVersion"
-    const val modo_android = "com.github.terrakok:modo-render-android-fm:$modoVersion"
+    const val cicerone = "com.github.terrakok:cicerone:7.0"
 
     const val coil = "io.coil-kt:coil:1.1.1"
 

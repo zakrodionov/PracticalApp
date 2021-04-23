@@ -8,6 +8,11 @@ import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.FlipperInitializer
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.di.appModule
+import com.zakrodionov.practicalapp.app.features.about.di.aboutModule
+import com.zakrodionov.practicalapp.app.features.bottom.di.bottomTabsModule
+import com.zakrodionov.practicalapp.app.features.favorite.di.favoriteModule
+import com.zakrodionov.practicalapp.app.features.login.di.loginModule
+import com.zakrodionov.practicalapp.app.features.posts.di.postsModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -31,7 +36,14 @@ class App : Application() {
         startKoin {
             androidContext(this@App)
             androidLogger(Level.ERROR)
-            modules(appModule)
+            modules(
+                appModule,
+                bottomTabsModule,
+                aboutModule,
+                loginModule,
+                favoriteModule,
+                postsModule
+            )
         }
     }
 
