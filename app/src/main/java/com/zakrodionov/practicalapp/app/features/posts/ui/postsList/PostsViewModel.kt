@@ -15,8 +15,8 @@ import com.zakrodionov.practicalapp.app.core.navigation.FlowRouter
 import com.zakrodionov.practicalapp.app.core.onFailure
 import com.zakrodionov.practicalapp.app.core.onSuccess
 import com.zakrodionov.practicalapp.app.features.posts.PostsScreens.postDetailsScreen
+import com.zakrodionov.practicalapp.app.features.posts.domain.PostRepository
 import com.zakrodionov.practicalapp.app.features.posts.ui.postDetails.ArgsPostDetail
-import com.zakrodionov.practicalapp.domain.repository.PostRepository
 import kotlinx.coroutines.Job
 
 class PostsViewModel(

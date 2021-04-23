@@ -12,7 +12,6 @@ val appModule = module {
         CoreInitializer,
         NetInitializer,
         StoragesInitializer,
-        RepositoriesInitializer,
         GlobalNavigationInitializer
     ).forEach {
         it.initialize(this)

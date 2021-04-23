@@ -1,8 +1,8 @@
 package com.zakrodionov.practicalapp.app.features.posts.data.remote
 
+import com.zakrodionov.practicalapp.app.features.posts.domain.DEFAULT_PAGE_SIZE
 import com.zakrodionov.practicalapp.app.features.posts.domain.model.Posts
 import com.zakrodionov.practicalapp.app.features.posts.domain.model.Posts.Post
-import com.zakrodionov.practicalapp.domain.repository.DEFAULT_PAGE_SIZE
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

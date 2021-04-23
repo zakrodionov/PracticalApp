@@ -11,7 +11,7 @@ import com.zakrodionov.practicalapp.app.core.ShowAction.ShowDialog
 import com.zakrodionov.practicalapp.app.core.ShowAction.ShowSnackbar
 import com.zakrodionov.practicalapp.app.core.onFailure
 import com.zakrodionov.practicalapp.app.core.onSuccess
-import com.zakrodionov.practicalapp.domain.repository.PostRepository
+import com.zakrodionov.practicalapp.app.features.posts.domain.PostRepository
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
