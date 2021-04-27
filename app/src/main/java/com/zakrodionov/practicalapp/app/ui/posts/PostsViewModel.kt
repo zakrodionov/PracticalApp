@@ -46,16 +46,13 @@ class PostsViewModel(
                 postRepository
                     .getPosts(state.page)
                     .onSuccess { posts ->
-                        val newPosts = if (refresh) posts else state.posts.orEmpty().plus(posts).removeLoadingItem()
+                        val newPosts = if (refresh) posts else state.posts.orEmpty().plus(posts)
                         reduce { state.copy(posts = newPosts, error = null, page = state.increasePage()) }
                     }
                     .onFailure {
-                        reduce {
-                            state.copy(posts = state.posts?.removeLoadingItem())
-                        }
                         handleError(it)
                     }
-                reduce { state.copy(isLoading = false) }
+                reduce { state.copy(posts = state.posts?.removeLoadingItem(), isLoading = false) }
             }
         }
     }
