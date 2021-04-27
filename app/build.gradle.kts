@@ -13,6 +13,7 @@ import Libs.androidx_app_compat
 import Libs.androidx_constraint_layout
 import Libs.androidx_core
 import Libs.androidx_fragment
+import Libs.androidx_fragment_testing
 import Libs.androidx_material
 import Libs.androidx_swipe_refresh_layout
 import Libs.coroutines
@@ -33,8 +34,11 @@ import Libs.hyperion_measurement
 import Libs.hyperion_phoenix
 import Libs.hyperion_shared_preferences
 import Libs.hyperion_timber
+import Libs.junit
+import Libs.junit_ext
 import Libs.junit_jupiter_api
 import Libs.junit_jupiter_engine
+import Libs.kakao
 import Libs.koin
 import Libs.koin_test
 import Libs.kotlin_stdlib
@@ -146,10 +150,14 @@ dependencies {
 
     // Test
     androidTestImplementation(espresso_core)
+    androidTestImplementation(kakao)
+    testImplementation(junit)
+    androidTestImplementation(junit_ext)
     testImplementation(junit_jupiter_api)
     testImplementation(junit_jupiter_engine)
     testImplementation(mockk)
     testImplementation(coroutines_test)
+    debugImplementation(androidx_fragment_testing)
 
     // AndroidX
     implementation(androidx_core)

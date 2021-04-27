@@ -1,6 +1,7 @@
 object Versions {
     const val kotlinVersion = "1.4.32"
     const val kotlinCoroutinesVersion = "1.4.3"
+    const val fragmentVersion = "1.3.3"
 
     const val retrofitVersion = "2.9.0"
     const val moshiVersion = "1.12.0"

@@ -1,5 +1,6 @@
 import Versions.adapterDelegatesVersion
 import Versions.flipperVersion
+import Versions.fragmentVersion
 import Versions.glideVersion
 import Versions.hyperionVersion
 import Versions.koinVersion
@@ -17,7 +18,8 @@ object Libs {
     const val androidx_material = "com.google.android.material:material:1.3.0"
     const val androidx_core = "androidx.core:core-ktx:1.5.0-rc01"
     const val androidx_constraint_layout = "androidx.constraintlayout:constraintlayout:2.0.4"
-    const val androidx_fragment = "androidx.fragment:fragment-ktx:1.3.2"
+    const val androidx_fragment = "androidx.fragment:fragment-ktx:$fragmentVersion"
+    const val androidx_fragment_testing = "androidx.fragment:fragment-testing:$fragmentVersion"
     const val androidx_swipe_refresh_layout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     //Kotlin
@@ -93,8 +95,11 @@ object Libs {
     const val glide_compiler = "com.github.bumptech.glide:compiler:$glideVersion"
 
     //Test
+    const val junit = "junit:junit:4.+"
+    const val junit_ext = "androidx.test.ext:junit:1.1.2"
     const val junit_jupiter_api = "org.junit.jupiter:junit-jupiter-api:5.7.1"
     const val junit_jupiter_engine = "org.junit.jupiter:junit-jupiter-engine:5.7.1"
     const val espresso_core = "androidx.test.espresso:espresso-core:3.3.0"
+    const val kakao = "com.agoda.kakao:kakao:2.4.0"
     const val mockk = "io.mockk:mockk:1.11.0"
 }
