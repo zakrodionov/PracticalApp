@@ -3,6 +3,7 @@ import Versions.flipperVersion
 import Versions.glideVersion
 import Versions.hyperionVersion
 import Versions.koinVersion
+import Versions.kotlinCoroutinesVersion
 import Versions.kotlinVersion
 import Versions.lifecycleVersion
 import Versions.modoVersion
@@ -21,7 +22,8 @@ object Libs {
 
     //Kotlin
     const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3"
+    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion"
+    const val coroutines_test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinCoroutinesVersion"
 
     //Networking
     const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
@@ -91,7 +93,8 @@ object Libs {
     const val glide_compiler = "com.github.bumptech.glide:compiler:$glideVersion"
 
     //Test
-    const val junit = "junit:junit:4.+"
-    const val junit_ext = "androidx.test.ext:junit:1.1.2"
+    const val junit_jupiter_api = "org.junit.jupiter:junit-jupiter-api:5.7.1"
+    const val junit_jupiter_engine = "org.junit.jupiter:junit-jupiter-engine:5.7.1"
     const val espresso_core = "androidx.test.espresso:espresso-core:3.3.0"
+    const val mockk = "io.mockk:mockk:1.11.0"
 }
