@@ -45,8 +45,6 @@ import Libs.lifecycle_livedata
 import Libs.lifecycle_runtime_ktx
 import Libs.lifecycle_viewmodel
 import Libs.mockk
-import Libs.modo
-import Libs.modo_android
 import Libs.moshi
 import Libs.moshi_codegen
 import Libs.okhttp

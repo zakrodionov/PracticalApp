@@ -1,11 +1,11 @@
-package com.zakrodionov.practicalapp.app.ui.posts
+package com.zakrodionov.practicalapp.app.features.posts.ui.postsList
 
 import androidx.lifecycle.SavedStateHandle
 import com.zakrodionov.practicalapp.CoroutinesTestExtension
 import com.zakrodionov.practicalapp.app.core.NetworkConnectionError
 import com.zakrodionov.practicalapp.app.core.Result
 import com.zakrodionov.practicalapp.app.core.ScreenState
-import com.zakrodionov.practicalapp.domain.repository.PostRepository
+import com.zakrodionov.practicalapp.app.features.posts.domain.PostRepository
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
@@ -35,7 +35,7 @@ class PostsViewModelTest {
         postsViewModel = PostsViewModel(
             savedStateHandle = SavedStateHandle(),
             postRepository = postRepository,
-            modo = mockk()
+            flowRouter = mockk()
         )
     }
 
