@@ -97,8 +97,8 @@ android {
                 }
             }
 
-            isV1SigningEnabled = true
-            isV2SigningEnabled = true
+            enableV1Signing = true
+            enableV2Signing = true
         }
     }
 
