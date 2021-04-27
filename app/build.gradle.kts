@@ -18,6 +18,7 @@ import Libs.androidx_security_crypto
 import Libs.androidx_swipe_refresh_layout
 import Libs.cicerone
 import Libs.coroutines
+import Libs.coroutines_test
 import Libs.desugar_jdk
 import Libs.espresso_core
 import Libs.flipper
@@ -33,8 +34,8 @@ import Libs.hyperion_measurement
 import Libs.hyperion_phoenix
 import Libs.hyperion_shared_preferences
 import Libs.hyperion_timber
-import Libs.junit
-import Libs.junit_ext
+import Libs.junit_jupiter_api
+import Libs.junit_jupiter_engine
 import Libs.koin
 import Libs.koin_test
 import Libs.kotlin_stdlib
@@ -43,6 +44,9 @@ import Libs.lifecycle_extensions
 import Libs.lifecycle_livedata
 import Libs.lifecycle_runtime_ktx
 import Libs.lifecycle_viewmodel
+import Libs.mockk
+import Libs.modo
+import Libs.modo_android
 import Libs.moshi
 import Libs.moshi_codegen
 import Libs.okhttp
@@ -59,6 +63,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("kotlin-parcelize")
+    id("de.mannodermaus.android-junit5")
     id(Plugins.detekt_plugin)
     id(Plugins.ktlint_plugin)
 }
@@ -93,8 +98,8 @@ android {
                 }
             }
 
-            isV1SigningEnabled = true
-            isV2SigningEnabled = true
+            enableV1Signing = true
+            enableV2Signing = true
         }
     }
 
@@ -140,9 +145,12 @@ dependencies {
     implementation(kotlin_stdlib)
     implementation(coroutines)
 
-    testImplementation(junit)
-    androidTestImplementation(junit_ext)
+    // Test
     androidTestImplementation(espresso_core)
+    testImplementation(junit_jupiter_api)
+    testImplementation(junit_jupiter_engine)
+    testImplementation(mockk)
+    testImplementation(coroutines_test)
 
     // AndroidX
     implementation(androidx_core)
