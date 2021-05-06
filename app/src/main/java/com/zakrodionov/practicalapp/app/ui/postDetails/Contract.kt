@@ -2,7 +2,6 @@ package com.zakrodionov.practicalapp.app.ui.postDetails
 
 import android.os.Parcelable
 import com.zakrodionov.practicalapp.app.core.BaseError
-import com.zakrodionov.practicalapp.app.core.BaseShowEvent
 import com.zakrodionov.practicalapp.app.core.ScreenState
 import com.zakrodionov.practicalapp.app.core.ScreenState.CONTENT
 import com.zakrodionov.practicalapp.app.core.ScreenState.ERROR
@@ -22,6 +21,4 @@ data class PostDetailsState(
         }
 }
 
-sealed class PostDetailsEvent {
-    data class ShowEvent(val showAction: BaseShowEvent) : PostDetailsEvent()
-}
+sealed class PostDetailsEvent
