@@ -4,9 +4,10 @@ import android.os.Parcelable
 import androidx.annotation.StyleRes
 import com.zakrodionov.common.core.TextResource
 
-sealed class ShowAction {
-    data class ShowToast(val message: TextResource) : ShowAction()
-    data class ShowSnackbar(val message: TextResource, val payload: Parcelable? = null) : ShowAction()
+// Common show event
+sealed class BaseShowEvent {
+    data class ShowToast(val message: TextResource) : BaseShowEvent()
+    data class ShowSnackbar(val message: TextResource, val payload: Parcelable? = null) : BaseShowEvent()
     data class ShowDialog(
         val title: TextResource? = null,
         val message: TextResource? = null,
@@ -19,5 +20,5 @@ sealed class ShowAction {
         val cancelable: Boolean = false,
         @StyleRes val messageTextAppearance: Int? = null,
         @StyleRes val theme: Int? = null
-    ) : ShowAction()
+    ) : BaseShowEvent()
 }

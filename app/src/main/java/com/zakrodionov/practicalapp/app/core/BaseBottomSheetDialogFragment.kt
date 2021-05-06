@@ -75,36 +75,36 @@ abstract class BaseBottomSheetDialogFragment<STATE : Parcelable, SIDE_EFFECT : A
     abstract fun sideEffect(event: SIDE_EFFECT)
 
     // Обрабатываем showEvent от viewModel
-    open fun showEvent(showEvent: BaseViewModel.ShowEvent) {
-        handleShowAction(showEvent.showAction)
+    open fun showEvent(showEvent: BaseShowEvent) {
+        handleBaseShowEvent(showEvent)
     }
 
     // Используется для отображения базовых диалогов, снекбаров, тоастов
-    open fun handleShowAction(showAction: ShowAction) {
-        when (showAction) {
-            is ShowAction.ShowDialog -> {
+    open fun handleBaseShowEvent(showEvent: BaseShowEvent) {
+        when (showEvent) {
+            is BaseShowEvent.ShowDialog -> {
                 showDialog(
                     fragmentManager = childFragmentManager,
-                    tag = showAction.tag ?: TAG_COMMON_DIALOG,
-                    title = showAction.title,
-                    message = showAction.message,
-                    btnPositiveText = showAction.btnPositiveText,
-                    btnNegativeText = showAction.btnNegativeText,
-                    showBtnNegative = showAction.showBtnNegative,
-                    payload = showAction.payload,
-                    reverse = showAction.reverse,
-                    cancelable = showAction.cancelable,
-                    messageTextAppearance = showAction.messageTextAppearance,
-                    theme = showAction.theme
+                    tag = showEvent.tag ?: TAG_COMMON_DIALOG,
+                    title = showEvent.title,
+                    message = showEvent.message,
+                    btnPositiveText = showEvent.btnPositiveText,
+                    btnNegativeText = showEvent.btnNegativeText,
+                    showBtnNegative = showEvent.showBtnNegative,
+                    payload = showEvent.payload,
+                    reverse = showEvent.reverse,
+                    cancelable = showEvent.cancelable,
+                    messageTextAppearance = showEvent.messageTextAppearance,
+                    theme = showEvent.theme
                 )
             }
-            is ShowAction.ShowToast -> {
-                showToast(showAction.message.asString(resources), Toast.LENGTH_LONG)
+            is BaseShowEvent.ShowToast -> {
+                showToast(showEvent.message.asString(resources), Toast.LENGTH_LONG)
             }
-            is ShowAction.ShowSnackbar -> {
+            is BaseShowEvent.ShowSnackbar -> {
                 view?.let {
                     snackBar?.dismiss()
-                    snackBar = showSnackbar(it, showAction.message.asString(resources))
+                    snackBar = showSnackbar(it, showEvent.message.asString(resources))
                 }
             }
         }

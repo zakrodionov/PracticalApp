@@ -5,6 +5,7 @@ import android.os.Parcelable
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.zakrodionov.practicalapp.app.core.BaseShowEvent.ShowSnackbar
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,7 +33,7 @@ abstract class BaseViewModel<STATE : Parcelable, EVENT : Any>(
     val eventFlow = _eventFlow.asSharedFlow()
 
     // Общие ShowEvent события для toast, alert, dialog
-    private val _showEventFlow = MutableSharedFlow<ShowEvent>()
+    private val _showEventFlow = MutableSharedFlow<BaseShowEvent>()
     val showEventFlow = _showEventFlow.asSharedFlow()
 
     val state: STATE get() = stateFlow.value
@@ -49,7 +50,7 @@ abstract class BaseViewModel<STATE : Parcelable, EVENT : Any>(
         _eventFlow.emit(event)
     }
 
-    protected suspend fun postShowEvent(showEvent: ShowEvent) {
+    protected suspend fun postShowEvent(showEvent: BaseShowEvent) {
         _showEventFlow.emit(showEvent)
     }
 
@@ -68,7 +69,9 @@ abstract class BaseViewModel<STATE : Parcelable, EVENT : Any>(
         }
     }
 
-    abstract suspend fun handleError(baseError: BaseError)
+    protected fun showErrorSnackbar(baseError: BaseError) {
+        launch { postShowEvent(ShowSnackbar(baseError.message)) }
+    }
 
-    data class ShowEvent(val showAction: ShowAction)
+    abstract suspend fun handleError(baseError: BaseError)
 }
