@@ -9,12 +9,6 @@ import com.zakrodionov.practicalapp.app.core.BaseViewModel
 import com.zakrodionov.practicalapp.app.core.ImportanceError.CONTENT_ERROR
 import com.zakrodionov.practicalapp.app.core.ImportanceError.CRITICAL_ERROR
 import com.zakrodionov.practicalapp.app.core.ImportanceError.NON_CRITICAL_ERROR
-import com.zakrodionov.practicalapp.app.core.navigation.launchFullScreenFlow
-import com.zakrodionov.practicalapp.app.ui.login.loginFlow
-import com.zakrodionov.practicalapp.data.local.ApplicationSettings
-import com.zakrodionov.practicalapp.data.local.ApplicationSettings.Companion.KEY_IS_LOGGED
-import com.zakrodionov.practicalapp.app.core.ShowAction.ShowDialog
-import com.zakrodionov.practicalapp.app.core.ShowAction.ShowSnackbar
 import com.zakrodionov.practicalapp.app.core.navigation.FlowRouter
 import com.zakrodionov.practicalapp.app.environment.preferences.ApplicationSettings
 import com.zakrodionov.practicalapp.app.environment.preferences.ApplicationSettings.Companion.KEY_IS_LOGGED

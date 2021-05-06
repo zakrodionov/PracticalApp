@@ -2,13 +2,10 @@ package com.zakrodionov.practicalapp.app.features.posts.ui.postDetails
 
 import android.os.Parcelable
 import com.zakrodionov.practicalapp.app.core.BaseError
-import com.zakrodionov.practicalapp.app.core.BaseShowEvent
 import com.zakrodionov.practicalapp.app.core.ScreenState
 import com.zakrodionov.practicalapp.app.core.ScreenState.CONTENT
 import com.zakrodionov.practicalapp.app.core.ScreenState.ERROR
-import com.zakrodionov.practicalapp.app.core.ShowAction
 import com.zakrodionov.practicalapp.app.features.posts.domain.model.Posts.Post
-import com.zakrodionov.practicalapp.domain.model.Posts.Post
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
