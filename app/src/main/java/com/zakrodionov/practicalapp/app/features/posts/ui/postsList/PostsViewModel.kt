@@ -5,6 +5,8 @@ import com.zakrodionov.common.extensions.ifNotNull
 import com.zakrodionov.common.ui.rv.addLoadingItem
 import com.zakrodionov.common.ui.rv.removeLoadingItem
 import com.zakrodionov.practicalapp.app.core.BaseError
+import com.zakrodionov.practicalapp.app.core.BaseShowEvent.ShowDialog
+import com.zakrodionov.practicalapp.app.core.BaseShowEvent.ShowSnackbar
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
 import com.zakrodionov.practicalapp.app.core.ImportanceError.CONTENT_ERROR
 import com.zakrodionov.practicalapp.app.core.ImportanceError.CRITICAL_ERROR
@@ -45,16 +47,13 @@ class PostsViewModel(
                 postRepository
                     .getPosts(state.page)
                     .onSuccess { posts ->
-                        val newPosts = if (refresh) posts else state.posts.orEmpty().plus(posts).removeLoadingItem()
+                        val newPosts = if (refresh) posts else state.posts.orEmpty().plus(posts)
                         reduce { state.copy(posts = newPosts, error = null, page = state.increasePage()) }
                     }
                     .onFailure {
-                        reduce {
-                            state.copy(posts = state.posts?.removeLoadingItem())
-                        }
                         handleError(it)
                     }
-                reduce { state.copy(isLoading = false) }
+                reduce { state.copy(posts = state.posts?.removeLoadingItem(), isLoading = false) }
             }
         }
     }
@@ -67,8 +66,8 @@ class PostsViewModel(
 
     override suspend fun handleError(baseError: BaseError) {
         when (baseError.importanceError) {
-            CRITICAL_ERROR -> postShowEvent(ShowEvent(ShowDialog(baseError.title, baseError.message)))
-            NON_CRITICAL_ERROR -> postShowEvent(ShowEvent(ShowSnackbar(baseError.message)))
+            CRITICAL_ERROR -> postShowEvent(ShowDialog(baseError.title, baseError.message))
+            NON_CRITICAL_ERROR -> postShowEvent(ShowSnackbar(baseError.message))
             CONTENT_ERROR -> reduce { state.copy(error = baseError) }
         }
     }
