@@ -1,5 +1,5 @@
 object Versions {
-    const val kotlinVersion = "1.4.32"
+    const val kotlinVersion = "1.5.0"
     const val kotlinCoroutinesVersion = "1.4.3"
 
     const val retrofitVersion = "2.9.0"
@@ -9,10 +9,10 @@ object Versions {
     const val ktlintVersion = "10.0.0"
     const val libsVersionsPluginVersion = "0.38.0"
 
-    const val flipperVersion = "0.84.0"
+    const val flipperVersion = "0.87.0"
     const val hyperionVersion = "0.9.32"
 
-    const val koinVersion = "3.0.1-beta-2"
+    const val koinVersion = "3.0.1"
     const val mviOrbitVersion = "3.0.1"
 
     const val lifecycleVersion = "2.4.0-alpha01"
