@@ -9,7 +9,6 @@ import com.zakrodionov.common.R
 import com.zakrodionov.common.databinding.ViewLceErrorBinding
 import com.zakrodionov.common.extensions.gone
 import com.zakrodionov.common.extensions.show
-import com.zakrodionov.common.extensions.showIf
 
 class LceErrorView @JvmOverloads constructor(
     context: Context,

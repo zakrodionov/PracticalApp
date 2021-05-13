@@ -32,14 +32,17 @@ class PostsViewModel(
         if (state.posts == null) loadPosts(initial = true)
     }
 
-    fun loadPosts(refresh: Boolean = false, initial: Boolean = false) {
+    fun loadPosts(refresh: Boolean = false, initial: Boolean = false, afterError: Boolean = false) {
         if (loadingPostsJob.isCompleted || initial) {
             loadingPostsJob = launch {
                 if (refresh) reduce { state.copy(page = 0) }
 
                 if (state.page > 0) {
                     reduce { state.copy(posts = state.posts?.addLoadingItem()) }
-                } else if (!refresh) {
+                    if (afterError) {
+                        reduce { state.copy(isLoading = true) }
+                    }
+                } else if (initial) {
                     reduce { state.copy(isLoading = true) }
                 }
 

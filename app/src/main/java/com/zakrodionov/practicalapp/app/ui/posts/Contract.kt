@@ -20,7 +20,7 @@ data class PostsState(
 ) : Parcelable {
     val lceState: LceState
         get() = when {
-            isLoading -> LoadingState(page > 1)
+            isLoading -> LoadingState(page > 0)
             error != null -> ErrorState(error.toUiError())
             posts?.isEmpty() ?: false -> EmptyState
             posts?.isNotEmpty() ?: false -> ContentState

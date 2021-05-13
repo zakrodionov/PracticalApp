@@ -9,8 +9,6 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.zakrodionov.common.databinding.ViewLceEmptyBinding
-import com.zakrodionov.common.extensions.gone
-import com.zakrodionov.common.extensions.show
 
 class LceEmptyView @JvmOverloads constructor(
     context: Context,

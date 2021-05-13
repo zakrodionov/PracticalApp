@@ -34,7 +34,7 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
     override fun setupViews(view: View, savedInstanceState: Bundle?) = with(binding) {
         setupPostRv()
         lceLayout.tryAgainButtonClickListener = View.OnClickListener {
-            viewModel.loadPosts()
+            viewModel.loadPosts(afterError = true)
         }
     }
 

@@ -5,8 +5,6 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 import com.zakrodionov.common.R
-import com.zakrodionov.common.extensions.gone
-import com.zakrodionov.common.extensions.show
 
 class LceContentView @JvmOverloads constructor(
     context: Context,
