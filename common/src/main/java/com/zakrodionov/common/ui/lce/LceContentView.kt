@@ -20,18 +20,7 @@ class LceContentView @JvmOverloads constructor(
 
     override fun renderState(state: LceLayout.LceState) {
         val isContentState = state == LceLayout.LceState.ContentState
-        val isLoadingState = state is LceLayout.LceState.LoadingState
-
-        when {
-            isContentState -> {
-                show()
-            }
-            isLoadingState -> {
-                return
-            }
-            else -> {
-                gone()
-            }
-        }
+        val isTranslucent = state is LceLayout.LceState.LoadingState && state.isTranslucent
+        visibility = if (isContentState || isTranslucent) View.VISIBLE else View.GONE
     }
 }

@@ -15,7 +15,7 @@ data class PostDetailsState(
 ) : Parcelable {
     val lceState: LceLayout.LceState
         get() = when {
-            isLoading -> LceLayout.LceState.LoadingState(error != null)
+            isLoading -> LceLayout.LceState.LoadingState()
             error != null -> LceLayout.LceState.ErrorState(error.toUiError())
             else -> LceLayout.LceState.ContentState
         }

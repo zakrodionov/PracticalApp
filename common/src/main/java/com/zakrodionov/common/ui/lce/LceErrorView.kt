@@ -9,6 +9,7 @@ import com.zakrodionov.common.R
 import com.zakrodionov.common.databinding.ViewLceErrorBinding
 import com.zakrodionov.common.extensions.gone
 import com.zakrodionov.common.extensions.show
+import com.zakrodionov.common.extensions.showIf
 
 class LceErrorView @JvmOverloads constructor(
     context: Context,
@@ -23,23 +24,11 @@ class LceErrorView @JvmOverloads constructor(
     }
 
     override fun renderState(state: LceLayout.LceState) {
-        val isErrorState = state is LceLayout.LceState.ErrorState
-        val isLoadingState = state is LceLayout.LceState.LoadingState
-
-        when {
-            isErrorState -> {
-                show()
-            }
-            isLoadingState -> {
-                return
-            }
-            else -> {
-                gone()
-            }
-        }
-
         if (state is LceLayout.LceState.ErrorState) {
+            show()
             configureErrorView(state.error)
+        } else {
+            gone()
         }
     }
 

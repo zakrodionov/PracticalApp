@@ -25,20 +25,7 @@ class LceEmptyView @JvmOverloads constructor(
     }
 
     override fun renderState(state: LceLayout.LceState) {
-        val isEmptyState = state is LceLayout.LceState.EmptyState
-        val isLoadingState = state is LceLayout.LceState.LoadingState
-
-        when {
-            isEmptyState -> {
-                show()
-            }
-            isLoadingState -> {
-                return
-            }
-            else -> {
-                gone()
-            }
-        }
+        visibility = if (state == LceLayout.LceState.EmptyState) View.VISIBLE else View.GONE
     }
 
     fun customiseEmptyImage(@DrawableRes image: Int) {
