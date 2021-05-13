@@ -49,7 +49,7 @@ class PostsViewModelTest {
 
         // then
         assert(postsViewModel.state.posts?.isEmpty() ?: false)
-        assertEquals(ScreenState.STUB, postsViewModel.state.screenState)
+        assertEquals(ScreenState.STUB, postsViewModel.state.lceState)
     }
 
     @Test
@@ -62,7 +62,7 @@ class PostsViewModelTest {
 
         // then
         assert(postsViewModel.state.posts?.isNotEmpty() ?: false)
-        assertEquals(ScreenState.CONTENT, postsViewModel.state.screenState)
+        assertEquals(ScreenState.CONTENT, postsViewModel.state.lceState)
     }
 
     @Test
@@ -75,6 +75,6 @@ class PostsViewModelTest {
 
         // then
         assert(postsViewModel.state.error != null)
-        assertEquals(ScreenState.ERROR, postsViewModel.state.screenState)
+        assertEquals(ScreenState.ERROR, postsViewModel.state.lceState)
     }
 }

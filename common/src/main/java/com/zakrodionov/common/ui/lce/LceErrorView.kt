@@ -1,0 +1,60 @@
+package com.zakrodionov.common.ui.lce
+
+import android.content.Context
+import android.util.AttributeSet
+import android.view.LayoutInflater
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.zakrodionov.common.R
+import com.zakrodionov.common.databinding.ViewLceErrorBinding
+import com.zakrodionov.common.extensions.gone
+import com.zakrodionov.common.extensions.show
+
+class LceErrorView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : ConstraintLayout(context, attrs, defStyleAttr), LceView {
+
+    val binding = ViewLceErrorBinding.inflate(LayoutInflater.from(context), this)
+
+    init {
+        layoutParams = LayoutParams(MATCH_PARENT, MATCH_PARENT)
+    }
+
+    override fun renderState(state: LceLayout.LceState) {
+        val isErrorState = state is LceLayout.LceState.ErrorState
+        val isLoadingState = state is LceLayout.LceState.LoadingState
+
+        when {
+            isErrorState -> {
+                show()
+            }
+            isLoadingState -> {
+                return
+            }
+            else -> {
+                gone()
+            }
+        }
+
+        if (state is LceLayout.LceState.ErrorState) {
+            configureErrorView(state.error)
+        }
+    }
+
+    private fun configureErrorView(error: UiError?) {
+        with(binding) {
+            if (error != null) {
+                if (error.isNetworkError) {
+                    ivIcon.setImageResource(R.drawable.ic_no_signal)
+                    tvMessage.setText(R.string.no_internet_connection_error)
+                } else {
+                    ivIcon.setImageResource(R.drawable.ic_error)
+                    tvMessage.setText(R.string.default_error)
+                }
+                btnTryAgain.show()
+            }
+        }
+    }
+}

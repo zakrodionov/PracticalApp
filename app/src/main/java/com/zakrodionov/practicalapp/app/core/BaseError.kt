@@ -2,6 +2,7 @@ package com.zakrodionov.practicalapp.app.core
 
 import android.os.Parcelable
 import com.zakrodionov.common.core.TextResource
+import com.zakrodionov.common.ui.lce.UiError
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.ImportanceError.CONTENT_ERROR
 import com.zakrodionov.practicalapp.app.core.ImportanceError.CRITICAL_ERROR
@@ -39,3 +40,5 @@ data class HttpError(
 
 @Parcelize
 data class UnknownError(override val importanceError: ImportanceError = NON_CRITICAL_ERROR) : BaseError()
+
+fun BaseError.toUiError() = UiError(title, message, this is NetworkConnectionError)

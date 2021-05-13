@@ -12,9 +12,13 @@
 
     <string name="error">Error</string>
     <string name="unknown_error">Unknown Error</string>
+    <string name="default_error">Something went wrong…</string>
+    <string name="empty_message">It\'s empty in here.</string>
     <string name="no_internet_connection_error">No internet connection</string>
 
     <string name="title_error">Title Error</string>
     <string name="try_again">Try again</string>
 
+    <string name="сould_not_find">Could not find</string>
+    <string name="сould_not_find_with_placeholder">Could not find %s</string>
 </resources>
