@@ -13,6 +13,8 @@ interface EventPublisher {
     suspend fun publish(event: Event)
 }
 
+// EventBus для общих событий, если нужна какая-нибидь специализированная логика(например кеширование)
+// создаем отдельный EventBus
 open class EventBus : EventProvider, EventPublisher {
 
     private val events = MutableSharedFlow<Event>()
