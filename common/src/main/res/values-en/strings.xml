@@ -1,0 +1,25 @@
+<resources>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+    <string name="attention">Attention!</string>
+
+    <string name="error_file_larger_than_max_size">File size must not exceed %d mb</string>
+
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="default_notification_channel_name">General notifications</string>
+    <string name="default_notification_title">Notifications PracticalApp</string>
+
+    <string name="error">Error</string>
+    <string name="unknown_error">Unknown Error</string>
+    <string name="default_error">Something went wrong…</string>
+    <string name="empty_message">It\'s empty in here.</string>
+
+    <string name="no_internet_connection_error_title">No internet connection</string>
+    <string name="no_internet_connection_error_message">Check your connection and try again</string>
+
+    <string name="try_again">Try again</string>
+
+    <string name="сould_not_find">Could not find</string>
+    <string name="сould_not_find_with_placeholder">Could not find %s</string>
+</resources>

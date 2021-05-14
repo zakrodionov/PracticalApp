@@ -12,6 +12,7 @@ dependencies {
     implementation(Libs.okhttp_logging_interceptor)
     implementation(Libs.adapter_delegates)
     implementation(Libs.adapter_delegates_dsl)
+    implementation(Libs.androidx_constraint_layout)
 
     api(Libs.glide)
     kapt(Libs.glide_compiler)

@@ -10,11 +10,15 @@
     <string name="default_notification_channel_name">Общие уведомления</string>
     <string name="default_notification_title">Уведомление PracticalApp</string>
 
-    <string name="error">Error</string>
-    <string name="unknown_error">Unknown Error</string>
-    <string name="no_internet_connection_error">No internet connection</string>
+    <string name="error">Ошибка</string>
+    <string name="unknown_error">Неизвестная ошибка</string>
+    <string name="default_error">Что-то пошло не так…</string>
+    <string name="empty_message">Здесь пусто</string>
+    <string name="no_internet_connection_error_title">Отсутствует подключение к интернету</string>
+    <string name="no_internet_connection_error_message">Проверьте подключение и повторите попытку</string>
 
-    <string name="title_error">Title Error</string>
-    <string name="try_again">Try again</string>
+    <string name="try_again">Повторить</string>
 
+    <string name="сould_not_find">Не могли найти</string>
+    <string name="сould_not_find_with_placeholder">Не могли найти %s</string>
 </resources>
