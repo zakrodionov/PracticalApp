@@ -4,6 +4,7 @@ import com.zakrodionov.common.utils.net.ConnectionService
 import retrofit2.HttpException
 import timber.log.Timber
 import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 
 interface ErrorHandler {
     fun getError(throwable: Throwable): BaseError
@@ -15,7 +16,7 @@ class ErrorHandlerImpl(private val connectionService: ConnectionService) : Error
     override fun getError(throwable: Throwable): BaseError {
         Timber.e(throwable)
         when {
-            withoutNetworkConnection() -> {
+            withoutNetworkConnection() || throwable is UnknownHostException -> {
                 return NetworkConnectionError()
             }
 
