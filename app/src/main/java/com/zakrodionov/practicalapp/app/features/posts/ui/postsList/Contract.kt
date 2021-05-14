@@ -1,12 +1,14 @@
 package com.zakrodionov.practicalapp.app.features.posts.ui.postsList
 
 import android.os.Parcelable
+import com.zakrodionov.common.ui.lce.LceLayout.LceState
+import com.zakrodionov.common.ui.lce.LceLayout.LceState.ContentState
+import com.zakrodionov.common.ui.lce.LceLayout.LceState.EmptyState
+import com.zakrodionov.common.ui.lce.LceLayout.LceState.ErrorState
+import com.zakrodionov.common.ui.lce.LceLayout.LceState.LoadingState
 import com.zakrodionov.common.ui.rv.DiffItem
 import com.zakrodionov.practicalapp.app.core.BaseError
-import com.zakrodionov.practicalapp.app.core.ScreenState
-import com.zakrodionov.practicalapp.app.core.ScreenState.CONTENT
-import com.zakrodionov.practicalapp.app.core.ScreenState.ERROR
-import com.zakrodionov.practicalapp.app.core.ScreenState.STUB
+import com.zakrodionov.practicalapp.app.core.toUiError
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -16,12 +18,13 @@ data class PostsState(
     val error: BaseError? = null,
     val isLoading: Boolean = false
 ) : Parcelable {
-    val screenState: ScreenState
+    val lceState: LceState
         get() = when {
-            error != null -> ERROR
-            posts?.isEmpty() ?: false -> STUB
-            posts?.isNotEmpty() ?: false -> CONTENT
-            else -> CONTENT
+            isLoading -> LoadingState(page > 1)
+            error != null -> ErrorState(error.toUiError())
+            posts?.isEmpty() ?: false -> EmptyState
+            posts?.isNotEmpty() ?: false -> ContentState
+            else -> ContentState
         }
 
     fun increasePage() = page + 1

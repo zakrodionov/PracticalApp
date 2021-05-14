@@ -38,7 +38,7 @@ class PostsViewModel(
 
                 if (state.page > 0) {
                     reduce { state.copy(posts = state.posts?.addLoadingItem()) }
-                } else {
+                } else if (!refresh) {
                     reduce { state.copy(isLoading = true) }
                 }
 

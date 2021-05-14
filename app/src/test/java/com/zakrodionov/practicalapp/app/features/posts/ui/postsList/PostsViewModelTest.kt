@@ -1,11 +1,11 @@
 package com.zakrodionov.practicalapp.app.features.posts.ui.postsList
 
 import androidx.lifecycle.SavedStateHandle
+import com.zakrodionov.common.ui.lce.LceLayout
 import com.zakrodionov.practicalapp.CoroutinesTestExtension
 import com.zakrodionov.practicalapp.app.core.NetworkConnectionError
 import com.zakrodionov.practicalapp.app.core.Result
-import com.zakrodionov.practicalapp.app.core.ScreenState
-import com.zakrodionov.practicalapp.app.features.posts.domain.PostRepository
+import com.zakrodionov.practicalapp.domain.repository.PostRepository
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
@@ -49,7 +49,7 @@ class PostsViewModelTest {
 
         // then
         assert(postsViewModel.state.posts?.isEmpty() ?: false)
-        assertEquals(ScreenState.STUB, postsViewModel.state.screenState)
+        assertEquals(LceLayout.LceState.EmptyState, postsViewModel.state.lceState)
     }
 
     @Test
@@ -62,7 +62,7 @@ class PostsViewModelTest {
 
         // then
         assert(postsViewModel.state.posts?.isNotEmpty() ?: false)
-        assertEquals(ScreenState.CONTENT, postsViewModel.state.screenState)
+        assert(postsViewModel.state.lceState is LceLayout.LceState.ContentState)
     }
 
     @Test
@@ -75,6 +75,6 @@ class PostsViewModelTest {
 
         // then
         assert(postsViewModel.state.error != null)
-        assertEquals(ScreenState.ERROR, postsViewModel.state.screenState)
+        assert(postsViewModel.state.lceState is LceLayout.LceState.ErrorState)
     }
 }
