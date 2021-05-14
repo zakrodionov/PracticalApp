@@ -16,7 +16,8 @@ fun String.maxWord(max: Int, postfix: String = ""): String = split(" ").let { wo
     words.take(max).joinToString(separator = " ", postfix = postfix).trim()
 }
 
-fun String.capitalizeFirstLetter(locale: Locale = Locale.ROOT) = toLowerCase(locale).capitalize(locale)
+fun String.capitalizeFirstLetter(locale: Locale = Locale.ROOT) =
+    lowercase(locale).replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale) else it.toString() }
 
 @Suppress("SwallowedException", "TooGenericExceptionCaught")
 fun String.lastSymbols(count: Int): String {
