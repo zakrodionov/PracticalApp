@@ -5,7 +5,7 @@ import com.zakrodionov.common.ui.lce.LceLayout
 import com.zakrodionov.practicalapp.CoroutinesTestExtension
 import com.zakrodionov.practicalapp.app.core.NetworkConnectionError
 import com.zakrodionov.practicalapp.app.core.Result
-import com.zakrodionov.practicalapp.domain.repository.PostRepository
+import com.zakrodionov.practicalapp.app.features.posts.domain.PostRepository
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK

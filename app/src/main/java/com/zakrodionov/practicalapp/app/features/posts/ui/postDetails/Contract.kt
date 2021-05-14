@@ -4,7 +4,7 @@ import android.os.Parcelable
 import com.zakrodionov.common.ui.lce.LceLayout
 import com.zakrodionov.practicalapp.app.core.BaseError
 import com.zakrodionov.practicalapp.app.core.toUiError
-import com.zakrodionov.practicalapp.domain.model.Posts.Post
+import com.zakrodionov.practicalapp.app.features.posts.domain.model.Posts.Post
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
