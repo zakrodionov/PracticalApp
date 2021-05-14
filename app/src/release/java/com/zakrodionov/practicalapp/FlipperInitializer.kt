@@ -8,5 +8,5 @@ object FlipperInitializer {
 
     val interceptor: Interceptor? = null
 
-    fun initFlipperPlugins(context: Context) = Unit
+    fun initFlipperPlugins(@Suppress("UNUSED_PARAMETER") context: Context) = Unit
 }

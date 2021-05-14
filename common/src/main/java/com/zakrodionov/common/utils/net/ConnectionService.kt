@@ -21,7 +21,7 @@ interface ConnectionService {
     fun hasConnection(): Boolean
 }
 
-@OptIn(ExperimentalCoroutinesApi::class)
+@ExperimentalCoroutinesApi
 class ConnectionServiceImpl(context: Context, dispatcher: CoroutineDispatcher) : ConnectionService {
 
     private val connectivityManager: ConnectivityManager? by lazy {
