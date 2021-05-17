@@ -21,4 +21,6 @@
     <color name="color_bg_card">#F1FAEE</color>
     <color name="color_bg_primary_button">#FF018786</color>
 
+    <color name="color_bg_shimmer">#B3B3B3</color>
+
 </resources>

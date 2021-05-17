@@ -5,6 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
+import com.zakrodionov.common.extensions.debug
 import com.zakrodionov.common.extensions.setup
 import com.zakrodionov.common.ui.rv.DiffCallback
 import com.zakrodionov.common.ui.rv.EndlessScroll
@@ -27,6 +28,7 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
         AsyncListDifferDelegationAdapter(
             DiffCallback,
             loadingDelegate(),
+            postShimmerDelegate(),
             postDelegate { viewModel.navigateToPost(it.id) }
         )
     }
@@ -59,6 +61,7 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
     override fun sideEffect(event: PostsEvent) = Unit
 
     override fun render(state: PostsState) {
+        debug(state.posts.toString())
         adapter.items = state.posts
         with(binding) {
             if (!state.isLoading) srlPosts.isRefreshing = false

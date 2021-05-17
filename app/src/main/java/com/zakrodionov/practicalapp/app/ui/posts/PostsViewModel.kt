@@ -4,8 +4,11 @@ import androidx.lifecycle.SavedStateHandle
 import com.github.terrakok.modo.Modo
 import com.github.terrakok.modo.externalForward
 import com.zakrodionov.common.extensions.ifNotNull
+import com.zakrodionov.common.ui.rv.DiffItem
 import com.zakrodionov.common.ui.rv.addLoadingItem
+import com.zakrodionov.common.ui.rv.addLoadingShimmerItems
 import com.zakrodionov.common.ui.rv.removeLoadingItem
+import com.zakrodionov.common.ui.rv.removeLoadingShimmerItems
 import com.zakrodionov.practicalapp.app.core.BaseError
 import com.zakrodionov.practicalapp.app.core.BaseShowEvent.ShowDialog
 import com.zakrodionov.practicalapp.app.core.BaseShowEvent.ShowSnackbar
@@ -19,6 +22,7 @@ import com.zakrodionov.practicalapp.app.ui.Screens
 import com.zakrodionov.practicalapp.app.ui.postDetails.ArgsPostDetail
 import com.zakrodionov.practicalapp.domain.repository.PostRepository
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 
 class PostsViewModel(
     savedStateHandle: SavedStateHandle,
@@ -37,10 +41,10 @@ class PostsViewModel(
             loadingPostsJob = launch {
                 if (refresh) reduce { state.copy(page = 0) }
 
-                if (state.page > 0) {
-                    reduce { state.copy(posts = state.posts?.addLoadingItem()) }
-                } else if (!refresh) {
-                    reduce { state.copy(isLoading = true) }
+                if (initial) {
+                    reduce { state.copy(posts = state.posts.addLoadingShimmerItems()) }
+                } else if (state.page > 0) {
+                    reduce { state.copy(posts = state.posts.addLoadingItem()) }
                 }
 
                 postRepository
@@ -52,7 +56,7 @@ class PostsViewModel(
                     .onFailure {
                         handleError(it)
                     }
-                reduce { state.copy(posts = state.posts?.removeLoadingItem(), isLoading = false) }
+                reduce { state.copy(posts = state.posts?.removeLoadingItem()?.removeLoadingShimmerItems()) }
             }
         }
     }

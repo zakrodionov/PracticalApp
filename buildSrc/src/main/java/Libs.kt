@@ -92,6 +92,8 @@ object Libs {
     const val glide = "com.github.bumptech.glide:glide:$glideVersion"
     const val glide_compiler = "com.github.bumptech.glide:compiler:$glideVersion"
 
+    const val shimmer = "com.facebook.shimmer:shimmer:0.5.0"
+
     //Test
     const val junit_jupiter_api = "org.junit.jupiter:junit-jupiter-api:5.7.1"
     const val junit_jupiter_engine = "org.junit.jupiter:junit-jupiter-engine:5.7.1"

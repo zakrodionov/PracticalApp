@@ -16,4 +16,6 @@ dependencies {
 
     api(Libs.glide)
     kapt(Libs.glide_compiler)
+
+    api(Libs.shimmer)
 }
