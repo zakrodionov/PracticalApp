@@ -228,14 +228,12 @@ dependencies {
     implementation("androidx.compose.material:material-icons-core:$composeVersion")
     implementation("androidx.compose.material:material-icons-extended:$composeVersion")
     // Integration with activities
-    implementation("androidx.activity:activity-compose:1.3.0-alpha05")
+    implementation("androidx.activity:activity-compose:1.3.0-alpha08")
     // Integration with ViewModels
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha03")
-    // Integration with observables
-    implementation("androidx.compose.runtime:runtime-livedata:$composeVersion")
-    implementation("androidx.compose.runtime:runtime-rxjava2:$composeVersion")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha05")
 
-    implementation("com.google.accompanist:accompanist-glide:0.7.1")
+    implementation("com.google.accompanist:accompanist-glide:0.10.0")
 
-    implementation ("io.insert-koin:koin-androidx-compose:3.0.1-beta-1")
+    // Crash get vm
+    implementation ("io.insert-koin:koin-androidx-compose:3.0.1")
 }

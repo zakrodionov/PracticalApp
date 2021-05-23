@@ -1,5 +1,6 @@
 package com.zakrodionov.practicalapp.app.ui.posts
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,7 +24,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.accompanist.glide.GlideImage
+import com.google.accompanist.glide.rememberGlidePainter
 import com.zakrodionov.practicalapp.app.core.BaseComposeFragment
 import com.zakrodionov.practicalapp.domain.model.Posts.Post
 import org.koin.androidx.compose.getStateViewModel
@@ -38,19 +39,19 @@ class PostsFragment : BaseComposeFragment() {
 
 @Composable
 fun PostsScreen() {
-    val viewModel = getViewModel<PostsViewModel>()
-    val state = viewModel.stateFlow.collectAsState(null)
+    //val viewModel = getViewModel<PostsViewModel>()
+    //val state = viewModel.stateFlow.collectAsState(null)
 
     Box(contentAlignment = Alignment.Center) {
-        if (state.value?.posts.isNullOrEmpty()) {
-            EmptyStub(text = "EMPTY DATA")
-        } else {
-            PostList(state.value?.posts) {
-                viewModel.navigateToPost(it.id)
-            }
-        }
-
-        if (state.value?.isLoading == true) CircularProgressIndicator(modifier = Modifier.size(40.dp))
+//        if (state.value?.posts.isNullOrEmpty()) {
+//            EmptyStub(text = "EMPTY DATA")
+//        } else {
+//            PostList(state.value?.posts) {
+//                viewModel.navigateToPost(it.id)
+//            }
+//        }
+//
+//        if (state.value?.isLoading == true) CircularProgressIndicator(modifier = Modifier.size(40.dp))
     }
 }
 
@@ -77,8 +78,8 @@ fun PostItem(post: Post, onClick: (Post) -> Unit) {
             modifier = Modifier.clickable { onClick(post) }
         ) {
             Column {
-                GlideImage(
-                    data = post.image.orEmpty(),
+                Image(
+                    painter = rememberGlidePainter(post.image.orEmpty()),
                     contentDescription = "Post Image",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
