@@ -62,7 +62,7 @@ plugins {
     id("kotlin-kapt")
     id("kotlin-parcelize")
     id("de.mannodermaus.android-junit5")
-    id ("com.starter.easylauncher").version("4.0.0")
+    id("com.starter.easylauncher").version("4.0.0")
     id(Plugins.detekt_plugin)
     id(Plugins.ktlint_plugin)
 }

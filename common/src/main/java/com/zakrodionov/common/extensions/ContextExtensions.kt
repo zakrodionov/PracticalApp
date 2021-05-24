@@ -16,17 +16,20 @@ val Context.screenHeight
 val Context.screenWidth
     get() = resources.displayMetrics.widthPixels
 
-val Context.PORTRAIT_ORIENTATION
+val Context.isPortrait
     get() = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
 
-val Context.LANDSCAPE_ORIENTATION
+val Context.isLandscape
     get() = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
 fun Context.permissionGranted(permissionName: String) =
     ActivityCompat.checkSelfPermission(this, permissionName) == PackageManager.PERMISSION_GRANTED
 
-fun Context.toast(message: String?, length: Int = Toast.LENGTH_SHORT) =
-    Toast.makeText(this, message, length).show()
+fun Context.toast(message: String?, length: Int = Toast.LENGTH_SHORT) {
+    if (!message.isNullOrBlank()) {
+        Toast.makeText(this, message, length).show()
+    }
+}
 
 fun Context.copyToClipboard(text: CharSequence, label: String) {
     val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager

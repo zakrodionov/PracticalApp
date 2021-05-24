@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
+import android.provider.Settings
 import androidx.activity.result.contract.ActivityResultContract
 import timber.log.Timber
 
@@ -79,9 +80,17 @@ fun Context.actionViewImage(contentUri: Uri) {
     }
 }
 
+fun Context.actionApplicationSettings() {
+    val intent = Intent()
+    intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+    val uri = Uri.fromParts("package", packageName, null)
+    intent.data = uri
+    startActivity(intent)
+}
+
 fun obtainFilesResult(
     resultCode: Int,
-    data: Intent?
+    data: Intent?,
 ): List<Uri> {
     if (resultCode == Activity.RESULT_OK && data != null) {
         val uris = mutableListOf<Uri>()
