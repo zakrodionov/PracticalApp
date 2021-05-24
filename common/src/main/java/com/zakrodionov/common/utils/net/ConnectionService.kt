@@ -10,7 +10,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.channels.sendBlocking
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.callbackFlow
@@ -35,15 +34,15 @@ class ConnectionServiceImpl(context: Context, dispatcher: CoroutineDispatcher) :
     private val connectionFlow = callbackFlow<Boolean> {
         val networkCallback = object : ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) {
-                sendBlocking(true)
+                trySend(true)
             }
 
             override fun onUnavailable() {
-                sendBlocking(false)
+                trySend(false)
             }
 
             override fun onLost(network: Network) {
-                sendBlocking(false)
+                trySend(false)
             }
         }
         connectivityManager?.registerNetworkCallback(request, networkCallback)

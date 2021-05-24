@@ -2,22 +2,22 @@ import Versions.adapterDelegatesVersion
 import Versions.flipperVersion
 import Versions.glideVersion
 import Versions.hyperionVersion
+import Versions.junitJupiterVersion
 import Versions.koinVersion
 import Versions.kotlinCoroutinesVersion
 import Versions.kotlinVersion
 import Versions.lifecycleVersion
 import Versions.modoVersion
 import Versions.moshiVersion
-import Versions.mviOrbitVersion
 import Versions.retrofitVersion
 
 object Libs {
     //AndroidX
-    const val androidx_app_compat = "androidx.appcompat:appcompat:1.3.0-rc01"
+    const val androidx_app_compat = "androidx.appcompat:appcompat:1.3.0"
     const val androidx_material = "com.google.android.material:material:1.3.0"
-    const val androidx_core = "androidx.core:core-ktx:1.5.0-rc02"
+    const val androidx_core = "androidx.core:core-ktx:1.5.0"
     const val androidx_constraint_layout = "androidx.constraintlayout:constraintlayout:2.0.4"
-    const val androidx_fragment = "androidx.fragment:fragment-ktx:1.3.2"
+    const val androidx_fragment = "androidx.fragment:fragment-ktx:1.3.4"
     const val androidx_swipe_refresh_layout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     const val androidx_security_crypto = "androidx.security:security-crypto:1.0.0"
 
@@ -42,11 +42,6 @@ object Libs {
     // Koin
     const val koin = "io.insert-koin:koin-android:$koinVersion"
     const val koin_test = "io.insert-koin:koin-test:$koinVersion"
-
-    // Orbit Mvi
-    const val orbit_mvi = "org.orbit-mvi:orbit-core:$mviOrbitVersion"
-    const val orbit_mvi_vm = "org.orbit-mvi:orbit-viewmodel:$mviOrbitVersion"
-    const val orbit_mvi_test = "org.orbit-mvi:orbit-test:$mviOrbitVersion"
 
     // Inspect & Debug tools
     // Flipper
@@ -86,15 +81,13 @@ object Libs {
 
     const val coil = "io.coil-kt:coil:1.1.1"
 
-    const val state_delegator = "com.redmadrobot:state-delegator:1.7"
-
     //Glide
     const val glide = "com.github.bumptech.glide:glide:$glideVersion"
     const val glide_compiler = "com.github.bumptech.glide:compiler:$glideVersion"
 
     //Test
-    const val junit_jupiter_api = "org.junit.jupiter:junit-jupiter-api:5.7.1"
-    const val junit_jupiter_engine = "org.junit.jupiter:junit-jupiter-engine:5.7.1"
+    const val junit_jupiter_api = "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
+    const val junit_jupiter_engine = "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
     const val espresso_core = "androidx.test.espresso:espresso-core:3.3.0"
     const val mockk = "io.mockk:mockk:1.11.0"
 }
