@@ -28,7 +28,6 @@ class ApplicationSettings(context: Context) {
         get() = sp.getString(KEY_TOKEN, "") ?: ""
         set(value) = sp.edit { putString(KEY_TOKEN, value) }
 
-    // Active token for request
     var isLogged: Boolean
         get() = sp.getBoolean(KEY_IS_LOGGED, false)
         set(value) = sp.edit { putBoolean(KEY_IS_LOGGED, value) }
