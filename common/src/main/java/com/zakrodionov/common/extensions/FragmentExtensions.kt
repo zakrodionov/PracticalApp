@@ -1,3 +1,5 @@
+@file:Suppress("TooManyFunctions")
+
 package com.zakrodionov.common.extensions
 
 import android.app.Activity
@@ -5,6 +7,7 @@ import android.content.Context
 import android.os.Parcelable
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StyleRes
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
@@ -34,6 +37,21 @@ fun Fragment.hideKeyboard() {
     (requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?)?.apply {
         hideSoftInputFromWindow(view?.windowToken, 0)
     }
+}
+
+inline fun Fragment.askForMultiplePermissions(
+    crossinline onDenied: () -> Unit = {},
+    crossinline onPermissionsGranted: () -> Unit = {}
+) = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
+    val granted = result.map { it.value }.filter { it == false }
+    if (granted.isEmpty()) onPermissionsGranted() else onDenied()
+}
+
+inline fun Fragment.askForSinglePermission(
+    crossinline onDenied: () -> Unit = {},
+    crossinline onPermissionsGranted: () -> Unit = {}
+) = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+    if (it) onPermissionsGranted() else onDenied()
 }
 
 /*region fragment with parcelable initial arguments*/

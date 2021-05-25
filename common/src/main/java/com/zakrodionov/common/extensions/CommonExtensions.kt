@@ -8,7 +8,7 @@ import timber.log.Timber
 val isDebug: Boolean
     get() = BuildConfig.DEBUG
 
-fun debug(string: String) = Timber.d(string)
+inline fun <reified T : Any> T.debug(string: String) = Timber.d("Log__: $string")
 
 fun Any?.toStringOrEmpty() = this?.let { "$this" } ?: ""
 

@@ -18,6 +18,8 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.snackbar.Snackbar
 
 val Int.pxToDp get() = (this / Resources.getSystem().displayMetrics.density).toInt()
@@ -55,6 +57,13 @@ fun View.hideKeyboard() {
     val inputMethodManager =
         context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
+}
+
+fun View.imeVisibilityListener(onVisibilityChanged: (Boolean) -> Unit) {
+    ViewCompat.setOnApplyWindowInsetsListener(this) { _, insets ->
+        onVisibilityChanged(insets.isVisible(WindowInsetsCompat.Type.ime()))
+        insets
+    }
 }
 
 fun TextView.setOnEnterClickListener(action: (TextView) -> Unit) {
