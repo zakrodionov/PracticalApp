@@ -22,3 +22,7 @@ fun <T> List<T>.multiple(x: Int): MutableList<T> {
     }
     return list
 }
+
+fun <T> List<T>.transformItem(predicate: (index: Int, item: T) -> Boolean, transform: (T) -> T): List<T> {
+    return mapIndexed { index, item -> if (predicate(index, item)) transform(item) else item }
+}
