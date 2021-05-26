@@ -10,6 +10,7 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.use
+import androidx.core.graphics.ColorUtils
 
 /**
  * Получение цвета из аттрибута или [ColorRes]
@@ -49,3 +50,6 @@ fun Context.getCompatDrawable(@DrawableRes drawable: Int) =
 
 fun Context.getCompatColorStateList(@ColorRes color: Int): ColorStateList =
     AppCompatResources.getColorStateList(this, color)
+
+@Suppress("MagicNumber")
+val Int.isBrightColor: Boolean get() = ColorUtils.calculateLuminance(this) > 0.5
