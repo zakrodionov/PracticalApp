@@ -4,6 +4,7 @@ package com.zakrodionov.common.extensions
 
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.os.SystemClock
 import android.view.Gravity
@@ -29,6 +30,22 @@ val Int.dpToPx get() = (this * Resources.getSystem().displayMetrics.density).toI
 val Int.pxToDpF get() = (this / Resources.getSystem().displayMetrics.density)
 
 val Int.dpToPxF get() = (this * Resources.getSystem().displayMetrics.density)
+
+val View.screenLocation: IntArray
+    get(): IntArray {
+        val point = IntArray(2)
+        getLocationOnScreen(point)
+        return point
+    }
+
+val View.boundingBox: Rect
+    get(): Rect {
+        val (x, y) = screenLocation
+        return Rect(x, y, x + width, y + height)
+    }
+
+val View.rect: Rect
+    get() = Rect(0, 0, width, height)
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View =
     LayoutInflater.from(context).inflate(layoutRes, this, false)
