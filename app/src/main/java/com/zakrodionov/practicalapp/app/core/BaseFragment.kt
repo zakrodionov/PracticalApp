@@ -100,9 +100,6 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
 
         // When we rotate device isRemoving() return true for fragment placed in backstack
         // http://stackoverflow.com/questions/34649126/fragment-back-stack-and-isremoving
-
-        // When we rotate device isRemoving() return true for fragment placed in backstack
-        // http://stackoverflow.com/questions/34649126/fragment-back-stack-and-isremoving
         if (instanceStateSaved) {
             instanceStateSaved = false
             return
