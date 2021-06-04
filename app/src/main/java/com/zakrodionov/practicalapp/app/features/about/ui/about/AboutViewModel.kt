@@ -53,6 +53,7 @@ class AboutViewModel(
 
     private fun logout() {
         applicationSettings.isLogged = false
+        flowRouter.newRootFlow(LoginFlowScreen())
     }
 
     private fun navigateToLoginFlow() {

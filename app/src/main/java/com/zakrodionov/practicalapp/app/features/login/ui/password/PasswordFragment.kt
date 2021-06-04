@@ -9,6 +9,7 @@ import com.zakrodionov.practicalapp.app.core.navigation.FlowRouter
 import com.zakrodionov.practicalapp.app.environment.preferences.ApplicationSettings
 import com.zakrodionov.practicalapp.app.features.StubFragment
 import com.zakrodionov.practicalapp.app.features.StubViewModel
+import com.zakrodionov.practicalapp.app.features.bottom.BottomScreens
 import com.zakrodionov.practicalapp.databinding.FragmentPasswordBinding
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -34,6 +35,6 @@ class PasswordFragment : StubFragment(R.layout.fragment_password) {
 
 class PasswordViewModel(private val flowRouter: FlowRouter) : StubViewModel() {
     fun finish() {
-        flowRouter.finishFlow()
+        flowRouter.newRootFlow(BottomScreens.BottomTabsScreen())
     }
 }

@@ -147,7 +147,7 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
     private fun isRealRemoving(): Boolean =
         // Because isRemoving == true for fragment in backstack on screen rotation
         (isRemoving && !instanceStateSaved) ||
-                ((parentFragment as? BaseFragment<*, *>)?.isRealRemoving() ?: false)
+            ((parentFragment as? BaseFragment<*, *>)?.isRealRemoving() ?: false)
 
     // It will be valid only for 'onDestroy()' method
     private fun needCloseScope(): Boolean =
