@@ -64,6 +64,12 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
     }
 
     @CallSuper
+    override fun onStart() {
+        super.onStart()
+        instanceStateSaved = false
+    }
+
+    @CallSuper
     override fun onResume() {
         super.onResume()
         instanceStateSaved = false
@@ -80,10 +86,36 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
         super.onDestroyView()
     }
 
+    // Checking to destroy a fragment from
+    // https://github.com/moxy-community/Moxy/blob/develop/moxy-androidx/src/main/java/moxy/MvpAppCompatFragment.java
     @CallSuper
     override fun onDestroy() {
         super.onDestroy()
-        if (needCloseScope()) {
+        // We leave the screen and respectively all fragments will be destroyed
+        // We leave the screen and respectively all fragments will be destroyed
+        if (requireActivity().isFinishing) {
+            onRealDestroy()
+            return
+        }
+
+        // When we rotate device isRemoving() return true for fragment placed in backstack
+        // http://stackoverflow.com/questions/34649126/fragment-back-stack-and-isremoving
+
+        // When we rotate device isRemoving() return true for fragment placed in backstack
+        // http://stackoverflow.com/questions/34649126/fragment-back-stack-and-isremoving
+        if (instanceStateSaved) {
+            instanceStateSaved = false
+            return
+        }
+
+        var anyParentIsRemoving = false
+        var parent = parentFragment
+        while (!anyParentIsRemoving && parent != null) {
+            anyParentIsRemoving = parent.isRemoving
+            parent = parent.parentFragment
+        }
+
+        if (isRemoving || anyParentIsRemoving) {
             onRealDestroy()
         }
     }
@@ -142,20 +174,6 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
         super.onStop()
         view?.hideKeyboard()
     }
-
-    // This is android, baby!
-    private fun isRealRemoving(): Boolean =
-        // Because isRemoving == true for fragment in backstack on screen rotation
-        (isRemoving && !instanceStateSaved) ||
-                ((parentFragment as? BaseFragment<*, *>)?.isRealRemoving() ?: false)
-
-    // It will be valid only for 'onDestroy()' method
-    private fun needCloseScope(): Boolean =
-        when {
-            activity?.isChangingConfigurations == true -> false
-            activity?.isFinishing == true -> true
-            else -> isRealRemoving()
-        }
 
     override fun onBackPressed(): Boolean = true
 
