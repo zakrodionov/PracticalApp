@@ -38,6 +38,7 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
 
     override val screenAnimationStrategy: ScreenAnimationStrategy = SLIDE_HORIZONTAL
 
+    private var instanceStateSaved: Boolean = false
     private var snackBar: Snackbar? = null
 
     @CallSuper
@@ -62,10 +63,32 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
         }
     }
 
+    @CallSuper
+    override fun onResume() {
+        super.onResume()
+        instanceStateSaved = false
+    }
+
+    @CallSuper
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        instanceStateSaved = true
+    }
+
     override fun onDestroyView() {
         clearViews()
         super.onDestroyView()
     }
+
+    @CallSuper
+    override fun onDestroy() {
+        super.onDestroy()
+        if (needCloseScope()) {
+            onRealDestroy()
+        }
+    }
+
+    open fun onRealDestroy() = Unit
 
     // Метод для инициализации вью
     open fun setupViews(view: View, savedInstanceState: Bundle?) = Unit
@@ -119,6 +142,20 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
         super.onStop()
         view?.hideKeyboard()
     }
+
+    // This is android, baby!
+    private fun isRealRemoving(): Boolean =
+        // Because isRemoving == true for fragment in backstack on screen rotation
+        (isRemoving && !instanceStateSaved) ||
+                ((parentFragment as? BaseFragment<*, *>)?.isRealRemoving() ?: false)
+
+    // It will be valid only for 'onDestroy()' method
+    private fun needCloseScope(): Boolean =
+        when {
+            activity?.isChangingConfigurations == true -> false
+            activity?.isFinishing == true -> true
+            else -> isRealRemoving()
+        }
 
     override fun onBackPressed(): Boolean = true
 

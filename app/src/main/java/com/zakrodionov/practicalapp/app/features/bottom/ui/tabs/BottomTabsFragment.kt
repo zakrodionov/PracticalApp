@@ -12,9 +12,12 @@ import com.zakrodionov.practicalapp.app.core.navigation.TabHost
 import com.zakrodionov.practicalapp.app.di.DIQualifiers.navigationHolderQualifier
 import com.zakrodionov.practicalapp.app.features.bottom.base.Tab
 import com.zakrodionov.practicalapp.app.features.bottom.di.BOTTOM_TABS_QUALIFIER
+import com.zakrodionov.practicalapp.app.features.bottom.di.bottomTabsModule
 import com.zakrodionov.practicalapp.databinding.FragmentBottomTabsBinding
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
 
 class BottomTabsFragment : BaseFragment<BottomTabsState, BottomTabsEvent>(R.layout.fragment_bottom_tabs), TabHost {
 
@@ -35,6 +38,11 @@ class BottomTabsFragment : BaseFragment<BottomTabsState, BottomTabsEvent>(R.layo
         true
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        loadKoinModules(bottomTabsModule)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupBottomNavigation()
@@ -52,6 +60,10 @@ class BottomTabsFragment : BaseFragment<BottomTabsState, BottomTabsEvent>(R.layo
     override fun onPause() {
         navigatorHolder.removeNavigator()
         super.onPause()
+    }
+
+    override fun onRealDestroy() {
+        unloadKoinModules(bottomTabsModule)
     }
 
     override fun render(state: BottomTabsState) {

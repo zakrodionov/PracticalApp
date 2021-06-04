@@ -8,7 +8,6 @@ import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.di.appModule
 import com.zakrodionov.practicalapp.app.features.about.di.aboutModule
-import com.zakrodionov.practicalapp.app.features.bottom.di.bottomTabsModule
 import com.zakrodionov.practicalapp.app.features.favorite.di.favoriteModule
 import com.zakrodionov.practicalapp.app.features.login.di.loginModule
 import com.zakrodionov.practicalapp.app.features.posts.di.postsModule
@@ -37,7 +36,6 @@ class App : Application() {
             androidLogger(Level.ERROR)
             modules(
                 appModule,
-                bottomTabsModule,
                 aboutModule,
                 loginModule,
                 favoriteModule,
