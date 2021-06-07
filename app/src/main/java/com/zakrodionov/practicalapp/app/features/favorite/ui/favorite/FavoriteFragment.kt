@@ -10,8 +10,10 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.zakrodionov.common.core.TextResource
 import com.zakrodionov.common.dialogs.FixedBottomSheetDialogFragment
 import com.zakrodionov.common.dialogs.NumberPickerDialog
+import com.zakrodionov.common.dialogs.NumberPickerDialog.Companion.RK_NUMBER_PICKER_DIALOG
 import com.zakrodionov.common.extensions.showDialog
 import com.zakrodionov.common.extensions.showIfNotAlreadyShown
+import com.zakrodionov.common.extensions.showToast
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.features.StubFragment
 import com.zakrodionov.practicalapp.app.features.StubViewModel
@@ -53,6 +55,11 @@ class FavoriteFragment : StubFragment(R.layout.fragment_favorite) {
         }
         binding.tvShowBottomDialogFullscreen.setOnClickListener {
             BottomDialog.newInstance(true).showIfNotAlreadyShown(childFragmentManager, "BottomDialogFullscreen")
+        }
+        // Sample getting result
+        childFragmentManager.setFragmentResultListener(RK_NUMBER_PICKER_DIALOG, this) { _, bundle ->
+            val pickedNumber = bundle.getInt(NumberPickerDialog.ARG_PICKED_NUMBER)
+            showToast(pickedNumber.toString())
         }
         binding.tvShowNumberDialog.setOnClickListener {
             NumberPickerDialog.newInstance(5, 0, 10)
