@@ -1,15 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:gravity="center"
         android:text="@string/favorite"
+        android:layout_margin="20dp"
         android:textSize="40sp" />
 
-</FrameLayout>
+    <!--Test zone.Hardcoded string.-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:text="Test Dialogs"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/tvShowCommonDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:text="Show Common Dialog"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvShowBottomDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:text="Show Bottom Dialog"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvShowBottomDialogFullscreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:text="Show Bottom Dialog Fullscreen"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvShowNumberDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:text="Show Number Dialog"
+        android:textSize="20sp" />
+
+</LinearLayout>

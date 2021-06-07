@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.zakrodionov.common.R
 import com.zakrodionov.common.core.TextResource
 import com.zakrodionov.common.core.asString
@@ -37,7 +38,7 @@ class CommonDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         _binding = DialogCommonBinding.inflate(LayoutInflater.from(context))
         val theme = arguments?.getInt(THEME_KEY).takeIf { it != DEFAULT_VALUE_KEY } ?: R.style.AlertDialog_Theme
-        val builder = AlertDialog.Builder(requireContext(), theme)
+        val builder = MaterialAlertDialogBuilder(requireContext(), theme)
         builder.setView(binding.root)
 
         setupTexts()
