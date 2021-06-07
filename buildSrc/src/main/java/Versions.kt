@@ -9,7 +9,7 @@ object Versions {
     const val ktlintVersion = "10.0.0"
     const val libsVersionsPluginVersion = "0.38.0"
 
-    const val flipperVersion = "0.91.1"
+    const val flipperVersion = "0.92.0"
     const val hyperionVersion = "0.9.32"
 
     const val koinVersion = "3.0.2"
@@ -17,7 +17,6 @@ object Versions {
     const val lifecycleVersion = "2.4.0-alpha01"
 
     const val adapterDelegatesVersion = "4.3.0"
-    const val modoVersion = "0.6.1"
 
     const val glideVersion = "4.12.0"
 

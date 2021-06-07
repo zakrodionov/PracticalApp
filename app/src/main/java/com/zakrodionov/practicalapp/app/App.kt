@@ -5,6 +5,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
 import com.zakrodionov.practicalapp.BuildConfig
+import com.zakrodionov.practicalapp.FlipperInitializer
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.di.appModule
 import com.zakrodionov.practicalapp.app.features.about.di.aboutModule
@@ -45,7 +46,7 @@ class App : Application() {
     }
 
     private fun setupFlipper() {
-        // FlipperInitializer.initFlipperPlugins(this) TODO wait fix
+        FlipperInitializer.initFlipperPlugins(this)
     }
 
     private fun setupTimber() {

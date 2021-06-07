@@ -7,7 +7,6 @@ import Versions.koinVersion
 import Versions.kotlinCoroutinesVersion
 import Versions.kotlinVersion
 import Versions.lifecycleVersion
-import Versions.modoVersion
 import Versions.moshiVersion
 import Versions.retrofitVersion
 
