@@ -47,6 +47,15 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/tvShowAnimatedDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:text="Show Animated Dialog"
+            android:textSize="20sp" />
+
+        <TextView
             android:id="@+id/tvShowBottomDialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
