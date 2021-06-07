@@ -15,6 +15,7 @@ import com.zakrodionov.practicalapp.app.features.StubViewModel
 import com.zakrodionov.practicalapp.databinding.FragmentFavoriteBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@Suppress("MagicNumber")
 class FavoriteFragment : StubFragment(R.layout.fragment_favorite) {
     override val binding: FragmentFavoriteBinding by viewBinding(FragmentFavoriteBinding::bind)
     override val viewModel: FavoriteViewModel by viewModel()
@@ -29,6 +30,16 @@ class FavoriteFragment : StubFragment(R.layout.fragment_favorite) {
                 "CommonDialog",
                 TextResource.fromText("Hello"),
                 TextResource.fromText("World!")
+            )
+        }
+        binding.tvShowCustomCommonDialog.setOnClickListener {
+            showDialog(
+                childFragmentManager,
+                "CommonCustomDialog",
+                TextResource.fromText("Hello"),
+                TextResource.fromText("Red World!"),
+                messageTextAppearance = R.style.TextAppearance_MaterialComponents_Headline5,
+                theme = R.style.AlertDialog_Theme_RedButtons
             )
         }
         binding.tvShowBottomDialog.setOnClickListener {

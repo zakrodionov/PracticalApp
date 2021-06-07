@@ -29,6 +29,22 @@
         <item name="shapeAppearanceOverlay">@style/ShapeAppearance.MaterialComponents.Alert</item>
     </style>
 
+    <style name="AlertDialog.Theme.RedButtons">
+        <item name="buttonBarPositiveButtonStyle">@style/OutlinedButtonRed</item>
+        <item name="buttonBarNegativeButtonStyle">@style/OutlinedButtonRed</item>
+        <item name="buttonBarNeutralButtonStyle">@style/OutlinedButtonRed</item>
+    </style>
+
+    <style name="OutlinedButtonRed" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+        <item name="backgroundTint">@android:color/darker_gray</item>
+        <item name="android:textColor">@android:color/holo_red_light</item>
+        <item name="strokeColor">@android:color/holo_red_light</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
     <style name="ShapeAppearance.MaterialComponents.Alert">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">@dimen/corner_size_dialog</item>
