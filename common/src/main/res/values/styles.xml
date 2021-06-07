@@ -24,14 +24,14 @@
         <item name="colorAccent">@color/primaryColor</item>
     </style>
 
-    <style name="AlertDialog.Theme" parent="ThemeOverlay.AppCompat.Dialog.Alert">
-        <item name="buttonBarNegativeButtonStyle">@style/AlertDialog.ButtonColor</item>
-        <item name="buttonBarPositiveButtonStyle">@style/AlertDialog.ButtonColor</item>
-        <item name="colorAccent">@color/primaryColor</item>
+    <style name="AlertDialog.Theme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="android:textAllCaps">false</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.MaterialComponents.Alert</item>
     </style>
 
-    <style name="AlertDialog.ButtonColor" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
-        <item name="android:textColor">@color/primaryColor</item>
+    <style name="ShapeAppearance.MaterialComponents.Alert">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/corner_size_dialog</item>
     </style>
 
     <style name="RoundedBottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">

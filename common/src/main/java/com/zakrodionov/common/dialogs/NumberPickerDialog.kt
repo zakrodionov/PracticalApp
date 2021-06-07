@@ -4,10 +4,10 @@ import android.app.Dialog
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.LayoutInflater
-import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.zakrodionov.common.R
 import com.zakrodionov.common.databinding.DialogNumberPickerBinding
 
@@ -22,7 +22,7 @@ class NumberPickerDialog : DialogFragment() {
         _binding = DialogNumberPickerBinding.inflate(LayoutInflater.from(context))
         payload = arguments?.getParcelable(ARG_PAYLOAD)
 
-        val builder = AlertDialog.Builder(requireContext(), R.style.AlertDialog_Theme)
+        val builder = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog_Theme)
 
         val minValue = arguments?.getInt(ARG_MIN_VALUE) ?: DEFAULT_MIN_VALUE
         val maxValue = arguments?.getInt(ARG_MAX_VALUE) ?: DEFAULT_MAX_VALUE
