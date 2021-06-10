@@ -3,7 +3,6 @@ import Versions.flipperVersion
 import Versions.glideVersion
 import Versions.hyperionVersion
 import Versions.junitJupiterVersion
-import Versions.koinVersion
 import Versions.kotlinCoroutinesVersion
 import Versions.kotlinVersion
 import Versions.lifecycleVersion
@@ -37,9 +36,9 @@ object Libs {
     const val lifecycle_viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
     const val lifecycle_runtime_ktx = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
 
-    // Koin
-    const val koin = "io.insert-koin:koin-android:$koinVersion"
-    const val koin_test = "io.insert-koin:koin-test:$koinVersion"
+    // Hilt
+    const val hilt_android = "com.google.dagger:hilt-android:${Versions.hiltVersion}"
+    const val hilt_android_compiler = "com.google.dagger:hilt-android-compiler:${Versions.hiltVersion}"
 
     // Inspect & Debug tools
     // Flipper

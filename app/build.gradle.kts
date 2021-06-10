@@ -25,6 +25,8 @@ import Libs.flipper
 import Libs.flipper_network
 import Libs.flipper_no_op
 import Libs.flipper_soloader
+import Libs.hilt_android
+import Libs.hilt_android_compiler
 import Libs.hyperion_attr
 import Libs.hyperion_build_config
 import Libs.hyperion_core
@@ -36,8 +38,6 @@ import Libs.hyperion_shared_preferences
 import Libs.hyperion_timber
 import Libs.junit_jupiter_api
 import Libs.junit_jupiter_engine
-import Libs.koin
-import Libs.koin_test
 import Libs.kotlin_stdlib
 import Libs.leak_canary
 import Libs.lifecycle_extensions
@@ -62,6 +62,7 @@ plugins {
     id("kotlin-parcelize")
     id("de.mannodermaus.android-junit5")
     id("com.starter.easylauncher").version("4.0.0")
+    id("dagger.hilt.android.plugin")
     id(Plugins.detekt_plugin)
     id(Plugins.ktlint_plugin)
 }
@@ -153,9 +154,9 @@ dependencies {
     implementation(androidx_swipe_refresh_layout)
     implementation(androidx_security_crypto)
 
-    // Koin
-    implementation(koin)
-    testImplementation(koin_test)
+    // Hilt
+    implementation(hilt_android)
+    kapt(hilt_android_compiler)
 
     // Networking
     implementation(retrofit)
