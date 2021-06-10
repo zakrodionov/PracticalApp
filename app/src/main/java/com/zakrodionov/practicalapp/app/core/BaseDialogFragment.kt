@@ -24,7 +24,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
 @Suppress("TooManyFunctions")
-@AndroidEntryPoint
 abstract class BaseDialogFragment<STATE : Parcelable, SIDE_EFFECT : Any>(
     @LayoutRes contentLayoutId: Int,
 ) : DialogFragment(contentLayoutId) {

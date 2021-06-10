@@ -7,15 +7,22 @@ import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.navigation.BaseNavigator
 import com.zakrodionov.practicalapp.app.core.navigation.GlobalRouter
-import com.zakrodionov.practicalapp.app.di.DIQualifiers.navigationHolderQualifier
-import com.zakrodionov.practicalapp.app.di.module.GLOBAL_QUALIFIER
+import com.zakrodionov.practicalapp.app.di.module.GlobalRouterQualifier
 import com.zakrodionov.practicalapp.app.features.bottom.BottomScreens.BottomTabsScreen
-import org.koin.android.ext.android.inject
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class RootActivity : AppCompatActivity() {
 
-    private val globalRouter: GlobalRouter by inject()
-    private val navigatorHolder: NavigatorHolder by inject(navigationHolderQualifier(GLOBAL_QUALIFIER))
+    @Inject
+    @GlobalRouterQualifier
+    lateinit var globalRouter: GlobalRouter
+
+    @Inject
+    @GlobalRouterQualifier
+    lateinit var navigatorHolder: NavigatorHolder
+
     private val navigator: AppNavigator = BaseNavigator(this, supportFragmentManager, R.id.fragmentContainerView)
 
     override fun onCreate(savedInstanceState: Bundle?) {

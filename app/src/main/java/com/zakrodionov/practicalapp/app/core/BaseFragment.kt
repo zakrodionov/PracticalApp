@@ -28,7 +28,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
 @Suppress("TooManyFunctions")
-@AndroidEntryPoint
 abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes contentLayoutId: Int) :
     Fragment(contentLayoutId), BackButtonListener, AnimationScreen {
 

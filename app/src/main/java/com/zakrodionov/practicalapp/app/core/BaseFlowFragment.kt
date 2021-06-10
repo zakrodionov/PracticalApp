@@ -20,7 +20,6 @@ import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.
 import com.zakrodionov.practicalapp.app.core.navigation.TabHost
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 abstract class BaseFlowFragment(
     @LayoutRes contentLayoutId: Int,
     @IdRes private val containerId: Int
