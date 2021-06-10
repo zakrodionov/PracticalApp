@@ -31,14 +31,12 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
         )
     }
 
-    override fun setupViews(view: View, savedInstanceState: Bundle?) = with(binding) {
-        setupPostRv()
-        lceLayout.tryAgainButtonClickListener = View.OnClickListener {
-            viewModel.loadPosts()
-        }
+    override fun setupViews(view: View, savedInstanceState: Bundle?) {
+        setupRvPosts()
+        setupLceLayout()
     }
 
-    private fun setupPostRv() = with(binding) {
+    private fun setupRvPosts() = with(binding) {
         val layoutManager = LinearLayoutManager(context)
         rvPosts.setup(adapter, layoutManager = layoutManager)
         rvPosts.addOnScrollListener(object : EndlessScroll(layoutManager) {
@@ -49,6 +47,12 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
 
         srlPosts.setOnRefreshListener {
             viewModel.loadPosts(true)
+        }
+    }
+
+    private fun setupLceLayout() {
+        binding.lceLayout.tryAgainButtonClickListener = View.OnClickListener {
+            viewModel.loadPosts()
         }
     }
 

@@ -22,8 +22,12 @@ class PostDetailsFragment : BaseFragment<PostDetailsState, PostDetailsEvent>(R.l
     override val viewModel: PostDetailViewModel by stateViewModel { parametersOf(initialArguments()) }
     override val binding: FragmentPostDetailBinding by viewBinding(FragmentPostDetailBinding::bind)
 
-    override fun setupViews(view: View, savedInstanceState: Bundle?) = with(binding) {
-        lceLayout.tryAgainButtonClickListener = View.OnClickListener {
+    override fun setupViews(view: View, savedInstanceState: Bundle?) {
+        setupLceLayout()
+    }
+
+    private fun setupLceLayout() {
+        binding.lceLayout.tryAgainButtonClickListener = View.OnClickListener {
             viewModel.loadPostDetails()
         }
     }
