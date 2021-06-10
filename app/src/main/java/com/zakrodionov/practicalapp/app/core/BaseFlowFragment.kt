@@ -18,8 +18,8 @@ import com.zakrodionov.practicalapp.app.core.navigation.FlowRouter
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.SLIDE_HORIZONTAL
 import com.zakrodionov.practicalapp.app.core.navigation.TabHost
+import com.zakrodionov.practicalapp.app.core.navigation.toRouterQualifier
 import com.zakrodionov.practicalapp.app.di.DIQualifiers.navigationHolderQualifier
-import com.zakrodionov.practicalapp.app.di.DIQualifiers.routerQualifier
 import org.koin.android.ext.android.inject
 
 abstract class BaseFlowFragment(
@@ -32,7 +32,7 @@ abstract class BaseFlowFragment(
 
     override val screenAnimationStrategy: ScreenAnimationStrategy = SLIDE_HORIZONTAL
 
-    protected val flowRouter: FlowRouter by inject(routerQualifier(qualifier))
+    protected val flowRouter: FlowRouter by inject(qualifier.toRouterQualifier)
 
     private val navigator by lazy {
         createNavigator()
