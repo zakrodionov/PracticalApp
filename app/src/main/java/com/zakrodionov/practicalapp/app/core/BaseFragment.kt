@@ -24,9 +24,11 @@ import com.zakrodionov.practicalapp.app.core.navigation.AnimationScreen
 import com.zakrodionov.practicalapp.app.core.navigation.BackButtonListener
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.SLIDE_HORIZONTAL
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
 @Suppress("TooManyFunctions")
+@AndroidEntryPoint
 abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes contentLayoutId: Int) :
     Fragment(contentLayoutId), BackButtonListener, AnimationScreen {
 

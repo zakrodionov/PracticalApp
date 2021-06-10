@@ -2,7 +2,7 @@ package com.zakrodionov.practicalapp.app.features.posts.di
 
 import com.zakrodionov.practicalapp.app.core.navigation.flowModule
 import com.zakrodionov.practicalapp.app.core.navigation.toRouterQualifier
-import com.zakrodionov.practicalapp.app.di.initializer.NetInitializer.NAME_MAIN_RETROFIT
+import com.zakrodionov.practicalapp.app.di.module.NetInitializer.NAME_MAIN_RETROFIT
 import com.zakrodionov.practicalapp.app.features.posts.data.PostRepositoryImpl
 import com.zakrodionov.practicalapp.app.features.posts.data.remote.ApiPosts
 import com.zakrodionov.practicalapp.app.features.posts.domain.PostRepository

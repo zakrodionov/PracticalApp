@@ -1,7 +1,6 @@
 package com.zakrodionov.practicalapp.app.core.navigation
 
 import com.github.terrakok.cicerone.Cicerone
-import com.zakrodionov.practicalapp.app.di.DIQualifiers
 import org.koin.core.module.Module
 import org.koin.dsl.ModuleDeclaration
 

@@ -5,12 +5,13 @@ import retrofit2.HttpException
 import timber.log.Timber
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
+import javax.inject.Inject
 
 interface ErrorHandler {
     fun getError(throwable: Throwable): BaseError
 }
 
-class ErrorHandlerImpl(private val connectionService: ConnectionService) : ErrorHandler {
+class ErrorHandlerImpl @Inject constructor(private val connectionService: ConnectionService) : ErrorHandler {
 
     @Suppress("ReturnCount")
     override fun getError(throwable: Throwable): BaseError {

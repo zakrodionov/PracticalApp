@@ -1,5 +1,6 @@
-package com.zakrodionov.practicalapp.app.di.initializer
+package com.zakrodionov.practicalapp.app.di.module
 
+import android.content.Context
 import com.squareup.moshi.Moshi
 import com.zakrodionov.common.extensions.isDebug
 import com.zakrodionov.common.utils.net.ConnectionService
@@ -9,16 +10,20 @@ import com.zakrodionov.practicalapp.FlipperInitializer
 import com.zakrodionov.practicalapp.app.core.dispatchers.DispatchersProvider
 import com.zakrodionov.practicalapp.app.environment.interceptors.MainHeaderInterceptor
 import com.zakrodionov.practicalapp.app.environment.interceptors.MainTokenAuthenticator
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.core.module.Module
-import org.koin.core.qualifier.named
-import org.koin.core.scope.Scope
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
-object NetInitializer : Initializer {
+@Module
+@InstallIn(SingletonComponent::class)
+object NetModule {
 
     private const val TIMEOUT = 30L
     private const val MAX_REQUESTS_PER_HOST = 10
@@ -31,25 +36,29 @@ object NetInitializer : Initializer {
     // private const val NAME_OAUTH_OK_HTTP = "oauthOkHttp"
     // const val NAME_OAUTH_RETROFIT = "oauthRetrofit"
 
-    override fun initialize(appModule: Module) {
-        appModule.apply {
-            single { buildMoshi() }
+    @Provides
+    fun provideMoshi(): Moshi = buildMoshi()
 
-            single<ConnectionService> { ConnectionServiceImpl(get(), get<DispatchersProvider>().default) }
+    @Provides
+    fun provideConnectionService(
+        @ApplicationContext context: Context,
+        dispatchersProvider: DispatchersProvider,
+    ): ConnectionService = ConnectionServiceImpl(context, dispatchersProvider.default)
 
-            single { MainHeaderInterceptor(get()) }
-            single { MainTokenAuthenticator() }
+    @Provides
+    fun provideOkHttp(
+        mainHeaderInterceptor: MainHeaderInterceptor,
+        mainTokenAuthenticator: MainTokenAuthenticator,
+    ): OkHttpClient = buildMainOkHttp(mainHeaderInterceptor, mainTokenAuthenticator)
 
-            single(named(NAME_MAIN_OK_HTTP)) { buildMainOkHttp(get(), get()) }
-            single(named(NAME_MAIN_RETROFIT)) { buildMainRetrofit(get()) }
-        }
-    }
+    @Provides
+    fun provideRetrofit(moshi: Moshi, okHttpClient: OkHttpClient): Retrofit = buildMainRetrofit(moshi, okHttpClient)
 
     private fun buildMoshi(): Moshi = Moshi.Builder().build()
 
     private fun buildMainOkHttp(
         mainHeaderInterceptor: MainHeaderInterceptor,
-        mainTokenAuthenticator: MainTokenAuthenticator
+        mainTokenAuthenticator: MainTokenAuthenticator,
     ): OkHttpClient {
         val okHttpClientBuilder = OkHttpClient.Builder()
         okHttpClientBuilder.connectTimeout(TIMEOUT, TimeUnit.SECONDS)
@@ -72,10 +81,10 @@ object NetInitializer : Initializer {
         return client
     }
 
-    private fun Scope.buildMainRetrofit(moshi: Moshi): Retrofit {
+    private fun buildMainRetrofit(moshi: Moshi, okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.API_URL)
-            .client(get(named(NAME_MAIN_OK_HTTP)))
+            .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
     }

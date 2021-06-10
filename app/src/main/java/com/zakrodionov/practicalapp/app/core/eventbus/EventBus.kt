@@ -2,6 +2,7 @@ package com.zakrodionov.practicalapp.app.core.eventbus
 
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
+import javax.inject.Inject
 
 interface Event
 
@@ -15,7 +16,7 @@ interface EventPublisher {
 
 // EventBus для общих событий, если нужна какая-нибидь специализированная логика(например кеширование)
 // создаем отдельный EventBus
-open class EventBus : EventProvider, EventPublisher {
+open class EventBus @Inject constructor() : EventProvider, EventPublisher {
 
     private val events = MutableSharedFlow<Event>()
 

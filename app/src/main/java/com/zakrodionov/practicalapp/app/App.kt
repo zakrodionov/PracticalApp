@@ -7,42 +7,20 @@ import android.os.Build
 import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.FlipperInitializer
 import com.zakrodionov.practicalapp.R
-import com.zakrodionov.practicalapp.app.di.appModule
-import com.zakrodionov.practicalapp.app.features.about.di.aboutModule
-import com.zakrodionov.practicalapp.app.features.favorite.di.favoriteModule
-import com.zakrodionov.practicalapp.app.features.login.di.loginModule
-import com.zakrodionov.practicalapp.app.features.posts.di.postsModule
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin
-import org.koin.core.logger.Level
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
+@HiltAndroidApp
 class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        initKoin()
 
         setupFlipper()
         setupTimber()
 
         initDefaultNotificationChannel()
-    }
-
-    private fun initKoin() {
-        startKoin {
-            androidContext(this@App)
-            androidLogger(Level.ERROR)
-            modules(
-                appModule,
-                aboutModule,
-                loginModule,
-                favoriteModule,
-                postsModule
-            )
-        }
     }
 
     private fun setupFlipper() {

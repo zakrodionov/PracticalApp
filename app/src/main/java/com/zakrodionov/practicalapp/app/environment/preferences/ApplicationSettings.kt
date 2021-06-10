@@ -8,8 +8,10 @@ import androidx.security.crypto.EncryptedSharedPreferences.PrefKeyEncryptionSche
 import androidx.security.crypto.EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
 import androidx.security.crypto.MasterKeys
 import androidx.security.crypto.MasterKeys.AES256_GCM_SPEC
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class ApplicationSettings(context: Context) {
+class ApplicationSettings @Inject constructor(@ApplicationContext context: Context) {
 
     companion object {
         const val NAME_STORAGE = "Settings"

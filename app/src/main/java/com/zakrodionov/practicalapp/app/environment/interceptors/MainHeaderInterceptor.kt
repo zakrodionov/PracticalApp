@@ -3,9 +3,10 @@ package com.zakrodionov.practicalapp.app.environment.interceptors
 import com.zakrodionov.practicalapp.app.environment.preferences.ApplicationSettings
 import okhttp3.Interceptor
 import okhttp3.Response
+import javax.inject.Inject
 
-class MainHeaderInterceptor(
-    private val applicationSettings: ApplicationSettings
+class MainHeaderInterceptor @Inject constructor(
+    private val applicationSettings: ApplicationSettings,
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
