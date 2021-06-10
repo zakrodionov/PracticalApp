@@ -41,7 +41,6 @@ import Libs.koin_test
 import Libs.kotlin_stdlib
 import Libs.leak_canary
 import Libs.lifecycle_extensions
-import Libs.lifecycle_livedata
 import Libs.lifecycle_runtime_ktx
 import Libs.lifecycle_viewmodel
 import Libs.mockk
@@ -168,7 +167,6 @@ dependencies {
 
     // Lifecycle
     implementation(lifecycle_extensions)
-    implementation(lifecycle_livedata)
     implementation(lifecycle_viewmodel)
     implementation(lifecycle_runtime_ktx)
 

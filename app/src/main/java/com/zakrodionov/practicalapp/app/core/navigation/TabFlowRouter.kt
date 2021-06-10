@@ -1,7 +1,5 @@
 package com.zakrodionov.practicalapp.app.core.navigation
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asFlow
 import com.github.terrakok.cicerone.Command
 import com.github.terrakok.cicerone.Router
 import com.zakrodionov.practicalapp.app.core.navigation.BackTabStrategy.BACK_TO_DEFAULT_TAB
@@ -10,6 +8,7 @@ import com.zakrodionov.practicalapp.app.core.navigation.BackTabStrategy.BY_SHOW_
 import com.zakrodionov.practicalapp.app.core.navigation.BackTabStrategy.NONE
 import com.zakrodionov.practicalapp.app.features.bottom.base.Tab
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.onEach
 
@@ -27,7 +26,7 @@ enum class BackTabStrategy {
 
 interface TabsRouter {
 
-    val selectedTabFlow: Flow<Tab>
+    val selectedTab: Flow<Tab>
 
     fun switchTab(tab: Tab)
 
@@ -50,8 +49,8 @@ class TabFlowRouter(private val backTabStrategy: BackTabStrategy = BY_SHOW_ORDER
     private val firstTab = Tab.values().first()
     private val tabsHistory = mutableListOf<Tab>()
 
-    private val _selectedTab = MutableLiveData<Tab?>(null)
-    override val selectedTabFlow: Flow<Tab> = _selectedTab.asFlow().filterNotNull().onEach {
+    private val _selectedTab = MutableStateFlow<Tab?>(null)
+    override val selectedTab: Flow<Tab> = _selectedTab.filterNotNull().onEach {
         if (tabsHistory.contains(it)) {
             tabsHistory.remove(it)
         }

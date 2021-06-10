@@ -20,7 +20,7 @@ class BottomTabsViewModel(
 
     private fun observeSelectedTab() {
         launch {
-            tabFlowRouter.selectedTabFlow.collect {
+            tabFlowRouter.selectedTab.collect {
                 reduce { state.copy(currentTab = it) }
             }
         }
