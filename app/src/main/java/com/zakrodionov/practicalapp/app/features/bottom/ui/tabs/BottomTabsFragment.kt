@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.terrakok.cicerone.NavigatorHolder
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.BaseFragment
 import com.zakrodionov.practicalapp.app.core.navigation.TabFlowNavigator
@@ -33,7 +33,7 @@ class BottomTabsFragment : BaseFragment<BottomTabsState, BottomTabsEvent>(R.layo
         TabFlowNavigator(requireActivity(), childFragmentManager, R.id.bottomFragmentContainerView)
     }
 
-    private val bottomNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+    private val bottomNavigationItemSelectedListener = NavigationBarView.OnItemSelectedListener { item ->
         viewModel.switchTab(Tab.from(item))
         true
     }
@@ -49,7 +49,7 @@ class BottomTabsFragment : BaseFragment<BottomTabsState, BottomTabsEvent>(R.layo
     }
 
     private fun setupBottomNavigation() {
-        binding.bottomNavigation.setOnNavigationItemSelectedListener(bottomNavigationItemSelectedListener)
+        binding.bottomNavigation.setOnItemSelectedListener(bottomNavigationItemSelectedListener)
     }
 
     override fun onResume() {
@@ -68,9 +68,9 @@ class BottomTabsFragment : BaseFragment<BottomTabsState, BottomTabsEvent>(R.layo
 
     override fun render(state: BottomTabsState) {
         state.currentTab?.let {
-            binding.bottomNavigation.setOnNavigationItemSelectedListener(null)
+            binding.bottomNavigation.setOnItemSelectedListener(null)
             binding.bottomNavigation.selectedItemId = it.menuItemId
-            binding.bottomNavigation.setOnNavigationItemSelectedListener(bottomNavigationItemSelectedListener)
+            binding.bottomNavigation.setOnItemSelectedListener(bottomNavigationItemSelectedListener)
         }
     }
 

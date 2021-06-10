@@ -6,10 +6,10 @@ object Versions {
     const val moshiVersion = "1.12.0"
 
     const val detektVersion = "1.17.1"
-    const val ktlintVersion = "10.0.0"
-    const val libsVersionsPluginVersion = "0.38.0"
+    const val ktlintVersion = "10.1.0"
+    const val libsVersionsPluginVersion = "0.39.0"
 
-    const val flipperVersion = "0.92.0"
+    const val flipperVersion = "0.93.0"
     const val hyperionVersion = "0.9.32"
 
     const val koinVersion = "3.0.2"
