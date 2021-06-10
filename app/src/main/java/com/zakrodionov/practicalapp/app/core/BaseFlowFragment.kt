@@ -18,29 +18,25 @@ import com.zakrodionov.practicalapp.app.core.navigation.FlowRouter
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.SLIDE_HORIZONTAL
 import com.zakrodionov.practicalapp.app.core.navigation.TabHost
-import com.zakrodionov.practicalapp.app.core.navigation.toRouterQualifier
-import com.zakrodionov.practicalapp.app.di.DIQualifiers.navigationHolderQualifier
 import dagger.hilt.android.AndroidEntryPoint
-import org.koin.android.ext.android.inject
 
 @AndroidEntryPoint
 abstract class BaseFlowFragment(
     @LayoutRes contentLayoutId: Int,
-    @IdRes private val containerId: Int,
-    qualifier: String
+    @IdRes private val containerId: Int
 ) : Fragment(contentLayoutId), AnimationScreen {
 
     abstract val startScreen: Screen
 
-    override val screenAnimationStrategy: ScreenAnimationStrategy = SLIDE_HORIZONTAL
+    abstract val flowRouter: FlowRouter
 
-    //protected val flowRouter: FlowRouter by inject(qualifier.toRouterQualifier)
+    abstract val navigatorHolder: NavigatorHolder
+
+    override val screenAnimationStrategy: ScreenAnimationStrategy = SLIDE_HORIZONTAL
 
     private val navigator by lazy {
         createNavigator()
     }
-
-    //private val navigatorHolder: NavigatorHolder by inject(navigationHolderQualifier(qualifier))
 
     protected open fun createNavigator() =
         object : BaseNavigator(requireActivity(), childFragmentManager, containerId) {
