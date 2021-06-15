@@ -18,8 +18,6 @@ class RequestTokenAuthenticator(
 
     override fun getAccessToken(): String = applicationSettings.accessToken
 
-    override fun getRefreshToken(): String = applicationSettings.refreshToken
-
     override fun refreshTokens(): String? = runBlocking {
         val response = api.refresh(applicationSettings.refreshToken)
         applicationSettings.accessToken = "" // TODO response.accessToken

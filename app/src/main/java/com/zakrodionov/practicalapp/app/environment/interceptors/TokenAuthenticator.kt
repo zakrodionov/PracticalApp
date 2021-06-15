@@ -15,8 +15,6 @@ abstract class TokenAuthenticator : Authenticator {
 
     abstract fun getAccessToken(): String
 
-    abstract fun getRefreshToken(): String
-
     @Volatile
     private var retryCount = 0
 
