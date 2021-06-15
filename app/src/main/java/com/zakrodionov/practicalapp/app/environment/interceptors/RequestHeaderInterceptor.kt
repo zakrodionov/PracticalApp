@@ -4,7 +4,7 @@ import com.zakrodionov.practicalapp.app.environment.preferences.ApplicationSetti
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class MainHeaderInterceptor(
+class RequestHeaderInterceptor(
     private val applicationSettings: ApplicationSettings
 ) : Interceptor {
 
@@ -13,8 +13,8 @@ class MainHeaderInterceptor(
             .newBuilder()
             .header("app-id", "606b5b499129d5822c058cd0") // Todo Test api
             .apply {
-                if (applicationSettings.token.isNotBlank()) {
-                    addHeader("Authorization", "Bearer ${applicationSettings.token}")
+                if (applicationSettings.accessToken.isNotBlank()) {
+                    addHeader("Authorization", "Bearer ${applicationSettings.accessToken}")
                 }
             }
             .build()

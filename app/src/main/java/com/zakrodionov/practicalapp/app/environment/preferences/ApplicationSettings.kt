@@ -14,7 +14,8 @@ class ApplicationSettings(context: Context) {
     companion object {
         const val NAME_STORAGE = "Settings"
 
-        const val KEY_TOKEN = "KEY_TOKEN"
+        const val KEY_ACCESS_TOKEN = "KEY_ACCESS_TOKEN"
+        const val KEY_REFRESH_TOKEN = "KEY_REFRESH_TOKEN"
         const val KEY_IS_LOGGED = "KEY_IS_LOGGED"
     }
 
@@ -23,10 +24,13 @@ class ApplicationSettings(context: Context) {
         EncryptedSharedPreferences.create(NAME_STORAGE, masterKeyAlias, context, AES256_SIV, AES256_GCM)
     }
 
-    // Active token for request
-    var token: String
-        get() = sp.getString(KEY_TOKEN, "") ?: ""
-        set(value) = sp.edit { putString(KEY_TOKEN, value) }
+    var accessToken: String
+        get() = sp.getString(KEY_ACCESS_TOKEN, "") ?: ""
+        set(value) = sp.edit { putString(KEY_ACCESS_TOKEN, value) }
+
+    var refreshToken: String
+        get() = sp.getString(KEY_REFRESH_TOKEN, "") ?: ""
+        set(value) = sp.edit { putString(KEY_REFRESH_TOKEN, value) }
 
     var isLogged: Boolean
         get() = sp.getBoolean(KEY_IS_LOGGED, false)
