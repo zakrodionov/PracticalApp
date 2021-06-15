@@ -57,7 +57,7 @@ abstract class TokenAuthenticator : Authenticator {
 
     private fun Response.buildRequest(token: String) = request
         .newBuilder()
-        .header("Authorization", token)
+        .headerBearer(token)
         .build()
 
     @CallSuper

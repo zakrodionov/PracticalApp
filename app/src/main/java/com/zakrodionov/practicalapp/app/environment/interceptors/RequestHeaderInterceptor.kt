@@ -14,7 +14,7 @@ class RequestHeaderInterceptor(
             .header("app-id", "606b5b499129d5822c058cd0") // Todo Test api
             .apply {
                 if (applicationSettings.accessToken.isNotBlank()) {
-                    addHeader("Authorization", "Bearer ${applicationSettings.accessToken}")
+                    headerBearer(applicationSettings.accessToken)
                 }
             }
             .build()
