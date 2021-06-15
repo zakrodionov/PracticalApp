@@ -16,7 +16,6 @@ val postsModule = flowModule(POSTS_QUALIFIER) {
     viewModel { PostsViewModel(get(), get(), flowRouter = get(POSTS_QUALIFIER.toRouterQualifier)) }
     viewModel { parameters -> PostDetailViewModel(get(), get(), parameters.get()) }
 
-    single<PostRepository> { PostRepositoryImpl(get(), get()) }
-
     single<ApiPosts> { get<Retrofit>().create(ApiPosts::class.java) }
+    single<PostRepository> { PostRepositoryImpl(get(), get()) }
 }
