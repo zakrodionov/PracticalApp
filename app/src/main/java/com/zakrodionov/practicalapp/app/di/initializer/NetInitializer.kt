@@ -2,8 +2,8 @@ package com.zakrodionov.practicalapp.app.di.initializer
 
 import com.squareup.moshi.Moshi
 import com.zakrodionov.common.extensions.isDebug
-import com.zakrodionov.common.utils.net.ConnectionService
-import com.zakrodionov.common.utils.net.ConnectionServiceImpl
+import com.zakrodionov.common.net.ConnectionService
+import com.zakrodionov.common.net.ConnectionServiceImpl
 import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.FlipperInitializer
 import com.zakrodionov.practicalapp.app.core.dispatchers.DispatchersProvider

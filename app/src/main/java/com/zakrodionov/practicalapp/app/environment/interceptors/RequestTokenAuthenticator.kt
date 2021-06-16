@@ -1,6 +1,7 @@
 package com.zakrodionov.practicalapp.app.environment.interceptors
 
 import com.squareup.moshi.Moshi
+import com.zakrodionov.common.net.TokenAuthenticator
 import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.app.di.initializer.NetInitializer.basicOkHttpBuilder
 import com.zakrodionov.practicalapp.app.environment.preferences.AppPreferences

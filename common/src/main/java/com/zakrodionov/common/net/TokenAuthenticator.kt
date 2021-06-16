@@ -1,6 +1,7 @@
-package com.zakrodionov.practicalapp.app.environment.interceptors
+package com.zakrodionov.common.net
 
 import androidx.annotation.CallSuper
+import com.zakrodionov.common.extensions.headerBearer
 import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response

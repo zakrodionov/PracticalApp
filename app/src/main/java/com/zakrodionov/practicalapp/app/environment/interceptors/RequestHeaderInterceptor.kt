@@ -1,5 +1,6 @@
 package com.zakrodionov.practicalapp.app.environment.interceptors
 
+import com.zakrodionov.common.extensions.headerBearer
 import com.zakrodionov.practicalapp.app.environment.preferences.AppPreferences
 import okhttp3.Interceptor
 import okhttp3.Response

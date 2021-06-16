@@ -1,4 +1,4 @@
-package com.zakrodionov.practicalapp.app.environment.interceptors
+package com.zakrodionov.common.extensions
 
 import okhttp3.Request
 

@@ -1,4 +1,4 @@
-package com.zakrodionov.common.utils.net
+package com.zakrodionov.common.net
 
 import android.content.Context
 import android.net.ConnectivityManager
