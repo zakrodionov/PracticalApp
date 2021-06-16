@@ -3,6 +3,9 @@ package com.zakrodionov.practicalapp.app.core
 import com.zakrodionov.common.utils.net.ConnectionService
 import retrofit2.HttpException
 import timber.log.Timber
+import java.net.ConnectException
+import java.net.ProtocolException
+import java.net.SocketException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
@@ -16,15 +19,11 @@ class ErrorHandlerImpl(private val connectionService: ConnectionService) : Error
     override fun getError(throwable: Throwable): BaseError {
         Timber.e(throwable)
         when {
-            withoutNetworkConnection() || throwable is UnknownHostException -> {
+            withoutNetworkConnection() || throwable.isNetworkException() -> {
                 return NetworkConnectionError()
             }
 
             throwable is HttpException -> {
-                return HttpError()
-            }
-
-            throwable is SocketTimeoutException -> {
                 return HttpError()
             }
 
@@ -35,4 +34,16 @@ class ErrorHandlerImpl(private val connectionService: ConnectionService) : Error
     }
 
     private fun withoutNetworkConnection() = !connectionService.hasConnection()
+
+    private fun Throwable?.isNetworkException(): Boolean {
+        return when (this) {
+            is ConnectException,
+            is SocketException,
+            is SocketTimeoutException,
+            is UnknownHostException,
+            is ProtocolException,
+            -> true
+            else -> false
+        }
+    }
 }
