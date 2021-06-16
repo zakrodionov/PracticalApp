@@ -8,24 +8,24 @@ import com.zakrodionov.common.dialogs.CommonDialog
 import com.zakrodionov.common.extensions.showDialog
 
 // Common show event
-sealed class BaseShowEvent {
-    data class ShowToast(val message: TextResource) : BaseShowEvent()
-    data class ShowSnackbar(val message: TextResource, val payload: Parcelable? = null) : BaseShowEvent()
-    data class ShowDialog(
-        val title: TextResource? = null,
-        val message: TextResource? = null,
-        val btnPositiveText: TextResource? = null,
-        val btnNegativeText: TextResource? = null,
-        val showBtnNegative: Boolean = btnNegativeText != null,
-        val payload: Parcelable? = null,
-        val tag: String? = null,
-        val cancelable: Boolean = false,
-        @StyleRes val messageTextAppearance: Int? = null,
-        @StyleRes val theme: Int? = null
-    ) : BaseShowEvent()
-}
+sealed class BaseShowEvent
 
-fun FragmentManager.showDialog(event: BaseShowEvent.ShowDialog) {
+data class ShowToast(val message: TextResource) : BaseShowEvent()
+data class ShowSnackbar(val message: TextResource, val payload: Parcelable? = null) : BaseShowEvent()
+data class ShowDialog(
+    val title: TextResource? = null,
+    val message: TextResource? = null,
+    val btnPositiveText: TextResource? = null,
+    val btnNegativeText: TextResource? = null,
+    val showBtnNegative: Boolean = btnNegativeText != null,
+    val payload: Parcelable? = null,
+    val tag: String? = null,
+    val cancelable: Boolean = false,
+    @StyleRes val messageTextAppearance: Int? = null,
+    @StyleRes val theme: Int? = null,
+) : BaseShowEvent()
+
+fun FragmentManager.showDialog(event: ShowDialog) {
     showDialog(
         fragmentManager = this,
         tag = event.tag ?: CommonDialog.TAG_COMMON_DIALOG,

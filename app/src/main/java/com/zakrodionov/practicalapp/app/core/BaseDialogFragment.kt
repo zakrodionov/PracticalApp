@@ -81,13 +81,13 @@ abstract class BaseDialogFragment<STATE : Parcelable, SIDE_EFFECT : Any>(
     // Используется для отображения базовых диалогов, снекбаров, тоастов
     open fun handleBaseShowEvent(showEvent: BaseShowEvent) {
         when (showEvent) {
-            is BaseShowEvent.ShowDialog -> {
+            is ShowDialog -> {
                 childFragmentManager.showDialog(showEvent)
             }
-            is BaseShowEvent.ShowToast -> {
+            is ShowToast -> {
                 showToast(showEvent.message.asString(resources), Toast.LENGTH_LONG)
             }
-            is BaseShowEvent.ShowSnackbar -> {
+            is ShowSnackbar -> {
                 view?.let {
                     snackBar?.dismiss()
                     snackBar = showSnackbar(it, showEvent.message.asString(resources))

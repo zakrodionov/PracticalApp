@@ -3,12 +3,12 @@ package com.zakrodionov.practicalapp.app.features.posts.ui.postDetails
 import android.os.Parcelable
 import androidx.lifecycle.SavedStateHandle
 import com.zakrodionov.practicalapp.app.core.BaseError
-import com.zakrodionov.practicalapp.app.core.BaseShowEvent.ShowDialog
-import com.zakrodionov.practicalapp.app.core.BaseShowEvent.ShowSnackbar
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
 import com.zakrodionov.practicalapp.app.core.ImportanceError.CONTENT_ERROR
 import com.zakrodionov.practicalapp.app.core.ImportanceError.CRITICAL_ERROR
 import com.zakrodionov.practicalapp.app.core.ImportanceError.NON_CRITICAL_ERROR
+import com.zakrodionov.practicalapp.app.core.ShowDialog
+import com.zakrodionov.practicalapp.app.core.ShowSnackbar
 import com.zakrodionov.practicalapp.app.core.onFailure
 import com.zakrodionov.practicalapp.app.core.onSuccess
 import com.zakrodionov.practicalapp.app.features.posts.domain.PostRepository
