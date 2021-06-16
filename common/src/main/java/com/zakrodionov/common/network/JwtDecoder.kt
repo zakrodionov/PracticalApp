@@ -1,4 +1,4 @@
-package com.zakrodionov.common.net
+package com.zakrodionov.common.network
 
 import android.util.Base64
 import com.squareup.moshi.Json

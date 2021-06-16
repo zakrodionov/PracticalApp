@@ -1,4 +1,4 @@
-package com.zakrodionov.common.net
+package com.zakrodionov.common.network
 
 import okhttp3.Interceptor
 import okhttp3.Request

@@ -1,6 +1,6 @@
 package com.zakrodionov.practicalapp.app.core
 
-import com.zakrodionov.common.net.ConnectionService
+import com.zakrodionov.common.network.ConnectionService
 import retrofit2.HttpException
 import timber.log.Timber
 import java.net.ConnectException

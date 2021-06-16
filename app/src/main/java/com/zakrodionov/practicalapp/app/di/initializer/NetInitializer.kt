@@ -2,14 +2,14 @@ package com.zakrodionov.practicalapp.app.di.initializer
 
 import com.squareup.moshi.Moshi
 import com.zakrodionov.common.extensions.isDebug
-import com.zakrodionov.common.net.ConnectionService
-import com.zakrodionov.common.net.ConnectionServiceImpl
+import com.zakrodionov.common.network.ConnectionService
+import com.zakrodionov.common.network.ConnectionServiceImpl
 import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.FlipperInitializer
 import com.zakrodionov.practicalapp.app.core.dispatchers.DispatchersProvider
-import com.zakrodionov.practicalapp.app.environment.interceptors.RequestHeaderInterceptor
-import com.zakrodionov.practicalapp.app.environment.interceptors.RequestTokenAuthenticator
-import com.zakrodionov.practicalapp.app.environment.interceptors.buildAuthApi
+import com.zakrodionov.practicalapp.app.data.network.RequestHeaderInterceptor
+import com.zakrodionov.practicalapp.app.data.network.RequestTokenAuthenticator
+import com.zakrodionov.practicalapp.app.data.network.buildAuthApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.module.Module

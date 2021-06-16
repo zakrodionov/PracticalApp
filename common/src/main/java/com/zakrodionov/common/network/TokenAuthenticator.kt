@@ -1,4 +1,4 @@
-package com.zakrodionov.common.net
+package com.zakrodionov.common.network
 
 import androidx.annotation.CallSuper
 import com.zakrodionov.common.extensions.headerBearer

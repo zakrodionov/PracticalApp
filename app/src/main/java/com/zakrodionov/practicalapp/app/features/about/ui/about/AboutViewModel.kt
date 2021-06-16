@@ -10,8 +10,8 @@ import com.zakrodionov.practicalapp.app.core.ImportanceError.CONTENT_ERROR
 import com.zakrodionov.practicalapp.app.core.ImportanceError.CRITICAL_ERROR
 import com.zakrodionov.practicalapp.app.core.ImportanceError.NON_CRITICAL_ERROR
 import com.zakrodionov.practicalapp.app.core.navigation.FlowRouter
-import com.zakrodionov.practicalapp.app.environment.preferences.AppPreferences
-import com.zakrodionov.practicalapp.app.environment.preferences.AppPreferences.Companion.KEY_IS_LOGGED
+import com.zakrodionov.practicalapp.app.data.persistence.AppPreferences
+import com.zakrodionov.practicalapp.app.data.persistence.AppPreferences.Companion.KEY_IS_LOGGED
 import com.zakrodionov.practicalapp.app.features.login.LoginScreens.LoginFlowScreen
 
 class AboutViewModel(

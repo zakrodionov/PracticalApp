@@ -1,8 +1,8 @@
-package com.zakrodionov.practicalapp.app.environment.interceptors
+package com.zakrodionov.practicalapp.app.data.network
 
 import com.zakrodionov.common.extensions.headerBearer
-import com.zakrodionov.common.net.RequestInterceptor
-import com.zakrodionov.practicalapp.app.environment.preferences.AppPreferences
+import com.zakrodionov.common.network.RequestInterceptor
+import com.zakrodionov.practicalapp.app.data.persistence.AppPreferences
 import okhttp3.Request
 
 class RequestHeaderInterceptor(

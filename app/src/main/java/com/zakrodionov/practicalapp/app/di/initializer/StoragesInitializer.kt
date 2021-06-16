@@ -1,6 +1,6 @@
 package com.zakrodionov.practicalapp.app.di.initializer
 
-import com.zakrodionov.practicalapp.app.environment.preferences.AppPreferences
+import com.zakrodionov.practicalapp.app.data.persistence.AppPreferences
 import org.koin.core.module.Module
 
 object StoragesInitializer : Initializer {
