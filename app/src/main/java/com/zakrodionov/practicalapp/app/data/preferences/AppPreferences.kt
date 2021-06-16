@@ -1,4 +1,4 @@
-package com.zakrodionov.practicalapp.app.data.persistence
+package com.zakrodionov.practicalapp.app.data.preferences
 
 import android.content.Context
 import androidx.core.content.edit

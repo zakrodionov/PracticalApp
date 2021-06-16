@@ -3,7 +3,7 @@ package com.zakrodionov.practicalapp.app.data.network
 import com.squareup.moshi.Moshi
 import com.zakrodionov.common.network.TokenAuthenticator
 import com.zakrodionov.practicalapp.BuildConfig
-import com.zakrodionov.practicalapp.app.data.persistence.AppPreferences
+import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences
 import com.zakrodionov.practicalapp.app.di.initializer.NetInitializer.basicOkHttpBuilder
 import kotlinx.coroutines.runBlocking
 import retrofit2.Retrofit
