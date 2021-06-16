@@ -13,7 +13,7 @@ import com.zakrodionov.practicalapp.app.features.bottom.base.Tab
 
 enum class TransactionStrategy {
     SHOW_HIDE,
-    ATTACH_DETACH
+    ATTACH_DETACH // Default. Destroy view on switch tab
 }
 
 // Для навигации во флоу боттом экране
@@ -21,7 +21,7 @@ class TabFlowNavigator(
     activity: FragmentActivity,
     fragmentManager: FragmentManager,
     @IdRes containerId: Int,
-    private val transactionStrategy: TransactionStrategy = ATTACH_DETACH // Default. Destroy view on switch tab
+    private val transactionStrategy: TransactionStrategy = ATTACH_DETACH,
 ) : AppNavigator(activity, containerId, fragmentManager) {
 
     private val currentTabFragment: BaseTabFragment?
