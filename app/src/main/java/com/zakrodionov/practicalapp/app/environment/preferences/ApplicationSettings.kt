@@ -44,7 +44,7 @@ class ApplicationSettings(context: Context) {
         sp.unregisterOnSharedPreferenceChangeListener(listener)
     }
 
-    fun cleanSettings() {
+    fun clearSettings() {
         sp.edit { clear() }
     }
 }

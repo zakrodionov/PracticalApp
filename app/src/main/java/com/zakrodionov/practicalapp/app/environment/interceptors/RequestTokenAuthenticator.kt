@@ -30,7 +30,7 @@ class RequestTokenAuthenticator(
     override fun logout() {
         super.logout()
         // TODO clear app data and send Logout event
-        applicationSettings.cleanSettings()
+        applicationSettings.clearSettings()
     }
 }
 
