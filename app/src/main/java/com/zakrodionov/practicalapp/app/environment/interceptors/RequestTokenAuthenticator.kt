@@ -3,7 +3,7 @@ package com.zakrodionov.practicalapp.app.environment.interceptors
 import com.squareup.moshi.Moshi
 import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.app.di.initializer.NetInitializer.basicOkHttpBuilder
-import com.zakrodionov.practicalapp.app.environment.preferences.ApplicationSettings
+import com.zakrodionov.practicalapp.app.environment.preferences.AppPreferences
 import kotlinx.coroutines.runBlocking
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -13,15 +13,15 @@ import retrofit2.http.POST
 // Used to get 401 errors and updates the token
 class RequestTokenAuthenticator(
     private val api: ApiAuthRefreshTokens,
-    private val applicationSettings: ApplicationSettings,
+    private val appPreferences: AppPreferences,
 ) : TokenAuthenticator() {
 
-    override fun getAccessToken(): String = applicationSettings.accessToken
+    override fun getAccessToken(): String = appPreferences.accessToken
 
     override fun refreshTokens(): String? = runBlocking {
-        val response = api.refresh(applicationSettings.refreshToken)
-        applicationSettings.accessToken = "" // TODO response.accessToken
-        applicationSettings.refreshToken = "" // TODO response.refreshToken
+        val response = api.refresh(appPreferences.refreshToken)
+        appPreferences.accessToken = "" // TODO response.accessToken
+        appPreferences.refreshToken = "" // TODO response.refreshToken
         response
         // TODO return response.accessToken
         null
@@ -30,7 +30,7 @@ class RequestTokenAuthenticator(
     override fun logout() {
         super.logout()
         // TODO clear app data and send Logout event
-        applicationSettings.clearSettings()
+        appPreferences.clearPreferences()
     }
 }
 

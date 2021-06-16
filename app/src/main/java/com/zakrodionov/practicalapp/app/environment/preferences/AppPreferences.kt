@@ -9,7 +9,7 @@ import androidx.security.crypto.EncryptedSharedPreferences.PrefValueEncryptionSc
 import androidx.security.crypto.MasterKeys
 import androidx.security.crypto.MasterKeys.AES256_GCM_SPEC
 
-class ApplicationSettings(context: Context) {
+class AppPreferences(context: Context) {
 
     companion object {
         const val NAME_STORAGE = "Settings"
@@ -44,7 +44,7 @@ class ApplicationSettings(context: Context) {
         sp.unregisterOnSharedPreferenceChangeListener(listener)
     }
 
-    fun clearSettings() {
+    fun clearPreferences() {
         sp.edit { clear() }
     }
 }

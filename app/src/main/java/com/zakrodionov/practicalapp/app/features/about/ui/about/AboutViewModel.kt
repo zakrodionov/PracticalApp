@@ -10,13 +10,13 @@ import com.zakrodionov.practicalapp.app.core.ImportanceError.CONTENT_ERROR
 import com.zakrodionov.practicalapp.app.core.ImportanceError.CRITICAL_ERROR
 import com.zakrodionov.practicalapp.app.core.ImportanceError.NON_CRITICAL_ERROR
 import com.zakrodionov.practicalapp.app.core.navigation.FlowRouter
-import com.zakrodionov.practicalapp.app.environment.preferences.ApplicationSettings
-import com.zakrodionov.practicalapp.app.environment.preferences.ApplicationSettings.Companion.KEY_IS_LOGGED
+import com.zakrodionov.practicalapp.app.environment.preferences.AppPreferences
+import com.zakrodionov.practicalapp.app.environment.preferences.AppPreferences.Companion.KEY_IS_LOGGED
 import com.zakrodionov.practicalapp.app.features.login.LoginScreens.LoginFlowScreen
 
 class AboutViewModel(
     savedStateHandle: SavedStateHandle,
-    private val applicationSettings: ApplicationSettings,
+    private val appPreferences: AppPreferences,
     private val flowRouter: FlowRouter
 ) : BaseViewModel<AboutState, AboutEvent>(AboutState(), savedStateHandle) {
 
@@ -35,15 +35,15 @@ class AboutViewModel(
     }
 
     private fun getIsLogged() = launch {
-        reduce { state.copy(isLogged = applicationSettings.isLogged) }
+        reduce { state.copy(isLogged = appPreferences.isLogged) }
     }
 
     private fun subscribePreferences() {
-        applicationSettings.registerListener(settingsListener)
+        appPreferences.registerListener(settingsListener)
     }
 
     override fun onCleared() {
-        applicationSettings.unregisterListener(settingsListener)
+        appPreferences.unregisterListener(settingsListener)
         super.onCleared()
     }
 
@@ -52,7 +52,7 @@ class AboutViewModel(
     }
 
     private fun logout() {
-        applicationSettings.isLogged = false
+        appPreferences.isLogged = false
     }
 
     private fun navigateToLoginFlow() {

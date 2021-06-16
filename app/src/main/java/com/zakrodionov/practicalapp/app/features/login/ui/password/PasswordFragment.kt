@@ -6,7 +6,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.zakrodionov.common.extensions.textString
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.navigation.FlowRouter
-import com.zakrodionov.practicalapp.app.environment.preferences.ApplicationSettings
+import com.zakrodionov.practicalapp.app.environment.preferences.AppPreferences
 import com.zakrodionov.practicalapp.app.features.StubFragment
 import com.zakrodionov.practicalapp.app.features.StubViewModel
 import com.zakrodionov.practicalapp.databinding.FragmentPasswordBinding
@@ -21,7 +21,7 @@ class PasswordFragment : StubFragment(R.layout.fragment_password) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnNext.setOnClickListener {
-            get<ApplicationSettings>().isLogged = true
+            get<AppPreferences>().isLogged = true
             viewModel.finish()
         }
     }
