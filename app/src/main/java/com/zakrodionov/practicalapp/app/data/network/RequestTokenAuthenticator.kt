@@ -1,6 +1,7 @@
 package com.zakrodionov.practicalapp.app.data.network
 
 import com.squareup.moshi.Moshi
+import com.zakrodionov.common.extensions.tryOrNull
 import com.zakrodionov.common.network.TokenAuthenticator
 import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences
@@ -20,12 +21,13 @@ class RequestTokenAuthenticator(
     override fun getAccessToken(): String = appPreferences.accessToken
 
     override fun refreshTokens(): String? = runBlocking {
-        val response = api.refresh(appPreferences.refreshToken)
-        appPreferences.accessToken = "" // TODO response.accessToken
-        appPreferences.refreshToken = "" // TODO response.refreshToken
-        response
-        // TODO return response.accessToken
-        null
+        val response = tryOrNull { api.refresh(appPreferences.refreshToken) }
+        response?.let {
+            appPreferences.accessToken = "" // TODO response.accessToken
+            appPreferences.refreshToken = "" // TODO response.refreshToken
+
+            "response.accessToken" // TODO return response.accessToken
+        }
     }
 
     override fun logout() {
