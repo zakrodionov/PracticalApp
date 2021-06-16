@@ -25,7 +25,7 @@ class TabFlowNavigator(
 ) : AppNavigator(activity, containerId, fragmentManager) {
 
     private val currentTabFragment: BaseTabFragment?
-        get() = fragmentManager.fragments.firstOrNull { !it.isHidden } as? BaseTabFragment
+        get() = fragmentManager.fragments.firstOrNull { it.isVisible } as? BaseTabFragment
 
     override fun applyCommand(command: Command) {
         when (command) {
