@@ -13,15 +13,13 @@ import com.zakrodionov.common.databinding.DialogNumberPickerBinding
 
 class NumberPickerDialog : DialogFragment() {
 
-    private var payload: Parcelable? = null
-
     private var _binding: DialogNumberPickerBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         _binding = DialogNumberPickerBinding.inflate(LayoutInflater.from(context))
-        payload = arguments?.getParcelable(ARG_PAYLOAD)
 
+        val payload = arguments?.getParcelable<Parcelable>(ARG_PAYLOAD)
         val builder = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog_Theme)
 
         val minValue = arguments?.getInt(ARG_MIN_VALUE) ?: DEFAULT_MIN_VALUE

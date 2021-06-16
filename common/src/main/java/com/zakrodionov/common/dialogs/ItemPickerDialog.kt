@@ -12,12 +12,10 @@ import com.zakrodionov.common.extensions.dpToPx
 import com.zakrodionov.common.extensions.getCompatDrawable
 
 class ItemPickerDialog : DialogFragment() {
-    private var payload: Parcelable? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        payload = arguments?.getParcelable(ARG_PAYLOAD)
-        val items =
-            arguments?.getStringArrayList(ARG_ITEMS)?.map { it as CharSequence }?.toTypedArray()
+        val payload = arguments?.getParcelable<Parcelable>(ARG_PAYLOAD)
+        val items = arguments?.getStringArrayList(ARG_ITEMS)?.toTypedArray()
 
         val dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog_Theme)
             .apply {
