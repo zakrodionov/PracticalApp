@@ -14,7 +14,7 @@ object Versions {
 
     const val koinVersion = "3.0.2"
 
-    const val lifecycleVersion = "2.4.0-alpha01"
+    const val lifecycleVersion = "2.4.0-alpha02"
 
     const val adapterDelegatesVersion = "4.3.0"
 

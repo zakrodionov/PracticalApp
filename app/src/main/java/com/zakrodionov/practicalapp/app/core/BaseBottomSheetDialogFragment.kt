@@ -6,14 +6,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.addRepeatingJob
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.zakrodionov.common.core.asString
 import com.zakrodionov.common.dialogs.FixedBottomSheetDialogFragment
 import com.zakrodionov.common.extensions.getCompatColor
 import com.zakrodionov.common.extensions.hideKeyboard
+import com.zakrodionov.common.extensions.repeatOnStarted
 import com.zakrodionov.common.extensions.setStatusBarLightMode
 import com.zakrodionov.common.extensions.showSnackbar
 import com.zakrodionov.common.extensions.showToast
@@ -42,15 +41,15 @@ abstract class BaseBottomSheetDialogFragment<STATE : Parcelable, SIDE_EFFECT : A
 
         setupViews(view, savedInstanceState)
 
-        viewLifecycleOwner.addRepeatingJob(Lifecycle.State.STARTED) {
+        viewLifecycleOwner.repeatOnStarted {
             viewModel.stateFlow.collect { render(it) }
         }
 
-        viewLifecycleOwner.addRepeatingJob(Lifecycle.State.STARTED) {
+        viewLifecycleOwner.repeatOnStarted {
             viewModel.eventFlow.collect { sideEffect(it) }
         }
 
-        viewLifecycleOwner.addRepeatingJob(Lifecycle.State.STARTED) {
+        viewLifecycleOwner.repeatOnStarted {
             viewModel.showEventFlow.collect { showEvent(it) }
         }
     }
