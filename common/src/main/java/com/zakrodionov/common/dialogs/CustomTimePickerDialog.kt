@@ -9,7 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import com.zakrodionov.common.R
-import com.zakrodionov.common.extensions.addZeroPrefixMonth
+import com.zakrodionov.common.extensions.addZeroPrefix
 import com.zakrodionov.common.extensions.parseTime
 
 class CustomTimePickerDialog : DialogFragment(), TimePickerDialog.OnTimeSetListener {
@@ -26,8 +26,8 @@ class CustomTimePickerDialog : DialogFragment(), TimePickerDialog.OnTimeSetListe
     }
 
     override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute_: Int) {
-        val hour = hourOfDay.addZeroPrefixMonth()
-        val minute = minute_.addZeroPrefixMonth()
+        val hour = hourOfDay.addZeroPrefix()
+        val minute = minute_.addZeroPrefix()
         val time = "$hour:$minute"
 
         setFragmentResult(

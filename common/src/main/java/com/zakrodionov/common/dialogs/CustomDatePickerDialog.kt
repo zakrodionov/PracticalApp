@@ -9,7 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import com.zakrodionov.common.R
-import com.zakrodionov.common.extensions.addZeroPrefixMonth
+import com.zakrodionov.common.extensions.addZeroPrefix
 import com.zakrodionov.common.extensions.parseDate
 import com.zakrodionov.common.extensions.parseDateFirstYear
 
@@ -45,8 +45,8 @@ class CustomDatePickerDialog : DialogFragment(), DatePickerDialog.OnDateSetListe
 
     override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
         val realMonth = month + 1
-        val monthTwoDigit = realMonth.addZeroPrefixMonth()
-        val dayTwoDigit = day.addZeroPrefixMonth()
+        val monthTwoDigit = realMonth.addZeroPrefix()
+        val dayTwoDigit = day.addZeroPrefix()
 
         val stringDate = if (reverseFormat)
             "$year.$monthTwoDigit.$dayTwoDigit"

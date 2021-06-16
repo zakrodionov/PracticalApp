@@ -36,4 +36,4 @@ fun calculatePercentage(first: Int, second: Int): Double {
 }
 
 @Suppress("MagicNumber")
-fun Int.addZeroPrefixMonth() = if (this < 10) "0$this" else "$this"
+fun Int.addZeroPrefix() = if (this < 10) "0$this" else "$this"
