@@ -12,11 +12,9 @@ import androidx.lifecycle.addRepeatingJob
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.zakrodionov.common.core.asString
-import com.zakrodionov.common.dialogs.CommonDialog.Companion.TAG_COMMON_DIALOG
 import com.zakrodionov.common.extensions.getCompatColor
 import com.zakrodionov.common.extensions.hideKeyboard
 import com.zakrodionov.common.extensions.setStatusBarLightMode
-import com.zakrodionov.common.extensions.showDialog
 import com.zakrodionov.common.extensions.showSnackbar
 import com.zakrodionov.common.extensions.showToast
 import com.zakrodionov.practicalapp.R
@@ -140,20 +138,7 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
     open fun handleBaseShowEvent(showEvent: BaseShowEvent) {
         when (showEvent) {
             is BaseShowEvent.ShowDialog -> {
-                showDialog(
-                    fragmentManager = childFragmentManager,
-                    tag = showEvent.tag ?: TAG_COMMON_DIALOG,
-                    title = showEvent.title,
-                    message = showEvent.message,
-                    btnPositiveText = showEvent.btnPositiveText,
-                    btnNegativeText = showEvent.btnNegativeText,
-                    showBtnNegative = showEvent.showBtnNegative,
-                    payload = showEvent.payload,
-                    reverse = showEvent.reverse,
-                    cancelable = showEvent.cancelable,
-                    messageTextAppearance = showEvent.messageTextAppearance,
-                    theme = showEvent.theme
-                )
+                childFragmentManager.showDialog(showEvent)
             }
             is BaseShowEvent.ShowToast -> {
                 showToast(showEvent.message.asString(resources), Toast.LENGTH_LONG)

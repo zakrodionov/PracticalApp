@@ -77,12 +77,11 @@ class CommonDialog : DialogFragment() {
             negativeButton = TextResource.fromStringId(R.string.cancel)
         }
 
-        val isNegativeVisible = arguments?.getBoolean(NEGATIVE_VISIBLE_KEY) ?: true
-
         builder.setPositiveButton(positiveButton.asString(resources)) { _, _ ->
             cancelAndSendResult(CommonDialogEvent(DialogButton.OK, payload, tag))
         }
 
+        val isNegativeVisible = arguments?.getBoolean(NEGATIVE_VISIBLE_KEY) ?: true
         if (isNegativeVisible) {
             builder.setNegativeButton(negativeButton.asString(resources)) { _, _ ->
                 cancelAndSendResult(CommonDialogEvent(DialogButton.CANCEL, payload, tag))
@@ -114,7 +113,6 @@ class CommonDialog : DialogFragment() {
         private var payload: Parcelable? = null
         private var btnPositive: TextResource? = null
         private var btnNegative: TextResource? = null
-        private var reverse: Boolean = false
         private var negativeVisible: Boolean = false
         private var cancelable: Boolean = false
         private var theme: Int? = null
@@ -159,11 +157,6 @@ class CommonDialog : DialogFragment() {
             return this
         }
 
-        fun reverse(reverse: Boolean): Builder {
-            this.reverse = reverse
-            return this
-        }
-
         fun cancelable(cancelable: Boolean): Builder {
             this.cancelable = cancelable
             return this
@@ -183,7 +176,6 @@ class CommonDialog : DialogFragment() {
             args.putInt(MESSAGE_APPEARANCE_KEY, messageTextAppearance ?: DEFAULT_VALUE_KEY)
             args.putParcelable(PAYLOAD_KEY, payload)
             args.putString(TAG_KEY, tag)
-            args.putBoolean(REVERSE_KEY, reverse)
             args.putBoolean(CANCELABLE_KEY, cancelable)
             args.putBoolean(NEGATIVE_VISIBLE_KEY, negativeVisible)
             args.putParcelable(BTN_POSITIVE_KEY, btnPositive)
@@ -208,9 +200,7 @@ class CommonDialog : DialogFragment() {
         const val BTN_POSITIVE_KEY = "BTN_POSITIVE_KEY"
         const val BTN_NEGATIVE_KEY = "BTN_NEGATIVE_KEY"
         const val NEGATIVE_VISIBLE_KEY = "CANCEL_VISIBLE_KEY"
-        const val REVERSE_KEY = "REVERSE_KEY"
         const val CANCELABLE_KEY = "CANCELABLE_KEY"
-        const val WITH_HTML_KEY = "WITH_HTML_KEY"
         const val THEME_KEY = "THEME_KEY"
 
         // Because we can't put null int to bundle

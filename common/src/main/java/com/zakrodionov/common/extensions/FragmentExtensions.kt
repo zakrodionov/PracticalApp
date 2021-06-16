@@ -101,7 +101,6 @@ fun showDialog(
     btnPositiveText: TextResource? = null,
     btnNegativeText: TextResource? = null,
     showBtnNegative: Boolean = false,
-    reverse: Boolean = false,
     cancelable: Boolean = false,
     payload: Parcelable? = null,
     @StyleRes theme: Int? = R.style.AlertDialog_Theme,
@@ -113,7 +112,6 @@ fun showDialog(
         .btnPositive(btnPositiveText)
         .btnNegative(btnNegativeText)
         .negativeVisible(showBtnNegative)
-        .reverse(reverse)
         .cancelable(cancelable)
         .payload(payload)
         .theme(theme)
