@@ -1,4 +1,4 @@
-package com.zakrodionov.common.custom.viewpager2
+package com.zakrodionov.common.ui.viewpager2
 
 import android.content.res.Resources
 import androidx.fragment.app.Fragment

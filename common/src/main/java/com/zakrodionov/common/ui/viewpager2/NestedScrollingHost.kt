@@ -1,4 +1,4 @@
-package com.zakrodionov.common.custom.viewpager2
+package com.zakrodionov.common.ui.viewpager2
 
 import android.annotation.SuppressLint
 import android.content.Context
