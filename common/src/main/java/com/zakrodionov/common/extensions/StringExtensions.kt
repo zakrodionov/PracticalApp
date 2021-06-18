@@ -3,7 +3,6 @@
 package com.zakrodionov.common.extensions
 
 import android.graphics.Color
-import android.os.Build
 import android.telephony.PhoneNumberUtils
 import android.util.Base64
 import android.webkit.URLUtil
@@ -69,16 +68,12 @@ fun String?.parseColor(): Int? {
     }
 }
 
-@Suppress("DEPRECATION")
 fun String.formatPhone(defaultCountryIso: String = currentLocale.country): String {
     var phone = this
     if (defaultCountryIso == "RU" && !phone.startsWith("8") && !phone.startsWith("+7"))
         phone = "+7$phone"
 
-    phone = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        PhoneNumberUtils.formatNumber(phone, defaultCountryIso)
-    } else
-        PhoneNumberUtils.formatNumber(phone)
+    phone = PhoneNumberUtils.formatNumber(phone, defaultCountryIso)
 
     return phone
 }

@@ -3,7 +3,7 @@ package com.zakrodionov.practicalapp.app
 import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.os.Build
+import com.zakrodionov.common.extensions.sdk26AndUp
 import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.FlipperInitializer
 import com.zakrodionov.practicalapp.R
@@ -54,7 +54,7 @@ class App : Application() {
     }
 
     private fun initDefaultNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (sdk26AndUp) {
             val channelId = getString(R.string.default_notification_channel_id)
             val channelName = getString(R.string.default_notification_channel_name)
             getSystemService(NotificationManager::class.java)?.createNotificationChannel(

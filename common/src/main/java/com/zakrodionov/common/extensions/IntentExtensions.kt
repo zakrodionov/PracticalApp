@@ -5,7 +5,6 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.provider.Settings
 import androidx.activity.result.contract.ActivityResultContract
 import timber.log.Timber
@@ -128,17 +127,9 @@ fun fileChooserIntent(
     intent.addCategory(Intent.CATEGORY_OPENABLE)
     intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, allowMultiple)
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-        intent.type = if (mimeTypes.size == 1) mimeTypes[0] else "*/*"
-        if (mimeTypes.isNotEmpty()) {
-            intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
-        }
-    } else {
-        var mimeTypesStr = ""
-        for (mimeType in mimeTypes) {
-            mimeTypesStr += "$mimeType|"
-        }
-        intent.type = mimeTypesStr.substring(0, mimeTypesStr.length - 1)
+    intent.type = if (mimeTypes.size == 1) mimeTypes[0] else "*/*"
+    if (mimeTypes.isNotEmpty()) {
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
     }
 
     return intent
