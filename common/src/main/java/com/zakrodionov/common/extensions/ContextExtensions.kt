@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 
 val Context.screenHeight
     get() = resources.displayMetrics.heightPixels
@@ -35,4 +36,8 @@ fun Context.copyToClipboard(text: CharSequence, label: String) {
     val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     val clip = ClipData.newPlainText(label, text)
     clipboard.setPrimaryClip(clip)
+}
+
+fun Context.hasPermissions(vararg permissions: String) = permissions.all { permission ->
+    ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
 }
