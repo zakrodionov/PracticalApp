@@ -4,6 +4,7 @@ package com.zakrodionov.common.extensions
 
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.Outline
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.os.SystemClock
@@ -12,6 +13,7 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewOutlineProvider
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.webkit.WebView
@@ -145,4 +147,18 @@ fun showSnackbar(
     }
 
     return snackbar
+}
+
+fun View.setRoundCorner(
+    radius: Float = 15.dpToPxF,
+    onlyTop: Boolean = false,
+) {
+    val viewOutlineProvider = object : ViewOutlineProvider() {
+        override fun getOutline(view: View, outline: Outline) {
+            val height = if (onlyTop) (height + radius).toInt() else height
+            outline.setRoundRect(0, 0, width, height, radius)
+        }
+    }
+    outlineProvider = viewOutlineProvider
+    clipToOutline = true
 }
