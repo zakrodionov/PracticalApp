@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.zakrodionov.common.R
-import com.zakrodionov.common.ui.viewpager2.LoopingPhotoAdapter.PhotoViewHolder
 import com.zakrodionov.common.extensions.inflate
 import com.zakrodionov.common.extensions.load
+import com.zakrodionov.common.ui.viewpager2.LoopingPhotoAdapter.PhotoViewHolder
 
 // Looping adapter for ViewPager2 and RecyclerView
 // Typical usage:
