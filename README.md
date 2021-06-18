@@ -35,7 +35,7 @@ Android Studio имеет достаточно неплохой встроенн
 
 • MV/I/VM 
 
-• Modo
+• Cicerone/Modo
 
 • Retrofit, Coroutines, Moshi, OkHttp
 
