@@ -34,7 +34,7 @@ class AboutViewModel(
         subscribePreferences()
     }
 
-    private fun getIsLogged() = launch {
+    private fun getIsLogged() {
         reduce { state.copy(isLogged = appPreferences.isLogged) }
     }
 
@@ -47,7 +47,7 @@ class AboutViewModel(
         super.onCleared()
     }
 
-    fun loginOrLogout() = launch {
+    fun loginOrLogout() {
         if (state.isLogged) logout() else navigateToLoginFlow()
     }
 

@@ -11,7 +11,7 @@ val isDebug: Boolean
 inline fun <reified T : Any> T.debug(string: String) = Timber.d("Log__: $string")
 
 inline fun <reified T : Any> T.checkThread(string: String = "") =
-    Timber.d("Log__checkThread: ${Thread.currentThread().name}, is main = ${Looper.getMainLooper().isCurrentThread} $string")
+    debug("${Thread.currentThread().name}, is main = ${Looper.getMainLooper().isCurrentThread} $string")
 
 fun Any?.toStringOrEmpty() = this?.let { "$this" } ?: ""
 

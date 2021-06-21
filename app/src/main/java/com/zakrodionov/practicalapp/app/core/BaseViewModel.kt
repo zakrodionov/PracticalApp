@@ -41,8 +41,8 @@ abstract class BaseViewModel<STATE : Parcelable, EVENT : Any>(
         setSavedStateProvider()
     }
 
-    protected suspend fun reduce(state: suspend () -> STATE) {
-        _stateFlow.emit(state())
+    fun reduce(state: () -> STATE) {
+        _stateFlow.value = state()
     }
 
     protected suspend fun postEvent(event: EVENT) {
