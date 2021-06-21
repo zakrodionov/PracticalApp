@@ -43,11 +43,4 @@ class LceLayout @JvmOverloads constructor(
         binding.emptyView.renderState(state)
         binding.errorView.renderState(state)
     }
-
-    sealed class LceState {
-        class LoadingState(val isTranslucent: Boolean = false) : LceState()
-        object ContentState : LceState()
-        object EmptyState : LceState()
-        class ErrorState(val error: UiError) : LceState()
-    }
 }

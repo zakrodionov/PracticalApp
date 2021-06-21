@@ -26,8 +26,8 @@ class LceErrorView @JvmOverloads constructor(
         setBackgroundColor(context.getCompatColor(R.color.color_bg_layout))
     }
 
-    override fun renderState(state: LceLayout.LceState) {
-        if (state is LceLayout.LceState.ErrorState) {
+    override fun renderState(state: LceState) {
+        if (state is ErrorState) {
             show()
             configureErrorView(state.error)
         } else {

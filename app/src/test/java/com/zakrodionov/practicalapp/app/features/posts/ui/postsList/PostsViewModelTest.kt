@@ -1,7 +1,9 @@
 package com.zakrodionov.practicalapp.app.features.posts.ui.postsList
 
 import androidx.lifecycle.SavedStateHandle
-import com.zakrodionov.common.ui.lce.LceLayout
+import com.zakrodionov.common.ui.lce.ContentState
+import com.zakrodionov.common.ui.lce.EmptyState
+import com.zakrodionov.common.ui.lce.ErrorState
 import com.zakrodionov.practicalapp.CoroutinesTestExtension
 import com.zakrodionov.practicalapp.app.core.NetworkConnectionError
 import com.zakrodionov.practicalapp.app.core.Result
@@ -49,7 +51,7 @@ class PostsViewModelTest {
 
         // then
         assert(postsViewModel.state.posts?.isEmpty() ?: false)
-        assertEquals(LceLayout.LceState.EmptyState, postsViewModel.state.lceState)
+        assertEquals(EmptyState, postsViewModel.state.lceState)
     }
 
     @Test
@@ -62,7 +64,7 @@ class PostsViewModelTest {
 
         // then
         assert(postsViewModel.state.posts?.isNotEmpty() ?: false)
-        assert(postsViewModel.state.lceState is LceLayout.LceState.ContentState)
+        assert(postsViewModel.state.lceState is ContentState)
     }
 
     @Test
@@ -75,6 +77,6 @@ class PostsViewModelTest {
 
         // then
         assert(postsViewModel.state.error != null)
-        assert(postsViewModel.state.lceState is LceLayout.LceState.ErrorState)
+        assert(postsViewModel.state.lceState is ErrorState)
     }
 }

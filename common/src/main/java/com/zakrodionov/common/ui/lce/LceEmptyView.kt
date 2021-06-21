@@ -27,8 +27,8 @@ class LceEmptyView @JvmOverloads constructor(
         setBackgroundColor(context.getCompatColor(R.color.color_bg_layout))
     }
 
-    override fun renderState(state: LceLayout.LceState) {
-        isVisible = state is LceLayout.LceState.EmptyState
+    override fun renderState(state: LceState) {
+        isVisible = state is EmptyState
     }
 
     fun customiseEmptyImage(@DrawableRes image: Int) {

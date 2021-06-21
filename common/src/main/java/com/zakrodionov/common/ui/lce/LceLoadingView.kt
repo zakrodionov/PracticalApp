@@ -22,8 +22,8 @@ class LceLoadingView @JvmOverloads constructor(
         isClickable = true
     }
 
-    override fun renderState(state: LceLayout.LceState) {
-        if (state is LceLayout.LceState.LoadingState) {
+    override fun renderState(state: LceState) {
+        if (state is LoadingState) {
             show()
             val background =
                 if (state.isTranslucent) Color.TRANSPARENT else context.getCompatColor(R.color.color_bg_layout)

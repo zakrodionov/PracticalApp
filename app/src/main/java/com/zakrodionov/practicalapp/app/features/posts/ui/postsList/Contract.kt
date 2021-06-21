@@ -1,11 +1,11 @@
 package com.zakrodionov.practicalapp.app.features.posts.ui.postsList
 
 import android.os.Parcelable
-import com.zakrodionov.common.ui.lce.LceLayout.LceState
-import com.zakrodionov.common.ui.lce.LceLayout.LceState.ContentState
-import com.zakrodionov.common.ui.lce.LceLayout.LceState.EmptyState
-import com.zakrodionov.common.ui.lce.LceLayout.LceState.ErrorState
-import com.zakrodionov.common.ui.lce.LceLayout.LceState.LoadingState
+import com.zakrodionov.common.ui.lce.ContentState
+import com.zakrodionov.common.ui.lce.EmptyState
+import com.zakrodionov.common.ui.lce.ErrorState
+import com.zakrodionov.common.ui.lce.LceState
+import com.zakrodionov.common.ui.lce.LoadingState
 import com.zakrodionov.common.ui.rv.DiffItem
 import com.zakrodionov.practicalapp.app.core.BaseError
 import com.zakrodionov.practicalapp.app.core.toUiError
