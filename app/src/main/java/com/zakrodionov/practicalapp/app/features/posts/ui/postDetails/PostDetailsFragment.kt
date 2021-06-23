@@ -3,6 +3,7 @@ package com.zakrodionov.practicalapp.app.features.posts.ui.postDetails
 import android.os.Bundle
 import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.zakrodionov.common.extensions.capitalizeFirstLetter
 import com.zakrodionov.common.extensions.initialArguments
 import com.zakrodionov.common.extensions.load
 import com.zakrodionov.common.extensions.setTextOrHide
@@ -36,7 +37,7 @@ class PostDetailsFragment : BaseFragment<PostDetailsState, PostDetailsEvent>(R.l
 
     override fun render(state: PostDetailsState) {
         with(binding) {
-            tvTitle.setTextOrHide(state.post?.text)
+            tvTitle.setTextOrHide(state.post?.text?.capitalizeFirstLetter())
             ivPhoto.load(state.post?.image)
             lceLayout.renderState(state.lceState)
         }
