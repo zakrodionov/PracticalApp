@@ -21,10 +21,6 @@
     </style>
 
     <!--Common-->
-    <style name="ProgressBar.Theme" parent="ThemeOverlay.AppCompat.Light">
-        <item name="colorAccent">@color/primaryColor</item>
-    </style>
-
     <style name="AlertDialog.Theme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
         <item name="android:textAllCaps">false</item>
         <item name="shapeAppearanceOverlay">@style/ShapeAppearance.MaterialComponents.Alert</item>
