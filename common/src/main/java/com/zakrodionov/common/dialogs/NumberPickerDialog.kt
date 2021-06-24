@@ -20,7 +20,7 @@ class NumberPickerDialog : DialogFragment() {
         _binding = DialogNumberPickerBinding.inflate(LayoutInflater.from(context))
 
         val payload = arguments?.getParcelable<Parcelable>(ARG_PAYLOAD)
-        val builder = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog_Theme)
+        val builder = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
 
         val minValue = arguments?.getInt(ARG_MIN_VALUE) ?: DEFAULT_MIN_VALUE
         val maxValue = arguments?.getInt(ARG_MAX_VALUE) ?: DEFAULT_MAX_VALUE

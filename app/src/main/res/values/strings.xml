@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">PracticalApp</string>
+    <string name="app_name" translatable="false">PracticalApp</string>
 
-    <string name="email">Email</string>
-    <string name="favorite">Favorite</string>
-    <string name="password">Password</string>
-    <string name="next">Next</string>
-    <string name="stub">Stub</string>
-    <string name="posts">Posts</string>
-    <string name="about">About</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="favorite" translatable="false">Favorite</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="next" translatable="false">Next</string>
+    <string name="stub" translatable="false">Stub</string>
+    <string name="posts" translatable="false">Posts</string>
+    <string name="about" translatable="false">About</string>
 </resources>

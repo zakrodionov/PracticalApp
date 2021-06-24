@@ -17,7 +17,7 @@ class ItemPickerDialog : DialogFragment() {
         val payload = arguments?.getParcelable<Parcelable>(ARG_PAYLOAD)
         val items = arguments?.getStringArrayList(ARG_ITEMS)?.toTypedArray()
 
-        val dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog_Theme)
+        val dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
             .apply {
                 setItems(items) { _, position ->
                     setFragmentResult(

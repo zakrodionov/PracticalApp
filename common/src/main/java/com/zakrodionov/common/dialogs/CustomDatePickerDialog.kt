@@ -29,7 +29,7 @@ class CustomDatePickerDialog : DialogFragment(), DatePickerDialog.OnDateSetListe
 
         val dialog = DatePickerDialog(
             requireContext(),
-            R.style.AlertDialog_Theme,
+            R.style.AlertDialog,
             this,
             date.year,
             date.monthValue - 1,

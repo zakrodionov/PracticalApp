@@ -52,4 +52,5 @@ fun Context.getCompatColorStateList(@ColorRes color: Int): ColorStateList =
     AppCompatResources.getColorStateList(this, color)
 
 @Suppress("MagicNumber")
-val Int.isBrightColor: Boolean get() = ColorUtils.calculateLuminance(this) > 0.5
+val Int.isBrightColor: Boolean
+    get() = ColorUtils.calculateLuminance(this) > 0.5

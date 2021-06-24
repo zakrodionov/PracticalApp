@@ -44,7 +44,7 @@ class FavoriteFragment : StubFragment(R.layout.fragment_favorite) {
                 TextResource.fromText("Hello"),
                 TextResource.fromText("Red World!"),
                 messageTextAppearance = R.style.TextAppearance_MaterialComponents_Headline5,
-                theme = R.style.AlertDialog_Theme_RedButtons
+                theme = R.style.AlertDialog_RedButtons
             )
         }
         binding.tvShowAnimatedDialog.setOnClickListener {
@@ -83,11 +83,11 @@ class BottomDialog : FixedBottomSheetDialogFragment(R.layout.fragment_favorite) 
 
 class AnimatedDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog_Theme)
+        return MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
             .setView(R.layout.fragment_email)
             .create()
             .apply {
-                window?.setWindowAnimations(R.style.DialogAnimation)
+                window?.setWindowAnimations(R.style.Dialog_Animation)
             }
     }
 }

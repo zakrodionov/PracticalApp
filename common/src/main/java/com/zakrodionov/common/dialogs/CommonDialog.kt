@@ -37,7 +37,7 @@ class CommonDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         _binding = DialogCommonBinding.inflate(LayoutInflater.from(context))
-        val theme = arguments?.getInt(THEME_KEY).takeIf { it != DEFAULT_VALUE_KEY } ?: R.style.AlertDialog_Theme
+        val theme = arguments?.getInt(THEME_KEY).takeIf { it != DEFAULT_VALUE_KEY } ?: R.style.AlertDialog
         val builder = MaterialAlertDialogBuilder(requireContext(), theme)
         builder.setView(binding.root)
 

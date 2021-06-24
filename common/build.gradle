@@ -1,6 +1,8 @@
 apply from: '../common-lib-build.gradle'
 
 dependencies {
+    implementation(project(":coreui"))
+
     implementation(Libs.androidx_core)
     implementation(Libs.androidx_app_compat)
     implementation(Libs.androidx_fragment)

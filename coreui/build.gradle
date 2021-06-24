@@ -1,0 +1,7 @@
+apply from: '../common-lib-build.gradle'
+
+dependencies {
+    implementation(Libs.androidx_core)
+    implementation(Libs.androidx_app_compat)
+    implementation(Libs.androidx_material)
+}

@@ -2,17 +2,17 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
     <ImageView
         android:id="@+id/ivIcon"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:layout_constraintBottom_toTopOf="@+id/tvTitle"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
         tools:ignore="ContentDescription" />
@@ -21,16 +21,16 @@
         android:id="@+id/tvTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
-        android:textSize="16sp"
         android:textColor="@color/secondaryTextColor"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/tvMessage"
-        tools:text="Ошибка"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivIcon" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivIcon"
+        tools:text="Ошибка" />
 
     <TextView
         android:id="@+id/tvMessage"
@@ -48,15 +48,15 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnTryAgain"
-        style="@style/Style.MaterialButton"
+        style="@style/Button.Primary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/try_again"
         android:visibility="gone"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:visibility="visible" />
 

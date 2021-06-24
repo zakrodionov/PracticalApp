@@ -133,6 +133,7 @@ android {
 
 dependencies {
     implementation(project(":common"))
+    implementation(project(":coreui"))
 
     implementation(kotlin_stdlib)
     implementation(coroutines)

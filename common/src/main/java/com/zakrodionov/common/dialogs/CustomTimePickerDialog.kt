@@ -22,7 +22,7 @@ class CustomTimePickerDialog : DialogFragment(), TimePickerDialog.OnTimeSetListe
         val stringTime = arguments?.getString(ARG_TIME)
         val time = stringTime.parseTime()
 
-        return TimePickerDialog(activity, R.style.AlertDialog_Theme, this, time.hour, time.minute, true)
+        return TimePickerDialog(activity, R.style.AlertDialog, this, time.hour, time.minute, true)
     }
 
     override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute_: Int) {

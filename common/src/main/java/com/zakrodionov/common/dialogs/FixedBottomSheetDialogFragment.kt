@@ -26,7 +26,7 @@ abstract class FixedBottomSheetDialogFragment(@LayoutRes open val layoutId: Int)
      */
     open val applyCustomShapeInFullScreen: Boolean = true
 
-    override fun getTheme(): Int = R.style.RoundedBottomSheetDialog
+    override fun getTheme(): Int = R.style.BottomSheetDialog_Rounded
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -87,7 +87,7 @@ abstract class FixedBottomSheetDialogFragment(@LayoutRes open val layoutId: Int)
     open fun createMaterialShapeDrawable(bottomSheet: View): MaterialShapeDrawable? {
         val shapeAppearanceModel =
             // Create a ShapeAppearanceModel with the same shapeAppearanceOverlay used in the style
-            ShapeAppearanceModel.builder(context, 0, R.style.RoundedShapeAppearanceBottomSheetDialog)
+            ShapeAppearanceModel.builder(context, 0, R.style.ShapeAppearance_BottomSheet_Rounded)
                 .build()
 
         // Create a new MaterialShapeDrawable (you can't use the original MaterialShapeDrawable in the BottoSheet)

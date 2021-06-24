@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright 2019 Google LLC
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2018 Google LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,9 +14,11 @@
   ~ limitations under the License.
   -->
 
-<!-- Values used for animations -->
-<resources>
-
-    <!-- Duration (in milliseconds) for slide transition animation -->
-    <integer name="slide">200</integer>
-</resources>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate
+        android:duration="@integer/slide"
+        android:fromXDelta="0%"
+        android:fromYDelta="0%"
+        android:toXDelta="100%"
+        android:toYDelta="0%" />
+</set>

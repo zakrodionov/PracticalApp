@@ -103,7 +103,7 @@ fun showDialog(
     showBtnNegative: Boolean = false,
     cancelable: Boolean = false,
     payload: Parcelable? = null,
-    @StyleRes theme: Int? = R.style.AlertDialog_Theme,
+    @StyleRes theme: Int? = R.style.AlertDialog,
     @StyleRes messageTextAppearance: Int? = null
 ) {
     CommonDialog.Builder()
