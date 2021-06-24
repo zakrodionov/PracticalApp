@@ -11,7 +11,7 @@
     <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#FFFFFF</color>
 
-    <color name="color_statusbar">#A8DADC</color>
+    <color name="color_statusbar">@color/transparent</color>
 
     <color name="color_bg_layout">#000000</color>
     <color name="color_bg_card">#F1FAEE</color>

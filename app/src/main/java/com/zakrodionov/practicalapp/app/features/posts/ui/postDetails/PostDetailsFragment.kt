@@ -26,6 +26,8 @@ class PostDetailsFragment : BaseFragment<PostDetailsState, PostDetailsEvent>(R.l
     override val viewModel: PostDetailViewModel by stateViewModel { parametersOf(initialArguments()) }
     override val binding: FragmentPostDetailBinding by viewBinding(FragmentPostDetailBinding::bind)
 
+    override val applyInsets: Boolean = false
+
     override fun setupViews(view: View, savedInstanceState: Bundle?) {
         setupLceLayout()
     }

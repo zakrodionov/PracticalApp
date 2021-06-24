@@ -2,6 +2,7 @@ package com.zakrodionov.practicalapp.app.features.root.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.zakrodionov.practicalapp.R
@@ -21,6 +22,9 @@ class RootActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_fragment_container)
+
+        // Делаем window от края до края
+        WindowCompat.setDecorFitsSystemWindows(window, false)
 
         if (savedInstanceState == null) {
             globalRouter.newRootScreen(BottomTabsScreen())

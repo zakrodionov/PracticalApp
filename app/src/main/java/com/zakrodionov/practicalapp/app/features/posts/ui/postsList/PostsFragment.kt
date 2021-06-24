@@ -10,6 +10,7 @@ import com.zakrodionov.common.ui.rv.DiffCallback
 import com.zakrodionov.common.ui.rv.EndlessScroll
 import com.zakrodionov.common.ui.rv.loadingDelegate
 import com.zakrodionov.practicalapp.R
+import com.zakrodionov.practicalapp.app.applyStatusAndNavigationBarsInsetsPadding
 import com.zakrodionov.practicalapp.app.core.BaseFragment
 import com.zakrodionov.practicalapp.databinding.FragmentPostsBinding
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
@@ -22,6 +23,8 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
 
     override val viewModel: PostsViewModel by stateViewModel()
     override val binding: FragmentPostsBinding by viewBinding(FragmentPostsBinding::bind)
+
+    override val applyInsets: Boolean = false
 
     private val adapter by lazy {
         AsyncListDifferDelegationAdapter(
@@ -38,6 +41,7 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
 
     private fun setupRvPosts() = with(binding) {
         val layoutManager = LinearLayoutManager(context)
+        rvPosts.applyStatusAndNavigationBarsInsetsPadding()
         rvPosts.setup(adapter, layoutManager = layoutManager)
         rvPosts.addOnScrollListener(object : EndlessScroll(layoutManager) {
             override fun onLoadMore() {

@@ -203,4 +203,7 @@ dependencies {
 
     // Cicerone
     implementation(cicerone)
+
+    implementation("dev.chrisbanes.insetter:insetter:0.6.0")
+    implementation("dev.chrisbanes.insetter:insetter-dbx:0.6.0")
 }

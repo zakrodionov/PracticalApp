@@ -17,6 +17,7 @@ import com.zakrodionov.common.extensions.setStatusBarLightMode
 import com.zakrodionov.common.extensions.showSnackbar
 import com.zakrodionov.common.extensions.showToast
 import com.zakrodionov.practicalapp.R
+import com.zakrodionov.practicalapp.app.applyStatusAndNavigationBarsInsetsPadding
 import com.zakrodionov.practicalapp.app.core.navigation.AnimationScreen
 import com.zakrodionov.practicalapp.app.core.navigation.BackButtonListener
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy
@@ -31,7 +32,8 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
     abstract val binding: ViewBinding
 
     open val statusBarColor = R.color.color_statusbar
-    open val statusBarLightMode = false
+    open val statusBarLightMode = true
+    open val applyInsets = true
 
     override val screenAnimationStrategy: ScreenAnimationStrategy = SLIDE_HORIZONTAL
 
@@ -45,6 +47,9 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
         activity?.window?.statusBarColor = requireContext().getCompatColor(statusBarColor)
         activity?.window?.setStatusBarLightMode(statusBarLightMode)
 
+        if (applyInsets) {
+            view.applyStatusAndNavigationBarsInsetsPadding()
+        }
         setupViews(view, savedInstanceState)
 
         viewLifecycleOwner.repeatOnStarted {

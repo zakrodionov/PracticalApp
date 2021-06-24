@@ -28,6 +28,8 @@ class BottomTabsFragment : BaseFragment<BottomTabsState, BottomTabsEvent>(R.layo
     override val viewModel: BottomTabsViewModel by stateViewModel()
     override val binding by viewBinding(FragmentBottomTabsBinding::bind)
 
+    override val applyInsets: Boolean = false
+
     private val navigatorHolder: NavigatorHolder by inject(navigationHolderQualifier(BOTTOM_TABS_QUALIFIER))
     private val navigator: TabFlowNavigator by lazy {
         TabFlowNavigator(requireActivity(), childFragmentManager, R.id.bottomFragmentContainerView)
