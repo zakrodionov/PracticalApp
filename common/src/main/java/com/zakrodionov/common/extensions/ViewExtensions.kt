@@ -16,6 +16,8 @@ import android.view.ViewGroup
 import android.view.ViewOutlineProvider
 import android.view.inputmethod.InputMethodManager
 import android.webkit.WebView
+import android.widget.FrameLayout
+import android.widget.LinearLayout
 import androidx.annotation.LayoutRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
@@ -116,10 +118,19 @@ fun View.showSnackbar(
     val snackbar = Snackbar.make(this, text, length)
 
     with(snackbar) {
-        val params = view.layoutParams as? CoordinatorLayout.LayoutParams
-        params?.let {
-            params.gravity = gravity
-            view.layoutParams = params
+        when (val params = view.layoutParams) {
+            is CoordinatorLayout.LayoutParams -> {
+                params.gravity = gravity
+                view.layoutParams = params
+            }
+            is FrameLayout.LayoutParams -> {
+                params.gravity = gravity
+                view.layoutParams = params
+            }
+            is LinearLayout.LayoutParams -> {
+                params.gravity = gravity
+                view.layoutParams = params
+            }
         }
 
         background?.let {
