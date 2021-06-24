@@ -1,3 +1,4 @@
+@file:Suppress("TooManyFunctions")
 package com.zakrodionov.common.extensions
 
 import android.content.Context
@@ -5,7 +6,9 @@ import android.graphics.drawable.Drawable
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ImageSpan
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
@@ -87,3 +90,12 @@ fun TextView.setStartImageSpan(string: String?, drawable: Drawable?, countSpace:
 
         text = ssb
     }
+
+fun TextView.setOnEnterClickListener(action: (TextView) -> Unit) {
+    setOnEditorActionListener { textView, actionId, keyEvent ->
+        if (keyEvent?.keyCode == KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_DONE) {
+            action(textView)
+        }
+        false
+    }
+}

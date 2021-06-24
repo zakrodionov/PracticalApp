@@ -9,16 +9,13 @@ import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.os.SystemClock
 import android.view.Gravity
-import android.view.KeyEvent
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.webkit.WebView
-import android.widget.EditText
-import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
@@ -32,6 +29,20 @@ val Int.dpToPx get() = (this * Resources.getSystem().displayMetrics.density).toI
 val Int.pxToDpF get() = (this / Resources.getSystem().displayMetrics.density)
 
 val Int.dpToPxF get() = (this * Resources.getSystem().displayMetrics.density)
+
+fun View.hide() = run { visibility = View.INVISIBLE }
+
+fun View.show() = run { visibility = View.VISIBLE }
+
+fun View.gone() = run { visibility = View.GONE }
+
+inline fun View.showIf(invisibleMode: Int = View.GONE, condition: View.() -> Boolean) {
+    visibility = if (condition()) View.VISIBLE else invisibleMode
+}
+
+inline fun View.hideIf(invisibleMode: Int = View.GONE, condition: View.() -> Boolean) {
+    visibility = if (condition()) invisibleMode else View.VISIBLE
+}
 
 val View.screenLocation: IntArray
     get(): IntArray {
@@ -52,20 +63,6 @@ val View.rect: Rect
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View =
     LayoutInflater.from(context).inflate(layoutRes, this, false)
 
-fun View.hide() = run { visibility = View.INVISIBLE }
-
-fun View.show() = run { visibility = View.VISIBLE }
-
-fun View.gone() = run { visibility = View.GONE }
-
-inline fun View.showIf(invisibleMode: Int = View.GONE, condition: View.() -> Boolean) {
-    visibility = if (condition()) View.VISIBLE else invisibleMode
-}
-
-inline fun View.hideIf(invisibleMode: Int = View.GONE, condition: View.() -> Boolean) {
-    visibility = if (condition()) invisibleMode else View.VISIBLE
-}
-
 fun View.showKeyboard() {
     this.requestFocus()
     val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -85,20 +82,6 @@ fun View.imeVisibilityListener(onVisibilityChanged: (Boolean) -> Unit) {
     }
 }
 
-fun TextView.setOnEnterClickListener(action: (TextView) -> Unit) {
-    setOnEditorActionListener { textView, actionId, keyEvent ->
-        if (keyEvent?.keyCode == KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_DONE) {
-            action(textView)
-        }
-        false
-    }
-}
-
-fun EditText.setTextWithSelection(text: String) {
-    setText(text)
-    setSelection(text.length)
-}
-
 fun WebView.loadUtf8Data(html: String) {
     loadData(html, "text/html; charset=UTF-8;", "utf-8")
 }
@@ -116,9 +99,13 @@ fun View.clickWithDebounce(debounceTime: Long = 600L, action: () -> Unit) {
     })
 }
 
+fun View.isInTouchArea(event: MotionEvent): Boolean {
+    return event.x.toInt() in left..right &&
+        event.y.toInt() in top..bottom
+}
+
 @Suppress("LongParameterList")
-fun showSnackbar(
-    parentView: View,
+fun View.showSnackbar(
     text: CharSequence,
     gravity: Int = Gravity.BOTTOM,
     length: Int = Snackbar.LENGTH_LONG,
@@ -126,7 +113,7 @@ fun showSnackbar(
     actionText: String = "",
     action: (() -> Unit)? = null,
 ): Snackbar {
-    val snackbar = Snackbar.make(parentView, text, length)
+    val snackbar = Snackbar.make(this, text, length)
 
     with(snackbar) {
         val params = view.layoutParams as? CoordinatorLayout.LayoutParams

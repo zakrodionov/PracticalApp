@@ -86,10 +86,8 @@ abstract class BaseBottomSheetDialogFragment<STATE : Parcelable, SIDE_EFFECT : A
                 showToast(showEvent.message.asString(resources), Toast.LENGTH_LONG)
             }
             is ShowSnackbar -> {
-                view?.let {
-                    snackBar?.dismiss()
-                    snackBar = showSnackbar(it, showEvent.message.asString(resources))
-                }
+                snackBar?.dismiss()
+                snackBar = view?.showSnackbar(showEvent.message.asString(resources))
             }
         }
     }
