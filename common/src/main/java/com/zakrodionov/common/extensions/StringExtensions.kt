@@ -18,6 +18,8 @@ fun String.maxWord(max: Int, postfix: String = ""): String = split(" ").let { wo
 fun String.capitalizeFirstLetter(locale: Locale = Locale.ROOT) =
     replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale) else it.toString() }
 
+fun String.extractDigits(): String = filter { it.isDigit() }
+
 @Suppress("SwallowedException", "TooGenericExceptionCaught")
 fun String.lastSymbols(count: Int): String {
     if (count == 0) return ""

@@ -84,7 +84,7 @@ class BottomDialog : FixedBottomSheetDialogFragment(R.layout.fragment_favorite) 
 class AnimatedDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
-            .setView(R.layout.fragment_email)
+            .setView(R.layout.fragment_phone)
             .create()
             .apply {
                 window?.setWindowAnimations(R.style.Dialog_Animation)

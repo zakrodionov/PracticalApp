@@ -77,6 +77,8 @@ object Libs {
 
     const val cicerone = "com.github.terrakok:cicerone:7.0"
 
+    const val decoro = "ru.tinkoff.decoro:decoro:1.5.0"
+
     const val coil = "io.coil-kt:coil:1.1.1"
 
     //Glide
