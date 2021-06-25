@@ -1,4 +1,4 @@
-package com.zakrodionov.practicalapp.app.features.posts.ui.postsList
+package com.zakrodionov.practicalapp.app.features.posts.ui.list
 
 import androidx.lifecycle.SavedStateHandle
 import com.zakrodionov.common.extensions.ifNotNull
@@ -16,7 +16,7 @@ import com.zakrodionov.practicalapp.app.core.onFailure
 import com.zakrodionov.practicalapp.app.core.onSuccess
 import com.zakrodionov.practicalapp.app.features.posts.PostsScreens.postDetailsScreen
 import com.zakrodionov.practicalapp.app.features.posts.domain.PostRepository
-import com.zakrodionov.practicalapp.app.features.posts.ui.postDetails.ArgsPostDetail
+import com.zakrodionov.practicalapp.app.features.posts.ui.detail.ArgsPostDetail
 import kotlinx.coroutines.Job
 
 class PostsViewModel(

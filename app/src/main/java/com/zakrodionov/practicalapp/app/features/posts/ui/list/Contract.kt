@@ -1,4 +1,4 @@
-package com.zakrodionov.practicalapp.app.features.posts.ui.postsList
+package com.zakrodionov.practicalapp.app.features.posts.ui.list
 
 import android.os.Parcelable
 import com.zakrodionov.common.ui.lce.ContentState

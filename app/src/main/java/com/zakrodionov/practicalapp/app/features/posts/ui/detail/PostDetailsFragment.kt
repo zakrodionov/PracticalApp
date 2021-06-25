@@ -1,4 +1,4 @@
-package com.zakrodionov.practicalapp.app.features.posts.ui.postDetails
+package com.zakrodionov.practicalapp.app.features.posts.ui.detail
 
 import android.os.Bundle
 import android.view.View

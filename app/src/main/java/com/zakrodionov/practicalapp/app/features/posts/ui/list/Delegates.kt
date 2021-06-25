@@ -1,4 +1,4 @@
-package com.zakrodionov.practicalapp.app.features.posts.ui.postsList
+package com.zakrodionov.practicalapp.app.features.posts.ui.list
 
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import com.zakrodionov.common.extensions.capitalizeFirstLetter

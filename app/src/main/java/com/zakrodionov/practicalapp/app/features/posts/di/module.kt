@@ -5,8 +5,8 @@ import com.zakrodionov.practicalapp.app.core.navigation.toRouterQualifier
 import com.zakrodionov.practicalapp.app.features.posts.data.PostRepositoryImpl
 import com.zakrodionov.practicalapp.app.features.posts.data.remote.ApiPosts
 import com.zakrodionov.practicalapp.app.features.posts.domain.PostRepository
-import com.zakrodionov.practicalapp.app.features.posts.ui.postDetails.PostDetailViewModel
-import com.zakrodionov.practicalapp.app.features.posts.ui.postsList.PostsViewModel
+import com.zakrodionov.practicalapp.app.features.posts.ui.detail.PostDetailViewModel
+import com.zakrodionov.practicalapp.app.features.posts.ui.list.PostsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import retrofit2.Retrofit
 

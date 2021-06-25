@@ -1,4 +1,4 @@
-package com.zakrodionov.practicalapp.app.features.posts.ui.postDetails
+package com.zakrodionov.practicalapp.app.features.posts.ui.detail
 
 import android.os.Parcelable
 import androidx.lifecycle.SavedStateHandle
