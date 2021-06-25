@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">PracticalApp</string>
 
-    <string name="email" translatable="false">Email</string>
+    <string name="phone" translatable="false">Email</string>
     <string name="favorite" translatable="false">Favorite</string>
     <string name="password" translatable="false">Password</string>
     <string name="next" translatable="false">Next</string>

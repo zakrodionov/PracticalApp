@@ -3,7 +3,7 @@ package com.zakrodionov.practicalapp.app.features.login.ui
 import com.github.terrakok.cicerone.Screen
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.BaseFlowFragment
-import com.zakrodionov.practicalapp.app.features.login.LoginScreens.EmailScreen
+import com.zakrodionov.practicalapp.app.features.login.LoginScreens.PhoneScreen
 import com.zakrodionov.practicalapp.app.features.login.di.LOGIN_QUALIFIER
 
 class LoginFlowFragment : BaseFlowFragment(
@@ -16,5 +16,5 @@ class LoginFlowFragment : BaseFlowFragment(
         fun newInstance() = LoginFlowFragment()
     }
 
-    override val startScreen: Screen = EmailScreen()
+    override val startScreen: Screen = PhoneScreen()
 }

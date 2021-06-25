@@ -6,13 +6,12 @@
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/etEmail"
+        android:id="@+id/etPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:hint="@string/email"
         android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
+        android:inputType="phone"
         android:textSize="40sp" />
 
     <com.google.android.material.button.MaterialButton
@@ -21,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
+        android:enabled="false"
         android:text="@string/next" />
 
 </LinearLayout>

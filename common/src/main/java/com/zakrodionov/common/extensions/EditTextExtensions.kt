@@ -27,7 +27,15 @@ fun TextInputLayout.addLengthCounterColorWatcher(
 
 val EditText.isNotBlank get() = text.toString().isNotBlank()
 
+val EditText.string get() = text.toString()
+
 fun EditText.setTextWithSelection(text: String) {
     setText(text)
     setSelection(text.length)
+}
+
+fun EditText.setTextIfDifferent(newText: String) {
+    if (string != newText) {
+        setText(newText)
+    }
 }
