@@ -7,6 +7,10 @@ import ru.tinkoff.decoro.slots.Slot
 import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 
 fun EditText.setPhoneMask(behaviour: DecoroBehaviour = RusPhoneNumberShortBehaviour()) {
+    setMask(behaviour)
+}
+
+fun EditText.setMask(behaviour: DecoroBehaviour) {
     val slots: Array<Slot> = Slot.copySlotArray(behaviour.getSlots())
     behaviour.changeSlots(slots)
     val mask = MaskImpl(slots, behaviour.isTerminated)
