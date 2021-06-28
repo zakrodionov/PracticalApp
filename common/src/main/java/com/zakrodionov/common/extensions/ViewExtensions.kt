@@ -2,7 +2,6 @@
 
 package com.zakrodionov.common.extensions
 
-import android.content.Context
 import android.content.res.Resources
 import android.graphics.Outline
 import android.graphics.Rect
@@ -14,7 +13,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
-import android.view.inputmethod.InputMethodManager
 import android.webkit.WebView
 import android.widget.FrameLayout
 import android.widget.LinearLayout
@@ -65,24 +63,27 @@ val View.rect: Rect
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View =
     LayoutInflater.from(context).inflate(layoutRes, this, false)
 
+/** Requests focus and shows keyboard for [this] view if it is possible. */
 fun View.showKeyboard() {
-    this.requestFocus()
-    val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+    ViewCompat.getWindowInsetsController(this)
+        ?.show(WindowInsetsCompat.Type.ime())
 }
 
 fun View.hideKeyboard() {
-    val inputMethodManager =
-        context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
+    ViewCompat.getWindowInsetsController(this)
+        ?.hide(WindowInsetsCompat.Type.ime())
 }
 
 fun View.imeVisibilityListener(onVisibilityChanged: (Boolean) -> Unit) {
     ViewCompat.setOnApplyWindowInsetsListener(this) { _, insets ->
-        onVisibilityChanged(insets.isVisible(WindowInsetsCompat.Type.ime()))
+        onVisibilityChanged(isKeyboardVisible)
         insets
     }
 }
+
+val View.isKeyboardVisible: Boolean
+    get() = ViewCompat.getRootWindowInsets(this)
+        ?.isVisible(WindowInsetsCompat.Type.ime()) == true
 
 fun WebView.loadUtf8Data(html: String) {
     loadData(html, "text/html; charset=UTF-8;", "utf-8")

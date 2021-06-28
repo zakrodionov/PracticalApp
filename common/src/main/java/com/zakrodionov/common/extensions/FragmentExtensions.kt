@@ -2,10 +2,8 @@
 
 package com.zakrodionov.common.extensions
 
-import android.app.Activity
 import android.content.Context
 import android.os.Parcelable
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StyleRes
@@ -28,15 +26,11 @@ fun Fragment.showToast(text: String?, length: Int = Toast.LENGTH_SHORT) {
 }
 
 fun Fragment.showKeyboard() {
-    (requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?)?.apply {
-        toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0)
-    }
+    view?.showKeyboard()
 }
 
 fun Fragment.hideKeyboard() {
-    (requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?)?.apply {
-        hideSoftInputFromWindow(view?.windowToken, 0)
-    }
+    view?.hideKeyboard()
 }
 
 inline fun Fragment.askForMultiplePermissions(
@@ -80,13 +74,21 @@ fun <T : Parcelable> Fragment.initialArguments(): T {
 }
 /*endregion*/
 
-fun DialogFragment.showIfNotAlreadyShown(fragmentManager: FragmentManager, tag: String, now: Boolean = true) {
+fun DialogFragment.showIfNotAlreadyShown(
+    fragmentManager: FragmentManager,
+    tag: String,
+    now: Boolean = true
+) {
     if (fragmentManager.findFragmentByTag(tag) == null) {
         if (now) showNow(fragmentManager, tag) else show(fragmentManager, tag)
     }
 }
 
-fun DialogFragment.showWithPreventMultiple(fragmentManager: FragmentManager, tag: String, now: Boolean = true) {
+fun DialogFragment.showWithPreventMultiple(
+    fragmentManager: FragmentManager,
+    tag: String,
+    now: Boolean = true
+) {
     (fragmentManager.findFragmentByTag(tag) as? DialogFragment)?.dismiss()
 
     if (now) showNow(fragmentManager, tag) else show(fragmentManager, tag)
@@ -122,4 +124,9 @@ fun showDialog(
 }
 
 fun FragmentTransaction.setDefaultAnimations() =
-    setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right)
+    setCustomAnimations(
+        R.anim.slide_in_right,
+        R.anim.slide_out_left,
+        R.anim.slide_in_left,
+        R.anim.slide_out_right
+    )
