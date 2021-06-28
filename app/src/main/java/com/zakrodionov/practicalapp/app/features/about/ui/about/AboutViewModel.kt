@@ -1,7 +1,7 @@
 package com.zakrodionov.practicalapp.app.features.about.ui.about
 
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import androidx.lifecycle.SavedStateHandle
+import com.zakrodionov.common.extensions.preferenceListener
 import com.zakrodionov.practicalapp.app.core.BaseError
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
 import com.zakrodionov.practicalapp.app.core.ImportanceError.CONTENT_ERROR
@@ -24,10 +24,8 @@ class AboutViewModel(
         getIsLogged()
     }
 
-    private val settingsListener = OnSharedPreferenceChangeListener { _, key ->
-        if (key == KEY_IS_LOGGED) {
-            getIsLogged()
-        }
+    private val settingsListener = preferenceListener(KEY_IS_LOGGED) {
+        getIsLogged()
     }
 
     init {

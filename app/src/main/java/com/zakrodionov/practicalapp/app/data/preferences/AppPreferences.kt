@@ -1,7 +1,6 @@
 package com.zakrodionov.practicalapp.app.data.preferences
 
 import android.content.Context
-import androidx.core.content.edit
 import com.zakrodionov.common.preferences.EncryptedPreferences
 
 class AppPreferences(context: Context) : EncryptedPreferences(context, NAME_APP_PREFERENCES) {
@@ -14,15 +13,9 @@ class AppPreferences(context: Context) : EncryptedPreferences(context, NAME_APP_
         const val KEY_IS_LOGGED = "KEY_IS_LOGGED"
     }
 
-    var accessToken: String
-        get() = sp.getString(KEY_ACCESS_TOKEN, "") ?: ""
-        set(value) = sp.edit { putString(KEY_ACCESS_TOKEN, value) }
+    var accessToken: String by stringPref(KEY_ACCESS_TOKEN)
 
-    var refreshToken: String
-        get() = sp.getString(KEY_REFRESH_TOKEN, "") ?: ""
-        set(value) = sp.edit { putString(KEY_REFRESH_TOKEN, value) }
+    var refreshToken: String by stringPref(KEY_REFRESH_TOKEN)
 
-    var isLogged: Boolean
-        get() = sp.getBoolean(KEY_IS_LOGGED, false)
-        set(value) = sp.edit { putBoolean(KEY_IS_LOGGED, value) }
+    var isLogged: Boolean by booleanPref(KEY_IS_LOGGED)
 }

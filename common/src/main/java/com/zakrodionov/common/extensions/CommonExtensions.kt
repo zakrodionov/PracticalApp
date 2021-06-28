@@ -1,5 +1,6 @@
 package com.zakrodionov.common.extensions
 
+import android.content.SharedPreferences
 import android.os.Handler
 import android.os.Looper
 import com.zakrodionov.common.BuildConfig
@@ -19,4 +20,15 @@ val Any.TAG get() = this.javaClass.simpleName
 
 fun postDelayed(delay: Long, func: () -> Unit) {
     Handler(Looper.getMainLooper()).postDelayed({ func.invoke() }, delay)
+}
+
+fun preferenceListener(
+    propertyKey: String,
+    propertyUpdated: (key: String) -> Unit
+): SharedPreferences.OnSharedPreferenceChangeListener {
+    return SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
+        if (propertyKey == key) {
+            propertyUpdated.invoke(key)
+        }
+    }
 }
