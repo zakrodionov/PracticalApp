@@ -28,10 +28,9 @@ fun Module.bindGlobalNavigation(globalQualifier: String) {
 fun flowModule(
     flowQualifier: String,
     createdAtStart: Boolean = false,
-    override: Boolean = false,
     moduleDeclaration: ModuleDeclaration,
 ): Module {
-    val module = Module(createdAtStart, override)
+    val module = Module(createdAtStart)
     module.bindFlowNavigation(flowQualifier)
     moduleDeclaration(module)
     return module
@@ -55,10 +54,9 @@ fun Module.bindFlowNavigation(flowQualifier: String) {
 fun tabFlowModule(
     flowQualifier: String,
     createdAtStart: Boolean = false,
-    override: Boolean = false,
     moduleDeclaration: ModuleDeclaration,
 ): Module {
-    val module = Module(createdAtStart, override)
+    val module = Module(createdAtStart)
     module.bindTabFlowNavigation(flowQualifier)
     moduleDeclaration(module)
     return module
