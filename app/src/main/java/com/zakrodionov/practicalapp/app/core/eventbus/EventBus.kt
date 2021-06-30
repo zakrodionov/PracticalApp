@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.SharedFlow
 interface Event
 
 interface EventProvider {
-    suspend fun provide(): SharedFlow<Event>
+    fun provide(): SharedFlow<Event>
 }
 
 interface EventPublisher {
@@ -19,7 +19,7 @@ open class EventBus : EventProvider, EventPublisher {
 
     private val events = MutableSharedFlow<Event>()
 
-    override suspend fun provide(): SharedFlow<Event> = events
+    override fun provide(): SharedFlow<Event> = events
 
     override suspend fun publish(event: Event) {
         events.emit(event)
