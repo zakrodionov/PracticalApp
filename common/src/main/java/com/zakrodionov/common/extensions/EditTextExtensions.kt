@@ -1,5 +1,7 @@
 package com.zakrodionov.common.extensions
 
+import android.content.Context
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.annotation.ColorRes
 import androidx.core.widget.doAfterTextChanged
@@ -38,4 +40,24 @@ fun EditText.setTextIfDifferent(newText: String) {
     if (string != newText) {
         setText(newText)
     }
+}
+
+// Usage:
+// override fun onResume() {
+//        binding.etPhone.doOnNextLayout {
+//            binding.etPhone.showKeyboard()
+//        }
+//    }
+fun EditText.showKeyboard() {
+    if (requestFocus()) {
+        (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+            .showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+        setSelection(text.length)
+    }
+}
+
+fun EditText.hideKeyboard() {
+    val inputMethodManager =
+        context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
 }
