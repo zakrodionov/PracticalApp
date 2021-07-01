@@ -3,7 +3,8 @@ package com.zakrodionov.practicalapp.app.core.navigation
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
+import androidx.fragment.app.commit
+import androidx.fragment.app.commitNow
 import com.github.terrakok.cicerone.Command
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.zakrodionov.practicalapp.app.core.BaseTabFragment
@@ -25,7 +26,7 @@ class TabFlowNavigator(
 ) : AppNavigator(activity, containerId, fragmentManager) {
 
     private val currentTabFragment: BaseTabFragment?
-        get() = fragmentManager.fragments.firstOrNull { it.isVisible } as? BaseTabFragment
+        get() = fragmentManager.fragments.firstOrNull { !it.isHidden } as? BaseTabFragment
 
     override fun applyCommand(command: Command) {
         when (command) {
@@ -36,9 +37,7 @@ class TabFlowNavigator(
             is ResetTab -> {
                 fragmentManager.fragments.forEach {
                     if (Tab.from(it) == command.tab) {
-                        fragmentManager.beginTransaction()
-                            .remove(it)
-                            .commit()
+                        fragmentManager.commit { remove(it) }
                     }
                 }
             }
@@ -63,37 +62,30 @@ class TabFlowNavigator(
             return
         }
 
-        val transaction = fragmentManager.beginTransaction()
-
-        if (newFragment == null) {
-            transaction.add(containerId, tab.getFragment(), tab.name)
-        }
-
-        currentFragment?.let {
-            when (transactionStrategy) {
-                SHOW_HIDE -> transaction.hide(it)
-                ATTACH_DETACH -> transaction.detach(it)
+        fragmentManager.commitNow {
+            if (newFragment == null) {
+                add(containerId, tab.getFragment(), tab.name)
             }
-            transaction.setMaxLifecycle(it, Lifecycle.State.STARTED)
-            it.onTabUnselected()
-        }
 
-        newFragment?.let {
-            when (transactionStrategy) {
-                SHOW_HIDE -> transaction.show(it)
-                ATTACH_DETACH -> transaction.attach(it)
+            currentFragment?.let {
+                when (transactionStrategy) {
+                    SHOW_HIDE -> hide(it)
+                    ATTACH_DETACH -> detach(it)
+                }
+                it.onTabUnselected()
             }
-            transaction.setMaxLifecycle(it, Lifecycle.State.RESUMED)
-            (it as? BaseTabFragment)?.onTabSelected()
-        }
 
-        transaction.commitNow()
+            newFragment?.let {
+                when (transactionStrategy) {
+                    SHOW_HIDE -> show(it)
+                    ATTACH_DETACH -> attach(it)
+                }
+                (it as? BaseTabFragment)?.onTabSelected()
+            }
+        }
     }
 
     private fun clearFragments() {
-        val transaction = fragmentManager.beginTransaction()
-        fragmentManager.fragments.forEach { transaction.remove(it) }
-
-        transaction.commitNow()
+        fragmentManager.commitNow { fragmentManager.fragments.forEach { remove(it) } }
     }
 }
