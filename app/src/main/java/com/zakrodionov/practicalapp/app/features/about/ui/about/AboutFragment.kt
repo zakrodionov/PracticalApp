@@ -18,9 +18,9 @@ class AboutFragment : BaseFragment<AboutState, AboutEvent>(R.layout.fragment_abo
         }
     }
 
-    override fun sideEffect(event: AboutEvent) = Unit
-
     override fun render(state: AboutState) {
         binding.tvTitle.text = if (state.isLogged) "Logout" else "Login"
     }
+
+    override fun sideEffect(event: AboutEvent) = Unit
 }

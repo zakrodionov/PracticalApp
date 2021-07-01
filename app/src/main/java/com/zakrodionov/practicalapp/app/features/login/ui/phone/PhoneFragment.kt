@@ -32,10 +32,10 @@ class PhoneFragment : BaseFragment<PhoneState, PhoneEvent>(R.layout.fragment_pho
         etPhone.showKeyboard()
     }
 
-    override fun sideEffect(event: PhoneEvent) = Unit
-
     override fun render(state: PhoneState) = with(binding) {
         etPhone.setTextIfDifferent(state.formattedPhone)
         btnNext.isEnabled = state.phoneIsValid
     }
+
+    override fun sideEffect(event: PhoneEvent) = Unit
 }

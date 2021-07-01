@@ -60,8 +60,6 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
         binding.rvPosts.adapter = null
     }
 
-    override fun sideEffect(event: PostsEvent) = Unit
-
     override fun render(state: PostsState) {
         adapter.items = state.posts
         with(binding) {
@@ -70,4 +68,6 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
             lceLayout.renderState(state.lceState)
         }
     }
+
+    override fun sideEffect(event: PostsEvent) = Unit
 }

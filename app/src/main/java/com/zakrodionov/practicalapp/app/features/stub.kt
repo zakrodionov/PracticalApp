@@ -19,6 +19,6 @@ abstract class StubViewModel : BaseViewModel<StubState, Unit>(StubState()) {
 }
 
 abstract class StubFragment(@LayoutRes layout: Int = R.layout.fragment_stub) : BaseFragment<StubState, Unit>(layout) {
-    override fun sideEffect(event: Unit) = Unit
     override fun render(state: StubState) = Unit
+    override fun sideEffect(event: Unit) = Unit
 }

@@ -36,8 +36,6 @@ class PostDetailsFragment : BaseFragment<PostDetailsState, PostDetailsEvent>(R.l
         }
     }
 
-    override fun sideEffect(event: PostDetailsEvent) = Unit
-
     override fun render(state: PostDetailsState) {
         with(binding) {
             tvTitle.setTextOrHide(state.post?.text?.capitalizeFirstLetter())
@@ -46,6 +44,8 @@ class PostDetailsFragment : BaseFragment<PostDetailsState, PostDetailsEvent>(R.l
             lceLayout.renderState(state.lceState)
         }
     }
+
+    override fun sideEffect(event: PostDetailsEvent) = Unit
 
     // Вообще это надо маппить в data слое или VM в OffsetDateTime, но для примера конвертации даты пока будет здесь
     private fun parsePostDate(date: String?): String? =
