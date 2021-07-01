@@ -63,7 +63,9 @@ val View.rect: Rect
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View =
     LayoutInflater.from(context).inflate(layoutRes, this, false)
 
-/** Requests focus and shows keyboard for [this] view if it is possible. */
+/** Requests focus and shows keyboard for [this] view if it is possible.
+ *  To display at startup, you need to set [setSoftInputModeAlwaysVisible]
+ * */
 fun View.showKeyboard() {
     ViewCompat.getWindowInsetsController(this)
         ?.show(WindowInsetsCompat.Type.ime())

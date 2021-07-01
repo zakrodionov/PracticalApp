@@ -89,7 +89,6 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
     override fun onDestroy() {
         super.onDestroy()
         // We leave the screen and respectively all fragments will be destroyed
-        // We leave the screen and respectively all fragments will be destroyed
         if (requireActivity().isFinishing) {
             onRealDestroy()
             return
