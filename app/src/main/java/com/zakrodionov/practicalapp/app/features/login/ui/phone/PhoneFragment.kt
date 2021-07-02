@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.widget.doAfterTextChanged
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.zakrodionov.common.custom.PhoneKeyListener
 import com.zakrodionov.common.extensions.library.setPhoneMask
 import com.zakrodionov.common.extensions.setTextIfDifferent
 import com.zakrodionov.common.extensions.showKeyboard
@@ -25,6 +26,7 @@ class PhoneFragment : BaseFragment<PhoneState, PhoneEvent>(R.layout.fragment_pho
     }
 
     private fun setupEditTextPhone() = with(binding) {
+        etPhone.keyListener = PhoneKeyListener.instance
         etPhone.setPhoneMask()
         etPhone.doAfterTextChanged {
             viewModel.setFormattedPhone(it.toString())
