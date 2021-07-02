@@ -68,9 +68,17 @@ abstract class BaseViewModel<STATE : Parcelable, EVENT : Any>(
         }
     }
 
-    protected fun showErrorSnackbar(baseError: BaseError) {
-        launch { postShowEvent(ShowSnackbar(baseError.message)) }
-    }
+    // handleContentError, handleImportantError, handleNotImportantError - для базовых
+    // обработок ошибок
+    // Скрываем UI экрана, отображем специальною вью для ошибки. Необходимо переопределить
+    // в дочерней ViewModel
+    open suspend fun handleContentError(baseError: BaseError) = Unit
 
-    abstract suspend fun handleError(baseError: BaseError)
+    // Показываем диалог
+    protected suspend fun handleImportantError(baseError: BaseError) =
+        postShowEvent(ShowDialog(baseError.title, baseError.message))
+
+    // Показываем снекбар
+    protected suspend fun handleNotImportantError(baseError: BaseError) =
+        postShowEvent(ShowSnackbar(baseError.message))
 }

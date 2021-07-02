@@ -14,11 +14,10 @@ data class StubState(
     val isLoading: Boolean = false
 ) : Parcelable
 
-abstract class StubViewModel : BaseViewModel<StubState, Unit>(StubState()) {
-    override suspend fun handleError(baseError: BaseError) = Unit
-}
+abstract class StubViewModel : BaseViewModel<StubState, Unit>(StubState())
 
-abstract class StubFragment(@LayoutRes layout: Int = R.layout.fragment_stub) : BaseFragment<StubState, Unit>(layout) {
+abstract class StubFragment(@LayoutRes layout: Int = R.layout.fragment_stub) :
+    BaseFragment<StubState, Unit>(layout) {
     override fun render(state: StubState) = Unit
     override fun sideEffect(event: Unit) = Unit
 }

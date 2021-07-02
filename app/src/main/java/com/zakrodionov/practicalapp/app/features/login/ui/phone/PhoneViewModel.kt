@@ -2,7 +2,6 @@ package com.zakrodionov.practicalapp.app.features.login.ui.phone
 
 import androidx.lifecycle.SavedStateHandle
 import com.zakrodionov.common.core.TextResource
-import com.zakrodionov.practicalapp.app.core.BaseError
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
 import com.zakrodionov.practicalapp.app.core.ShowToast
 import com.zakrodionov.practicalapp.app.core.navigation.FlowRouter
@@ -23,6 +22,4 @@ class PhoneViewModel(
     fun setFormattedPhone(phone: String) {
         reduce { state.copy(formattedPhone = phone) }
     }
-
-    override suspend fun handleError(baseError: BaseError) = Unit
 }

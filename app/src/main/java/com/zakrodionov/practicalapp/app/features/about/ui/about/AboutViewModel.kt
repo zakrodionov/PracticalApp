@@ -2,13 +2,7 @@ package com.zakrodionov.practicalapp.app.features.about.ui.about
 
 import androidx.lifecycle.SavedStateHandle
 import com.zakrodionov.common.extensions.preferenceListener
-import com.zakrodionov.practicalapp.app.core.BaseError
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
-import com.zakrodionov.practicalapp.app.core.ImportanceError.CONTENT_ERROR
-import com.zakrodionov.practicalapp.app.core.ImportanceError.CRITICAL_ERROR
-import com.zakrodionov.practicalapp.app.core.ImportanceError.NON_CRITICAL_ERROR
-import com.zakrodionov.practicalapp.app.core.ShowDialog
-import com.zakrodionov.practicalapp.app.core.ShowSnackbar
 import com.zakrodionov.practicalapp.app.core.navigation.FlowRouter
 import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences
 import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences.Companion.KEY_IS_LOGGED
@@ -55,13 +49,5 @@ class AboutViewModel(
 
     private fun navigateToLoginFlow() {
         flowRouter.externalNavigateTo(LoginFlowScreen())
-    }
-
-    override suspend fun handleError(baseError: BaseError) {
-        when (baseError.importanceError) {
-            CRITICAL_ERROR -> postShowEvent(ShowDialog(baseError.title, baseError.message))
-            NON_CRITICAL_ERROR -> postShowEvent(ShowSnackbar(baseError.message))
-            CONTENT_ERROR -> reduce { state.copy(error = baseError) }
-        }
     }
 }

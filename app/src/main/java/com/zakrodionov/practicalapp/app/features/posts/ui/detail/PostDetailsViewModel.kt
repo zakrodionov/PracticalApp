@@ -2,13 +2,7 @@ package com.zakrodionov.practicalapp.app.features.posts.ui.detail
 
 import android.os.Parcelable
 import androidx.lifecycle.SavedStateHandle
-import com.zakrodionov.practicalapp.app.core.BaseError
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
-import com.zakrodionov.practicalapp.app.core.ImportanceError.CONTENT_ERROR
-import com.zakrodionov.practicalapp.app.core.ImportanceError.CRITICAL_ERROR
-import com.zakrodionov.practicalapp.app.core.ImportanceError.NON_CRITICAL_ERROR
-import com.zakrodionov.practicalapp.app.core.ShowDialog
-import com.zakrodionov.practicalapp.app.core.ShowSnackbar
 import com.zakrodionov.practicalapp.app.core.onFailure
 import com.zakrodionov.practicalapp.app.core.onSuccess
 import com.zakrodionov.practicalapp.app.features.posts.domain.PostRepository
@@ -35,16 +29,8 @@ class PostDetailViewModel(
                 reduce { state.copy(post = post, error = null) }
             }
             .onFailure {
-                handleError(it)
+                reduce { state.copy(error = it) }
             }
         reduce { state.copy(isLoading = false) }
-    }
-
-    override suspend fun handleError(baseError: BaseError) {
-        when (baseError.importanceError) {
-            CRITICAL_ERROR -> postShowEvent(ShowDialog(baseError.title, baseError.message))
-            NON_CRITICAL_ERROR -> postShowEvent(ShowSnackbar(baseError.message))
-            CONTENT_ERROR -> reduce { state.copy(error = baseError) }
-        }
     }
 }

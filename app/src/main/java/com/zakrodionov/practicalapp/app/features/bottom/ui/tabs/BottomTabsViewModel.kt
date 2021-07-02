@@ -1,7 +1,6 @@
 package com.zakrodionov.practicalapp.app.features.bottom.ui.tabs
 
 import androidx.lifecycle.SavedStateHandle
-import com.zakrodionov.practicalapp.app.core.BaseError
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
 import com.zakrodionov.practicalapp.app.core.navigation.TabFlowRouter
 import com.zakrodionov.practicalapp.app.features.bottom.base.Tab
@@ -44,6 +43,4 @@ class BottomTabsViewModel(
     fun onBackTab() {
         tabFlowRouter.onBackTab()
     }
-
-    override suspend fun handleError(baseError: BaseError) = Unit
 }

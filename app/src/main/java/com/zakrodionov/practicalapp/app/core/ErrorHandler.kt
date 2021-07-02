@@ -20,17 +20,17 @@ class ErrorHandlerImpl(private val connectionService: ConnectionService) : Error
         Timber.e(throwable)
         when {
             withoutNetworkConnection() || throwable.isNetworkException() -> {
-                return NetworkConnectionError()
+                return NetworkConnectionError
             }
 
             throwable is HttpException -> {
                 return HttpError()
             }
 
-            else -> UnknownError()
+            else -> UnknownError
         }
 
-        return UnknownError()
+        return UnknownError
     }
 
     private fun withoutNetworkConnection() = !connectionService.hasConnection()
