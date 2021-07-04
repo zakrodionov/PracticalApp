@@ -68,12 +68,6 @@ abstract class BaseViewModel<STATE : Parcelable, EVENT : Any>(
         }
     }
 
-    // handleContentError, handleImportantError, handleNotImportantError - для базовых
-    // обработок ошибок
-    // Скрываем UI экрана, отображем специальною вью для ошибки. Необходимо переопределить
-    // в дочерней ViewModel
-    open suspend fun handleContentError(baseError: BaseError) = Unit
-
     // Показываем диалог
     protected suspend fun handleImportantError(baseError: BaseError) =
         postShowEvent(ShowDialog(baseError.title, baseError.message))
