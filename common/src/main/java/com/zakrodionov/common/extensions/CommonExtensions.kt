@@ -14,12 +14,20 @@ inline fun <reified T : Any> T.debug(string: String) = Timber.d("Log__: $string"
 inline fun <reified T : Any> T.checkThread(string: String = "") =
     debug("${Thread.currentThread().name}, is main = ${Looper.getMainLooper().isCurrentThread} $string")
 
-fun Any?.toStringOrEmpty() = this?.let { "$this" } ?: ""
+fun Any?.toStringOrEmpty(): String = this?.let { "$this" } ?: ""
+
+fun Any?.toStringOrNull(): String = this?.let { "$this" } ?: "null"
 
 val Any.TAG get() = this.javaClass.simpleName
 
-fun postDelayed(delay: Long, func: () -> Unit) {
-    Handler(Looper.getMainLooper()).postDelayed({ func.invoke() }, delay)
+fun postDelayed(delay: Long, func: () -> Unit): Runnable {
+    return Handler(Looper.getMainLooper()).postDelayed(delay, func)
+}
+
+fun Handler.postDelayed(delay: Long, func: () -> Unit): Runnable {
+    val runnable = Runnable { func.invoke() }
+    postDelayed(runnable, delay)
+    return runnable
 }
 
 fun preferenceListener(
