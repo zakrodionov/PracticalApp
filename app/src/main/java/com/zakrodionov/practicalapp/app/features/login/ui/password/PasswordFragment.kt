@@ -3,6 +3,7 @@ package com.zakrodionov.practicalapp.app.features.login.ui.password
 import android.os.Bundle
 import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.zakrodionov.common.extensions.showKeyboard
 import com.zakrodionov.common.extensions.textString
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.navigation.FlowRouter
@@ -24,6 +25,11 @@ class PasswordFragment : StubFragment(R.layout.fragment_password) {
             get<AppPreferences>().isLogged = true
             viewModel.finish()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.etPassword.showKeyboard()
     }
 
     // Test custom onBackPressed

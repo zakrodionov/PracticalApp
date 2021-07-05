@@ -31,7 +31,12 @@ class PhoneFragment : BaseFragment<PhoneState, PhoneEvent>(R.layout.fragment_pho
         etPhone.doAfterTextChanged {
             viewModel.setFormattedPhone(it.toString())
         }
-        etPhone.showKeyboard()
+        etPhone.requestFocus()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.etPhone.showKeyboard()
     }
 
     override fun render(state: PhoneState) = with(binding) {
