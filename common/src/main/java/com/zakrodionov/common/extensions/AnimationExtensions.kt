@@ -6,57 +6,52 @@ import android.view.View
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.animation.Animation
 import android.view.animation.Transformation
+import com.google.android.material.animation.AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR
 
-fun View.toggleArrow(delay: Long = 200): Boolean =
+fun View.toggleArrow(duration: Long = 200): Boolean =
     when (rotation) {
         0f -> {
-            animate().apply {
-                duration = delay
-                rotation(180f)
-            }
+            animate()
+                .setDuration(duration)
+                .rotation(180f)
             true
         }
         else -> {
-            animate().apply {
-                duration = delay
-                rotation(0f)
-            }
+            animate()
+                .setDuration(duration)
+                .rotation(0f)
             false
         }
     }
 
-fun View.toggleArrow(show: Boolean, delay: Long = 200): Boolean =
+fun View.toggleArrow(show: Boolean, duration: Long = 200): Boolean =
     when {
         show -> {
-            animate().apply {
-                duration = delay
-                rotation(180f)
-            }
+            animate()
+                .setDuration(duration)
+                .rotation(180f)
             true
         }
         else -> {
-            animate().apply {
-                duration = delay
-                rotation(0f)
-            }
+            animate()
+                .setDuration(duration)
+                .rotation(0f)
             false
         }
     }
 
-fun View.rotate(degree: Float, delay: Long = 200): Boolean =
+fun View.rotate(degree: Float, duration: Long = 200): Boolean =
     when (rotation) {
         0f -> {
-            animate().apply {
-                duration = delay
-                rotation(degree)
-            }
+            animate()
+                .setDuration(duration)
+                .rotation(degree)
             true
         }
         else -> {
-            animate().apply {
-                duration = delay
-                rotation(0f)
-            }
+            animate()
+                .setDuration(duration)
+                .rotation(0f)
             false
         }
     }
@@ -66,7 +61,8 @@ fun View.toggleCollapse(isCollapse: Boolean) {
 }
 
 fun View.expand() {
-    val matchParentMeasureSpec = View.MeasureSpec.makeMeasureSpec((parent as View).width, View.MeasureSpec.EXACTLY)
+    val matchParentMeasureSpec =
+        View.MeasureSpec.makeMeasureSpec((parent as View).width, View.MeasureSpec.EXACTLY)
     val wrapContentMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
     measure(matchParentMeasureSpec, wrapContentMeasureSpec)
     val targetHeight = measuredHeight
@@ -113,11 +109,11 @@ fun View.collapse() {
     startAnimation(a)
 }
 
-fun View.toggleAlpha(isShow: Boolean, delay: Long = 200, invisibleMode: Int = View.GONE) {
-    if (isShow) animateAlpha(View.VISIBLE, delay) else animateAlpha(invisibleMode, delay)
+fun View.toggleAlpha(isShow: Boolean, duration: Long = 200, invisibleMode: Int = View.GONE) {
+    if (isShow) animateAlpha(View.VISIBLE, duration) else animateAlpha(invisibleMode, duration)
 }
 
-fun View.animateAlpha(visibility: Int, delay: Long = 200) {
+fun View.animateAlpha(visibility: Int, duration: Long = 200) {
     if (visibility == View.VISIBLE) {
         setVisibility(View.VISIBLE)
     }
@@ -128,11 +124,31 @@ fun View.animateAlpha(visibility: Int, delay: Long = 200) {
         else -> 1f
     }
 
-    animate().apply {
-        duration = delay
-        alpha(alpha)
-        withEndAction {
+    animate()
+        .setDuration(duration)
+        .alpha(alpha)
+        .withEndAction {
             setVisibility(visibility)
         }
-    }
+}
+
+/** [animateViewIn], [animateViewOut]
+ * Можно обернуть view во ViewGroup чтобы вьюшка ны выходило за свои границы во время анимации,
+ * так же иногда нужно использовать doOnLayout
+ */
+fun View.animateViewIn(duration: Long = 200) {
+    translationY = -height.toFloat()
+    animate()
+        .translationY(0f)
+        .setInterpolator(FAST_OUT_SLOW_IN_INTERPOLATOR)
+        .setDuration(duration)
+        .start()
+}
+
+fun View.animateViewOut(duration: Long = 200) {
+    animate()
+        .translationY(-height.toFloat())
+        .setInterpolator(FAST_OUT_SLOW_IN_INTERPOLATOR)
+        .setDuration(duration)
+        .start()
 }
