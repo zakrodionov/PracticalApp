@@ -3,9 +3,15 @@
 package com.zakrodionov.common.extensions
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.os.Parcelable
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
@@ -32,6 +38,33 @@ fun Fragment.showKeyboard() {
 fun Fragment.hideKeyboard() {
     view?.hideKeyboard()
 }
+
+/**
+ * Получение цвета из аттрибута или [ColorRes]
+ */
+@ColorInt
+fun Fragment.getColorFromAnyRes(someRes: Int): Int = requireContext().getColorFromAnyRes(someRes)
+
+/**
+ * Получение drawable из аттрибута или [DrawableRes]
+ */
+fun Fragment.getDrawableFromAnyRes(someRes: Int): Drawable? =
+    requireContext().getDrawableFromAnyRes(someRes)
+
+@ColorInt
+fun Fragment.getAttrColor(@AttrRes attrColorId: Int): Int =
+    requireContext().getAttrColor(attrColorId)
+
+fun Fragment.getAttrDrawable(@AttrRes attrDrawableId: Int): Drawable? =
+    requireContext().getAttrDrawable(attrDrawableId)
+
+fun Fragment.getCompatColor(@ColorRes color: Int) = requireContext().getCompatColor(color)
+
+fun Fragment.getCompatDrawable(@DrawableRes drawable: Int) =
+    requireContext().getCompatDrawable(drawable)
+
+fun Fragment.getCompatColorStateList(@ColorRes color: Int): ColorStateList =
+    requireContext().getCompatColorStateList(color)
 
 inline fun Fragment.askForMultiplePermissions(
     crossinline onDenied: () -> Unit = {},
