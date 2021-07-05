@@ -1,11 +1,15 @@
-@file:Suppress("MagicNumber")
+@file:Suppress("MagicNumber", "TooManyFunctions")
 
 package com.zakrodionov.common.extensions
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.view.View
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.animation.Animation
 import android.view.animation.Transformation
+import android.widget.TextView
+import androidx.core.animation.doOnEnd
 import com.google.android.material.animation.AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR
 
 fun View.toggleArrow(duration: Long = 200): Boolean =
@@ -151,4 +155,36 @@ fun View.animateViewOut(duration: Long = 200) {
         .setInterpolator(FAST_OUT_SLOW_IN_INTERPOLATOR)
         .setDuration(duration)
         .start()
+}
+
+fun TextView.animateSetTextLikeSlotUp(text: String, duration: Long = 200) {
+    val translationYOut = ObjectAnimator.ofFloat(this, View.TRANSLATION_Y, 0f, -height.toFloat())
+    translationYOut.duration = duration
+    translationYOut.doOnEnd {
+        translationY = height.toFloat()
+        this.text = text
+    }
+
+    val translationYIn = ObjectAnimator.ofFloat(this, View.TRANSLATION_Y, height.toFloat(), 0f)
+    translationYIn.duration = duration
+
+    val set = AnimatorSet()
+    set.playSequentially(translationYOut, translationYIn)
+    set.start()
+}
+
+fun TextView.animateSetTextLikeSlotDown(text: String, duration: Long = 200) {
+    val translationYOut = ObjectAnimator.ofFloat(this, View.TRANSLATION_Y, 0f, height.toFloat())
+    translationYOut.duration = duration
+    translationYOut.doOnEnd {
+        translationY = -height.toFloat()
+        this.text = text
+    }
+
+    val translationYIn = ObjectAnimator.ofFloat(this, View.TRANSLATION_Y, -height.toFloat(), 0f)
+    translationYIn.duration = duration
+
+    val set = AnimatorSet()
+    set.playSequentially(translationYOut, translationYIn)
+    set.start()
 }
