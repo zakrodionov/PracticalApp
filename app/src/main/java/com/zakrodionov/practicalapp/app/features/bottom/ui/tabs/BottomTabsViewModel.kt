@@ -1,10 +1,12 @@
 package com.zakrodionov.practicalapp.app.features.bottom.ui.tabs
 
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
 import com.zakrodionov.practicalapp.app.core.navigation.TabFlowRouter
 import com.zakrodionov.practicalapp.app.features.bottom.base.Tab
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class BottomTabsViewModel(
     savedStateHandle: SavedStateHandle,
@@ -18,26 +20,22 @@ class BottomTabsViewModel(
     }
 
     private fun observeSelectedTab() {
-        launch {
-            tabFlowRouter.selectedTab.collect {
+        tabFlowRouter.selectedTab
+            .onEach {
                 reduce { state.copy(currentTab = it) }
             }
-        }
+            .launchIn(viewModelScope)
     }
 
     private fun initTabs() {
-        launch {
-            if (!state.tabsIsInitialized) {
-                tabFlowRouter.resetAllTabsAndOpenNewTab(Tab.POSTS)
-                reduce { state.copy(tabsIsInitialized = true) }
-            }
+        if (!state.tabsIsInitialized) {
+            tabFlowRouter.resetAllTabsAndOpenNewTab(Tab.POSTS)
+            reduce { state.copy(tabsIsInitialized = true) }
         }
     }
 
     fun switchTab(tab: Tab) {
-        launch {
-            tabFlowRouter.switchTab(tab)
-        }
+        tabFlowRouter.switchTab(tab)
     }
 
     fun onBackTab() {
