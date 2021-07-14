@@ -5,7 +5,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.fragment.app.commitNow
-import androidx.lifecycle.Lifecycle
 import com.github.terrakok.cicerone.Command
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.zakrodionov.practicalapp.app.core.BaseTabFragment
@@ -63,7 +62,8 @@ class TabFlowNavigator(
             return
         }
 
-        fragmentManager.commitNow {
+        // TODO FIXME(commit) В Cicerone 7.0 крашит при быстрой смене фргамнетов и commitNow
+        fragmentManager.commit {
             if (newFragment == null) {
                 add(containerId, tab.getFragment(), tab.name)
             }
@@ -73,7 +73,6 @@ class TabFlowNavigator(
                     SHOW_HIDE -> hide(it)
                     ATTACH_DETACH -> detach(it)
                 }
-                setMaxLifecycle(it, Lifecycle.State.STARTED)
                 it.onTabUnselected()
             }
 
@@ -82,7 +81,6 @@ class TabFlowNavigator(
                     SHOW_HIDE -> show(it)
                     ATTACH_DETACH -> attach(it)
                 }
-                setMaxLifecycle(it, Lifecycle.State.RESUMED)
                 (it as? BaseTabFragment)?.onTabSelected()
             }
         }
