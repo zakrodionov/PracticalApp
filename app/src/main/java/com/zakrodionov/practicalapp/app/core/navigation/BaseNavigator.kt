@@ -7,14 +7,18 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.github.terrakok.cicerone.androidx.FragmentScreen
-import com.zakrodionov.common.extensions.setDefaultAnimations
+import com.zakrodionov.common.extensions.setHorizontalSlideAnimations
+import com.zakrodionov.common.extensions.setVerticalSlideAnimations
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.NONE
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.SLIDE_HORIZONTAL
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.SLIDE_VERTICAL
 
 // Обычный навигатор между экранами
-open class BaseNavigator(activity: FragmentActivity, fragmentManager: FragmentManager, @IdRes containerId: Int) :
-    AppNavigator(activity, containerId, fragmentManager) {
+open class BaseNavigator(
+    activity: FragmentActivity,
+    fragmentManager: FragmentManager,
+    @IdRes containerId: Int
+) : AppNavigator(activity, containerId, fragmentManager) {
     override fun setupFragmentTransaction(
         screen: FragmentScreen,
         fragmentTransaction: FragmentTransaction,
@@ -24,10 +28,8 @@ open class BaseNavigator(activity: FragmentActivity, fragmentManager: FragmentMa
         val animationStrategy = (nextFragment as? AnimationScreen)?.screenAnimationStrategy
         if (currentFragment != null) {
             when (animationStrategy) {
-                SLIDE_HORIZONTAL -> fragmentTransaction.setDefaultAnimations()
-                SLIDE_VERTICAL -> {
-                    // TODO
-                }
+                SLIDE_HORIZONTAL -> fragmentTransaction.setHorizontalSlideAnimations()
+                SLIDE_VERTICAL -> fragmentTransaction.setVerticalSlideAnimations()
                 NONE, null -> fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_NONE)
             }
         }

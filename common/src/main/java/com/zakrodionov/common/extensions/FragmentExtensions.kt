@@ -7,7 +7,6 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.os.Parcelable
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
@@ -65,21 +64,6 @@ fun Fragment.getCompatDrawable(@DrawableRes drawable: Int) =
 
 fun Fragment.getCompatColorStateList(@ColorRes color: Int): ColorStateList =
     requireContext().getCompatColorStateList(color)
-
-inline fun Fragment.askForMultiplePermissions(
-    crossinline onDenied: () -> Unit = {},
-    crossinline onPermissionsGranted: () -> Unit = {}
-) = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
-    val granted = result.map { it.value }.filter { it == false }
-    if (granted.isEmpty()) onPermissionsGranted() else onDenied()
-}
-
-inline fun Fragment.askForSinglePermission(
-    crossinline onDenied: () -> Unit = {},
-    crossinline onPermissionsGranted: () -> Unit = {}
-) = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-    if (it) onPermissionsGranted() else onDenied()
-}
 
 /*region fragment with parcelable initial arguments*/
 private const val BUNDLE_INITIAL_ARGS = "BUNDLE_INITIAL_ARGS"
@@ -156,10 +140,18 @@ fun showDialog(
         .showWithPreventMultiple(fragmentManager, tag)
 }
 
-fun FragmentTransaction.setDefaultAnimations() =
+fun FragmentTransaction.setHorizontalSlideAnimations() =
     setCustomAnimations(
         R.anim.slide_in_right,
         R.anim.slide_out_left,
         R.anim.slide_in_left,
         R.anim.slide_out_right
+    )
+
+fun FragmentTransaction.setVerticalSlideAnimations() =
+    setCustomAnimations(
+        R.anim.slide_in_up,
+        R.anim.slide_in_down,
+        R.anim.slide_out_down,
+        R.anim.slide_out_up
     )

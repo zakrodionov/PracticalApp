@@ -2,11 +2,13 @@ package com.zakrodionov.practicalapp.app.core
 
 import android.os.Bundle
 import android.os.Parcelable
+import android.os.SystemClock
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.zakrodionov.common.core.asString
@@ -21,7 +23,9 @@ import com.zakrodionov.practicalapp.app.core.navigation.AnimationScreen
 import com.zakrodionov.practicalapp.app.core.navigation.BackButtonListener
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.SLIDE_HORIZONTAL
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @Suppress("TooManyFunctions")
 abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes contentLayoutId: Int) :
@@ -37,6 +41,7 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
 
     private var instanceStateSaved: Boolean = false
     private var snackBar: Snackbar? = null
+    protected var viewCreatedTime: Long = 0
 
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -156,4 +161,13 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
     override fun onBackPressed(): Boolean = true
 
     open fun loadData() {}
+
+    fun waitForAnimation(animationDelay: Long, block: () -> Unit) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val delay =
+                maxOf((animationDelay - (SystemClock.elapsedRealtime() - viewCreatedTime)), 0)
+            delay(delay)
+            block.invoke()
+        }
+    }
 }
