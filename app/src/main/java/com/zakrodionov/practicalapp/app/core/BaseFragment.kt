@@ -56,11 +56,11 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
             viewModel.stateFlow.collect { render(it) }
         }
 
-        repeatOnStarted {
+        viewLifecycleOwner.repeatOnStarted {
             viewModel.eventFlow.collect { sideEffect(it) }
         }
 
-        repeatOnStarted {
+        viewLifecycleOwner.repeatOnStarted {
             viewModel.showEventFlow.collect { showEvent(it) }
         }
     }
