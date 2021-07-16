@@ -22,6 +22,15 @@
         <item name="android:windowExitAnimation">@anim/slide_bottom</item>
     </style>
 
+    <style name="BottomSheetDialog.NoShape" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetDialog.NoShapeButtonSheet</item>
+    </style>
+
+    <style name="BottomSheetDialog.NoShapeButtonSheet" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="shapeAppearance">@null</item>
+        <item name="shapeAppearanceOverlay">@null</item>
+    </style>
+
     <style name="BottomSheetDialog.Rounded" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/BottomSheet.RoundedShape</item>
     </style>
