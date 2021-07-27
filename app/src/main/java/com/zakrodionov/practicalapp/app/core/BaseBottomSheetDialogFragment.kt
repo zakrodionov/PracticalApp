@@ -36,7 +36,7 @@ abstract class BaseBottomSheetDialogFragment<STATE : Parcelable, SIDE_EFFECT : A
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        activity?.window?.statusBarColor = requireContext().getCompatColor(statusBarColor)
+        activity?.window?.statusBarColor = getCompatColor(statusBarColor)
         activity?.window?.setStatusBarLightMode(statusBarLightMode)
 
         setupViews(view, savedInstanceState)

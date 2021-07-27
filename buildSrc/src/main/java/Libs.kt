@@ -75,7 +75,7 @@ object Libs {
     const val adapter_delegates_dsl =
         "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:$adapterDelegatesVersion"
 
-    const val cicerone = "com.github.terrakok:cicerone:7.0"
+    const val cicerone = "com.github.terrakok:cicerone:7.1"
 
     const val decoro = "ru.tinkoff.decoro:decoro:1.5.0"
 

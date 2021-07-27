@@ -58,6 +58,10 @@ abstract class BaseViewModel<STATE : Parcelable, EVENT : Any>(
         block.invoke()
     }
 
+    protected fun launchIo(block: suspend () -> Unit): Job = viewModelScope.launch(Dispatchers.IO) {
+        block.invoke()
+    }
+
     private fun restoreState(): STATE? {
         val bundle = savedStateHandle?.get<Bundle>(BUNDLE_STATE)
         return bundle?.getParcelable(KEY_STATE)

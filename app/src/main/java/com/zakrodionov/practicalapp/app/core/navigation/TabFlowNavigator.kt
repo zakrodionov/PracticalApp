@@ -62,8 +62,7 @@ class TabFlowNavigator(
             return
         }
 
-        // TODO FIXME(commit) В Cicerone 7.0 крашит при быстрой смене фргамнетов и commitNow
-        fragmentManager.commit {
+        fragmentManager.commitNow {
             if (newFragment == null) {
                 add(containerId, tab.getFragment(), tab.name)
             }
