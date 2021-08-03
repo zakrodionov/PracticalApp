@@ -27,7 +27,7 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
         AsyncListDifferDelegationAdapter(
             DiffCallback,
             loadingDelegate(),
-            postDelegate { viewModel.navigateToPost(it.id) }
+            postDelegate { viewModel.navigateToPost(it) }
         )
     }
 
