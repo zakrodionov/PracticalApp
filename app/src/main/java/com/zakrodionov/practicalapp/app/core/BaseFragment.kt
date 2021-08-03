@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
+import androidx.core.view.doOnLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
@@ -69,7 +70,7 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
 
         // Fixme Когда возвращаешься с фрагмента с клавиатурой
         // даже при том что она начинает скрыватся, на предыдущем экране insets не обновятся
-        view.post {
+        view.doOnLayout {
             view.requestApplyInsets()
         }
     }
