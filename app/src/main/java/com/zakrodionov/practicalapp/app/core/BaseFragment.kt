@@ -66,6 +66,12 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
         viewLifecycleOwner.repeatOnStarted {
             viewModel.showEventFlow.collect { showEvent(it) }
         }
+
+        // Fixme Когда возвращаешься с фрагмента с клавиатурой
+        // даже при том что она начинает скрыватся, на предыдущем экране insets не обновятся
+        view.post {
+            view.requestApplyInsets()
+        }
     }
 
     @CallSuper
