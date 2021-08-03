@@ -11,4 +11,5 @@
 
     <string name="logout" translatable="false">Logout</string>
     <string name="login" translatable="false">Login</string>
+    <string name="agreement">You agree to use your phone to send memes</string>
 </resources>
