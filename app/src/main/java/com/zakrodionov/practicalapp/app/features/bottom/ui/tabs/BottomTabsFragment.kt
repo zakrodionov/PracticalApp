@@ -19,7 +19,8 @@ import org.koin.androidx.viewmodel.ext.android.stateViewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 
-class BottomTabsFragment : BaseFragment<BottomTabsState, BottomTabsEvent>(R.layout.fragment_bottom_tabs), TabHost {
+class BottomTabsFragment :
+    BaseFragment<BottomTabsState, BottomTabsEvent>(R.layout.fragment_bottom_tabs), TabHost {
 
     companion object {
         fun newInstance() = BottomTabsFragment()
@@ -28,15 +29,20 @@ class BottomTabsFragment : BaseFragment<BottomTabsState, BottomTabsEvent>(R.layo
     override val viewModel: BottomTabsViewModel by stateViewModel()
     override val binding by viewBinding(FragmentBottomTabsBinding::bind)
 
-    private val navigatorHolder: NavigatorHolder by inject(navigationHolderQualifier(BOTTOM_TABS_QUALIFIER))
+    private val navigatorHolder: NavigatorHolder by inject(
+        navigationHolderQualifier(
+            BOTTOM_TABS_QUALIFIER
+        )
+    )
     private val navigator: TabFlowNavigator by lazy {
         TabFlowNavigator(requireActivity(), childFragmentManager, R.id.bottomFragmentContainerView)
     }
 
-    private val bottomNavigationItemSelectedListener = NavigationBarView.OnItemSelectedListener { item ->
-        viewModel.switchTab(Tab.from(item))
-        true
-    }
+    private val bottomNavigationItemSelectedListener =
+        NavigationBarView.OnItemSelectedListener { item ->
+            viewModel.switchTab(Tab.from(item))
+            true
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +67,9 @@ class BottomTabsFragment : BaseFragment<BottomTabsState, BottomTabsEvent>(R.layo
         navigatorHolder.removeNavigator()
         super.onPause()
     }
+
+    // Игнорируем инсеты для экрана с BottomNavigationView
+    override fun applyInsets() = Unit
 
     override fun onRealDestroy() {
         unloadKoinModules(bottomTabsModule)

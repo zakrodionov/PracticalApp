@@ -23,6 +23,7 @@ import com.zakrodionov.practicalapp.app.core.navigation.AnimationScreen
 import com.zakrodionov.practicalapp.app.core.navigation.BackButtonListener
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.SLIDE_HORIZONTAL
+import dev.chrisbanes.insetter.applyInsetter
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -49,6 +50,8 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
 
         activity?.window?.statusBarColor = getCompatColor(statusBarColor)
         activity?.window?.setStatusBarLightMode(statusBarLightMode)
+
+        applyInsets()
 
         setupViews(view, savedInstanceState)
 
@@ -149,6 +152,14 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
             is ShowSnackbar -> {
                 snackBar?.dismiss()
                 snackBar = view?.showSnackbar(showEvent.message.asString(resources))
+            }
+        }
+    }
+
+    open fun applyInsets() {
+        view?.applyInsetter {
+            type(ime = true, statusBars = true, navigationBars = true) {
+                margin()
             }
         }
     }

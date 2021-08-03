@@ -14,10 +14,12 @@ import com.zakrodionov.common.extensions.withInitialArguments
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.BaseFragment
 import com.zakrodionov.practicalapp.databinding.FragmentPostDetailBinding
+import dev.chrisbanes.insetter.applyInsetter
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
 import org.koin.core.parameter.parametersOf
 
-class PostDetailsFragment : BaseFragment<PostDetailsState, PostDetailsEvent>(R.layout.fragment_post_detail) {
+class PostDetailsFragment :
+    BaseFragment<PostDetailsState, PostDetailsEvent>(R.layout.fragment_post_detail) {
 
     companion object {
         fun newInstance(args: ArgsPostDetail) = PostDetailsFragment().withInitialArguments(args)
@@ -25,6 +27,7 @@ class PostDetailsFragment : BaseFragment<PostDetailsState, PostDetailsEvent>(R.l
 
     override val viewModel: PostDetailViewModel by stateViewModel { parametersOf(initialArguments()) }
     override val binding: FragmentPostDetailBinding by viewBinding(FragmentPostDetailBinding::bind)
+    override val statusBarColor: Int = R.color.transparent
 
     override fun setupViews(view: View, savedInstanceState: Bundle?) {
         setupLceLayout()
@@ -46,6 +49,15 @@ class PostDetailsFragment : BaseFragment<PostDetailsState, PostDetailsEvent>(R.l
     }
 
     override fun sideEffect(event: PostDetailsEvent) = Unit
+
+    // Скрываем статусбар
+    override fun applyInsets() {
+        view?.applyInsetter {
+            type(ime = true, navigationBars = true) {
+                margin()
+            }
+        }
+    }
 
     // Вообще это надо маппить в data слое или VM в OffsetDateTime, но для примера конвертации даты пока будет здесь
     private fun parsePostDate(date: String?): String? =

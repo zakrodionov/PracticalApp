@@ -34,6 +34,7 @@ import Libs.hyperion_measurement
 import Libs.hyperion_phoenix
 import Libs.hyperion_shared_preferences
 import Libs.hyperion_timber
+import Libs.insetter
 import Libs.junit_jupiter_api
 import Libs.junit_jupiter_engine
 import Libs.koin
@@ -204,4 +205,6 @@ dependencies {
 
     // Cicerone
     implementation(cicerone)
+
+    implementation(insetter)
 }
