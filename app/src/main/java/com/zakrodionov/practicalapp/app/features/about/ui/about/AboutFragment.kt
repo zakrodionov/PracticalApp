@@ -1,8 +1,10 @@
 package com.zakrodionov.practicalapp.app.features.about.ui.about
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.BaseFragment
 import com.zakrodionov.practicalapp.databinding.FragmentAboutBinding
@@ -12,10 +14,12 @@ class AboutFragment : BaseFragment<AboutState, AboutEvent>(R.layout.fragment_abo
     override val binding: FragmentAboutBinding by viewBinding(FragmentAboutBinding::bind)
     override val viewModel: AboutViewModel by stateViewModel()
 
+    @SuppressLint("SetTextI18n")
     override fun setupViews(view: View, savedInstanceState: Bundle?) {
         binding.tvTitle.setOnClickListener {
             viewModel.loginOrLogout()
         }
+        binding.tvAppVersion.text = getString(R.string.app_name) + " - " + BuildConfig.VERSION_NAME
     }
 
     override fun render(state: AboutState) {
