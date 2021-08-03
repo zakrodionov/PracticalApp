@@ -25,7 +25,7 @@ class PostDetailViewModel(
         if (state.post == null) loadPostDetails()
     }
 
-    fun loadPostDetails() = launch {
+    fun loadPostDetails() = launchIo {
         reduce { state.copy(isLoading = true) }
         postRepository
             .getPost(args.postId)

@@ -28,7 +28,7 @@ class PostsViewModel(
 
     fun loadPosts(refresh: Boolean = false, initial: Boolean = false) {
         if (loadingPostsJob.isCompleted || initial) {
-            loadingPostsJob = launch {
+            loadingPostsJob = launchIo {
                 if (refresh) reduce { state.copy(page = 0) }
 
                 if (state.page > 0) {
@@ -43,9 +43,7 @@ class PostsViewModel(
                         val newPosts = if (refresh) posts else state.posts.orEmpty().plus(posts)
                         reduce {
                             state.copy(
-                                posts = newPosts,
-                                error = null,
-                                page = state.increasePage()
+                                posts = newPosts, error = null, page = state.increasePage()
                             )
                         }
                     }
