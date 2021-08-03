@@ -53,7 +53,7 @@ class PostDetailsFragment :
     // Скрываем статусбар
     override fun applyInsets() {
         view?.applyInsetter {
-            type(ime = true, navigationBars = true) {
+            type(ime = true) {
                 margin()
             }
         }

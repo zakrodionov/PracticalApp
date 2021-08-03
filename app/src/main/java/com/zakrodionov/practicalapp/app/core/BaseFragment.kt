@@ -158,7 +158,7 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
 
     open fun applyInsets() {
         view?.applyInsetter {
-            type(ime = true, statusBars = true, navigationBars = true) {
+            type(ime = true, statusBars = true) {
                 margin()
             }
         }
