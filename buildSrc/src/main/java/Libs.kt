@@ -15,7 +15,7 @@ object Libs {
     const val androidx_app_compat = "androidx.appcompat:appcompat:1.3.1"
     const val androidx_material = "com.google.android.material:material:1.4.0"
     const val androidx_core = "androidx.core:core-ktx:1.6.0"
-    const val androidx_constraint_layout = "androidx.constraintlayout:constraintlayout:2.0.4"
+    const val androidx_constraint_layout = "androidx.constraintlayout:constraintlayout:2.1.0"
     const val androidx_fragment = "androidx.fragment:fragment-ktx:1.3.6"
     const val androidx_swipe_refresh_layout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     const val androidx_security_crypto = "androidx.security:security-crypto:1.0.0"
@@ -48,7 +48,7 @@ object Libs {
     const val flipper_no_op = "com.facebook.flipper:flipper-noop:$flipperVersion"
     const val flipper_soloader = "com.facebook.soloader:soloader:0.10.1"
 
-    const val timber = "com.jakewharton.timber:timber:4.7.1"
+    const val timber = "com.jakewharton.timber:timber:5.0.1"
 
     const val leak_canary = "com.squareup.leakcanary:leakcanary-android:2.7"
 
