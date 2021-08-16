@@ -12,6 +12,7 @@ import com.zakrodionov.common.extensions.setVerticalSlideAnimations
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.NONE
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.SLIDE_HORIZONTAL
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.SLIDE_VERTICAL
+import com.zakrodionov.practicalapp.app.features.bottom.ui.tabs.BottomTabsFragment
 
 // Обычный навигатор между экранами
 open class BaseNavigator(
@@ -26,7 +27,7 @@ open class BaseNavigator(
         nextFragment: Fragment
     ) {
         val animationStrategy = (nextFragment as? AnimationScreen)?.screenAnimationStrategy
-        if (currentFragment != null) {
+        if (nextFragment !is BottomTabsFragment) {
             when (animationStrategy) {
                 SLIDE_HORIZONTAL -> fragmentTransaction.setHorizontalSlideAnimations()
                 SLIDE_VERTICAL -> fragmentTransaction.setVerticalSlideAnimations()

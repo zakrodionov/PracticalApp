@@ -15,6 +15,7 @@ import com.zakrodionov.common.extensions.showDialog
 import com.zakrodionov.common.extensions.showIfNotAlreadyShown
 import com.zakrodionov.common.extensions.showToast
 import com.zakrodionov.practicalapp.R
+import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy
 import com.zakrodionov.practicalapp.app.features.StubFragment
 import com.zakrodionov.practicalapp.app.features.StubViewModel
 import com.zakrodionov.practicalapp.databinding.FragmentFavoriteBinding
@@ -22,8 +23,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @Suppress("MagicNumber")
 class FavoriteFragment : StubFragment(R.layout.fragment_favorite) {
+
     override val binding: FragmentFavoriteBinding by viewBinding(FragmentFavoriteBinding::bind)
     override val viewModel: FavoriteViewModel by viewModel()
+    override val screenAnimationStrategy: ScreenAnimationStrategy = ScreenAnimationStrategy.NONE
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,10 +54,12 @@ class FavoriteFragment : StubFragment(R.layout.fragment_favorite) {
             AnimatedDialog().showIfNotAlreadyShown(childFragmentManager, "AnimatedDialog")
         }
         binding.tvShowBottomDialog.setOnClickListener {
-            BottomDialog.newInstance(false).showIfNotAlreadyShown(childFragmentManager, "BottomDialog")
+            BottomDialog.newInstance(false)
+                .showIfNotAlreadyShown(childFragmentManager, "BottomDialog")
         }
         binding.tvShowBottomDialogFullscreen.setOnClickListener {
-            BottomDialog.newInstance(true).showIfNotAlreadyShown(childFragmentManager, "BottomDialogFullscreen")
+            BottomDialog.newInstance(true)
+                .showIfNotAlreadyShown(childFragmentManager, "BottomDialogFullscreen")
         }
         // Sample getting result
         childFragmentManager.setFragmentResultListener(RK_NUMBER_PICKER_DIALOG, this) { _, bundle ->

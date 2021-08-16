@@ -11,6 +11,8 @@ import com.zakrodionov.common.ui.rv.EndlessScroll
 import com.zakrodionov.common.ui.rv.loadingDelegate
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.BaseFragment
+import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy
+import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.NONE
 import com.zakrodionov.practicalapp.databinding.FragmentPostsBinding
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
 
@@ -22,6 +24,7 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
 
     override val viewModel: PostsViewModel by stateViewModel()
     override val binding: FragmentPostsBinding by viewBinding(FragmentPostsBinding::bind)
+    override val screenAnimationStrategy: ScreenAnimationStrategy = NONE
 
     private val adapter by lazy {
         AsyncListDifferDelegationAdapter(
