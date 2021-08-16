@@ -13,5 +13,5 @@ object AndroidConfig {
 
     const val APK_NAME = "Practical App-$VERSION_NAME"
 
-    const val API_DEBUG_URL = "\"https://dummyapi.io/data/api/\""
+    const val API_DEBUG_URL = "\"https://dummyapi.io/data/v1/\""
 }

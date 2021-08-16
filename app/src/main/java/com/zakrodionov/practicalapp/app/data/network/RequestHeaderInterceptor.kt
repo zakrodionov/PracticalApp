@@ -10,7 +10,7 @@ class RequestHeaderInterceptor(
 ) : RequestInterceptor() {
 
     override fun interceptRequest(requestBuilder: Request.Builder) {
-        requestBuilder.header("app-id", "606b5b499129d5822c058cd0") // Todo Test api
+        requestBuilder.header("app-id", "611a0d97fe9acec0ba2220cc") // Todo Test api
 
         if (appPreferences.accessToken.isNotBlank()) {
             requestBuilder.headerBearer(appPreferences.accessToken)
