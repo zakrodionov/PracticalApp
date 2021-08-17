@@ -215,34 +215,33 @@ dependencies {
     implementation(insetter)
 
     // TODO COMPOSE
-    implementation("androidx.compose.ui:ui:1.0.1")
+    val compose = "1.0.1"
+    implementation("androidx.compose.ui:ui:$compose")
     // Tooling support (Previews, etc.)
-    implementation("androidx.compose.ui:ui-tooling:1.0.1")
+    implementation("androidx.compose.ui:ui-tooling:$compose")
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
-    implementation("androidx.compose.foundation:foundation:1.0.1")
+    implementation("androidx.compose.foundation:foundation:$compose")
     // Material Design
-    implementation("androidx.compose.material:material:1.0.1")
+    implementation("androidx.compose.material:material:$compose")
     // Material design icons
-    implementation("androidx.compose.material:material-icons-core:1.0.1")
-    implementation("androidx.compose.material:material-icons-extended:1.0.1")
-    // Integration with observables
-    implementation("androidx.compose.runtime:runtime-livedata:1.0.1")
-    implementation("androidx.compose.runtime:runtime-rxjava2:1.0.1")
-
+    implementation("androidx.compose.material:material-icons-core:$compose")
+    implementation("androidx.compose.material:material-icons-extended:$compose")
     // UI Tests
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.0.1")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose")
 
-    val currentVersion = "1.0.0-beta05"
-    implementation("cafe.adriel.voyager:voyager-navigator:$currentVersion")
-    implementation("cafe.adriel.voyager:voyager-tab-navigator:$currentVersion")
-    implementation("cafe.adriel.voyager:voyager-transitions:$currentVersion")
+    val voyager = "1.0.0-beta05"
+    implementation("cafe.adriel.voyager:voyager-navigator:$voyager")
+    implementation("cafe.adriel.voyager:voyager-tab-navigator:$voyager")
+    implementation("cafe.adriel.voyager:voyager-transitions:$voyager")
 
-    implementation("io.coil-kt:coil:1.3.2")
-    implementation("io.coil-kt:coil-compose:1.3.2")
+    val coil = "1.3.2"
+    implementation("io.coil-kt:coil:$coil")
+    implementation("io.coil-kt:coil-compose:$coil")
 
     implementation("io.insert-koin:koin-androidx-compose:$koinVersion")
 
     implementation("androidx.activity:activity-compose:1.3.1")
 
-    implementation("com.google.accompanist:accompanist-swiperefresh:0.16.1")
+    val accompanist = "0.16.1"
+    implementation("com.google.accompanist:accompanist-swiperefresh:$accompanist")
 }
