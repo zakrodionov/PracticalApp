@@ -1,42 +1,62 @@
 package com.zakrodionov.practicalapp.app.features.root.ui
 
 import android.os.Bundle
-import com.github.terrakok.cicerone.NavigatorHolder
-import com.github.terrakok.cicerone.androidx.AppNavigator
-import com.zakrodionov.practicalapp.R
-import com.zakrodionov.practicalapp.app.core.BaseActivity
-import com.zakrodionov.practicalapp.app.core.navigation.BaseNavigator
-import com.zakrodionov.practicalapp.app.core.navigation.GlobalRouter
-import com.zakrodionov.practicalapp.app.di.DIQualifiers.navigationHolderQualifier
-import com.zakrodionov.practicalapp.app.di.initializer.GLOBAL_QUALIFIER
-import com.zakrodionov.practicalapp.app.features.bottom.BottomScreens.BottomTabsScreen
-import org.koin.android.ext.android.inject
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
+import androidx.compose.material.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import cafe.adriel.voyager.navigator.tab.CurrentTab
+import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
+import cafe.adriel.voyager.navigator.tab.Tab
+import cafe.adriel.voyager.navigator.tab.TabNavigator
+import com.zakrodionov.practicalapp.app.features.about.ui.AboutTab
+import com.zakrodionov.practicalapp.app.features.favorite.ui.FavoritesTab
+import com.zakrodionov.practicalapp.app.features.posts.ui.PostsTab
 
-class RootActivity : BaseActivity() {
-
-    private val globalRouter: GlobalRouter by inject()
-    private val navigatorHolder: NavigatorHolder by inject(
-        navigationHolderQualifier(GLOBAL_QUALIFIER)
-    )
-    private val navigator: AppNavigator =
-        BaseNavigator(this, supportFragmentManager, R.id.fragmentContainerView)
+class RootActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.layout_fragment_container)
-
-        if (savedInstanceState == null) {
-            globalRouter.newRootScreen(BottomTabsScreen())
+        setContent {
+            Content()
         }
     }
 
-    override fun onResumeFragments() {
-        super.onResumeFragments()
-        navigatorHolder.setNavigator(navigator)
+    @Composable
+    fun Content() {
+        TabNavigator(PostsTab) { tabNavigator ->
+            Scaffold(
+                content = {
+                    Box(modifier = Modifier.padding(it)) {
+                        CurrentTab()
+                    }
+                },
+                bottomBar = {
+                    BottomNavigation {
+                        TabNavigationItem(PostsTab)
+                        TabNavigationItem(FavoritesTab)
+                        TabNavigationItem(AboutTab)
+                    }
+                }
+            )
+        }
     }
 
-    override fun onPause() {
-        navigatorHolder.removeNavigator()
-        super.onPause()
+    @Composable
+    private fun RowScope.TabNavigationItem(tab: Tab) {
+        val tabNavigator = LocalTabNavigator.current
+
+        BottomNavigationItem(
+            selected = tabNavigator.current.key == tab.key,
+            onClick = { tabNavigator.current = tab },
+            icon = { Icon(painter = tab.options.icon!!, contentDescription = tab.options.title) }
+        )
     }
 }

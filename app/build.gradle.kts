@@ -53,8 +53,9 @@ import Libs.retrofit
 import Libs.retrofit_moshi
 import Libs.timber
 import Libs.viewbinding_property_delegate
+import Versions.koinVersion
 import java.io.FileInputStream
-import java.util.Properties
+import java.util.*
 
 plugins {
     id("com.android.application")
@@ -129,6 +130,11 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.0.1"
     }
 }
 
@@ -207,4 +213,36 @@ dependencies {
     implementation(cicerone)
 
     implementation(insetter)
+
+    // TODO COMPOSE
+    implementation("androidx.compose.ui:ui:1.0.1")
+    // Tooling support (Previews, etc.)
+    implementation("androidx.compose.ui:ui-tooling:1.0.1")
+    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+    implementation("androidx.compose.foundation:foundation:1.0.1")
+    // Material Design
+    implementation("androidx.compose.material:material:1.0.1")
+    // Material design icons
+    implementation("androidx.compose.material:material-icons-core:1.0.1")
+    implementation("androidx.compose.material:material-icons-extended:1.0.1")
+    // Integration with observables
+    implementation("androidx.compose.runtime:runtime-livedata:1.0.1")
+    implementation("androidx.compose.runtime:runtime-rxjava2:1.0.1")
+
+    // UI Tests
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.0.1")
+
+    val currentVersion = "1.0.0-beta05"
+    implementation("cafe.adriel.voyager:voyager-navigator:$currentVersion")
+    implementation("cafe.adriel.voyager:voyager-tab-navigator:$currentVersion")
+    implementation("cafe.adriel.voyager:voyager-transitions:$currentVersion")
+
+    implementation("io.coil-kt:coil:1.3.2")
+    implementation("io.coil-kt:coil-compose:1.3.2")
+
+    implementation("io.insert-koin:koin-androidx-compose:$koinVersion")
+
+    implementation("androidx.activity:activity-compose:1.3.1")
+
+    implementation("com.google.accompanist:accompanist-swiperefresh:0.16.1")
 }

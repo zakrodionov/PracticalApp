@@ -2,19 +2,51 @@ package com.zakrodionov.practicalapp.app.features.posts.ui.list
 
 import android.os.Bundle
 import android.view.View
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.dp
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
+import coil.compose.rememberImagePainter
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.zakrodionov.common.extensions.setup
 import com.zakrodionov.common.ui.rv.DiffCallback
 import com.zakrodionov.common.ui.rv.EndlessScroll
+import com.zakrodionov.common.ui.rv.LoadingItem
 import com.zakrodionov.common.ui.rv.loadingDelegate
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.BaseFragment
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.NONE
+import com.zakrodionov.practicalapp.app.features.posts.domain.model.Posts.Post
+import com.zakrodionov.practicalapp.app.features.posts.ui.detail.ArgsPostDetail
+import com.zakrodionov.practicalapp.app.features.posts.ui.detail.PostDetailsScreen
+import com.zakrodionov.practicalapp.app.features.temp.Lce
 import com.zakrodionov.practicalapp.databinding.FragmentPostsBinding
+import org.koin.androidx.compose.getStateViewModel
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
+import kotlin.random.Random
 
 class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_posts) {
 
@@ -73,4 +105,69 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
     }
 
     override fun sideEffect(event: PostsEvent) = Unit
+}
+
+object PostsScreen : Screen {
+    override val key: String = "PostsScreen"
+
+    @Composable
+    override fun Content() {
+        val navigator = LocalNavigator.current
+        val viewModel = getStateViewModel<PostsViewModel>()
+        val state = viewModel.stateFlow.collectAsState()
+
+        Lce(lceState = state.value.lceState, tryAgain = { viewModel.loadPosts() }) {
+            SwipeRefresh(
+                state = rememberSwipeRefreshState(state.value.isLoading),
+                onRefresh = { viewModel.loadPosts(refresh = true) },
+            ) {
+                val listState = rememberLazyListState()
+                if (listState.layoutInfo.totalItemsCount != 0 && listState.firstVisibleItemIndex + 5 > listState.layoutInfo.totalItemsCount) {
+                    viewModel.loadPosts()
+                }
+
+                LazyColumn(
+                    state = listState,
+                    verticalArrangement = Arrangement.spacedBy(15.dp), // Расстояние между айтемами
+                    contentPadding = PaddingValues(20.dp) // Отступы всего LazyColumn
+                ) {
+                    items(state.value.posts.orEmpty(), key = { it.itemId }) { item ->
+                        when (item) {
+                            is Post -> PostItem(item) { navigateToPost(navigator, it) }
+                            LoadingItem -> com.zakrodionov.practicalapp.app.features.temp.LoadingItem()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun navigateToPost(navigator: Navigator?, post: Post) {
+        val id = post.id
+        if (id != null) {
+            // Для теста разного поведения передаем или сразу весь Post или только id для загрузки поста с сервера
+            val postOrNull = if (Random.nextBoolean()) post else null
+            navigator?.push(PostDetailsScreen(ArgsPostDetail(id, postOrNull)))
+        }
+    }
+}
+
+@Composable
+fun PostItem(post: Post, onClick: (Post) -> Unit) {
+    Card(
+        modifier = Modifier.clickable { onClick(post) },
+        shape = RoundedCornerShape(15.dp)
+    ) {
+        Column {
+            Image(
+                painter = rememberImagePainter(post.image.orEmpty()),
+                contentDescription = "Post Image",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .height(150.dp)
+                    .fillMaxWidth()
+            )
+            Text(modifier = Modifier.padding(5.dp), text = post.text.orEmpty())
+        }
+    }
 }
