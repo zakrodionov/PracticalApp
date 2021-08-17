@@ -8,7 +8,9 @@ import kotlinx.parcelize.Parcelize
 data class AboutState(
     val isLogged: Boolean = false,
     val error: BaseError? = null,
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
 ) : Parcelable
 
 sealed class AboutEvent
+
+object NavigateToLoginFlow : AboutEvent()

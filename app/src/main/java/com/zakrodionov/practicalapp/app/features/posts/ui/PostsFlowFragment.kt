@@ -13,7 +13,7 @@ import com.zakrodionov.practicalapp.app.core.BaseTabFragment
 import com.zakrodionov.practicalapp.app.features.posts.PostsScreens.postsScreen
 import com.zakrodionov.practicalapp.app.features.posts.di.POSTS_QUALIFIER
 import com.zakrodionov.practicalapp.app.features.posts.ui.list.PostsScreen
-import com.zakrodionov.practicalapp.app.features.temp.TabContent
+import com.zakrodionov.practicalapp.app.ui.components.TabContent
 
 class PostsFlowFragment : BaseTabFragment(
     R.layout.layout_fragment_container,

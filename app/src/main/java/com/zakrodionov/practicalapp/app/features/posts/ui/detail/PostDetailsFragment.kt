@@ -27,7 +27,7 @@ import com.zakrodionov.common.extensions.toLocaleDateTimeApplyZone
 import com.zakrodionov.common.extensions.withInitialArguments
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.BaseFragment
-import com.zakrodionov.practicalapp.app.features.temp.Lce
+import com.zakrodionov.practicalapp.app.ui.components.Lce
 import com.zakrodionov.practicalapp.databinding.FragmentPostDetailBinding
 import dev.chrisbanes.insetter.applyInsetter
 import org.koin.androidx.compose.getStateViewModel

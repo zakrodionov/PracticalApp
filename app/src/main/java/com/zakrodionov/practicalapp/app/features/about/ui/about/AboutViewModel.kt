@@ -6,12 +6,11 @@ import com.zakrodionov.practicalapp.app.core.BaseViewModel
 import com.zakrodionov.practicalapp.app.core.navigation.FlowRouter
 import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences
 import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences.Companion.KEY_IS_LOGGED
-import com.zakrodionov.practicalapp.app.features.login.LoginScreens.LoginFlowScreen
 
 class AboutViewModel(
     savedStateHandle: SavedStateHandle,
     private val appPreferences: AppPreferences,
-    private val flowRouter: FlowRouter
+    private val flowRouter: FlowRouter,
 ) : BaseViewModel<AboutState, AboutEvent>(AboutState(), savedStateHandle) {
 
     init {
@@ -48,6 +47,8 @@ class AboutViewModel(
     }
 
     private fun navigateToLoginFlow() {
-        flowRouter.externalNavigateTo(LoginFlowScreen())
+        launch {
+            postEvent(NavigateToLoginFlow)
+        }
     }
 }

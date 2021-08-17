@@ -3,7 +3,6 @@ package com.zakrodionov.practicalapp.app.features.posts.ui.list
 import android.os.Bundle
 import android.view.View
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -13,8 +12,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -42,7 +41,8 @@ import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.
 import com.zakrodionov.practicalapp.app.features.posts.domain.model.Posts.Post
 import com.zakrodionov.practicalapp.app.features.posts.ui.detail.ArgsPostDetail
 import com.zakrodionov.practicalapp.app.features.posts.ui.detail.PostDetailsScreen
-import com.zakrodionov.practicalapp.app.features.temp.Lce
+import com.zakrodionov.practicalapp.app.ui.components.Lce
+import com.zakrodionov.practicalapp.app.ui.components.LoadingItem
 import com.zakrodionov.practicalapp.databinding.FragmentPostsBinding
 import org.koin.androidx.compose.getStateViewModel
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
@@ -134,7 +134,7 @@ object PostsScreen : Screen {
                     items(state.value.posts.orEmpty(), key = { it.itemId }) { item ->
                         when (item) {
                             is Post -> PostItem(item) { navigateToPost(navigator, it) }
-                            LoadingItem -> com.zakrodionov.practicalapp.app.features.temp.LoadingItem()
+                            LoadingItem -> LoadingItem()
                         }
                     }
                 }
@@ -152,12 +152,10 @@ object PostsScreen : Screen {
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun PostItem(post: Post, onClick: (Post) -> Unit) {
-    Card(
-        modifier = Modifier.clickable { onClick(post) },
-        shape = RoundedCornerShape(15.dp)
-    ) {
+    Card(onClick = { onClick(post) }) {
         Column {
             Image(
                 painter = rememberImagePainter(post.image.orEmpty()),

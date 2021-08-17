@@ -1,4 +1,4 @@
-package com.zakrodionov.practicalapp.app.features.temp
+package com.zakrodionov.practicalapp.app.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

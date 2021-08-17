@@ -1,4 +1,4 @@
-package com.zakrodionov.practicalapp.app.features.temp
+package com.zakrodionov.practicalapp.app.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable

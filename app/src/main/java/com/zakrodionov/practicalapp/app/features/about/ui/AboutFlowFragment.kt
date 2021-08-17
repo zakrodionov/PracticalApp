@@ -12,7 +12,7 @@ import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.BaseTabFragment
 import com.zakrodionov.practicalapp.app.features.about.AboutScreens.AboutScreen
 import com.zakrodionov.practicalapp.app.features.about.di.ABOUT_QUALIFIER
-import com.zakrodionov.practicalapp.app.features.temp.TabContent
+import com.zakrodionov.practicalapp.app.ui.components.TabContent
 
 class AboutFlowFragment : BaseTabFragment(
     R.layout.layout_fragment_container,

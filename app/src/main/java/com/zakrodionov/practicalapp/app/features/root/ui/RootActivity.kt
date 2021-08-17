@@ -19,13 +19,16 @@ import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.zakrodionov.practicalapp.app.features.about.ui.AboutTab
 import com.zakrodionov.practicalapp.app.features.favorite.ui.FavoritesTab
 import com.zakrodionov.practicalapp.app.features.posts.ui.PostsTab
+import com.zakrodionov.practicalapp.app.ui.theme.PracticalAppTheme
 
 class RootActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Content()
+            PracticalAppTheme {
+                Content()
+            }
         }
     }
 
