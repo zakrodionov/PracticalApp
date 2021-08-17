@@ -69,9 +69,6 @@ object PhoneScreen : Screen {
 
     @Composable
     override fun Content() {
-        val viewModel = getStateViewModel<PhoneViewModel>()
-        val state = viewModel.stateFlow.collectAsState()
-
         val navigator = LocalNavigator.current
 
         Column(verticalArrangement = Arrangement.Center, modifier = Modifier.fillMaxSize()) {

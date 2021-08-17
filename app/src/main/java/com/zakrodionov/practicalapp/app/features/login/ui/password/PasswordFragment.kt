@@ -71,8 +71,6 @@ object PasswordScreen : Screen {
         val appPreferences = get<AppPreferences>()
 
         val navigator = LocalNavigator.current
-        val viewModel = getStateViewModel<PasswordViewModel>()
-        val state = viewModel.stateFlow.collectAsState()
 
         Column(verticalArrangement = Arrangement.Center, modifier = Modifier.fillMaxSize()) {
             PasswordTextField(onValueChanged = { debug(it) })
