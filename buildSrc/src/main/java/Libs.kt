@@ -1,6 +1,7 @@
-import Versions.adapterDelegatesVersion
+import Versions.accompanistVersion
+import Versions.coilVersion
+import Versions.composeVersion
 import Versions.flipperVersion
-import Versions.glideVersion
 import Versions.hyperionVersion
 import Versions.junitJupiterVersion
 import Versions.koinVersion
@@ -15,10 +16,9 @@ object Libs {
     const val androidx_app_compat = "androidx.appcompat:appcompat:1.3.1"
     const val androidx_material = "com.google.android.material:material:1.4.0"
     const val androidx_core = "androidx.core:core-ktx:1.6.0"
-    const val androidx_constraint_layout = "androidx.constraintlayout:constraintlayout:2.1.0"
-    const val androidx_fragment = "androidx.fragment:fragment-ktx:1.3.6"
-    const val androidx_swipe_refresh_layout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     const val androidx_security_crypto = "androidx.security:security-crypto:1.0.0"
+    const val androidx_activity_compose = "androidx.activity:activity-compose:1.3.1"
+    const val androidx_navigation_compose = "androidx.navigation:navigation-compose:2.4.0-alpha06"
 
     //Kotlin
     const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
@@ -39,6 +39,7 @@ object Libs {
 
     // Koin
     const val koin = "io.insert-koin:koin-android:$koinVersion"
+    const val koin_compose = "io.insert-koin:koin-androidx-compose:$koinVersion"
     const val koin_test = "io.insert-koin:koin-test:$koinVersion"
 
     // Inspect & Debug tools
@@ -68,22 +69,31 @@ object Libs {
 
     const val desugar_jdk = "com.android.tools:desugar_jdk_libs:1.1.5"
 
-    const val viewbinding_property_delegate = "com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.4.7"
+    // Compose
+    const val compose_ui = "androidx.compose.ui:ui:$composeVersion"
 
-    //AdapterDelegates
-    const val adapter_delegates = "com.hannesdorfmann:adapterdelegates4:$adapterDelegatesVersion"
-    const val adapter_delegates_dsl =
-        "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:$adapterDelegatesVersion"
+    // Tooling support (Previews, etc.)
+    const val compose_tooling = "androidx.compose.ui:ui-tooling:$composeVersion"
 
-    const val cicerone = "com.github.terrakok:cicerone:7.1"
+    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+    const val compose_foundation = "androidx.compose.foundation:foundation:$composeVersion"
 
-    const val decoro = "ru.tinkoff.decoro:decoro:1.5.0"
+    // Material Design
+    const val compose_material = "androidx.compose.material:material:$composeVersion"
 
-    const val coil = "io.coil-kt:coil:1.1.1"
+    // Material design icons
+    const val compose_material_icons_core = "androidx.compose.material:material-icons-core:$composeVersion"
+    const val compose_material_icons_extended = "androidx.compose.material:material-icons-extended:$composeVersion"
 
-    //Glide
-    const val glide = "com.github.bumptech.glide:glide:$glideVersion"
-    const val glide_compiler = "com.github.bumptech.glide:compiler:$glideVersion"
+    // Coil
+    const val coil = "io.coil-kt:coil:$coilVersion"
+    const val coil_compose = "io.coil-kt:coil-compose:$coilVersion"
+
+    // Accompanist
+    const val accompanist_swipe_refresh = "com.google.accompanist:accompanist-swiperefresh:$accompanistVersion"
+
+    // UI Tests
+    const val compose_ui_test = "androidx.compose.ui:ui-test-junit4:$composeVersion"
 
     const val insetter = "dev.chrisbanes.insetter:insetter:0.6.0"
 

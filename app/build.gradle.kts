@@ -7,15 +7,10 @@ import AndroidConfig.TARGET_SDK_VERSION
 import AndroidConfig.TEST_INSTRUMENTATION_RUNNER
 import AndroidConfig.VERSION_CODE
 import AndroidConfig.VERSION_NAME
-import Libs.adapter_delegates
-import Libs.adapter_delegates_dsl
 import Libs.androidx_app_compat
-import Libs.androidx_constraint_layout
 import Libs.androidx_core
-import Libs.androidx_fragment
 import Libs.androidx_material
 import Libs.androidx_security_crypto
-import Libs.androidx_swipe_refresh_layout
 import Libs.coroutines
 import Libs.coroutines_test
 import Libs.desugar_jdk
@@ -24,10 +19,10 @@ import Libs.flipper
 import Libs.flipper_network
 import Libs.flipper_no_op
 import Libs.flipper_soloader
-import Libs.insetter
 import Libs.junit_jupiter_api
 import Libs.junit_jupiter_engine
 import Libs.koin
+import Libs.koin_compose
 import Libs.koin_test
 import Libs.kotlin_stdlib
 import Libs.leak_canary
@@ -42,8 +37,6 @@ import Libs.okhttp_logging_interceptor
 import Libs.retrofit
 import Libs.retrofit_moshi
 import Libs.timber
-import Libs.viewbinding_property_delegate
-import Versions.koinVersion
 import java.io.FileInputStream
 import java.util.Properties
 
@@ -119,12 +112,11 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
         compose = true
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.0.1"
+        kotlinCompilerExtensionVersion = Versions.composeVersion
     }
 }
 
@@ -146,13 +138,11 @@ dependencies {
     implementation(androidx_core)
     implementation(androidx_app_compat)
     implementation(androidx_material)
-    implementation(androidx_constraint_layout)
-    implementation(androidx_fragment)
-    implementation(androidx_swipe_refresh_layout)
     implementation(androidx_security_crypto)
 
     // Koin
     implementation(koin)
+    implementation(koin_compose)
     testImplementation(koin_test)
 
     // Networking
@@ -179,53 +169,22 @@ dependencies {
 
     debugImplementation(leak_canary)
 
-    // Hyperion
-//    debugImplementation(hyperion_core)
-//    debugImplementation(hyperion_attr)
-//    debugImplementation(hyperion_build_config)
-//    debugImplementation(hyperion_disk)
-//    debugImplementation(hyperion_geiger_counter)
-//    debugImplementation(hyperion_measurement)
-//    debugImplementation(hyperion_phoenix)
-//    debugImplementation(hyperion_shared_preferences)
-//    debugImplementation(hyperion_timber)
-    // endregion
-
     coreLibraryDesugaring(desugar_jdk)
 
-    implementation(viewbinding_property_delegate)
+    // Compose
+    implementation(Libs.compose_ui)
+    implementation(Libs.compose_tooling)
+    implementation(Libs.compose_foundation)
+    implementation(Libs.compose_material)
+    implementation(Libs.compose_material_icons_core)
+    implementation(Libs.compose_material_icons_extended)
+    androidTestImplementation(Libs.compose_ui_test)
 
-    // AdapterDelegates
-    implementation(adapter_delegates)
-    implementation(adapter_delegates_dsl)
+    implementation(Libs.androidx_activity_compose)
+    implementation(Libs.androidx_navigation_compose)
 
-    implementation(insetter)
+    implementation(Libs.coil)
+    implementation(Libs.coil_compose)
 
-    // TODO COMPOSE
-    val compose = "1.0.1"
-    implementation("androidx.compose.ui:ui:$compose")
-    // Tooling support (Previews, etc.)
-    implementation("androidx.compose.ui:ui-tooling:$compose")
-    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
-    implementation("androidx.compose.foundation:foundation:$compose")
-    // Material Design
-    implementation("androidx.compose.material:material:$compose")
-    // Material design icons
-    implementation("androidx.compose.material:material-icons-core:$compose")
-    implementation("androidx.compose.material:material-icons-extended:$compose")
-    // UI Tests
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose")
-
-    val coil = "1.3.2"
-    implementation("io.coil-kt:coil:$coil")
-    implementation("io.coil-kt:coil-compose:$coil")
-
-    implementation("io.insert-koin:koin-androidx-compose:$koinVersion")
-
-    implementation("androidx.activity:activity-compose:1.3.1")
-
-    val accompanist = "0.16.1"
-    implementation("com.google.accompanist:accompanist-swiperefresh:$accompanist")
-
-    implementation("androidx.navigation:navigation-compose:2.4.0-alpha06")
+    implementation(Libs.accompanist_swipe_refresh)
 }

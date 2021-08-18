@@ -46,5 +46,5 @@ fun currentRoute(navController: NavHostController): String? {
 fun shouldShowBottomBar(navController: NavHostController): Boolean {
     val currentRoute = currentRoute(navController)
     return currentRoute != LoginScreens.PHONE.route &&
-            currentRoute != LoginScreens.PASSWORD.route
+        currentRoute != LoginScreens.PASSWORD.route
 }

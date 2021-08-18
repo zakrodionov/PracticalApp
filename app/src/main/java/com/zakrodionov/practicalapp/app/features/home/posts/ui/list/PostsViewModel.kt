@@ -1,8 +1,8 @@
 package com.zakrodionov.practicalapp.app.features.home.posts.ui.list
 
 import androidx.lifecycle.SavedStateHandle
-import com.zakrodionov.common.ui.rv.addLoadingItem
-import com.zakrodionov.common.ui.rv.removeLoadingItem
+import com.zakrodionov.common.ui.addLoadingItem
+import com.zakrodionov.common.ui.removeLoadingItem
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
 import com.zakrodionov.practicalapp.app.core.onFailure
 import com.zakrodionov.practicalapp.app.core.onSuccess

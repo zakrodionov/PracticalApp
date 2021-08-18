@@ -30,14 +30,7 @@ android {
         coreLibraryDesugaringEnabled true
     }
 
-    buildFeatures {
-        viewBinding = true
-    }
-
     dependencies {
-        implementation(Libs.viewbinding_property_delegate)
-
         coreLibraryDesugaring(Libs.desugar_jdk)
     }
-
 }

@@ -22,7 +22,7 @@ import androidx.navigation.NavHostController
 import coil.compose.rememberImagePainter
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import com.zakrodionov.common.ui.rv.LoadingItem
+import com.zakrodionov.common.ui.LoadingItem
 import com.zakrodionov.practicalapp.app.features.MainDestinations.POST_DETAIL_ROUTE
 import com.zakrodionov.practicalapp.app.features.home.posts.domain.model.Posts.Post
 import com.zakrodionov.practicalapp.app.ui.components.Lce

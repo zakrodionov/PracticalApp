@@ -3,7 +3,7 @@ package com.zakrodionov.practicalapp.app.features.home.posts.domain.model
 import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import com.zakrodionov.common.ui.rv.DiffItem
+import com.zakrodionov.common.ui.DiffItem
 import kotlinx.parcelize.Parcelize
 
 @JsonClass(generateAdapter = true)
@@ -17,7 +17,7 @@ data class Posts(
     @Json(name = "page")
     val page: Int?,
     @Json(name = "total")
-    val total: Int?
+    val total: Int?,
 ) {
     @JsonClass(generateAdapter = true)
     @Parcelize
@@ -37,7 +37,7 @@ data class Posts(
         @Json(name = "tags")
         val tags: List<String?>?,
         @Json(name = "text")
-        val text: String?
+        val text: String?,
     ) : DiffItem {
         @JsonClass(generateAdapter = true)
         @Parcelize
@@ -53,7 +53,7 @@ data class Posts(
             @Json(name = "picture")
             val picture: String?,
             @Json(name = "title")
-            val title: String?
+            val title: String?,
         ) : Parcelable
 
         override val itemId: String

@@ -1,12 +1,12 @@
 package com.zakrodionov.practicalapp.app.features.home.posts.ui.list
 
 import android.os.Parcelable
+import com.zakrodionov.common.ui.DiffItem
 import com.zakrodionov.common.ui.lce.ContentState
 import com.zakrodionov.common.ui.lce.EmptyState
 import com.zakrodionov.common.ui.lce.ErrorState
 import com.zakrodionov.common.ui.lce.LceState
 import com.zakrodionov.common.ui.lce.LoadingState
-import com.zakrodionov.common.ui.rv.DiffItem
 import com.zakrodionov.practicalapp.app.core.BaseError
 import com.zakrodionov.practicalapp.app.core.toUiError
 import kotlinx.parcelize.Parcelize
@@ -16,7 +16,7 @@ data class PostsState(
     val posts: List<DiffItem>? = null,
     val page: Int = 0,
     val error: BaseError? = null,
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
 ) : Parcelable {
     val lceState: LceState
         get() = when {
