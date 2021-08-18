@@ -9,8 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.zakrodionov.practicalapp.app.features.home.ui.HomeScreens
-import com.zakrodionov.practicalapp.app.features.home.ui.PracticalAppBottomBar
+import com.zakrodionov.practicalapp.app.features.home.HomeScreens
+import com.zakrodionov.practicalapp.app.features.home.PracticalAppBottomBar
 import com.zakrodionov.practicalapp.app.features.login.LoginScreens
 import com.zakrodionov.practicalapp.app.ui.theme.PracticalAppTheme
 
@@ -46,5 +46,5 @@ fun currentRoute(navController: NavHostController): String? {
 fun shouldShowBottomBar(navController: NavHostController): Boolean {
     val currentRoute = currentRoute(navController)
     return currentRoute != LoginScreens.PHONE.route &&
-        currentRoute != LoginScreens.PASSWORD.route
+            currentRoute != LoginScreens.PASSWORD.route
 }

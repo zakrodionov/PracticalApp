@@ -16,11 +16,11 @@ import com.zakrodionov.practicalapp.app.features.MainDestinations.HOME_ROUTE
 import com.zakrodionov.practicalapp.app.features.MainDestinations.LOGIN_ROUTE
 import com.zakrodionov.practicalapp.app.features.MainDestinations.POST_DETAIL_ROUTE
 import com.zakrodionov.practicalapp.app.features.MainDestinations.POST_ID_KEY
-import com.zakrodionov.practicalapp.app.features.home.ui.HomeScreens
-import com.zakrodionov.practicalapp.app.features.home.ui.addHomeGraph
+import com.zakrodionov.practicalapp.app.features.home.HomeScreens
+import com.zakrodionov.practicalapp.app.features.home.addHomeGraph
+import com.zakrodionov.practicalapp.app.features.home.posts.ui.detail.PostDetailsScreen
 import com.zakrodionov.practicalapp.app.features.login.LoginScreens
 import com.zakrodionov.practicalapp.app.features.login.addLoginGraph
-import com.zakrodionov.practicalapp.app.features.posts.ui.detail.PostDetailsScreen
 
 object MainDestinations {
     const val HOME_ROUTE = "home"
@@ -46,28 +46,14 @@ fun PracticalAppNavGraph(
             route = HOME_ROUTE,
             startDestination = HomeScreens.POSTS.route
         ) {
-            addHomeGraph(
-                navigateToPostDetail = { postId: String ->
-                    navController.navigate("$POST_DETAIL_ROUTE/$postId")
-                },
-                navigateToLogin = {
-                    navController.navigate(LOGIN_ROUTE)
-                }
-            )
+            addHomeGraph(navController)
         }
 
         navigation(
             route = LOGIN_ROUTE,
             startDestination = LoginScreens.PHONE.route
         ) {
-            addLoginGraph(
-                navigateToPassword = {
-                    navController.navigate(LoginScreens.PASSWORD.route)
-                },
-                popToRoot = {
-                    navController.closeNestedNavigation(this)
-                }
-            )
+            addLoginGraph(navController)
         }
 
         composable(
@@ -81,5 +67,5 @@ fun PracticalAppNavGraph(
     }
 }
 
-fun NavHostController.closeNestedNavigation(navGraphBuilder: NavGraphBuilder) =
+fun NavHostController.closeNestedNavGraph(navGraphBuilder: NavGraphBuilder) =
     popBackStack(navGraphBuilder.route!!, true)

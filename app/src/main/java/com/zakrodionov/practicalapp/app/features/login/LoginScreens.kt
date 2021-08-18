@@ -1,7 +1,9 @@
 package com.zakrodionov.practicalapp.app.features.login
 
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.zakrodionov.practicalapp.app.features.closeNestedNavGraph
 import com.zakrodionov.practicalapp.app.features.login.ui.password.PasswordScreen
 import com.zakrodionov.practicalapp.app.features.login.ui.phone.PhoneScreen
 
@@ -11,13 +13,12 @@ enum class LoginScreens(val route: String) {
 }
 
 fun NavGraphBuilder.addLoginGraph(
-    navigateToPassword: () -> Unit,
-    popToRoot: () -> Unit,
+    navController: NavHostController,
 ) {
     composable(LoginScreens.PHONE.route) {
-        PhoneScreen(navigateToPassword)
+        PhoneScreen(navController)
     }
     composable(LoginScreens.PASSWORD.route) {
-        PasswordScreen(popToRoot)
+        PasswordScreen { navController.closeNestedNavGraph(this) }
     }
 }
