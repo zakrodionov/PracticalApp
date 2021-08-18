@@ -30,6 +30,14 @@ android {
         coreLibraryDesugaringEnabled true
     }
 
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion Versions.composeVersion
+    }
+
     dependencies {
         coreLibraryDesugaring(Libs.desugar_jdk)
     }

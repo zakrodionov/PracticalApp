@@ -12,6 +12,7 @@ dependencies {
     implementation(Libs.moshi)
     implementation(Libs.retrofit)
     implementation(Libs.okhttp_logging_interceptor)
+    implementation(Libs.compose_ui)
 
     api(Libs.androidx_security_crypto)
 }
