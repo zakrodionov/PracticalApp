@@ -190,15 +190,15 @@ dependencies {
     debugImplementation(leak_canary)
 
     // Hyperion
-    debugImplementation(hyperion_core)
-    debugImplementation(hyperion_attr)
-    debugImplementation(hyperion_build_config)
-    debugImplementation(hyperion_disk)
-    debugImplementation(hyperion_geiger_counter)
-    debugImplementation(hyperion_measurement)
-    debugImplementation(hyperion_phoenix)
-    debugImplementation(hyperion_shared_preferences)
-    debugImplementation(hyperion_timber)
+//    debugImplementation(hyperion_core)
+//    debugImplementation(hyperion_attr)
+//    debugImplementation(hyperion_build_config)
+//    debugImplementation(hyperion_disk)
+//    debugImplementation(hyperion_geiger_counter)
+//    debugImplementation(hyperion_measurement)
+//    debugImplementation(hyperion_phoenix)
+//    debugImplementation(hyperion_shared_preferences)
+//    debugImplementation(hyperion_timber)
     // endregion
 
     coreLibraryDesugaring(desugar_jdk)
