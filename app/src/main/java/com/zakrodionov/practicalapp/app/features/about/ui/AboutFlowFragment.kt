@@ -26,27 +26,3 @@ class AboutFlowFragment : BaseTabFragment(
 
     override val startScreen: Screen = AboutScreen()
 }
-
-object AboutTab : Tab {
-    override val key: String
-        get() = "AboutTab"
-
-    override val options: TabOptions
-        @Composable
-        get() {
-            val icon = rememberVectorPainter(Icons.Default.More)
-
-            return remember {
-                TabOptions(
-                    index = 2u,
-                    title = "About",
-                    icon = icon
-                )
-            }
-        }
-
-    @Composable
-    override fun Content() {
-        TabContent(startScreen = com.zakrodionov.practicalapp.app.features.about.ui.about.AboutScreen)
-    }
-}

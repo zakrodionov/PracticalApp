@@ -244,4 +244,6 @@ dependencies {
 
     val accompanist = "0.16.1"
     implementation("com.google.accompanist:accompanist-swiperefresh:$accompanist")
+
+    implementation("androidx.navigation:navigation-compose:2.4.0-alpha06")
 }

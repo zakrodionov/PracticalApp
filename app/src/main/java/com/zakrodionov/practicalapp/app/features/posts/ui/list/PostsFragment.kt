@@ -22,9 +22,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.Navigator
 import coil.compose.rememberImagePainter
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
@@ -39,14 +36,11 @@ import com.zakrodionov.practicalapp.app.core.BaseFragment
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.NONE
 import com.zakrodionov.practicalapp.app.features.posts.domain.model.Posts.Post
-import com.zakrodionov.practicalapp.app.features.posts.ui.detail.ArgsPostDetail
-import com.zakrodionov.practicalapp.app.features.posts.ui.detail.PostDetailsScreen
 import com.zakrodionov.practicalapp.app.ui.components.Lce
 import com.zakrodionov.practicalapp.app.ui.components.LoadingItem
 import com.zakrodionov.practicalapp.databinding.FragmentPostsBinding
 import org.koin.androidx.compose.getStateViewModel
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
-import kotlin.random.Random
 
 class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_posts) {
 
@@ -107,47 +101,33 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
     override fun sideEffect(event: PostsEvent) = Unit
 }
 
-object PostsScreen : Screen {
-    override val key: String = "PostsScreen"
+@Composable
+fun PostsScreen(onPostClick: (Post) -> Unit) {
+    val viewModel = getStateViewModel<PostsViewModel>()
+    val state = viewModel.stateFlow.collectAsState()
 
-    @Composable
-    override fun Content() {
-        val navigator = LocalNavigator.current
-        val viewModel = getStateViewModel<PostsViewModel>()
-        val state = viewModel.stateFlow.collectAsState()
+    Lce(lceState = state.value.lceState, tryAgain = { viewModel.loadPosts() }) {
+        SwipeRefresh(
+            state = rememberSwipeRefreshState(state.value.isLoading),
+            onRefresh = { viewModel.loadPosts(refresh = true) },
+        ) {
+            val listState = rememberLazyListState()
+            if (listState.layoutInfo.totalItemsCount != 0 && listState.firstVisibleItemIndex + 5 > listState.layoutInfo.totalItemsCount) {
+                viewModel.loadPosts()
+            }
 
-        Lce(lceState = state.value.lceState, tryAgain = { viewModel.loadPosts() }) {
-            SwipeRefresh(
-                state = rememberSwipeRefreshState(state.value.isLoading),
-                onRefresh = { viewModel.loadPosts(refresh = true) },
+            LazyColumn(
+                state = listState,
+                verticalArrangement = Arrangement.spacedBy(15.dp), // Расстояние между айтемами
+                contentPadding = PaddingValues(20.dp) // Отступы всего LazyColumn
             ) {
-                val listState = rememberLazyListState()
-                if (listState.layoutInfo.totalItemsCount != 0 && listState.firstVisibleItemIndex + 5 > listState.layoutInfo.totalItemsCount) {
-                    viewModel.loadPosts()
-                }
-
-                LazyColumn(
-                    state = listState,
-                    verticalArrangement = Arrangement.spacedBy(15.dp), // Расстояние между айтемами
-                    contentPadding = PaddingValues(20.dp) // Отступы всего LazyColumn
-                ) {
-                    items(state.value.posts.orEmpty(), key = { it.itemId }) { item ->
-                        when (item) {
-                            is Post -> PostItem(item) { navigateToPost(navigator, it) }
-                            LoadingItem -> LoadingItem()
-                        }
+                items(state.value.posts.orEmpty(), key = { it.itemId }) { item ->
+                    when (item) {
+                        is Post -> PostItem(item) { onPostClick(it) }
+                        LoadingItem -> LoadingItem()
                     }
                 }
             }
-        }
-    }
-
-    private fun navigateToPost(navigator: Navigator?, post: Post) {
-        val id = post.id
-        if (id != null) {
-            // Для теста разного поведения передаем или сразу весь Post или только id для загрузки поста с сервера
-            val postOrNull = if (Random.nextBoolean()) post else null
-            navigator?.push(PostDetailsScreen(ArgsPostDetail(id, postOrNull)))
         }
     }
 }

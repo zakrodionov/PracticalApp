@@ -14,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import by.kirich1409.viewbindingdelegate.viewBinding
-import cafe.adriel.voyager.core.screen.Screen
 import coil.compose.rememberImagePainter
 import com.zakrodionov.common.extensions.capitalizeFirstLetter
 import com.zakrodionov.common.extensions.dtfDateTimeFullMonth
@@ -80,38 +79,34 @@ class PostDetailsFragment :
         date?.parseOffsetDateTime()?.toLocaleDateTimeApplyZone()?.format(dtfDateTimeFullMonth)
 }
 
-data class PostDetailsScreen(val args: ArgsPostDetail) : Screen {
-    override val key: String = "PostDetailsScreen"
+@Composable
+fun PostDetailsScreen(postId: String) {
+    val viewModel = getStateViewModel<PostDetailViewModel>(parameters = { parametersOf(postId) })
+    val state = viewModel.stateFlow.collectAsState()
+    val post = state.value.post
 
-    @Composable
-    override fun Content() {
-        val viewModel = getStateViewModel<PostDetailViewModel>(parameters = { parametersOf(args) })
-        val state = viewModel.stateFlow.collectAsState()
-        val post = state.value.post
+    Lce(lceState = state.value.lceState, tryAgain = { viewModel.loadPostDetails() }) {
+        Column {
+            Image(
+                painter = rememberImagePainter(post?.image.orEmpty()),
+                contentDescription = "Post Image",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .height(150.dp)
+                    .fillMaxWidth()
+            )
 
-        Lce(lceState = state.value.lceState, tryAgain = { viewModel.loadPostDetails() }) {
-            Column {
-                Image(
-                    painter = rememberImagePainter(post?.image.orEmpty()),
-                    contentDescription = "Post Image",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .height(150.dp)
-                        .fillMaxWidth()
-                )
+            post?.text?.capitalizeFirstLetter().ifNotNull {
+                Text(modifier = Modifier.padding(5.dp), text = it)
+            }
 
-                post?.text?.capitalizeFirstLetter().ifNotNull {
-                    Text(modifier = Modifier.padding(5.dp), text = it)
-                }
-
-                post?.publishDate?.parsePostDate()?.ifNotNull {
-                    Text(modifier = Modifier.padding(5.dp), text = it)
-                }
+            post?.publishDate?.parsePostDate()?.ifNotNull {
+                Text(modifier = Modifier.padding(5.dp), text = it)
             }
         }
     }
-
-    // Вообще это надо маппить в data слое или VM в OffsetDateTime, но для примера конвертации даты пока будет здесь
-    private fun String.parsePostDate(): String? =
-        parseOffsetDateTime().toLocaleDateTimeApplyZone().format(dtfDateTimeFullMonth)
 }
+
+// Вообще это надо маппить в data слое или VM в OffsetDateTime, но для примера конвертации даты пока будет здесь
+private fun String.parsePostDate(): String? =
+    parseOffsetDateTime().toLocaleDateTimeApplyZone().format(dtfDateTimeFullMonth)

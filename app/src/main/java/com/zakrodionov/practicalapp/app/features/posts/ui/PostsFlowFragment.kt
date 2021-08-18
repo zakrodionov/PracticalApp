@@ -27,27 +27,3 @@ class PostsFlowFragment : BaseTabFragment(
 
     override val startScreen: Screen = postsScreen()
 }
-
-object PostsTab : Tab {
-    override val key: String
-        get() = "PostsTab"
-
-    override val options: TabOptions
-        @Composable
-        get() {
-            val icon = rememberVectorPainter(Icons.Default.List)
-
-            return remember {
-                TabOptions(
-                    index = 0u,
-                    title = "Posts",
-                    icon = icon
-                )
-            }
-        }
-
-    @Composable
-    override fun Content() {
-        TabContent(startScreen = PostsScreen)
-    }
-}

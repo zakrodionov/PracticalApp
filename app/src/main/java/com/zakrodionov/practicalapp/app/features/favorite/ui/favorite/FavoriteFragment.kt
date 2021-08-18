@@ -3,6 +3,11 @@ package com.zakrodionov.practicalapp.app.features.favorite.ui.favorite
 import android.app.Dialog
 import android.os.Bundle
 import android.view.View
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -94,5 +99,12 @@ class AnimatedDialog : DialogFragment() {
             .apply {
                 window?.setWindowAnimations(R.style.Dialog_Animation)
             }
+    }
+}
+
+@Composable
+fun FavoriteScreen() {
+    Box(modifier = Modifier.fillMaxSize()) {
+        Text(text = "Favorites")
     }
 }

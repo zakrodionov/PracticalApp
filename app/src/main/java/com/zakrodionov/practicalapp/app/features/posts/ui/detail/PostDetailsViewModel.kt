@@ -8,16 +8,17 @@ import com.zakrodionov.practicalapp.app.core.onSuccess
 import com.zakrodionov.practicalapp.app.features.posts.domain.PostRepository
 import com.zakrodionov.practicalapp.app.features.posts.domain.model.Posts.Post
 import kotlinx.parcelize.Parcelize
+import java.io.Serializable
 
 @Parcelize
-data class ArgsPostDetail(val postId: String, val post: Post? = null) : Parcelable
+data class ArgsPostDetail(val postId: String, val post: Post? = null) : Parcelable, Serializable
 
 class PostDetailViewModel(
     savedStateHandle: SavedStateHandle,
     private val postRepository: PostRepository,
-    private val args: ArgsPostDetail
+    private val postId: String,
 ) : BaseViewModel<PostDetailsState, PostDetailsEvent>(
-    PostDetailsState(post = args.post),
+    PostDetailsState(),
     savedStateHandle
 ) {
 
@@ -28,7 +29,7 @@ class PostDetailViewModel(
     fun loadPostDetails() = launchIo {
         reduce { state.copy(isLoading = true) }
         postRepository
-            .getPost(args.postId)
+            .getPost(postId)
             .onSuccess { post ->
                 reduce { state.copy(post = post, error = null) }
             }

@@ -26,27 +26,3 @@ class FavoriteFlowFragment : BaseTabFragment(
 
     override val startScreen: Screen = FavoriteScreen()
 }
-
-object FavoritesTab : Tab {
-    override val key: String
-        get() = "FavoritesTab"
-
-    override val options: TabOptions
-        @Composable
-        get() {
-            val icon = rememberVectorPainter(Icons.Default.Favorite)
-
-            return remember {
-                TabOptions(
-                    index = 1u,
-                    title = "Favorites",
-                    icon = icon
-                )
-            }
-        }
-
-    @Composable
-    override fun Content() {
-        Text(text = key)
-    }
-}
