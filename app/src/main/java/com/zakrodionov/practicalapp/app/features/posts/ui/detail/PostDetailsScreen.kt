@@ -2,6 +2,8 @@ package com.zakrodionov.practicalapp.app.features.posts.ui.detail
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -10,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.zakrodionov.common.extensions.capitalizeFirstLetter
@@ -28,7 +31,7 @@ fun PostDetailsScreen(postId: String) {
     val post = state.value.post
 
     Lce(lceState = state.value.lceState, tryAgain = { viewModel.loadPostDetails() }) {
-        Column {
+        Column(modifier = Modifier.fillMaxSize()) {
             Image(
                 painter = rememberImagePainter(post?.image.orEmpty()),
                 contentDescription = "Post Image",
@@ -45,6 +48,9 @@ fun PostDetailsScreen(postId: String) {
             post?.publishDate?.parsePostDate()?.ifNotNull {
                 Text(modifier = Modifier.padding(5.dp), text = it)
             }
+
+            Spacer(modifier = Modifier.weight(1f))
+            Text(text = "Todo Footer", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
         }
     }
 }
