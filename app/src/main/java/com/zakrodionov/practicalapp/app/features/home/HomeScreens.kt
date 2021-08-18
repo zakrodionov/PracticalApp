@@ -18,14 +18,25 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.navArgument
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.features.home.about.AboutScreen
 import com.zakrodionov.practicalapp.app.features.home.favorite.FavoriteScreen
+import com.zakrodionov.practicalapp.app.features.home.posts.detail.PostDetailsScreen
 import com.zakrodionov.practicalapp.app.features.home.posts.list.PostsScreen
 
+const val POST_ID_KEY = "postId"
+
 enum class HomeScreens(
+    val route: String,
+) {
+    POST_DETAIL("home/post_detail")
+}
+
+enum class HomeTabScreens(
     @StringRes val title: Int,
     val icon: ImageVector,
     val route: String,
@@ -38,21 +49,29 @@ enum class HomeScreens(
 fun NavGraphBuilder.addHomeGraph(
     navController: NavHostController,
 ) {
-    composable(HomeScreens.POSTS.route) {
+    composable(HomeTabScreens.POSTS.route) {
         PostsScreen(navController)
     }
-    composable(HomeScreens.FAVORITE.route) {
+    composable(HomeTabScreens.FAVORITE.route) {
         FavoriteScreen()
     }
-    composable(HomeScreens.ABOUT.route) {
+    composable(HomeTabScreens.ABOUT.route) {
         AboutScreen(navController)
+    }
+    composable(
+        "${HomeScreens.POST_DETAIL.route}/{$POST_ID_KEY}",
+        arguments = listOf(navArgument(POST_ID_KEY) { type = NavType.StringType })
+    ) { backStackEntry ->
+        val arguments = requireNotNull(backStackEntry.arguments)
+        val postId = requireNotNull(arguments.getString(POST_ID_KEY))
+        PostDetailsScreen(postId)
     }
 }
 
 @Composable
 fun PracticalAppBottomBar(
     navController: NavController,
-    tabs: Array<HomeScreens>,
+    tabs: Array<HomeTabScreens>,
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination

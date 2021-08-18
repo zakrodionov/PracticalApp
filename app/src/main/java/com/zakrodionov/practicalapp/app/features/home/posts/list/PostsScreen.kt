@@ -24,7 +24,8 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.zakrodionov.common.ui.LoadingItem
 import com.zakrodionov.practicalapp.app.domain.model.Posts.Post
-import com.zakrodionov.practicalapp.app.features.MainDestinations.POST_DETAIL_ROUTE
+import com.zakrodionov.practicalapp.app.features.home.HomeScreens
+import com.zakrodionov.practicalapp.app.features.home.HomeScreens.POST_DETAIL
 import com.zakrodionov.practicalapp.app.ui.components.Lce
 import com.zakrodionov.practicalapp.app.ui.components.LoadingItem
 import org.koin.androidx.compose.getStateViewModel
@@ -56,7 +57,7 @@ fun PostsScreen(navController: NavHostController) {
                 items(state.value.posts.orEmpty(), key = { it.itemId }) { item ->
                     when (item) {
                         is Post -> PostItem(item) {
-                            navController.navigate("$POST_DETAIL_ROUTE/${it.id}")
+                            navController.navigate("${POST_DETAIL.route}/${it.id}")
                         }
                         LoadingItem -> LoadingItem()
                     }
