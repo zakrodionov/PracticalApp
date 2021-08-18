@@ -1,4 +1,4 @@
-# PracticalApp  [![Build](https://github.com/zakrodionov/PracticalApp/actions/workflows/Build.yml/badge.svg)](https://github.com/zakrodionov/PracticalApp/actions/workflows/Build.yml)
+# PracticalApp - Compose [WIP] [![Build](https://github.com/zakrodionov/PracticalApp/actions/workflows/Build.yml/badge.svg)](https://github.com/zakrodionov/PracticalApp/actions/workflows/Build.yml)
 
 PracticalApp - пример архитектуры приложения для коммерческой/аутсорс разработки. Основные цели: эффективность, простота ведения и поддержания кода, использования инструментов, которые не требуют
 длительного изучения (Android Architecture Components, Koin, Coroutines). Принципы Clean Architecture придерживаются, но без строгого фанатизма, не в ущерб производительности (без абстракций ради абстракций).
@@ -23,19 +23,11 @@ Flipper, Hyperion позволяют перехватить вызовы сет�
 Android Studio имеет достаточно неплохой встроенный линтер, запускается с помощью команды `gradlew lint`. Позволяет выявлять Deprecated API, неиспользуемые ресурсы, проблемы безопасности, производительности, юзабилити, доступности и т.д.
 
 ## Stack
+• Android Jetpack + Compose
+
 • Kotlin
 
-• Github Actions
-
-• Gradle DSL
-
-• Gradle Modules
-
-• Android Jetpack
-
 • MV/I/VM 
-
-• Cicerone/Modo
 
 • Retrofit, Coroutines, Moshi, OkHttp
 
@@ -45,15 +37,17 @@ Android Studio имеет достаточно неплохой встроенн
 
 • Room
 
-• Adapter Delegates 4
-
-• Glide
-
-• ViewBinding
+• Coil
 
 • Desugar Jdk (Java 8 time)
 
 • Flipper, Hyperion, Timber, LeakCanary
+
+• Github Actions
+
+• Gradle DSL
+
+• Gradle Modules
 
  Как выглядит сэмпл:  
    
