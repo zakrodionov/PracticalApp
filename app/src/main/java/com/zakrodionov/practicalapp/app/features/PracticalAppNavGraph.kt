@@ -1,3 +1,5 @@
+@file:Suppress("MatchingDeclarationName")
+
 package com.zakrodionov.practicalapp.app.features
 
 import androidx.compose.runtime.Composable
@@ -11,10 +13,10 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.zakrodionov.practicalapp.app.features.MainDestinations.LOGIN_ROUTE
 import com.zakrodionov.practicalapp.app.features.MainDestinations.POST_ID_KEY
-import com.zakrodionov.practicalapp.app.features.bottom.ui.HomeScreeens
-import com.zakrodionov.practicalapp.app.features.bottom.ui.addHomeGraph
-import com.zakrodionov.practicalapp.app.features.login.ui.LoginScreens
-import com.zakrodionov.practicalapp.app.features.login.ui.addLoginGraph
+import com.zakrodionov.practicalapp.app.features.home.ui.HomeScreens
+import com.zakrodionov.practicalapp.app.features.home.ui.addHomeGraph
+import com.zakrodionov.practicalapp.app.features.login.LoginScreens
+import com.zakrodionov.practicalapp.app.features.login.addLoginGraph
 import com.zakrodionov.practicalapp.app.features.posts.ui.detail.PostDetailsScreen
 
 object MainDestinations {
@@ -39,7 +41,7 @@ fun PracticalAppNavGraph(
     ) {
         navigation(
             route = MainDestinations.HOME_ROUTE,
-            startDestination = HomeScreeens.POSTS.route
+            startDestination = HomeScreens.POSTS.route
         ) {
             addHomeGraph(
                 navigateToPostDetail = { postId: String ->
@@ -70,7 +72,7 @@ fun PracticalAppNavGraph(
             arguments = listOf(navArgument(POST_ID_KEY) { type = NavType.StringType })
         ) { backStackEntry ->
             val arguments = requireNotNull(backStackEntry.arguments)
-            val postId = arguments.getString(POST_ID_KEY)!!
+            val postId = requireNotNull(arguments.getString(POST_ID_KEY))
             PostDetailsScreen(postId)
         }
     }

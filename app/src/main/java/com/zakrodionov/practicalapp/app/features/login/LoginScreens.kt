@@ -1,21 +1,22 @@
 package com.zakrodionov.practicalapp.app.features.login
 
-import com.github.terrakok.cicerone.androidx.FragmentScreen
-import com.zakrodionov.practicalapp.app.features.login.ui.LoginFlowFragment
-import com.zakrodionov.practicalapp.app.features.login.ui.password.PasswordFragment
-import com.zakrodionov.practicalapp.app.features.login.ui.phone.PhoneFragment
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.composable
+import com.zakrodionov.practicalapp.app.features.login.ui.password.PasswordScreen
 
-@Suppress("FunctionName")
-object LoginScreens {
-    fun LoginFlowScreen() = FragmentScreen("LoginFlowScreen") {
-        LoginFlowFragment.newInstance()
+enum class LoginScreens(val route: String) {
+    PHONE("login/phone"),
+    PASSWORD("login/password")
+}
+
+fun NavGraphBuilder.addLoginGraph(
+    navigateToPassword: () -> Unit,
+    popToRoot: () -> Unit,
+) {
+    composable(LoginScreens.PHONE.route) {
+        com.zakrodionov.practicalapp.app.features.login.ui.phone.PhoneScreen(navigateToPassword)
     }
-
-    fun PhoneScreen() = FragmentScreen("PhoneScreen") {
-        PhoneFragment()
-    }
-
-    fun PasswordScreen() = FragmentScreen("PasswordScreen") {
-        PasswordFragment()
+    composable(LoginScreens.PASSWORD.route) {
+        PasswordScreen(popToRoot)
     }
 }

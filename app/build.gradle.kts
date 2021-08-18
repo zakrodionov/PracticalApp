@@ -16,7 +16,6 @@ import Libs.androidx_fragment
 import Libs.androidx_material
 import Libs.androidx_security_crypto
 import Libs.androidx_swipe_refresh_layout
-import Libs.cicerone
 import Libs.coroutines
 import Libs.coroutines_test
 import Libs.desugar_jdk
@@ -25,15 +24,6 @@ import Libs.flipper
 import Libs.flipper_network
 import Libs.flipper_no_op
 import Libs.flipper_soloader
-import Libs.hyperion_attr
-import Libs.hyperion_build_config
-import Libs.hyperion_core
-import Libs.hyperion_disk
-import Libs.hyperion_geiger_counter
-import Libs.hyperion_measurement
-import Libs.hyperion_phoenix
-import Libs.hyperion_shared_preferences
-import Libs.hyperion_timber
 import Libs.insetter
 import Libs.junit_jupiter_api
 import Libs.junit_jupiter_engine
@@ -55,7 +45,7 @@ import Libs.timber
 import Libs.viewbinding_property_delegate
 import Versions.koinVersion
 import java.io.FileInputStream
-import java.util.*
+import java.util.Properties
 
 plugins {
     id("com.android.application")
@@ -209,9 +199,6 @@ dependencies {
     implementation(adapter_delegates)
     implementation(adapter_delegates_dsl)
 
-    // Cicerone
-    implementation(cicerone)
-
     implementation(insetter)
 
     // TODO COMPOSE
@@ -228,11 +215,6 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:$compose")
     // UI Tests
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose")
-
-    val voyager = "1.0.0-beta05"
-    implementation("cafe.adriel.voyager:voyager-navigator:$voyager")
-    implementation("cafe.adriel.voyager:voyager-tab-navigator:$voyager")
-    implementation("cafe.adriel.voyager:voyager-transitions:$voyager")
 
     val coil = "1.3.2"
     implementation("io.coil-kt:coil:$coil")

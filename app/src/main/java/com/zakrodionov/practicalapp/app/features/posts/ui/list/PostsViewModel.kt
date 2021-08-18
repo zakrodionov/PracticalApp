@@ -4,20 +4,14 @@ import androidx.lifecycle.SavedStateHandle
 import com.zakrodionov.common.ui.rv.addLoadingItem
 import com.zakrodionov.common.ui.rv.removeLoadingItem
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
-import com.zakrodionov.practicalapp.app.core.navigation.FlowRouter
 import com.zakrodionov.practicalapp.app.core.onFailure
 import com.zakrodionov.practicalapp.app.core.onSuccess
-import com.zakrodionov.practicalapp.app.features.posts.PostsScreens.postDetailsScreen
 import com.zakrodionov.practicalapp.app.features.posts.domain.PostRepository
-import com.zakrodionov.practicalapp.app.features.posts.domain.model.Posts.Post
-import com.zakrodionov.practicalapp.app.features.posts.ui.detail.ArgsPostDetail
 import kotlinx.coroutines.Job
-import kotlin.random.Random
 
 class PostsViewModel(
     savedStateHandle: SavedStateHandle,
     private val postRepository: PostRepository,
-    private val flowRouter: FlowRouter
 ) : BaseViewModel<PostsState, PostsEvent>(PostsState(), savedStateHandle) {
 
     private var loadingPostsJob: Job = Job()
@@ -52,15 +46,6 @@ class PostsViewModel(
                     }
                 reduce { state.copy(posts = state.posts?.removeLoadingItem(), isLoading = false) }
             }
-        }
-    }
-
-    fun navigateToPost(post: Post) {
-        val id = post.id
-        if (id != null) {
-            // Для теста разного поведения передаем или сразу весь Post или только id для загрузки поста с сервера
-            val postOrNull = if (Random.nextBoolean()) post else null
-            flowRouter.navigateTo(postDetailsScreen(ArgsPostDetail(post.id, postOrNull)))
         }
     }
 }

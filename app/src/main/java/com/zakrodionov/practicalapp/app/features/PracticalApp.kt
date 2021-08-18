@@ -9,16 +9,17 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.zakrodionov.practicalapp.app.features.bottom.ui.HomeScreeens
-import com.zakrodionov.practicalapp.app.features.bottom.ui.PracticalAppBottomBar
-import com.zakrodionov.practicalapp.app.features.login.ui.LoginScreens
+import com.zakrodionov.practicalapp.app.features.home.ui.HomeScreens
+import com.zakrodionov.practicalapp.app.features.home.ui.PracticalAppBottomBar
+import com.zakrodionov.practicalapp.app.features.login.LoginScreens
 import com.zakrodionov.practicalapp.app.ui.theme.PracticalAppTheme
 
 @Composable
 fun PracticalApp() {
     PracticalAppTheme {
-        val tabs = remember { HomeScreeens.values() }
+        val tabs = remember { HomeScreens.values() }
         val navController = rememberNavController()
+
         Scaffold(
             bottomBar = {
                 if (shouldShowBottomBar(navController)) {
@@ -30,7 +31,8 @@ fun PracticalApp() {
                     navController = navController,
                     modifier = Modifier.padding(innerPaddingModifier)
                 )
-            })
+            }
+        )
     }
 }
 
@@ -43,6 +45,6 @@ fun currentRoute(navController: NavHostController): String? {
 @Composable
 fun shouldShowBottomBar(navController: NavHostController): Boolean {
     val currentRoute = currentRoute(navController)
-    return currentRoute != LoginScreens.PHONE.route
-            && currentRoute != LoginScreens.PASSWORD.route
+    return currentRoute != LoginScreens.PHONE.route &&
+        currentRoute != LoginScreens.PASSWORD.route
 }

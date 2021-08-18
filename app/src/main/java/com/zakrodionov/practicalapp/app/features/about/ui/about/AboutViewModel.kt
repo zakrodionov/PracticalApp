@@ -3,14 +3,12 @@ package com.zakrodionov.practicalapp.app.features.about.ui.about
 import androidx.lifecycle.SavedStateHandle
 import com.zakrodionov.common.extensions.preferenceListener
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
-import com.zakrodionov.practicalapp.app.core.navigation.FlowRouter
 import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences
 import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences.Companion.KEY_IS_LOGGED
 
 class AboutViewModel(
     savedStateHandle: SavedStateHandle,
     private val appPreferences: AppPreferences,
-    private val flowRouter: FlowRouter,
 ) : BaseViewModel<AboutState, AboutEvent>(AboutState(), savedStateHandle) {
 
     init {

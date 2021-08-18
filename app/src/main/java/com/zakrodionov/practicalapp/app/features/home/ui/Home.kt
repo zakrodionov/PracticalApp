@@ -1,20 +1,4 @@
-/*
- * Copyright 2020 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-package com.zakrodionov.practicalapp.app.features.bottom.ui
+package com.zakrodionov.practicalapp.app.features.home.ui
 
 import androidx.annotation.StringRes
 import androidx.compose.material.BottomNavigation
@@ -27,7 +11,6 @@ import androidx.compose.material.icons.outlined.List
 import androidx.compose.material.icons.outlined.MoreHoriz
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
@@ -45,18 +28,18 @@ fun NavGraphBuilder.addHomeGraph(
     navigateToPostDetail: (String) -> Unit,
     navigateToLogin: () -> Unit,
 ) {
-    composable(HomeScreeens.POSTS.route) {
+    composable(HomeScreens.POSTS.route) {
         PostsScreen { navigateToPostDetail(it.id.orEmpty()) }
     }
-    composable(HomeScreeens.FAVORITE.route) {
+    composable(HomeScreens.FAVORITE.route) {
         FavoriteScreen()
     }
-    composable(HomeScreeens.ABOUT.route) {
+    composable(HomeScreens.ABOUT.route) {
         AboutScreen(navigateToLogin)
     }
 }
 
-enum class HomeScreeens(
+enum class HomeScreens(
     @StringRes val title: Int,
     val icon: ImageVector,
     val route: String,
@@ -69,17 +52,16 @@ enum class HomeScreeens(
 @Composable
 fun PracticalAppBottomBar(
     navController: NavController,
-    tabs: Array<HomeScreeens>,
+    tabs: Array<HomeScreens>,
 ) {
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    val sections = remember { HomeScreeens.values() }
-    val routes = remember { sections.map { it.route } }
+    // val routes = remember { tabs.map { it.route } }
 
     BottomNavigation {
-        sections.forEach { screen ->
+        tabs.forEach { screen ->
             BottomNavigationItem(
                 icon = { Icon(screen.icon, contentDescription = null) },
                 label = { Text(stringResource(screen.title)) },

@@ -8,10 +8,9 @@ import com.zakrodionov.practicalapp.app.core.onSuccess
 import com.zakrodionov.practicalapp.app.features.posts.domain.PostRepository
 import com.zakrodionov.practicalapp.app.features.posts.domain.model.Posts.Post
 import kotlinx.parcelize.Parcelize
-import java.io.Serializable
 
 @Parcelize
-data class ArgsPostDetail(val postId: String, val post: Post? = null) : Parcelable, Serializable
+data class ArgsPostDetail(val postId: String, val post: Post? = null) : Parcelable
 
 class PostDetailViewModel(
     savedStateHandle: SavedStateHandle,
