@@ -11,7 +11,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
+import com.zakrodionov.practicalapp.app.features.MainDestinations.HOME_ROUTE
 import com.zakrodionov.practicalapp.app.features.MainDestinations.LOGIN_ROUTE
+import com.zakrodionov.practicalapp.app.features.MainDestinations.POST_DETAIL_ROUTE
 import com.zakrodionov.practicalapp.app.features.MainDestinations.POST_ID_KEY
 import com.zakrodionov.practicalapp.app.features.home.ui.HomeScreens
 import com.zakrodionov.practicalapp.app.features.home.ui.addHomeGraph
@@ -32,7 +34,7 @@ object MainDestinations {
 fun PracticalAppNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = MainDestinations.HOME_ROUTE,
+    startDestination: String = HOME_ROUTE,
 ) {
     NavHost(
         navController = navController,
@@ -40,12 +42,12 @@ fun PracticalAppNavGraph(
         modifier = modifier
     ) {
         navigation(
-            route = MainDestinations.HOME_ROUTE,
+            route = HOME_ROUTE,
             startDestination = HomeScreens.POSTS.route
         ) {
             addHomeGraph(
                 navigateToPostDetail = { postId: String ->
-                    navController.navigate("${MainDestinations.POST_DETAIL_ROUTE}/$postId")
+                    navController.navigate("$POST_DETAIL_ROUTE/$postId")
                 },
                 navigateToLogin = {
                     navController.navigate(LOGIN_ROUTE)
@@ -68,7 +70,7 @@ fun PracticalAppNavGraph(
         }
 
         composable(
-            "${MainDestinations.POST_DETAIL_ROUTE}/{$POST_ID_KEY}",
+            "$POST_DETAIL_ROUTE/{$POST_ID_KEY}",
             arguments = listOf(navArgument(POST_ID_KEY) { type = NavType.StringType })
         ) { backStackEntry ->
             val arguments = requireNotNull(backStackEntry.arguments)
