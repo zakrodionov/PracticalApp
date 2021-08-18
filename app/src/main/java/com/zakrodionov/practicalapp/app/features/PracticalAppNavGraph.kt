@@ -4,6 +4,7 @@ package com.zakrodionov.practicalapp.app.features
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -64,7 +65,7 @@ fun PracticalAppNavGraph(
                     navController.navigate(LoginScreens.PASSWORD.route)
                 },
                 popToRoot = {
-                    navController.navigateUp()
+                    navController.closeNestedNavigation(this)
                 }
             )
         }
@@ -79,3 +80,6 @@ fun PracticalAppNavGraph(
         }
     }
 }
+
+fun NavHostController.closeNestedNavigation(navGraphBuilder: NavGraphBuilder) =
+    popBackStack(navGraphBuilder.route!!, true)
