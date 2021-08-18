@@ -36,7 +36,6 @@ class LoginFlowFragment : BaseFlowFragment(
 }
 
 enum class LoginScreens(val route: String) {
-    LOGIN("login"),
     PHONE("login/phone"),
     PASSWORD("login/password")
 }

@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.zakrodionov.practicalapp.app.features.bottom.ui.HomeSections
+import com.zakrodionov.practicalapp.app.features.bottom.ui.HomeScreeens
 import com.zakrodionov.practicalapp.app.features.bottom.ui.PracticalAppBottomBar
 import com.zakrodionov.practicalapp.app.features.login.ui.LoginScreens
 import com.zakrodionov.practicalapp.app.ui.theme.PracticalAppTheme
@@ -17,7 +17,7 @@ import com.zakrodionov.practicalapp.app.ui.theme.PracticalAppTheme
 @Composable
 fun PracticalApp() {
     PracticalAppTheme {
-        val tabs = remember { HomeSections.values() }
+        val tabs = remember { HomeScreeens.values() }
         val navController = rememberNavController()
         Scaffold(
             bottomBar = {

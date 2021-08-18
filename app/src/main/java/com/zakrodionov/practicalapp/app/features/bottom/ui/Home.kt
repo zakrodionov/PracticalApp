@@ -45,18 +45,18 @@ fun NavGraphBuilder.addHomeGraph(
     navigateToPostDetail: (String) -> Unit,
     navigateToLogin: () -> Unit,
 ) {
-    composable(HomeSections.POSTS.route) {
+    composable(HomeScreeens.POSTS.route) {
         PostsScreen { navigateToPostDetail(it.id.orEmpty()) }
     }
-    composable(HomeSections.FAVORITE.route) {
+    composable(HomeScreeens.FAVORITE.route) {
         FavoriteScreen()
     }
-    composable(HomeSections.ABOUT.route) {
+    composable(HomeScreeens.ABOUT.route) {
         AboutScreen(navigateToLogin)
     }
 }
 
-enum class HomeSections(
+enum class HomeScreeens(
     @StringRes val title: Int,
     val icon: ImageVector,
     val route: String,
@@ -69,13 +69,13 @@ enum class HomeSections(
 @Composable
 fun PracticalAppBottomBar(
     navController: NavController,
-    tabs: Array<HomeSections>,
+    tabs: Array<HomeScreeens>,
 ) {
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    val sections = remember { HomeSections.values() }
+    val sections = remember { HomeScreeens.values() }
     val routes = remember { sections.map { it.route } }
 
     BottomNavigation {
