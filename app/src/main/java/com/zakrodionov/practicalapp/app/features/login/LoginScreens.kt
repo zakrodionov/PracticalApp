@@ -4,8 +4,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.zakrodionov.practicalapp.app.features.closeNestedNavGraph
-import com.zakrodionov.practicalapp.app.features.login.ui.password.PasswordScreen
-import com.zakrodionov.practicalapp.app.features.login.ui.phone.PhoneScreen
+import com.zakrodionov.practicalapp.app.features.login.password.PasswordScreen
+import com.zakrodionov.practicalapp.app.features.login.phone.PhoneScreen
 
 enum class LoginScreens(val route: String) {
     PHONE("login/phone"),

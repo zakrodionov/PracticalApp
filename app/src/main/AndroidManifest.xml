@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PracticalApp">
 
-        <activity android:name=".app.features.root.ui.RootActivity">
+        <activity android:name=".app.features.root.RootActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

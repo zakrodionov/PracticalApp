@@ -21,9 +21,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.zakrodionov.practicalapp.R
-import com.zakrodionov.practicalapp.app.features.home.about.ui.about.AboutScreen
-import com.zakrodionov.practicalapp.app.features.home.favorite.ui.favorite.FavoriteScreen
-import com.zakrodionov.practicalapp.app.features.home.posts.ui.list.PostsScreen
+import com.zakrodionov.practicalapp.app.features.home.about.AboutScreen
+import com.zakrodionov.practicalapp.app.features.home.favorite.FavoriteScreen
+import com.zakrodionov.practicalapp.app.features.home.posts.list.PostsScreen
 
 enum class HomeScreens(
     @StringRes val title: Int,

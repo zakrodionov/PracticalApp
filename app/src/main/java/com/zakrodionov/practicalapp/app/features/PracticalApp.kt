@@ -37,14 +37,18 @@ fun PracticalApp() {
 }
 
 @Composable
-fun currentRoute(navController: NavHostController): String? {
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    return navBackStackEntry?.destination?.route
+fun shouldShowBottomBar(navController: NavHostController): Boolean {
+    val currentRoute = currentRoute(navController)
+    // Сюда добавляем экраны в которых надо скрывать BottomBar
+    val routesWithoutBottomBar = listOf(
+        LoginScreens.PHONE.route,
+        LoginScreens.PASSWORD.route,
+    )
+    return !routesWithoutBottomBar.contains(currentRoute)
 }
 
 @Composable
-fun shouldShowBottomBar(navController: NavHostController): Boolean {
-    val currentRoute = currentRoute(navController)
-    return currentRoute != LoginScreens.PHONE.route &&
-        currentRoute != LoginScreens.PASSWORD.route
+fun currentRoute(navController: NavHostController): String? {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    return navBackStackEntry?.destination?.route
 }

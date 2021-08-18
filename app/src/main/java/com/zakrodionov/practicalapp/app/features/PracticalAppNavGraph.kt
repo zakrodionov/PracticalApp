@@ -18,7 +18,7 @@ import com.zakrodionov.practicalapp.app.features.MainDestinations.POST_DETAIL_RO
 import com.zakrodionov.practicalapp.app.features.MainDestinations.POST_ID_KEY
 import com.zakrodionov.practicalapp.app.features.home.HomeScreens
 import com.zakrodionov.practicalapp.app.features.home.addHomeGraph
-import com.zakrodionov.practicalapp.app.features.home.posts.ui.detail.PostDetailsScreen
+import com.zakrodionov.practicalapp.app.features.home.posts.detail.PostDetailsScreen
 import com.zakrodionov.practicalapp.app.features.login.LoginScreens
 import com.zakrodionov.practicalapp.app.features.login.addLoginGraph
 
