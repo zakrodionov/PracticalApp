@@ -11,6 +11,8 @@ import androidx.compose.material.icons.outlined.List
 import androidx.compose.material.icons.outlined.MoreHoriz
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
@@ -76,16 +78,16 @@ fun PracticalAppBottomBar(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    // val routes = remember { tabs.map { it.route } }
+    val lastClickedTab = remember { mutableStateOf<HomeTabScreens?>(null) }
 
     BottomNavigation {
-        tabs.forEach { screen ->
+        tabs.forEach { tab ->
             BottomNavigationItem(
-                icon = { Icon(screen.icon, contentDescription = null) },
-                label = { Text(stringResource(screen.title)) },
-                selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                icon = { Icon(tab.icon, contentDescription = null) },
+                label = { Text(stringResource(tab.title)) },
+                selected = currentDestination?.hierarchy?.any { it.route == tab.route } == true || lastClickedTab.value == tab,
                 onClick = {
-                    navController.navigate(screen.route) {
+                    navController.navigate(tab.route) {
                         // Pop up to the start destination of the graph to
                         // avoid building up a large stack of destinations
                         // on the back stack as users select items
@@ -98,6 +100,7 @@ fun PracticalAppBottomBar(
                         // Restore state when reselecting a previously selected item
                         restoreState = true
                     }
+                    lastClickedTab.value = tab
                 }
             )
         }
