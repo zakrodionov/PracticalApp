@@ -18,14 +18,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import coil.compose.rememberImagePainter
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.zakrodionov.common.ui.LoadingItem
 import com.zakrodionov.practicalapp.app.domain.model.Posts.Post
-import com.zakrodionov.practicalapp.app.features.home.HomeScreens
-import com.zakrodionov.practicalapp.app.features.home.HomeScreens.POST_DETAIL
 import com.zakrodionov.practicalapp.app.ui.components.Lce
 import com.zakrodionov.practicalapp.app.ui.components.LoadingItem
 import org.koin.androidx.compose.getStateViewModel
@@ -33,7 +30,7 @@ import org.koin.androidx.compose.getStateViewModel
 const val PAGINATION_THRESHOLD = 5
 
 @Composable
-fun PostsScreen(navController: NavHostController) {
+fun PostsScreen(navigateToPostDetail: (postId: String) -> Unit) {
     val viewModel = getStateViewModel<PostsViewModel>()
     val state = viewModel.stateFlow.collectAsState()
 
@@ -57,7 +54,7 @@ fun PostsScreen(navController: NavHostController) {
                 items(state.value.posts.orEmpty(), key = { it.itemId }) { item ->
                     when (item) {
                         is Post -> PostItem(item) {
-                            navController.navigate("${POST_DETAIL.route}/${it.id}")
+                            navigateToPostDetail(it.id.orEmpty())
                         }
                         LoadingItem -> LoadingItem()
                     }

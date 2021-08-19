@@ -31,6 +31,7 @@ import com.zakrodionov.common.ui.lce.LoadingState
 import com.zakrodionov.common.ui.lce.UiError
 import com.zakrodionov.practicalapp.R
 
+// Обертка лейаута для обработки состояний загрузки, контента и ошибки
 @Composable
 fun Lce(
     lceState: LceState,

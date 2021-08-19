@@ -34,7 +34,7 @@ fun PracticalAppNavGraph(
     ) {
         navigation(
             route = HOME_ROUTE,
-            startDestination = HomeTabScreens.POSTS_TAB.route
+            startDestination = HomeTabScreens.PostsTab.route
         ) {
             addHomeGraph(navController)
         }
