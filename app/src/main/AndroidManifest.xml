@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PracticalApp">
 
-        <activity android:name=".app.features.root.RootActivity">
+        <activity
+            android:name=".app.features.root.RootActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -24,6 +24,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navArgument
+import androidx.navigation.navigation
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.features.home.about.AboutScreen
 import com.zakrodionov.practicalapp.app.features.home.favorite.FavoriteScreen
@@ -35,7 +36,10 @@ const val POST_ID_KEY = "postId"
 enum class HomeScreens(
     val route: String,
 ) {
-    POST_DETAIL("home/post_detail")
+    POSTS("home/posts"),
+    POST_DETAIL("home/post_detail"),
+    FAVORITE("home/favorite"),
+    ABOUT("home/about")
 }
 
 enum class HomeTabScreens(
@@ -43,30 +47,61 @@ enum class HomeTabScreens(
     val icon: ImageVector,
     val route: String,
 ) {
-    POSTS(R.string.posts, Icons.Outlined.List, "home/posts"),
-    FAVORITE(R.string.favorite, Icons.Outlined.Favorite, "home/favorite"),
-    ABOUT(R.string.about, Icons.Outlined.MoreHoriz, "home/about"),
+    POSTS_TAB(R.string.posts, Icons.Outlined.List, "home/posts_tab"),
+    FAVORITE_TAB(R.string.favorite, Icons.Outlined.Favorite, "home/favorite_tab"),
+    ABOUT_TAB(R.string.about, Icons.Outlined.MoreHoriz, "home/about_tab"),
 }
 
 fun NavGraphBuilder.addHomeGraph(
     navController: NavHostController,
 ) {
-    composable(HomeTabScreens.POSTS.route) {
-        PostsScreen(navController)
+    addPostsGraph(navController)
+    addFavoriteGraph()
+    addAboutGraph(navController)
+}
+
+fun NavGraphBuilder.addPostsGraph(
+    navController: NavHostController,
+) {
+    navigation(
+        route = HomeTabScreens.POSTS_TAB.route,
+        startDestination = HomeScreens.POSTS.route,
+    ) {
+        composable(HomeScreens.POSTS.route) {
+            PostsScreen(navController)
+        }
+        composable(
+            "${HomeScreens.POST_DETAIL.route}/{$POST_ID_KEY}",
+            arguments = listOf(navArgument(POST_ID_KEY) { type = NavType.StringType })
+        ) { backStackEntry ->
+            val arguments = requireNotNull(backStackEntry.arguments)
+            val postId = requireNotNull(arguments.getString(POST_ID_KEY))
+            PostDetailsScreen(postId)
+        }
     }
-    composable(HomeTabScreens.FAVORITE.route) {
-        FavoriteScreen()
+}
+
+fun NavGraphBuilder.addFavoriteGraph() {
+    navigation(
+        route = HomeTabScreens.FAVORITE_TAB.route,
+        startDestination = HomeScreens.FAVORITE.route,
+    ) {
+        composable(HomeScreens.FAVORITE.route) {
+            FavoriteScreen()
+        }
     }
-    composable(HomeTabScreens.ABOUT.route) {
-        AboutScreen(navController)
-    }
-    composable(
-        "${HomeScreens.POST_DETAIL.route}/{$POST_ID_KEY}",
-        arguments = listOf(navArgument(POST_ID_KEY) { type = NavType.StringType })
-    ) { backStackEntry ->
-        val arguments = requireNotNull(backStackEntry.arguments)
-        val postId = requireNotNull(arguments.getString(POST_ID_KEY))
-        PostDetailsScreen(postId)
+}
+
+fun NavGraphBuilder.addAboutGraph(
+    navController: NavHostController,
+) {
+    navigation(
+        route = HomeTabScreens.ABOUT_TAB.route,
+        startDestination = HomeScreens.ABOUT.route,
+    ) {
+        composable(HomeScreens.ABOUT.route) {
+            AboutScreen(navController)
+        }
     }
 }
 
@@ -100,7 +135,6 @@ fun PracticalAppBottomBar(
                         // Restore state when reselecting a previously selected item
                         restoreState = true
                     }
-                    lastClickedTab.value = tab
                 }
             )
         }
