@@ -11,7 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.zakrodionov.practicalapp.app.features.MainDestinations.HOME_ROUTE
 import com.zakrodionov.practicalapp.app.features.MainDestinations.LOGIN_ROUTE
-import com.zakrodionov.practicalapp.app.features.home.HomeTabScreens
+import com.zakrodionov.practicalapp.app.features.home.HomeTabScreen
 import com.zakrodionov.practicalapp.app.features.home.addHomeGraph
 import com.zakrodionov.practicalapp.app.features.login.LoginScreens
 import com.zakrodionov.practicalapp.app.features.login.addLoginGraph
@@ -34,7 +34,7 @@ fun PracticalAppNavGraph(
     ) {
         navigation(
             route = HOME_ROUTE,
-            startDestination = HomeTabScreens.PostsTab.route
+            startDestination = HomeTabScreen.PostsTab.route
         ) {
             addHomeGraph(navController)
         }

@@ -25,36 +25,36 @@ import androidx.navigation.compose.navArgument
 import androidx.navigation.navigation
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.features.MainDestinations
-import com.zakrodionov.practicalapp.app.features.home.HomeScreens.Keys.POST_ID_KEY
-import com.zakrodionov.practicalapp.app.features.home.HomeTabScreens.AboutTab
-import com.zakrodionov.practicalapp.app.features.home.HomeTabScreens.FavoriteTab
-import com.zakrodionov.practicalapp.app.features.home.HomeTabScreens.PostsTab
+import com.zakrodionov.practicalapp.app.features.home.HomeScreen.Keys.POST_ID_KEY
+import com.zakrodionov.practicalapp.app.features.home.HomeTabScreen.AboutTab
+import com.zakrodionov.practicalapp.app.features.home.HomeTabScreen.FavoriteTab
+import com.zakrodionov.practicalapp.app.features.home.HomeTabScreen.PostsTab
 import com.zakrodionov.practicalapp.app.features.home.about.AboutScreen
 import com.zakrodionov.practicalapp.app.features.home.favorite.FavoriteScreen
 import com.zakrodionov.practicalapp.app.features.home.posts.detail.PostDetailsScreen
 import com.zakrodionov.practicalapp.app.features.home.posts.list.PostsScreen
 
-sealed class HomeScreens(
+sealed class HomeScreen(
     private val route: String,
 ) {
     companion object Keys {
         const val POST_ID_KEY = "postId"
     }
 
-    open fun createRoute(root: HomeTabScreens) = "${root.route}/$route"
+    fun createRoute(root: HomeTabScreen) = "${root.route}/$route"
 
-    object Posts : HomeScreens("posts")
-    object PostDetail : HomeScreens("post_detail/{$POST_ID_KEY}") {
-        fun createRoute(root: HomeTabScreens, postId: String): String {
+    object Posts : HomeScreen("posts")
+    object PostDetail : HomeScreen("post_detail/{$POST_ID_KEY}") {
+        fun createRoute(root: HomeTabScreen, postId: String): String {
             return "${root.route}/post_detail/$postId"
         }
     }
 
-    object Favorite : HomeScreens("favorite")
-    object About : HomeScreens("about")
+    object Favorite : HomeScreen("favorite")
+    object About : HomeScreen("about")
 }
 
-enum class HomeTabScreens(
+enum class HomeTabScreen(
     @StringRes val title: Int,
     val icon: ImageVector,
     val route: String,
@@ -73,7 +73,7 @@ fun NavGraphBuilder.addHomeGraph(navController: NavHostController) {
 fun NavGraphBuilder.addPostsGraph(navController: NavController) {
     navigation(
         route = PostsTab.route,
-        startDestination = HomeScreens.Posts.createRoute(PostsTab),
+        startDestination = HomeScreen.Posts.createRoute(PostsTab),
     ) {
         addPosts(navController, PostsTab)
         addPostDetail(PostsTab)
@@ -83,7 +83,7 @@ fun NavGraphBuilder.addPostsGraph(navController: NavController) {
 fun NavGraphBuilder.addFavoriteGraph(navController: NavController) {
     navigation(
         route = FavoriteTab.route,
-        startDestination = HomeScreens.Favorite.createRoute(FavoriteTab),
+        startDestination = HomeScreen.Favorite.createRoute(FavoriteTab),
     ) {
         addFavorite(navController, FavoriteTab)
         addPostDetail(FavoriteTab)
@@ -93,24 +93,24 @@ fun NavGraphBuilder.addFavoriteGraph(navController: NavController) {
 fun NavGraphBuilder.addAboutGraph(navController: NavController) {
     navigation(
         route = AboutTab.route,
-        startDestination = HomeScreens.About.createRoute(AboutTab),
+        startDestination = HomeScreen.About.createRoute(AboutTab),
     ) {
         addAbout(navController, AboutTab)
     }
 }
 
-fun NavGraphBuilder.addPosts(navController: NavController, root: HomeTabScreens) {
-    composable(HomeScreens.Posts.createRoute(root)) {
+fun NavGraphBuilder.addPosts(navController: NavController, root: HomeTabScreen) {
+    composable(HomeScreen.Posts.createRoute(root)) {
         PostsScreen {
-            navController.navigate(HomeScreens.PostDetail.createRoute(root, it))
+            navController.navigate(HomeScreen.PostDetail.createRoute(root, it))
         }
     }
 }
 
 // Пример экрана который открывается с разных графов
-fun NavGraphBuilder.addPostDetail(root: HomeTabScreens) {
+fun NavGraphBuilder.addPostDetail(root: HomeTabScreen) {
     composable(
-        HomeScreens.PostDetail.createRoute(root),
+        HomeScreen.PostDetail.createRoute(root),
         arguments = listOf(navArgument(POST_ID_KEY) { type = NavType.StringType })
     ) { backStackEntry ->
         val arguments = requireNotNull(backStackEntry.arguments)
@@ -119,11 +119,11 @@ fun NavGraphBuilder.addPostDetail(root: HomeTabScreens) {
     }
 }
 
-fun NavGraphBuilder.addFavorite(navController: NavController, root: HomeTabScreens) {
-    composable(HomeScreens.Favorite.createRoute(root)) {
+fun NavGraphBuilder.addFavorite(navController: NavController, root: HomeTabScreen) {
+    composable(HomeScreen.Favorite.createRoute(root)) {
         FavoriteScreen(
             navigateToPostDetail = {
-                navController.navigate(HomeScreens.PostDetail.createRoute(root, it))
+                navController.navigate(HomeScreen.PostDetail.createRoute(root, it))
             },
             navigateToLogin = {
                 navController.navigate(MainDestinations.LOGIN_ROUTE)
@@ -132,8 +132,8 @@ fun NavGraphBuilder.addFavorite(navController: NavController, root: HomeTabScree
     }
 }
 
-fun NavGraphBuilder.addAbout(navController: NavController, root: HomeTabScreens) {
-    composable(HomeScreens.About.createRoute(root)) {
+fun NavGraphBuilder.addAbout(navController: NavController, root: HomeTabScreen) {
+    composable(HomeScreen.About.createRoute(root)) {
         AboutScreen {
             navController.navigate(MainDestinations.LOGIN_ROUTE)
         }
@@ -143,7 +143,7 @@ fun NavGraphBuilder.addAbout(navController: NavController, root: HomeTabScreens)
 @Composable
 fun PracticalAppBottomBar(
     navController: NavController,
-    tabs: Array<HomeTabScreens>,
+    tabs: Array<HomeTabScreen>,
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
