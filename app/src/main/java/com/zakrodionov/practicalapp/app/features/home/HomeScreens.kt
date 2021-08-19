@@ -24,6 +24,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navArgument
 import androidx.navigation.navigation
 import com.zakrodionov.practicalapp.R
+import com.zakrodionov.practicalapp.app.features.MainDestinations
 import com.zakrodionov.practicalapp.app.features.home.HomeScreens.Keys.POST_ID_KEY
 import com.zakrodionov.practicalapp.app.features.home.HomeTabScreens.AboutTab
 import com.zakrodionov.practicalapp.app.features.home.HomeTabScreens.FavoriteTab
@@ -120,15 +121,22 @@ fun NavGraphBuilder.addPostDetail(root: HomeTabScreens) {
 
 fun NavGraphBuilder.addFavorite(navController: NavController, root: HomeTabScreens) {
     composable(HomeScreens.Favorite.createRoute(root)) {
-        FavoriteScreen {
-            navController.navigate(HomeScreens.PostDetail.createRoute(root, it))
-        }
+        FavoriteScreen(
+            navigateToPostDetail = {
+                navController.navigate(HomeScreens.PostDetail.createRoute(root, it))
+            },
+            navigateToLogin = {
+                navController.navigate(MainDestinations.LOGIN_ROUTE)
+            }
+        )
     }
 }
 
 fun NavGraphBuilder.addAbout(navController: NavController, root: HomeTabScreens) {
     composable(HomeScreens.About.createRoute(root)) {
-        AboutScreen(navController)
+        AboutScreen {
+            navController.navigate(MainDestinations.LOGIN_ROUTE)
+        }
     }
 }
 

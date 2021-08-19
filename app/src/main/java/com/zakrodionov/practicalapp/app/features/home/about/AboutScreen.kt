@@ -7,11 +7,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavController
 import com.zakrodionov.common.extensions.Subscribe
 import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.R
-import com.zakrodionov.practicalapp.app.features.MainDestinations
 import com.zakrodionov.practicalapp.app.ui.components.CommonCenteredButton
 import com.zakrodionov.practicalapp.app.ui.components.CommonCenteredText
 import com.zakrodionov.practicalapp.app.ui.components.CommonFillSpacer
@@ -20,16 +18,14 @@ import kotlinx.coroutines.flow.collect
 import org.koin.androidx.compose.getStateViewModel
 
 @Composable
-fun AboutScreen(navController: NavController) {
+fun AboutScreen(navigateToLogin: () -> Unit) {
     val viewModel = getStateViewModel<AboutViewModel>()
     val state = viewModel.stateFlow.collectAsState()
 
     Subscribe {
         viewModel.eventFlow.collect {
             when (it) {
-                NavigateToLoginFlow -> {
-                    navController.navigate(MainDestinations.LOGIN_ROUTE)
-                }
+                NavigateToLoginFlow -> navigateToLogin()
             }
         }
     }

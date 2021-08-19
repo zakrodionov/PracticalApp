@@ -10,13 +10,21 @@ import com.zakrodionov.practicalapp.app.ui.components.CommonCenteredText
 import com.zakrodionov.practicalapp.app.ui.components.CommonSpacer
 
 @Composable
-fun FavoriteScreen(navigateToPostDetail: (postId: String) -> Unit) {
+fun FavoriteScreen(
+    navigateToPostDetail: (postId: String) -> Unit,
+    navigateToLogin: () -> Unit,
+) {
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
         CommonCenteredText(text = "Favorites")
         CommonSpacer()
         CommonCenteredButton(
             text = "Test Favorite Navigation - Navigate to Post Details",
             onClick = { navigateToPostDetail("60d21aeb67d0d8992e610b79") }
+        )
+        CommonSpacer()
+        CommonCenteredButton(
+            text = "Test Login Navigation",
+            onClick = { navigateToLogin() }
         )
     }
 }
