@@ -1,7 +1,6 @@
 package com.zakrodionov.practicalapp.app.features.home.posts.detail
 
 import android.os.Parcelable
-import androidx.lifecycle.SavedStateHandle
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
 import com.zakrodionov.practicalapp.app.core.onFailure
 import com.zakrodionov.practicalapp.app.core.onSuccess
@@ -12,13 +11,12 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class ArgsPostDetail(val postId: String, val post: Post? = null) : Parcelable
 
+// TODO wait fix Koin & Voyager to provide SavedStateHandle
 class PostDetailViewModel(
-    savedStateHandle: SavedStateHandle,
     private val postRepository: PostRepository,
-    private val postId: String,
+    private val args: ArgsPostDetail,
 ) : BaseViewModel<PostDetailsState, PostDetailsEvent>(
-    PostDetailsState(),
-    savedStateHandle
+    PostDetailsState(post = args.post)
 ) {
 
     init {
@@ -28,7 +26,7 @@ class PostDetailViewModel(
     fun loadPostDetails() = launchIo {
         reduce { state.copy(isLoading = true) }
         postRepository
-            .getPost(postId)
+            .getPost(args.postId)
             .onSuccess { post ->
                 reduce { state.copy(post = post, error = null) }
             }

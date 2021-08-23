@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.androidx.AndroidScreen
 import coil.compose.rememberImagePainter
 import com.zakrodionov.common.extensions.capitalizeFirstLetter
 import com.zakrodionov.common.extensions.dtfDateTimeFullMonth
@@ -21,36 +22,40 @@ import com.zakrodionov.common.extensions.ifNotNull
 import com.zakrodionov.common.extensions.parseOffsetDateTime
 import com.zakrodionov.common.extensions.toLocaleDateTimeApplyZone
 import com.zakrodionov.practicalapp.app.ui.components.Lce
-import org.koin.androidx.compose.getStateViewModel
+import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
-@Composable
-fun PostDetailsScreen(postId: String) {
-    val viewModel = getStateViewModel<PostDetailViewModel>(parameters = { parametersOf(postId) })
-    val state = viewModel.stateFlow.collectAsState()
-    val post = state.value.post
+data class PostDetailsScreen(
+    private val args: ArgsPostDetail,
+) : AndroidScreen() {
+    @Composable
+    override fun Content() {
+        val viewModel = getViewModel<PostDetailViewModel>(parameters = { parametersOf(args) })
+        val state = viewModel.stateFlow.collectAsState()
+        val post = state.value.post
 
-    Lce(lceState = state.value.lceState, tryAgain = { viewModel.loadPostDetails() }) {
-        Column(modifier = Modifier.fillMaxSize()) {
-            Image(
-                painter = rememberImagePainter(post?.image.orEmpty()),
-                contentDescription = "Post Image",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .height(150.dp)
-                    .fillMaxWidth()
-            )
+        Lce(lceState = state.value.lceState, tryAgain = { viewModel.loadPostDetails() }) {
+            Column(modifier = Modifier.fillMaxSize()) {
+                Image(
+                    painter = rememberImagePainter(post?.image.orEmpty()),
+                    contentDescription = "Post Image",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .height(150.dp)
+                        .fillMaxWidth()
+                )
 
-            post?.text?.capitalizeFirstLetter().ifNotNull {
-                Text(modifier = Modifier.padding(5.dp), text = it)
+                post?.text?.capitalizeFirstLetter().ifNotNull {
+                    Text(modifier = Modifier.padding(5.dp), text = it)
+                }
+
+                post?.publishDate?.parsePostDate()?.ifNotNull {
+                    Text(modifier = Modifier.padding(5.dp), text = it)
+                }
+
+                Spacer(modifier = Modifier.weight(1f))
+                Text(text = "Todo Footer", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
             }
-
-            post?.publishDate?.parsePostDate()?.ifNotNull {
-                Text(modifier = Modifier.padding(5.dp), text = it)
-            }
-
-            Spacer(modifier = Modifier.weight(1f))
-            Text(text = "Todo Footer", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
         }
     }
 }
