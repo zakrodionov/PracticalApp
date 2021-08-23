@@ -7,13 +7,17 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
 import com.zakrodionov.common.extensions.debug
+import com.zakrodionov.practicalapp.app.core.navigation.CurrentScreen
 import com.zakrodionov.practicalapp.app.core.navigation.Flow
 
 @Composable
 fun Flow.FlowContent(startScreen: Screen) {
     DisposableEffect(Unit) {
         debug("Navigator - Start flow $title")
-        onDispose { debug("Navigator - Dispose flow $title") }
+        onDispose {
+            CurrentScreen.current.value = null
+            debug("Navigator - Dispose flow $title")
+        }
     }
 
     Navigator(screen = startScreen) { navigator ->
@@ -23,5 +27,6 @@ fun Flow.FlowContent(startScreen: Screen) {
                 debug("Navigator - Last Event: ${navigator.lastEvent}")
             }
         }
+        CurrentScreen.current.value = navigator.lastItem
     }
 }

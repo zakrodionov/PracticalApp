@@ -23,16 +23,7 @@ package com.zakrodionov.practicalapp.app.features
 //    }
 // }
 //
-// @Composable
-// fun shouldShowBottomBar(navController: NavHostController): Boolean {
-//    val currentRoute = currentRoute(navController)
-//    // Сюда добавляем экраны в которых надо скрывать BottomBar
-//    val routesWithoutBottomBar = listOf(
-//        LoginScreens.PHONE.route,
-//        LoginScreens.PASSWORD.route,
-//    )
-//    return !routesWithoutBottomBar.contains(currentRoute)
-// }
+
 //
 // @Composable
 // fun currentRoute(navController: NavHostController): String? {

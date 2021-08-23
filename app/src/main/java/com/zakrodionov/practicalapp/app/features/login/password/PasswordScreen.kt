@@ -19,6 +19,12 @@ import com.zakrodionov.practicalapp.app.ui.components.PrimaryButton
 import org.koin.androidx.compose.get
 
 class PasswordScreen : AndroidScreen() {
+    companion object {
+        const val KEY = "PasswordScreen"
+    }
+
+    override val key: String = KEY
+
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.current

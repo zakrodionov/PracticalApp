@@ -18,6 +18,12 @@ import com.zakrodionov.practicalapp.app.ui.components.PhoneTextField
 import com.zakrodionov.practicalapp.app.ui.components.PrimaryButton
 
 class PhoneScreen : AndroidScreen() {
+    companion object {
+        const val KEY = "PhoneScreen"
+    }
+
+    override val key: String = KEY
+
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.current

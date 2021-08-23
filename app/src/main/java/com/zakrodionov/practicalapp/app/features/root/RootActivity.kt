@@ -11,14 +11,20 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
+import com.zakrodionov.common.extensions.debug
+import com.zakrodionov.practicalapp.app.core.navigation.CurrentScreen
 import com.zakrodionov.practicalapp.app.features.home.AboutTab
 import com.zakrodionov.practicalapp.app.features.home.FavoritesTab
 import com.zakrodionov.practicalapp.app.features.home.PostsTab
+import com.zakrodionov.practicalapp.app.features.login.password.PasswordScreen
+import com.zakrodionov.practicalapp.app.features.login.phone.PhoneScreen
 import com.zakrodionov.practicalapp.app.ui.theme.PracticalAppTheme
 
 class RootActivity : ComponentActivity() {
@@ -34,27 +40,39 @@ class RootActivity : ComponentActivity() {
 
     @Composable
     fun Content() {
-//        val navigator = LocalNavigator.current
-//        val tabNavigator = LocalTabNavigator.current
-//        debug(navigator?.items?.toString() ?: "null")
-//        debug("tab: " + tabNavigator?.current?.toString() ?: "null")
+        val currentScreen = CurrentScreen.current.collectAsState()
 
+        debug("vdcv ${currentScreen.value}")
         TabNavigator(PostsTab) { tabNavigator ->
             Scaffold(
                 content = {
                     Box(modifier = Modifier.padding(it)) {
+                        debug("CurrentTab")
                         CurrentTab()
                     }
                 },
                 bottomBar = {
-                    BottomNavigation {
-                        TabNavigationItem(PostsTab)
-                        TabNavigationItem(FavoritesTab)
-                        TabNavigationItem(AboutTab)
+                    if (shouldShowBottomBar(currentScreen.value)) {
+                        BottomNavigation {
+                            TabNavigationItem(PostsTab)
+                            TabNavigationItem(FavoritesTab)
+                            TabNavigationItem(AboutTab)
+                        }
                     }
                 }
             )
         }
+    }
+
+    @Composable
+    fun shouldShowBottomBar(currentScreen: Screen?): Boolean {
+        if (currentScreen == null) return true
+        // Сюда добавляем экраны в которых надо скрывать BottomBar
+        val routesWithoutBottomBar = listOf(
+            PhoneScreen.KEY,
+            PasswordScreen.KEY,
+        )
+        return !routesWithoutBottomBar.contains(currentScreen.key)
     }
 
     @Composable
