@@ -12,7 +12,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import com.zakrodionov.common.extensions.Subscribe
 import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.R
-import com.zakrodionov.practicalapp.app.features.login.phone.PhoneScreen
+import com.zakrodionov.practicalapp.app.features.login.LoginFlow
 import com.zakrodionov.practicalapp.app.ui.components.CommonCenteredButton
 import com.zakrodionov.practicalapp.app.ui.components.CommonCenteredText
 import com.zakrodionov.practicalapp.app.ui.components.CommonFillSpacer
@@ -30,7 +30,7 @@ class AboutScreen : AndroidScreen() {
         Subscribe {
             viewModel.eventFlow.collect {
                 when (it) {
-                    NavigateToLoginFlow -> navigator?.push(PhoneScreen())
+                    NavigateToLoginFlow -> navigator?.push(LoginFlow())
                 }
             }
         }

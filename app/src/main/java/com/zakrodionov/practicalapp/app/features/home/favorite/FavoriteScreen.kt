@@ -9,7 +9,7 @@ import cafe.adriel.voyager.androidx.AndroidScreen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import com.zakrodionov.practicalapp.app.features.home.posts.detail.ArgsPostDetail
 import com.zakrodionov.practicalapp.app.features.home.posts.detail.PostDetailsScreen
-import com.zakrodionov.practicalapp.app.features.login.phone.PhoneScreen
+import com.zakrodionov.practicalapp.app.features.login.LoginFlow
 import com.zakrodionov.practicalapp.app.ui.components.CommonCenteredButton
 import com.zakrodionov.practicalapp.app.ui.components.CommonCenteredText
 import com.zakrodionov.practicalapp.app.ui.components.CommonSpacer
@@ -29,7 +29,7 @@ class FavoriteScreen : AndroidScreen() {
             CommonSpacer()
             CommonCenteredButton(
                 text = "Test Login Navigation",
-                onClick = { navigator?.push(PhoneScreen()) }
+                onClick = { navigator?.push(LoginFlow()) }
             )
         }
     }
