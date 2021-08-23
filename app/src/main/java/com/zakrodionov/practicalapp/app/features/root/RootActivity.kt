@@ -42,12 +42,10 @@ class RootActivity : ComponentActivity() {
     fun Content() {
         val currentScreen = CurrentScreen.current.collectAsState()
 
-        debug("vdcv ${currentScreen.value}")
         TabNavigator(PostsTab) { tabNavigator ->
             Scaffold(
                 content = {
                     Box(modifier = Modifier.padding(it)) {
-                        debug("CurrentTab")
                         CurrentTab()
                     }
                 },
