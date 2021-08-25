@@ -16,7 +16,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.androidx.AndroidScreen
 import coil.compose.rememberImagePainter
 import com.google.accompanist.insets.imePadding
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -26,6 +25,7 @@ import com.zakrodionov.common.extensions.dtfDateTimeFullMonth
 import com.zakrodionov.common.extensions.ifNotNull
 import com.zakrodionov.common.extensions.parseOffsetDateTime
 import com.zakrodionov.common.extensions.toLocaleDateTimeApplyZone
+import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
 import com.zakrodionov.practicalapp.app.ui.components.Lce
 import com.zakrodionov.practicalapp.app.ui.theme.ColorStatusBar
 import org.koin.androidx.compose.getViewModel
@@ -33,9 +33,14 @@ import org.koin.core.parameter.parametersOf
 
 data class PostDetailsScreen(
     private val args: ArgsPostDetail,
-) : AndroidScreen() {
+) : BaseScreen() {
+
+    override val statusBarColor: Color = Color.Transparent
+
     @Composable
     override fun Content() {
+        super.Content()
+
         val viewModel = getViewModel<PostDetailViewModel>(parameters = { parametersOf(args) })
         val state = viewModel.stateFlow.collectAsState()
         val post = state.value.post

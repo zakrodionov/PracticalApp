@@ -18,13 +18,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.androidx.AndroidScreen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import coil.compose.rememberImagePainter
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.zakrodionov.common.ui.LoadingItem
+import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
 import com.zakrodionov.practicalapp.app.domain.model.Posts.Post
 import com.zakrodionov.practicalapp.app.features.home.posts.detail.ArgsPostDetail
 import com.zakrodionov.practicalapp.app.features.home.posts.detail.PostDetailsScreen
@@ -36,9 +36,11 @@ import kotlin.random.Random
 
 const val PAGINATION_THRESHOLD = 5
 
-class PostsScreen : AndroidScreen() {
+class PostsScreen : BaseScreen() {
     @Composable
     override fun Content() {
+        super.Content()
+
         val navigator = LocalNavigator.current
         val viewModel = getStateViewModel<PostsViewModel>()
         val state = viewModel.stateFlow.collectAsState()

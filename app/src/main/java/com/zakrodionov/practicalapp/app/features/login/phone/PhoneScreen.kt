@@ -8,17 +8,17 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.androidx.AndroidScreen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import com.zakrodionov.common.core.TextResource
 import com.zakrodionov.common.extensions.debug
 import com.zakrodionov.practicalapp.R
+import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
 import com.zakrodionov.practicalapp.app.features.login.password.PasswordScreen
 import com.zakrodionov.practicalapp.app.ui.components.PhoneTextField
 import com.zakrodionov.practicalapp.app.ui.components.PrimaryButton
 import com.zakrodionov.practicalapp.app.ui.defaultInsetsPadding
 
-class PhoneScreen : AndroidScreen() {
+class PhoneScreen : BaseScreen() {
     companion object {
         const val KEY = "PhoneScreen"
     }
@@ -27,6 +27,8 @@ class PhoneScreen : AndroidScreen() {
 
     @Composable
     override fun Content() {
+        super.Content()
+
         val navigator = LocalNavigator.current
 
         Column(

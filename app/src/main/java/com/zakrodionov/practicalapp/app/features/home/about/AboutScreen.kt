@@ -7,10 +7,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import cafe.adriel.voyager.androidx.AndroidScreen
 import com.zakrodionov.common.extensions.OnLaunched
 import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.R
+import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
 import com.zakrodionov.practicalapp.app.core.navigation.LocalGlobalNavigator
 import com.zakrodionov.practicalapp.app.features.login.LoginFlow
 import com.zakrodionov.practicalapp.app.ui.components.CommonCenteredButton
@@ -21,9 +21,11 @@ import com.zakrodionov.practicalapp.app.ui.defaultInsetsPadding
 import kotlinx.coroutines.flow.collect
 import org.koin.androidx.compose.getStateViewModel
 
-class AboutScreen : AndroidScreen() {
+class AboutScreen : BaseScreen() {
     @Composable
     override fun Content() {
+        super.Content()
+
         val globalNavigator = LocalGlobalNavigator.current
         val viewModel = getStateViewModel<AboutViewModel>()
         val state = viewModel.stateFlow.collectAsState()
