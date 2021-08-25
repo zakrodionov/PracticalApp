@@ -1,9 +1,18 @@
 package com.zakrodionov.common.extensions
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import kotlinx.coroutines.CoroutineScope
 
-// Поз
+// Выполняется только при первой композиции. Предоставляет CoroutineScope.
 @Composable
-fun Subscribe(block: suspend CoroutineScope.() -> Unit) = LaunchedEffect(key1 = Unit, block = block)
+fun OnLaunched(block: suspend CoroutineScope.() -> Unit) = LaunchedEffect(key1 = Unit, block = block)
+
+// Выполняется только при первой композиции.
+@Composable
+fun OnLaunched(block: () -> Unit, onDispose: () -> Unit = {}) = DisposableEffect(Unit) {
+    block()
+    onDispose { onDispose() }
+}
+

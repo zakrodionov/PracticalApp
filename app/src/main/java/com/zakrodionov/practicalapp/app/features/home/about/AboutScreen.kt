@@ -7,7 +7,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.zakrodionov.common.extensions.Subscribe
+import com.zakrodionov.common.extensions.OnLaunched
 import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.ui.components.CommonCenteredButton
@@ -22,7 +22,7 @@ fun AboutScreen(navigateToLogin: () -> Unit) {
     val viewModel = getStateViewModel<AboutViewModel>()
     val state = viewModel.stateFlow.collectAsState()
 
-    Subscribe {
+    OnLaunched {
         viewModel.eventFlow.collect {
             when (it) {
                 NavigateToLoginFlow -> navigateToLogin()
