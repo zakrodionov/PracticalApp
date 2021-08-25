@@ -1,6 +1,7 @@
 package com.zakrodionov.practicalapp.app.features.home.posts.list
 
 import androidx.lifecycle.SavedStateHandle
+import com.zakrodionov.common.models.Loading
 import com.zakrodionov.common.ui.addLoadingItem
 import com.zakrodionov.common.ui.removeLoadingItem
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
@@ -26,9 +27,9 @@ class PostsViewModel(
                 if (refresh) reduce { state.copy(page = 0) }
 
                 if (state.page > 0) {
-                    reduce { state.copy(posts = state.posts?.addLoadingItem()) }
-                } else if (!refresh) {
-                    reduce { state.copy(isLoading = true) }
+                    reduce { state.copy(posts = state.posts?.addLoadingItem()) } // Show pagination loading
+                } else {
+                    reduce { state.copy(loading = Loading(true, refresh)) }
                 }
 
                 postRepository
@@ -44,7 +45,14 @@ class PostsViewModel(
                     .onFailure {
                         reduce { state.copy(error = it) }
                     }
-                reduce { state.copy(posts = state.posts?.removeLoadingItem(), isLoading = false) }
+
+                // Hide all loaders
+                reduce {
+                    state.copy(
+                        posts = state.posts?.removeLoadingItem(),
+                        loading = Loading(isLoading = false, fromSwipeRefresh = false)
+                    )
+                }
             }
         }
     }

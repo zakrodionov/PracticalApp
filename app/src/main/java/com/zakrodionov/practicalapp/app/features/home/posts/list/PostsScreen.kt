@@ -47,7 +47,7 @@ class PostsScreen : BaseScreen() {
 
         Lce(lceState = state.value.lceState, tryAgain = { viewModel.loadPosts() }) {
             SwipeRefresh(
-                state = rememberSwipeRefreshState(state.value.isLoading),
+                state = rememberSwipeRefreshState(state.value.loading.fromSwipeRefresh),
                 onRefresh = { viewModel.loadPosts(refresh = true) },
                 modifier = Modifier.defaultInsetsPadding()
             ) {

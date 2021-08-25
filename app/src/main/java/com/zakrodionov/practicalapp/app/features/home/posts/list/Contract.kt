@@ -1,6 +1,7 @@
 package com.zakrodionov.practicalapp.app.features.home.posts.list
 
 import android.os.Parcelable
+import com.zakrodionov.common.models.Loading
 import com.zakrodionov.common.ui.DiffItem
 import com.zakrodionov.common.ui.lce.ContentState
 import com.zakrodionov.common.ui.lce.EmptyState
@@ -16,11 +17,11 @@ data class PostsState(
     val posts: List<DiffItem>? = null,
     val page: Int = 0,
     val error: BaseError? = null,
-    val isLoading: Boolean = false,
+    val loading: Loading = Loading(true),
 ) : Parcelable {
     val lceState: LceState
         get() = when {
-            isLoading -> LoadingState(page > 1)
+            loading.isLoading && !loading.fromSwipeRefresh -> LoadingState(page > 1)
             error != null -> ErrorState(error.toUiError())
             posts?.isEmpty() ?: false -> EmptyState
             posts?.isNotEmpty() ?: false -> ContentState
