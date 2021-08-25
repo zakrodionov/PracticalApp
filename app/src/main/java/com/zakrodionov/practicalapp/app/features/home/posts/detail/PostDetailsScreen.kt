@@ -41,7 +41,7 @@ data class PostDetailsScreen(
     override fun Content() {
         super.Content()
 
-        val viewModel = getViewModel<PostDetailViewModel>(parameters = { parametersOf(args) })
+        val viewModel = getViewModel<PostDetailViewModel> { parametersOf(args) }
         val state = viewModel.stateFlow.collectAsState()
 
         PostDetailsScreen(
