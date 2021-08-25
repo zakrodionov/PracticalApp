@@ -19,12 +19,6 @@ import com.zakrodionov.practicalapp.app.ui.components.PrimaryButton
 import com.zakrodionov.practicalapp.app.ui.defaultInsetsPadding
 
 class PhoneScreen : BaseScreen() {
-    companion object {
-        const val KEY = "PhoneScreen"
-    }
-
-    override val key: String = KEY
-
     @Composable
     override fun Content() {
         super.Content()

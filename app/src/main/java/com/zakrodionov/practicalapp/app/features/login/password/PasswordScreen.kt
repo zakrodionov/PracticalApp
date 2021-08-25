@@ -20,12 +20,6 @@ import com.zakrodionov.practicalapp.app.ui.defaultInsetsPadding
 import org.koin.androidx.compose.get
 
 class PasswordScreen : BaseScreen() {
-    companion object {
-        const val KEY = "PasswordScreen"
-    }
-
-    override val key: String = KEY
-
     @Composable
     override fun Content() {
         super.Content()
