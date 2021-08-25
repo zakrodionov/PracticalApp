@@ -2,9 +2,9 @@ package com.zakrodionov.practicalapp.app.core.navigation
 
 import androidx.annotation.CallSuper
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
 import cafe.adriel.voyager.androidx.AndroidScreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.zakrodionov.common.extensions.OnLaunched
 import com.zakrodionov.practicalapp.app.ui.theme.ColorStatusBar
 
 abstract class BaseScreen : AndroidScreen() {
@@ -20,7 +20,7 @@ abstract class BaseScreen : AndroidScreen() {
     @Composable
     private fun applyStatusBarColor(): Boolean {
         val systemUiController = rememberSystemUiController()
-        SideEffect { systemUiController.setStatusBarColor(statusBarColor, isLight) }
+        OnLaunched { systemUiController.setStatusBarColor(statusBarColor, isLight) }
         return true
     }
 }
