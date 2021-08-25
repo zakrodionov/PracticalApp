@@ -1,6 +1,7 @@
 # PracticalApp  [![Build](https://github.com/zakrodionov/PracticalApp/actions/workflows/Build.yml/badge.svg)](https://github.com/zakrodionov/PracticalApp/actions/workflows/Build.yml)
 
-### [Compose version [Work in Progress]](https://github.com/zakrodionov/PracticalApp/tree/feature/compose)
+### [Compose version (Google Navigation) [Work in Progress]](https://github.com/zakrodionov/PracticalApp/tree/feature/compose)
+### [Compose version (Voyager Navigation) [Work in Progress]](https://github.com/zakrodionov/PracticalApp/tree/feature/compose_voyager_navigation)
 
 PracticalApp - пример архитектуры приложения для коммерческой/аутсорс разработки. Основные цели: эффективность, простота ведения и поддержания кода, использования инструментов, которые не требуют
 длительного изучения (Android Architecture Components, Koin, Coroutines). Принципы Clean Architecture придерживаются, но без строгого фанатизма, не в ущерб производительности (без абстракций ради абстракций).
