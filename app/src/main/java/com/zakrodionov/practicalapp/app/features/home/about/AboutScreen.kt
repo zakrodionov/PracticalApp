@@ -8,7 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import cafe.adriel.voyager.androidx.AndroidScreen
-import com.zakrodionov.common.extensions.Subscribe
+import com.zakrodionov.common.extensions.OnLaunched
 import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.navigation.LocalGlobalNavigator
@@ -27,7 +27,7 @@ class AboutScreen : AndroidScreen() {
         val viewModel = getStateViewModel<AboutViewModel>()
         val state = viewModel.stateFlow.collectAsState()
 
-        Subscribe {
+        OnLaunched {
             viewModel.eventFlow.collect {
                 when (it) {
                     NavigateToLoginFlow -> globalNavigator.push(LoginFlow())
