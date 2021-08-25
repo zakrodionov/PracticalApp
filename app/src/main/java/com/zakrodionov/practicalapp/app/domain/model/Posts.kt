@@ -23,21 +23,21 @@ data class Posts(
     @Parcelize
     data class Post(
         @Json(name = "id")
-        val id: String?,
+        val id: String? = null,
         @Json(name = "image")
-        val image: String?,
+        val image: String? = null,
         @Json(name = "likes")
-        val likes: Int?,
+        val likes: Int? = null,
         @Json(name = "link")
-        val link: String?,
+        val link: String? = null,
         @Json(name = "owner")
-        val owner: Owner?,
+        val owner: Owner? = null,
         @Json(name = "publishDate")
-        val publishDate: String?,
+        val publishDate: String? = null,
         @Json(name = "tags")
-        val tags: List<String?>?,
+        val tags: List<String?>? = null,
         @Json(name = "text")
-        val text: String?,
+        val text: String? = null,
     ) : DiffItem {
         @JsonClass(generateAdapter = true)
         @Parcelize

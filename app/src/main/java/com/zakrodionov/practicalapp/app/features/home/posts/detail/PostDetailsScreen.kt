@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.google.accompanist.insets.imePadding
@@ -22,7 +23,10 @@ import com.zakrodionov.common.extensions.dtfDateTimeFullMonth
 import com.zakrodionov.common.extensions.ifNotNull
 import com.zakrodionov.common.extensions.parseOffsetDateTime
 import com.zakrodionov.common.extensions.toLocaleDateTimeApplyZone
+import com.zakrodionov.common.ui.lce.ContentState
+import com.zakrodionov.common.ui.lce.LceState
 import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
+import com.zakrodionov.practicalapp.app.domain.model.Posts.Post
 import com.zakrodionov.practicalapp.app.ui.components.Lce
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
@@ -39,34 +43,43 @@ data class PostDetailsScreen(
 
         val viewModel = getViewModel<PostDetailViewModel>(parameters = { parametersOf(args) })
         val state = viewModel.stateFlow.collectAsState()
-        val post = state.value.post
 
-        Lce(lceState = state.value.lceState, tryAgain = { viewModel.loadPostDetails() }) {
-            Column(
+        PostDetailsScreen(
+            lceState = state.value.lceState,
+            post = state.value.post,
+            tryAgain = { viewModel.loadPostDetails() }
+        )
+    }
+}
+
+// Stateless Screen
+@Composable
+private fun PostDetailsScreen(lceState: LceState, post: Post?, tryAgain: () -> Unit) {
+    Lce(lceState = lceState, tryAgain = tryAgain) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .imePadding()
+        ) {
+            Image(
+                painter = rememberImagePainter(post?.image.orEmpty()),
+                contentDescription = "Post Image",
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .fillMaxSize()
-                    .imePadding()
-            ) {
-                Image(
-                    painter = rememberImagePainter(post?.image.orEmpty()),
-                    contentDescription = "Post Image",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .height(150.dp)
-                        .fillMaxWidth()
-                )
+                    .height(150.dp)
+                    .fillMaxWidth()
+            )
 
-                post?.text?.capitalizeFirstLetter().ifNotNull {
-                    Text(modifier = Modifier.padding(5.dp), text = it)
-                }
-
-                post?.publishDate?.parsePostDate()?.ifNotNull {
-                    Text(modifier = Modifier.padding(5.dp), text = it)
-                }
-
-                Spacer(modifier = Modifier.weight(1f))
-                Text(text = "Todo Footer", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
+            post?.text?.capitalizeFirstLetter().ifNotNull {
+                Text(modifier = Modifier.padding(5.dp), text = it)
             }
+
+            post?.publishDate?.parsePostDate()?.ifNotNull {
+                Text(modifier = Modifier.padding(5.dp), text = it)
+            }
+
+            Spacer(modifier = Modifier.weight(1f))
+            Text(text = "Todo Footer", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
         }
     }
 }
@@ -74,3 +87,14 @@ data class PostDetailsScreen(
 // Вообще это надо маппить в data слое или VM в OffsetDateTime, но для примера конвертации даты пока будет здесь
 private fun String.parsePostDate(): String? =
     parseOffsetDateTime().toLocaleDateTimeApplyZone().format(dtfDateTimeFullMonth)
+
+@Preview
+@Composable
+fun PreviewPostDetailsScreen() {
+    val post = Post(
+        image = "https://img.dummyapi.io/photo-1564694202779-bc908c327862.jpg",
+        text = "adult Labrador retriever",
+        publishDate = "2020-05-24T14:53:17.598Z"
+    )
+    PostDetailsScreen(lceState = ContentState, post = post) {}
+}
