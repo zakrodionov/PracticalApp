@@ -14,6 +14,7 @@ import com.zakrodionov.practicalapp.app.features.login.LoginFlow
 import com.zakrodionov.practicalapp.app.ui.components.CommonCenteredButton
 import com.zakrodionov.practicalapp.app.ui.components.CommonCenteredText
 import com.zakrodionov.practicalapp.app.ui.components.CommonSpacer
+import com.zakrodionov.practicalapp.app.ui.defaultInsetsPadding
 
 class FavoriteScreen : AndroidScreen() {
     @Composable
@@ -21,7 +22,12 @@ class FavoriteScreen : AndroidScreen() {
         val navigator = LocalNavigator.current
         val globalNavigator = LocalGlobalNavigator.current
 
-        Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .defaultInsetsPadding(),
+            verticalArrangement = Arrangement.Center
+        ) {
             CommonCenteredText(text = "Favorites")
             CommonSpacer()
             CommonCenteredButton(

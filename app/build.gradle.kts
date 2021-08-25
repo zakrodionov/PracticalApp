@@ -187,6 +187,7 @@ dependencies {
     implementation(Libs.coil_compose)
 
     implementation(Libs.accompanist_swipe_refresh)
+    implementation(Libs.accompanist_insets)
 
     val voyager = "1.0.0-beta07" // Todo
     implementation("cafe.adriel.voyager:voyager-navigator:$voyager")

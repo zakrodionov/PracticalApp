@@ -30,6 +30,7 @@ import com.zakrodionov.practicalapp.app.features.home.posts.detail.ArgsPostDetai
 import com.zakrodionov.practicalapp.app.features.home.posts.detail.PostDetailsScreen
 import com.zakrodionov.practicalapp.app.ui.components.Lce
 import com.zakrodionov.practicalapp.app.ui.components.LoadingItem
+import com.zakrodionov.practicalapp.app.ui.defaultInsetsPadding
 import org.koin.androidx.compose.getStateViewModel
 import kotlin.random.Random
 
@@ -46,6 +47,7 @@ class PostsScreen : AndroidScreen() {
             SwipeRefresh(
                 state = rememberSwipeRefreshState(state.value.isLoading),
                 onRefresh = { viewModel.loadPosts(refresh = true) },
+                modifier = Modifier.defaultInsetsPadding()
             ) {
                 val listState = rememberLazyListState()
                 if (listState.layoutInfo.totalItemsCount != 0 &&

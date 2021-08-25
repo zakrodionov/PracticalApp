@@ -17,6 +17,7 @@ import com.zakrodionov.practicalapp.app.ui.components.CommonCenteredButton
 import com.zakrodionov.practicalapp.app.ui.components.CommonCenteredText
 import com.zakrodionov.practicalapp.app.ui.components.CommonFillSpacer
 import com.zakrodionov.practicalapp.app.ui.components.CommonSpacer
+import com.zakrodionov.practicalapp.app.ui.defaultInsetsPadding
 import kotlinx.coroutines.flow.collect
 import org.koin.androidx.compose.getStateViewModel
 
@@ -35,7 +36,12 @@ class AboutScreen : AndroidScreen() {
             }
         }
 
-        Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxSize()
+                .defaultInsetsPadding()
+        ) {
             val title = if (state.value.isLogged) stringResource(R.string.logout) else stringResource(R.string.login)
             CommonSpacer()
             CommonCenteredButton(text = title, onClick = { viewModel.loginOrLogout() })

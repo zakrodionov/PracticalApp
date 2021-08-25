@@ -16,6 +16,7 @@ import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.features.login.password.PasswordScreen
 import com.zakrodionov.practicalapp.app.ui.components.PhoneTextField
 import com.zakrodionov.practicalapp.app.ui.components.PrimaryButton
+import com.zakrodionov.practicalapp.app.ui.defaultInsetsPadding
 
 class PhoneScreen : AndroidScreen() {
     companion object {
@@ -28,7 +29,12 @@ class PhoneScreen : AndroidScreen() {
     override fun Content() {
         val navigator = LocalNavigator.current
 
-        Column(verticalArrangement = Arrangement.Center, modifier = Modifier.fillMaxSize()) {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .fillMaxSize()
+                .defaultInsetsPadding()
+        ) {
             PhoneTextField(onValueChanged = { debug(it) })
             Spacer(modifier = Modifier.height(20.dp))
             PrimaryButton(

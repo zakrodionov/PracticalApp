@@ -8,7 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
+import com.google.accompanist.insets.ProvideWindowInsets
 import com.zakrodionov.common.extensions.debug
+import com.zakrodionov.common.extensions.disableFitsSystemWindows
 import com.zakrodionov.practicalapp.app.core.navigation.LocalGlobalNavigator
 import com.zakrodionov.practicalapp.app.features.home.HomeScreen
 import com.zakrodionov.practicalapp.app.ui.theme.PracticalAppTheme
@@ -17,9 +19,14 @@ class RootActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        window?.disableFitsSystemWindows()
+
         setContent {
             PracticalAppTheme {
-                RootScreen()
+                ProvideWindowInsets {
+                    RootScreen()
+                }
             }
         }
     }

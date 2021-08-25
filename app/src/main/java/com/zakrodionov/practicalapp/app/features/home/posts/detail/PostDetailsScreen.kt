@@ -16,6 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.androidx.AndroidScreen
 import coil.compose.rememberImagePainter
+import com.google.accompanist.insets.imePadding
 import com.zakrodionov.common.extensions.capitalizeFirstLetter
 import com.zakrodionov.common.extensions.dtfDateTimeFullMonth
 import com.zakrodionov.common.extensions.ifNotNull
@@ -35,7 +36,11 @@ data class PostDetailsScreen(
         val post = state.value.post
 
         Lce(lceState = state.value.lceState, tryAgain = { viewModel.loadPostDetails() }) {
-            Column(modifier = Modifier.fillMaxSize()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .imePadding()
+            ) {
                 Image(
                     painter = rememberImagePainter(post?.image.orEmpty()),
                     contentDescription = "Post Image",
