@@ -188,7 +188,7 @@ dependencies {
 
     implementation(Libs.accompanist_swipe_refresh)
 
-    val voyager = "1.0.0-beta06" // Todo
+    val voyager = "1.0.0-beta07" // Todo
     implementation("cafe.adriel.voyager:voyager-navigator:$voyager")
     implementation("cafe.adriel.voyager:voyager-tab-navigator:$voyager")
     implementation("cafe.adriel.voyager:voyager-transitions:$voyager")
