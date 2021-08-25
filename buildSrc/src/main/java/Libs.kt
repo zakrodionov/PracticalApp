@@ -92,6 +92,7 @@ object Libs {
     // Accompanist
     const val accompanist_swipe_refresh = "com.google.accompanist:accompanist-swiperefresh:$accompanistVersion"
     const val accompanist_insets = "com.google.accompanist:accompanist-insets:$accompanistVersion"
+    const val accompanist_system_ui_controller = "com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion"
 
     // UI Tests
     const val compose_ui_test = "androidx.compose.ui:ui-test-junit4:$composeVersion"
