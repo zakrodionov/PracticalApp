@@ -8,7 +8,6 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.transitions.SlideTransition
 import com.zakrodionov.common.extensions.debug
-import com.zakrodionov.practicalapp.app.core.navigation.CurrentScreen
 
 @Composable
 fun Tab.TabContent(startScreen: Screen) {
@@ -17,7 +16,6 @@ fun Tab.TabContent(startScreen: Screen) {
     LifecycleEffect(
         onStarted = { debug("Navigator - Start tab $tabTitle") },
         onDisposed = {
-            CurrentScreen.current.value = null
             debug("Navigator - Dispose tab $tabTitle")
         },
     )
@@ -29,6 +27,5 @@ fun Tab.TabContent(startScreen: Screen) {
                 debug("Navigator - Last Event: ${navigator.lastEvent}")
             }
         }
-        CurrentScreen.current.value = navigator.lastItem
     }
 }

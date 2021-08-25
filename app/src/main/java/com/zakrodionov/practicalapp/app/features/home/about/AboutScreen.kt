@@ -8,10 +8,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import cafe.adriel.voyager.androidx.AndroidScreen
-import cafe.adriel.voyager.navigator.LocalNavigator
 import com.zakrodionov.common.extensions.Subscribe
 import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.R
+import com.zakrodionov.practicalapp.app.core.navigation.LocalGlobalNavigator
 import com.zakrodionov.practicalapp.app.features.login.LoginFlow
 import com.zakrodionov.practicalapp.app.ui.components.CommonCenteredButton
 import com.zakrodionov.practicalapp.app.ui.components.CommonCenteredText
@@ -23,14 +23,14 @@ import org.koin.androidx.compose.getStateViewModel
 class AboutScreen : AndroidScreen() {
     @Composable
     override fun Content() {
-        val navigator = LocalNavigator.current
+        val globalNavigator = LocalGlobalNavigator.current
         val viewModel = getStateViewModel<AboutViewModel>()
         val state = viewModel.stateFlow.collectAsState()
 
         Subscribe {
             viewModel.eventFlow.collect {
                 when (it) {
-                    NavigateToLoginFlow -> navigator?.push(LoginFlow())
+                    NavigateToLoginFlow -> globalNavigator.push(LoginFlow())
                 }
             }
         }
