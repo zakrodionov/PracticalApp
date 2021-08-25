@@ -6,4 +6,4 @@ import cafe.adriel.voyager.navigator.Navigator
 
 // Роутер для навигации поверх Bottom Tab Bar
 val LocalGlobalNavigator: ProvidableCompositionLocal<Navigator> =
-    staticCompositionLocalOf { error("TabNavigator not initialized") }
+    staticCompositionLocalOf { error("LocalGlobalNavigator not initialized") }
