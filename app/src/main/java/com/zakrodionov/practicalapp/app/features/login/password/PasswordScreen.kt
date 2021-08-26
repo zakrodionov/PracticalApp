@@ -40,7 +40,7 @@ class PasswordScreen : BaseScreen() {
                 text = TextResource.fromStringId(R.string.next),
                 onClick = {
                     appPreferences.isLogged = true
-                    navigator.pop()
+                    navigator.popUntilRoot()
                 }
             )
         }
