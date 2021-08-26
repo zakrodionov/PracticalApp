@@ -20,6 +20,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import coil.compose.rememberImagePainter
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
@@ -41,7 +42,7 @@ class PostsScreen : BaseScreen() {
     override fun Content() {
         super.Content()
 
-        val navigator = LocalNavigator.current
+        val navigator = LocalNavigator.currentOrThrow
         val viewModel = getStateViewModel<PostsViewModel>()
         val state = viewModel.stateFlow.collectAsState()
 
@@ -77,12 +78,12 @@ class PostsScreen : BaseScreen() {
         }
     }
 
-    private fun navigateToPostDetail(navigator: Navigator?, post: Post) {
+    private fun navigateToPostDetail(navigator: Navigator, post: Post) {
         val id = post.id
         if (id != null) {
             // Для теста разного поведения передаем или сразу весь Post или только id для загрузки поста с сервера
             val postOrNull = if (Random.nextBoolean()) post else null
-            navigator?.push(PostDetailsScreen(ArgsPostDetail(id, postOrNull)))
+            navigator.push(PostDetailsScreen(ArgsPostDetail(id, postOrNull)))
         }
     }
 }

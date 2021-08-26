@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.zakrodionov.common.core.TextResource
 import com.zakrodionov.common.extensions.debug
 import com.zakrodionov.practicalapp.R
@@ -24,7 +25,7 @@ class PasswordScreen : BaseScreen() {
     override fun Content() {
         super.Content()
 
-        val navigator = LocalNavigator.current
+        val navigator = LocalNavigator.currentOrThrow
         val appPreferences = get<AppPreferences>()
 
         Column(
@@ -39,7 +40,7 @@ class PasswordScreen : BaseScreen() {
                 text = TextResource.fromStringId(R.string.next),
                 onClick = {
                     appPreferences.isLogged = true
-                    navigator?.popUntilRoot()
+                    navigator.pop()
                 }
             )
         }
