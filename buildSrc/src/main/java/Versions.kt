@@ -2,7 +2,7 @@ object Versions {
     const val kotlinVersion = "1.5.21"
     const val kotlinCoroutinesVersion = "1.5.1"
 
-    const val composeVersion = "1.0.1"
+    const val composeVersion = "1.1.0-alpha02"
 
     const val retrofitVersion = "2.9.0"
     const val moshiVersion = "1.12.0"
