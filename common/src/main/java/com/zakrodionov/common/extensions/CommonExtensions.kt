@@ -11,6 +11,8 @@ val isDebug: Boolean
 
 inline fun <reified T : Any> T.debug(string: String) = Timber.d("Log__: $string")
 
+fun String.toDebug() = Timber.d("Log__: $this")
+
 inline fun <reified T : Any> T.checkThread(string: String = "") =
     debug("${Thread.currentThread().name}, is main = ${Looper.getMainLooper().isCurrentThread} $string")
 
@@ -32,7 +34,7 @@ fun Handler.postDelayed(delay: Long, func: () -> Unit): Runnable {
 
 fun preferenceListener(
     propertyKey: String,
-    propertyUpdated: (key: String) -> Unit
+    propertyUpdated: (key: String) -> Unit,
 ): SharedPreferences.OnSharedPreferenceChangeListener {
     return SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
         if (propertyKey == key) {
