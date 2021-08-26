@@ -1,33 +1,26 @@
 package com.zakrodionov.practicalapp.app.ui.components
 
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
-import cafe.adriel.voyager.core.screen.LifecycleEffect
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.transitions.SlideTransition
+import com.zakrodionov.common.extensions.OnLaunched
 import com.zakrodionov.common.extensions.debug
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun Tab.TabContent(startScreen: Screen) {
     val tabTitle = options.title
-
-    LifecycleEffect(
-        onStarted = { debug("Navigator - Start tab $tabTitle") },
-        onDisposed = {
-            debug("Navigator - Dispose tab $tabTitle")
-        },
+    OnLaunched(
+        block = { debug("Navigator - Start tab $tabTitle") },
+        onDispose = { debug("Navigator - Dispose tab $tabTitle") }
     )
 
     Navigator(screen = startScreen) { navigator ->
         SlideTransition(navigator) { screen ->
-            Column {
-                screen.Content()
-                debug("Navigator - Last Event: ${navigator.lastEvent}")
-            }
+            screen.Content()
         }
     }
 }
