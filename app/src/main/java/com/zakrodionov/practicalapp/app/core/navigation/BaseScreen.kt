@@ -5,11 +5,11 @@ import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.androidx.AndroidScreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.zakrodionov.common.extensions.OnLaunched
-import com.zakrodionov.practicalapp.app.ui.theme.ColorStatusBar
+import com.zakrodionov.practicalapp.app.ui.theme.StatusBarColor
 
 abstract class BaseScreen : AndroidScreen() {
-    open val statusBarColor = ColorStatusBar
-    open val isLight = false
+    open val statusBarColor = StatusBarColor
+    open val useDarkIconsInStatusBar = false
 
     @Composable
     @CallSuper
@@ -20,7 +20,7 @@ abstract class BaseScreen : AndroidScreen() {
     @Composable
     private fun applyStatusBarColor(): Boolean {
         val systemUiController = rememberSystemUiController()
-        OnLaunched { systemUiController.setStatusBarColor(statusBarColor, isLight) }
+        OnLaunched { systemUiController.setStatusBarColor(statusBarColor, useDarkIconsInStatusBar) }
         return true
     }
 }
