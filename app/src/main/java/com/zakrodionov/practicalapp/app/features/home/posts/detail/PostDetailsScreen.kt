@@ -16,6 +16,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.google.accompanist.insets.imePadding
 import com.zakrodionov.common.extensions.capitalizeFirstLetter
@@ -28,7 +29,7 @@ import com.zakrodionov.common.ui.lce.LceState
 import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
 import com.zakrodionov.practicalapp.app.domain.model.Posts.Post
 import com.zakrodionov.practicalapp.app.ui.components.Lce
-import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.getStateViewModel
 import org.koin.core.parameter.parametersOf
 
 data class PostDetailsScreen(
@@ -41,7 +42,7 @@ data class PostDetailsScreen(
     override fun Content() {
         super.Content()
 
-        val viewModel = getViewModel<PostDetailViewModel> { parametersOf(args) }
+        val viewModel = getStateViewModel<PostDetailViewModel> { parametersOf(args) }
         val state = viewModel.stateFlow.collectAsState()
 
         PostDetailsScreen(
@@ -53,6 +54,7 @@ data class PostDetailsScreen(
 }
 
 // Stateless Screen
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 private fun PostDetailsScreen(lceState: LceState, post: Post?, tryAgain: () -> Unit) {
     Lce(lceState = lceState, tryAgain = tryAgain) {

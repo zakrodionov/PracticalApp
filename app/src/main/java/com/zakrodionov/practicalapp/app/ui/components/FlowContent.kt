@@ -1,5 +1,6 @@
 package com.zakrodionov.practicalapp.app.ui.components
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -9,6 +10,7 @@ import cafe.adriel.voyager.transitions.SlideTransition
 import com.zakrodionov.common.extensions.debug
 import com.zakrodionov.practicalapp.app.core.navigation.Flow
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun Flow.FlowContent(startScreen: Screen) {
     DisposableEffect(Unit) {

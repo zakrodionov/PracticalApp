@@ -12,7 +12,7 @@ object ViewModelInitializer : Initializer {
     override fun initialize(appModule: Module) {
         appModule.apply {
             viewModel { PostsViewModel(get(), get()) }
-            viewModel { parameters -> PostDetailViewModel(get(), parameters.get()) }
+            viewModel { parameters -> PostDetailViewModel(get(), get(), parameters.get()) }
             viewModel { PhoneViewModel(get()) }
             viewModel { AboutViewModel(get(), get()) }
         }

@@ -1,5 +1,6 @@
 package com.zakrodionov.practicalapp.app.ui.components
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.screen.LifecycleEffect
@@ -9,6 +10,7 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.transitions.SlideTransition
 import com.zakrodionov.common.extensions.debug
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun Tab.TabContent(startScreen: Screen) {
     val tabTitle = options.title
