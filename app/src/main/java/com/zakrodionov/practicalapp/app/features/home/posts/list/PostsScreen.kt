@@ -15,6 +15,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
@@ -44,11 +45,11 @@ class PostsScreen : BaseScreen() {
 
         val navigator = LocalNavigator.currentOrThrow
         val viewModel = getStateViewModel<PostsViewModel>()
-        val state = viewModel.stateFlow.collectAsState()
+        val state by viewModel.stateFlow.collectAsState()
 
-        Lce(lceState = state.value.lceState, tryAgain = { viewModel.loadPosts() }) {
+        Lce(lceState = state.lceState, tryAgain = { viewModel.loadPosts() }) {
             SwipeRefresh(
-                state = rememberSwipeRefreshState(state.value.loading.fromSwipeRefresh),
+                state = rememberSwipeRefreshState(state.loading.fromSwipeRefresh),
                 onRefresh = { viewModel.loadPosts(refresh = true) },
                 modifier = Modifier.defaultInsetsPadding()
             ) {
@@ -65,7 +66,7 @@ class PostsScreen : BaseScreen() {
                     verticalArrangement = Arrangement.spacedBy(15.dp), // Расстояние между айтемами
                     contentPadding = PaddingValues(20.dp) // Отступы всего LazyColumn
                 ) {
-                    items(state.value.posts.orEmpty(), key = { it.itemId }) { item ->
+                    items(state.posts.orEmpty(), key = { it.itemId }) { item ->
                         when (item) {
                             is Post -> PostItem(item) {
                                 navigateToPostDetail(navigator, it)

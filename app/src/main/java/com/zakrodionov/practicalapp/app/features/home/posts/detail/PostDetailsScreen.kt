@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -43,11 +44,11 @@ data class PostDetailsScreen(
         super.Content()
 
         val viewModel = getStateViewModel<PostDetailViewModel> { parametersOf(args) }
-        val state = viewModel.stateFlow.collectAsState()
+        val state by viewModel.stateFlow.collectAsState()
 
         PostDetailsScreen(
-            lceState = state.value.lceState,
-            post = state.value.post,
+            lceState = state.lceState,
+            post = state.post,
             tryAgain = { viewModel.loadPostDetails() }
         )
     }

@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -28,7 +29,7 @@ class AboutScreen : BaseScreen() {
 
         val globalNavigator = LocalGlobalNavigator.current
         val viewModel = getStateViewModel<AboutViewModel>()
-        val state = viewModel.stateFlow.collectAsState()
+        val state by viewModel.stateFlow.collectAsState()
 
         OnLaunched {
             viewModel.eventFlow.collect {
@@ -44,7 +45,7 @@ class AboutScreen : BaseScreen() {
                 .fillMaxSize()
                 .defaultInsetsPadding()
         ) {
-            val title = if (state.value.isLogged) stringResource(R.string.logout) else stringResource(R.string.login)
+            val title = if (state.isLogged) stringResource(R.string.logout) else stringResource(R.string.login)
             CommonSpacer()
             CommonCenteredButton(text = title, onClick = { viewModel.loginOrLogout() })
             CommonFillSpacer()
