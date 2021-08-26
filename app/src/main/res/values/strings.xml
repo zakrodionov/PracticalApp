@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">PracticalApp</string>
+    <string name="app_name" translatable="false">PracticalApp Google Navigation</string>
 
     <string name="phone" translatable="false">Email</string>
     <string name="favorite" translatable="false">Favorite</string>

@@ -1,5 +1,5 @@
 object AndroidConfig {
-    const val APPLICATION_ID = "com.zakrodionov.practicalapp"
+    const val APPLICATION_ID = "com.zakrodionov.practicalapp.googlenav"
 
     const val COMPILE_SDK_VERSION = 31
     const val MIN_SDK_VERSION = 23
