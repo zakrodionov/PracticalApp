@@ -14,6 +14,7 @@ import com.zakrodionov.common.core.TextResource
 import com.zakrodionov.common.extensions.debug
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
+import com.zakrodionov.practicalapp.app.core.navigation.popRoot
 import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences
 import com.zakrodionov.practicalapp.app.ui.components.PasswordTextField
 import com.zakrodionov.practicalapp.app.ui.components.PrimaryButton
@@ -40,7 +41,7 @@ class PasswordScreen : BaseScreen() {
                 text = TextResource.fromStringId(R.string.next),
                 onClick = {
                     appPreferences.isLogged = true
-                    navigator.popUntilRoot()
+                    navigator.popRoot()
                 }
             )
         }
