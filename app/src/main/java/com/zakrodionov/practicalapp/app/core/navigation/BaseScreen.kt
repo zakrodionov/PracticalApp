@@ -10,7 +10,7 @@ import com.zakrodionov.practicalapp.app.ui.theme.StatusBarColor
 
 abstract class BaseScreen : AndroidScreen() {
     open fun statusBarColor(): Color = StatusBarColor
-    open val useDarkIconsInStatusBar = false
+    open val useDarkIconsInStatusBar: Boolean = false
 
     @Composable
     @CallSuper
