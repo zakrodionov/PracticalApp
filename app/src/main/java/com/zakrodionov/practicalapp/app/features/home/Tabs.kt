@@ -15,7 +15,7 @@ import com.zakrodionov.practicalapp.app.features.home.favorite.FavoriteScreen
 import com.zakrodionov.practicalapp.app.features.home.posts.list.PostsScreen
 import com.zakrodionov.practicalapp.app.ui.components.TabContent
 
-object PostsTab : AndroidScreen(), Tab {
+object PostsTab : Tab {
     override val options: TabOptions
         @Composable
         get() {
@@ -29,7 +29,7 @@ object PostsTab : AndroidScreen(), Tab {
     }
 }
 
-object FavoritesTab : AndroidScreen(), Tab {
+object FavoritesTab : Tab {
     override val options: TabOptions
         @Composable
         get() {
@@ -45,7 +45,7 @@ object FavoritesTab : AndroidScreen(), Tab {
     }
 }
 
-object AboutTab : AndroidScreen(), Tab {
+object AboutTab : Tab {
     override val options: TabOptions
         @Composable
         get() {
