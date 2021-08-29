@@ -4,6 +4,7 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.Navigator
+import cafe.adriel.voyager.transitions.SlideTransition
 import com.zakrodionov.common.extensions.OnLaunched
 import com.zakrodionov.common.extensions.debug
 import com.zakrodionov.practicalapp.app.core.navigation.Flow
@@ -16,5 +17,9 @@ fun Flow.FlowContent(startScreen: Screen) {
         onDispose = { debug("Navigator - Dispose flow $title") }
     )
 
-    Navigator(screen = startScreen)
+    Navigator(screen = startScreen) { navigator ->
+        SlideTransition(navigator) { screen ->
+            screen.Content()
+        }
+    }
 }
