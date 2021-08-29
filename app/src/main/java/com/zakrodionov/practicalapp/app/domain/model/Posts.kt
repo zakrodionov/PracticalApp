@@ -5,6 +5,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import com.zakrodionov.common.ui.DiffItem
 import kotlinx.parcelize.Parcelize
+import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
 data class Posts(
@@ -38,7 +39,7 @@ data class Posts(
         val tags: List<String?>? = null,
         @Json(name = "text")
         val text: String? = null,
-    ) : DiffItem {
+    ) : DiffItem, Serializable {
         @JsonClass(generateAdapter = true)
         @Parcelize
         data class Owner(
@@ -54,7 +55,7 @@ data class Posts(
             val picture: String?,
             @Json(name = "title")
             val title: String?,
-        ) : Parcelable
+        ) : Parcelable, Serializable
 
         override val itemId: String
             get() = id.orEmpty()

@@ -6,8 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.Navigator
-import cafe.adriel.voyager.transitions.SlideTransition
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.zakrodionov.common.extensions.disableFitsSystemWindows
 import com.zakrodionov.practicalapp.app.core.navigation.LocalGlobalNavigator
@@ -36,9 +36,7 @@ class RootActivity : ComponentActivity() {
         Navigator(screen = HomeScreen()) { navigator ->
             // Root aka global navigator
             CompositionLocalProvider(LocalGlobalNavigator provides navigator) {
-                SlideTransition(navigator) { screen ->
-                    screen.Content()
-                }
+                CurrentScreen()
             }
         }
     }

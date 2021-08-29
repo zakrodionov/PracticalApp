@@ -5,7 +5,6 @@ import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.Tab
-import cafe.adriel.voyager.transitions.SlideTransition
 import com.zakrodionov.common.extensions.OnLaunched
 import com.zakrodionov.common.extensions.debug
 
@@ -18,9 +17,5 @@ fun Tab.TabContent(startScreen: Screen) {
         onDispose = { debug("Navigator - Dispose tab $tabTitle") }
     )
 
-    Navigator(screen = startScreen) { navigator ->
-        SlideTransition(navigator) { screen ->
-            screen.Content()
-        }
-    }
+    Navigator(screen = startScreen)
 }
