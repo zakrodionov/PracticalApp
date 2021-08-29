@@ -5,7 +5,7 @@ import com.zakrodionov.practicalapp.app.core.navigation.Flow
 import com.zakrodionov.practicalapp.app.features.login.phone.PhoneScreen
 import com.zakrodionov.practicalapp.app.ui.components.FlowContent
 
-class LoginFlow : Flow {
+class LoginFlow : Flow() {
     override val title: String = "LoginFlow"
 
     @Composable

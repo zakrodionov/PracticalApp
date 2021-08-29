@@ -7,6 +7,7 @@ import androidx.compose.material.icons.filled.More
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import cafe.adriel.voyager.androidx.AndroidScreen
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.zakrodionov.practicalapp.app.features.home.about.AboutScreen
@@ -14,7 +15,7 @@ import com.zakrodionov.practicalapp.app.features.home.favorite.FavoriteScreen
 import com.zakrodionov.practicalapp.app.features.home.posts.list.PostsScreen
 import com.zakrodionov.practicalapp.app.ui.components.TabContent
 
-object PostsTab : Tab {
+object PostsTab : AndroidScreen(), Tab {
     override val options: TabOptions
         @Composable
         get() {
@@ -28,7 +29,7 @@ object PostsTab : Tab {
     }
 }
 
-object FavoritesTab : Tab {
+object FavoritesTab : AndroidScreen(), Tab {
     override val options: TabOptions
         @Composable
         get() {
@@ -44,7 +45,7 @@ object FavoritesTab : Tab {
     }
 }
 
-object AboutTab : Tab {
+object AboutTab : AndroidScreen(), Tab {
     override val options: TabOptions
         @Composable
         get() {

@@ -1,7 +1,7 @@
 package com.zakrodionov.practicalapp.app.core.navigation
 
-import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.androidx.AndroidScreen
 
-interface Flow : Screen {
-    val title: String
+abstract class Flow : AndroidScreen() {
+    abstract val title: String
 }
