@@ -4,7 +4,7 @@ import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.Screen
 
 // Для навигация во флоу
-class FlowRouter(private val globalRouter: GlobalRouter, val qualifier: String) : Router() {
+class FlowRouter(private val globalRouter: GlobalRouter) : Router() {
 
     fun externalNavigateTo(screen: Screen) = globalRouter.navigateTo(screen)
 

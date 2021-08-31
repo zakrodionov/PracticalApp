@@ -5,8 +5,7 @@ import androidx.annotation.CallSuper
 abstract class BaseTabFragment(
     contentLayoutId: Int,
     containerId: Int,
-    qualifier: String
-) : BaseFlowFragment(contentLayoutId, containerId, qualifier) {
+) : BaseFlowFragment(contentLayoutId, containerId) {
 
     open fun onTabSelected() {}
 

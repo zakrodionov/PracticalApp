@@ -2,8 +2,10 @@ package com.zakrodionov.practicalapp.app.core.navigation
 
 import com.github.terrakok.cicerone.Cicerone
 import com.zakrodionov.practicalapp.app.di.DIQualifiers
+import com.zakrodionov.practicalapp.app.di.modules.GLOBAL_QUALIFIER
 import org.koin.core.module.Module
 import org.koin.dsl.ModuleDeclaration
+import org.koin.dsl.ScopeDSL
 
 val String.toCiceroneQualifier get() = DIQualifiers.ciceroneQualifier(this)
 val String.toNavigationHolderQualifier get() = DIQualifiers.navigationHolderQualifier(this)
@@ -19,59 +21,59 @@ fun Module.bindGlobalNavigation(globalQualifier: String) {
         get<Cicerone<GlobalRouter>>(globalQualifier.toCiceroneQualifier).getNavigatorHolder()
     }
 
-    single {
+    single(GLOBAL_QUALIFIER.toRouterQualifier) {
         get<Cicerone<GlobalRouter>>(globalQualifier.toCiceroneQualifier).router
     }
 }
 
 // Отличается от обычного модуля только тем, что дополнительно биндится FlowNavigation(FlowRouter)
-fun flowModule(
-    flowQualifier: String,
+inline fun <reified T> flowModule(
     createdAtStart: Boolean = false,
-    moduleDeclaration: ModuleDeclaration,
+    moduleDeclaration: ScopeDSL.() -> Unit,
 ): Module {
     val module = Module(createdAtStart)
-    module.bindFlowNavigation(flowQualifier)
-    moduleDeclaration(module)
+    module.scope<T> {
+        bindFlowNavigation()
+        moduleDeclaration()
+    }
     return module
 }
 
-fun Module.bindFlowNavigation(flowQualifier: String) {
-    single(flowQualifier.toCiceroneQualifier) {
-        Cicerone.create(FlowRouter(get(), flowQualifier.toRouterQualifier.value))
+fun ScopeDSL.bindFlowNavigation() {
+    scoped {
+        Cicerone.create(FlowRouter(get(GLOBAL_QUALIFIER.toRouterQualifier)))
     }
-
-    single(flowQualifier.toNavigationHolderQualifier) {
-        get<Cicerone<FlowRouter>>(flowQualifier.toCiceroneQualifier).getNavigatorHolder()
+    scoped {
+        get<Cicerone<FlowRouter>>().getNavigatorHolder()
     }
-
-    single(flowQualifier.toRouterQualifier) {
-        get<Cicerone<FlowRouter>>(flowQualifier.toCiceroneQualifier).router
+    scoped {
+        get<Cicerone<FlowRouter>>().router
     }
 }
 
 // Отличается от обычного модуля только тем, что дополнительно биндится TabFlowNavigation(TabFlowRouter)
-fun tabFlowModule(
-    flowQualifier: String,
+inline fun <reified T> tabFlowModule(
     createdAtStart: Boolean = false,
-    moduleDeclaration: ModuleDeclaration,
+    moduleDeclaration: ScopeDSL.() -> Unit,
 ): Module {
     val module = Module(createdAtStart)
-    module.bindTabFlowNavigation(flowQualifier)
-    moduleDeclaration(module)
+    module.scope<T> {
+        bindTabFlowNavigation()
+        moduleDeclaration()
+    }
     return module
 }
 
-fun Module.bindTabFlowNavigation(flowQualifier: String) {
-    single(flowQualifier.toCiceroneQualifier) {
+fun ScopeDSL.bindTabFlowNavigation() {
+    scoped {
         Cicerone.create(TabFlowRouter())
     }
 
-    single(flowQualifier.toNavigationHolderQualifier) {
-        get<Cicerone<TabFlowRouter>>(flowQualifier.toCiceroneQualifier).getNavigatorHolder()
+    scoped {
+        get<Cicerone<TabFlowRouter>>().getNavigatorHolder()
     }
 
-    single(flowQualifier.toRouterQualifier) {
-        get<Cicerone<TabFlowRouter>>(flowQualifier.toCiceroneQualifier).router
+    scoped {
+        get<Cicerone<TabFlowRouter>>().router
     }
 }

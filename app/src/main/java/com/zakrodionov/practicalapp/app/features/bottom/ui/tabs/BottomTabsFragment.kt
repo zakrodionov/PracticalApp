@@ -9,15 +9,12 @@ import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.BaseFragment
 import com.zakrodionov.practicalapp.app.core.navigation.TabFlowNavigator
 import com.zakrodionov.practicalapp.app.core.navigation.TabHost
-import com.zakrodionov.practicalapp.app.di.DIQualifiers.navigationHolderQualifier
 import com.zakrodionov.practicalapp.app.features.bottom.base.Tab
-import com.zakrodionov.practicalapp.app.features.bottom.di.BOTTOM_TABS_QUALIFIER
-import com.zakrodionov.practicalapp.app.features.bottom.di.bottomTabsModule
 import com.zakrodionov.practicalapp.databinding.FragmentBottomTabsBinding
 import org.koin.android.ext.android.inject
+import org.koin.androidx.scope.fragmentScope
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
-import org.koin.core.context.loadKoinModules
-import org.koin.core.context.unloadKoinModules
+import org.koin.core.scope.Scope
 
 class BottomTabsFragment :
     BaseFragment<BottomTabsState, BottomTabsEvent>(R.layout.fragment_bottom_tabs), TabHost {
@@ -26,14 +23,12 @@ class BottomTabsFragment :
         fun newInstance() = BottomTabsFragment()
     }
 
+    override val scope: Scope by fragmentScope()
+
     override val viewModel: BottomTabsViewModel by stateViewModel()
     override val binding by viewBinding(FragmentBottomTabsBinding::bind)
 
-    private val navigatorHolder: NavigatorHolder by inject(
-        navigationHolderQualifier(
-            BOTTOM_TABS_QUALIFIER
-        )
-    )
+    private val navigatorHolder: NavigatorHolder by inject()
     private val navigator: TabFlowNavigator by lazy {
         TabFlowNavigator(requireActivity(), childFragmentManager, R.id.bottomFragmentContainerView)
     }
@@ -43,11 +38,6 @@ class BottomTabsFragment :
             viewModel.switchTab(Tab.from(item))
             true
         }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        loadKoinModules(bottomTabsModule)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -70,10 +60,6 @@ class BottomTabsFragment :
 
     // Игнорируем инсеты для экрана с BottomNavigationView
     override fun applyInsets() = Unit
-
-    override fun onRealDestroy() {
-        unloadKoinModules(bottomTabsModule)
-    }
 
     override fun render(state: BottomTabsState) {
         state.currentTab?.let {

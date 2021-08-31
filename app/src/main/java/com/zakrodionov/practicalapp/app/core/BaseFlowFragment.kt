@@ -18,27 +18,27 @@ import com.zakrodionov.practicalapp.app.core.navigation.FlowRouter
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.SLIDE_HORIZONTAL
 import com.zakrodionov.practicalapp.app.core.navigation.TabHost
-import com.zakrodionov.practicalapp.app.core.navigation.toRouterQualifier
-import com.zakrodionov.practicalapp.app.di.DIQualifiers.navigationHolderQualifier
 import org.koin.android.ext.android.inject
+import org.koin.android.scope.AndroidScopeComponent
+import org.koin.androidx.scope.fragmentScope
+import org.koin.core.scope.Scope
 
 abstract class BaseFlowFragment(
     @LayoutRes contentLayoutId: Int,
     @IdRes private val containerId: Int,
-    qualifier: String
-) : Fragment(contentLayoutId), AnimationScreen {
+) : Fragment(contentLayoutId), AnimationScreen, AndroidScopeComponent {
 
     abstract val startScreen: Screen
 
     override val screenAnimationStrategy: ScreenAnimationStrategy = SLIDE_HORIZONTAL
 
-    protected val flowRouter: FlowRouter by inject(qualifier.toRouterQualifier)
+    override val scope: Scope by fragmentScope()
 
-    private val navigator by lazy {
-        createNavigator()
-    }
+    protected val flowRouter: FlowRouter by inject()
 
-    private val navigatorHolder: NavigatorHolder by inject(navigationHolderQualifier(qualifier))
+    private val navigator by lazy { createNavigator() }
+
+    private val navigatorHolder: NavigatorHolder by inject()
 
     protected open fun createNavigator() =
         object : BaseNavigator(requireActivity(), childFragmentManager, containerId) {
@@ -64,7 +64,7 @@ abstract class BaseFlowFragment(
             if (needBack) {
                 when {
                     childFragmentManager.backStackEntryCount <= 1 &&
-                        requireActivity().supportFragmentManager.backStackEntryCount < 1 -> {
+                            requireActivity().supportFragmentManager.backStackEntryCount < 1 -> {
 
                         if (parentFragment is TabHost) {
                             (parentFragment as TabHost).onBackTab()

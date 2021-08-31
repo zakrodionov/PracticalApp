@@ -28,10 +28,12 @@ import dev.chrisbanes.insetter.applyInsetter
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import org.koin.android.scope.AndroidScopeComponent
+import org.koin.core.scope.Scope
 
 @Suppress("TooManyFunctions")
 abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes contentLayoutId: Int) :
-    Fragment(contentLayoutId), BackButtonListener, AnimationScreen {
+    Fragment(contentLayoutId), BackButtonListener, AnimationScreen, AndroidScopeComponent {
 
     abstract val viewModel: BaseViewModel<STATE, SIDE_EFFECT>
     abstract val binding: ViewBinding
@@ -40,6 +42,10 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
     open val statusBarLightMode = false
 
     override val screenAnimationStrategy: ScreenAnimationStrategy = SLIDE_HORIZONTAL
+
+    // По умолчанию родительский скоуп Koin`a. Можно переопрделелить на собственный by fragmentScope()
+    override val scope: Scope
+        get() = (parentFragment as BaseFlowFragment).scope
 
     private var instanceStateSaved: Boolean = false
     private var snackBar: Snackbar? = null
