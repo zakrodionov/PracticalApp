@@ -48,7 +48,7 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
     override val screenAnimationStrategy: ScreenAnimationStrategy = SLIDE_HORIZONTAL
 
     // По умолчанию родительский скоуп Koin`a.
-    // Можно переопрделелить на собственный createFragmentScope(), но и уничтожение скоупа тоже надо будет реализовать.
+    // Можно переопрделелить на собственный getOrCreateFragmentScope(), но и уничтожение скоупа тоже надо будет реализовать.
     override val scope: Scope
         get() = (parentFragment as BaseFlowFragment).scope
 
