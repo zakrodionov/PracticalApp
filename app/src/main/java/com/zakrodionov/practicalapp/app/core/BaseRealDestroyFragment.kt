@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 
-// Fragment with correct onDestroy () call
-// Which is not called when the fragment or app process is recreated
+// Fragment with correct onDestroy () call,
+// which is not called when the fragment or app process is recreated
 // Checking to destroy a fragment from Moxy
 // https://github.com/moxy-community/Moxy/blob/develop/moxy-androidx/src/main/java/moxy/MvpAppCompatFragment.java
 abstract class BaseRealDestroyFragment(@LayoutRes contentLayoutId: Int) : BaseUniqueIdFragment(contentLayoutId) {
@@ -30,8 +30,6 @@ abstract class BaseRealDestroyFragment(@LayoutRes contentLayoutId: Int) : BaseUn
         instanceStateSaved = true
     }
 
-    // Checking to destroy a fragment from
-    // https://github.com/moxy-community/Moxy/blob/develop/moxy-androidx/src/main/java/moxy/MvpAppCompatFragment.java
     @CallSuper
     override fun onDestroy() {
         super.onDestroy()
