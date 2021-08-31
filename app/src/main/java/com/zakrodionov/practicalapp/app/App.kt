@@ -4,10 +4,11 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
+import com.zakrodionov.common.extensions.isDebug
 import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.FlipperInitializer
 import com.zakrodionov.practicalapp.R
-import com.zakrodionov.practicalapp.app.di.appModule
+import com.zakrodionov.practicalapp.app.di.allModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -30,10 +31,10 @@ class App : Application() {
     private fun initKoin() {
         startKoin {
             androidContext(this@App)
-            androidLogger(Level.ERROR)
-            modules(
-                appModule,
-            )
+            modules(allModules)
+            if (isDebug) {
+                androidLogger(Level.DEBUG)
+            }
         }
     }
 

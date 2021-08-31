@@ -5,7 +5,7 @@ import com.zakrodionov.common.extensions.tryOrNull
 import com.zakrodionov.common.network.TokenAuthenticator
 import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences
-import com.zakrodionov.practicalapp.app.di.initializer.NetInitializer.basicOkHttpBuilder
+import com.zakrodionov.practicalapp.app.di.modules.basicOkHttpBuilder
 import kotlinx.coroutines.runBlocking
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
