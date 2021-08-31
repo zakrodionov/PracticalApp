@@ -1,0 +1,25 @@
+package com.zakrodionov.practicalapp.app.di
+
+import androidx.fragment.app.Fragment
+import org.koin.android.ext.android.getKoin
+import org.koin.android.scope.getScopeOrNull
+import org.koin.core.component.getScopeName
+import org.koin.core.scope.Scope
+import java.util.*
+
+/**
+ * В отличие от встроенного в Koin fragmentScope(), этот скоуп будет переживать пересоздание
+ * app/activity/fragment, но его уничтожение лежит на нашей ответсвенности. Лучше всего скоуп уничтожать в onRealDestroy()
+ */
+fun Fragment.getOrCreateFragmentScope(uuid: UUID): Scope = getOrCreateFragmentScope(uuid.toString())
+
+fun Fragment.getOrCreateFragmentScope(id: String): Scope {
+    val fragmentScope = getScopeOrNullById(id) ?: createScopeById(id)
+    val activityScope = activity?.getScopeOrNull()
+    activityScope?.let { fragmentScope.linkTo(it) }
+    return fragmentScope
+}
+
+fun Fragment.createScopeById(id: String): Scope = getKoin().createScope(id, getScopeName(), null)
+
+fun Fragment.getScopeOrNullById(id: String): Scope? = getKoin().getScopeOrNull(id)

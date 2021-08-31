@@ -9,10 +9,10 @@ import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.BaseFragment
 import com.zakrodionov.practicalapp.app.core.navigation.TabFlowNavigator
 import com.zakrodionov.practicalapp.app.core.navigation.TabHost
+import com.zakrodionov.practicalapp.app.di.getOrCreateFragmentScope
 import com.zakrodionov.practicalapp.app.features.bottom.base.Tab
 import com.zakrodionov.practicalapp.databinding.FragmentBottomTabsBinding
 import org.koin.android.ext.android.inject
-import org.koin.androidx.scope.fragmentScope
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
 import org.koin.core.scope.Scope
 
@@ -23,7 +23,9 @@ class BottomTabsFragment :
         fun newInstance() = BottomTabsFragment()
     }
 
-    override val scope: Scope by fragmentScope()
+    override val scope: Scope by lazy {
+        getOrCreateFragmentScope(uniqueId.toString())
+    }
 
     override val viewModel: BottomTabsViewModel by stateViewModel()
     override val binding by viewBinding(FragmentBottomTabsBinding::bind)
@@ -74,4 +76,8 @@ class BottomTabsFragment :
     }
 
     override fun sideEffect(event: BottomTabsEvent) = Unit
+
+    override fun onRealDestroy() {
+        closeScope()
+    }
 }

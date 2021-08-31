@@ -18,21 +18,25 @@ import com.zakrodionov.practicalapp.app.core.navigation.FlowRouter
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.SLIDE_HORIZONTAL
 import com.zakrodionov.practicalapp.app.core.navigation.TabHost
+import com.zakrodionov.practicalapp.app.di.getOrCreateFragmentScope
 import org.koin.android.ext.android.inject
-import org.koin.android.scope.AndroidScopeComponent
-import org.koin.androidx.scope.fragmentScope
+import org.koin.core.component.KoinScopeComponent
 import org.koin.core.scope.Scope
+import java.util.*
+import kotlin.properties.Delegates
 
 abstract class BaseFlowFragment(
     @LayoutRes contentLayoutId: Int,
     @IdRes private val containerId: Int,
-) : Fragment(contentLayoutId), AnimationScreen, AndroidScopeComponent {
+) : Fragment(contentLayoutId), AnimationScreen, KoinScopeComponent {
 
     abstract val startScreen: Screen
 
     override val screenAnimationStrategy: ScreenAnimationStrategy = SLIDE_HORIZONTAL
 
-    override val scope: Scope by fragmentScope()
+    override val scope: Scope by lazy {
+        getOrCreateFragmentScope(uniqueId)
+    }
 
     protected val flowRouter: FlowRouter by inject()
 
@@ -49,6 +53,9 @@ abstract class BaseFlowFragment(
 
     protected val currentFragment: Fragment?
         get() = getCurrentFragment()
+
+    private var instanceStateSaved: Boolean = false
+    protected var uniqueId: UUID by Delegates.notNull()
 
     /**
      * В кратце шо тут происходит:
@@ -85,6 +92,7 @@ abstract class BaseFlowFragment(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        uniqueId = savedInstanceState?.getSerializable(KEY_UNIQUE_ID) as? UUID ?: UUID.randomUUID()
         if (savedInstanceState == null) {
             flowRouter.navigateTo(startScreen)
         }
@@ -107,5 +115,47 @@ abstract class BaseFlowFragment(
         super.onPause()
         onBackPressedCallback.isEnabled = false
         navigatorHolder.removeNavigator()
+    }
+
+    @CallSuper
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putSerializable(KEY_UNIQUE_ID, uniqueId)
+        instanceStateSaved = true
+    }
+
+    // Checking to destroy a fragment from
+    // https://github.com/moxy-community/Moxy/blob/develop/moxy-androidx/src/main/java/moxy/MvpAppCompatFragment.java
+    @CallSuper
+    override fun onDestroy() {
+        super.onDestroy()
+        // We leave the screen and respectively all fragments will be destroyed
+        if (requireActivity().isFinishing) {
+            onRealDestroy()
+            return
+        }
+
+        // When we rotate device isRemoving() return true for fragment placed in backstack
+        // http://stackoverflow.com/questions/34649126/fragment-back-stack-and-isremoving
+        if (instanceStateSaved) {
+            instanceStateSaved = false
+            return
+        }
+
+        var anyParentIsRemoving = false
+        var parent = parentFragment
+        while (!anyParentIsRemoving && parent != null) {
+            anyParentIsRemoving = parent.isRemoving
+            parent = parent.parentFragment
+        }
+
+        if (isRemoving || anyParentIsRemoving) {
+            onRealDestroy()
+        }
+    }
+
+    @CallSuper
+    open fun onRealDestroy() {
+        closeScope()
     }
 }

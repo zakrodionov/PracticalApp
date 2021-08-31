@@ -28,12 +28,16 @@ import dev.chrisbanes.insetter.applyInsetter
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import org.koin.android.scope.AndroidScopeComponent
+import org.koin.core.component.KoinScopeComponent
 import org.koin.core.scope.Scope
+import java.util.*
+import kotlin.properties.Delegates
+
+const val KEY_UNIQUE_ID = "KEY_UNIQUE_ID"
 
 @Suppress("TooManyFunctions")
 abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes contentLayoutId: Int) :
-    Fragment(contentLayoutId), BackButtonListener, AnimationScreen, AndroidScopeComponent {
+    Fragment(contentLayoutId), BackButtonListener, AnimationScreen, KoinScopeComponent {
 
     abstract val viewModel: BaseViewModel<STATE, SIDE_EFFECT>
     abstract val binding: ViewBinding
@@ -43,13 +47,21 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
 
     override val screenAnimationStrategy: ScreenAnimationStrategy = SLIDE_HORIZONTAL
 
-    // По умолчанию родительский скоуп Koin`a. Можно переопрделелить на собственный by fragmentScope()
+    // По умолчанию родительский скоуп Koin`a.
+    // Можно переопрделелить на собственный createFragmentScope(), но и уничтожение скоупа тоже надо будет реализовать.
     override val scope: Scope
         get() = (parentFragment as BaseFlowFragment).scope
 
     private var instanceStateSaved: Boolean = false
     private var snackBar: Snackbar? = null
     private var viewCreatedTime: Long = 0
+
+    protected var uniqueId: UUID by Delegates.notNull()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        uniqueId = savedInstanceState?.getSerializable(KEY_UNIQUE_ID) as? UUID ?: UUID.randomUUID()
+    }
 
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -96,6 +108,7 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
     @CallSuper
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+        outState.putSerializable(KEY_UNIQUE_ID, uniqueId)
         instanceStateSaved = true
     }
 
