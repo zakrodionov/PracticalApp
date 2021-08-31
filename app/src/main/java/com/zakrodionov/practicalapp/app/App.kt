@@ -8,7 +8,7 @@ import com.zakrodionov.common.extensions.isDebug
 import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.FlipperInitializer
 import com.zakrodionov.practicalapp.R
-import com.zakrodionov.practicalapp.app.di.listOfModules
+import com.zakrodionov.practicalapp.app.di.allModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -34,7 +34,7 @@ class App : Application() {
             if (isDebug) {
                 androidLogger(Level.DEBUG)
             }
-            modules(listOfModules)
+            modules(allModules)
         }
     }
 

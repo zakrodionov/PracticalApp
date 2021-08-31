@@ -30,7 +30,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinScopeComponent
 import org.koin.core.scope.Scope
-import java.util.*
+import java.util.UUID
 import kotlin.properties.Delegates
 
 const val KEY_UNIQUE_ID = "KEY_UNIQUE_ID"

@@ -25,6 +25,4 @@ val featuresModules = listOf(
     loginModule,
 )
 
-val listOfModules = appScopeModules + featuresModules
-
-
+val allModules = appScopeModules + featuresModules

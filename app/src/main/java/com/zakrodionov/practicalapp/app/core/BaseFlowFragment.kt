@@ -22,7 +22,7 @@ import com.zakrodionov.practicalapp.app.di.getOrCreateFragmentScope
 import org.koin.android.ext.android.inject
 import org.koin.core.component.KoinScopeComponent
 import org.koin.core.scope.Scope
-import java.util.*
+import java.util.UUID
 import kotlin.properties.Delegates
 
 abstract class BaseFlowFragment(
@@ -71,7 +71,7 @@ abstract class BaseFlowFragment(
             if (needBack) {
                 when {
                     childFragmentManager.backStackEntryCount <= 1 &&
-                            requireActivity().supportFragmentManager.backStackEntryCount < 1 -> {
+                        requireActivity().supportFragmentManager.backStackEntryCount < 1 -> {
 
                         if (parentFragment is TabHost) {
                             (parentFragment as TabHost).onBackTab()

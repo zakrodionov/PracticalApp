@@ -1,28 +1,21 @@
 package com.zakrodionov.practicalapp.app.core.navigation
 
 import com.github.terrakok.cicerone.Cicerone
-import com.zakrodionov.practicalapp.app.di.DIQualifiers
-import com.zakrodionov.practicalapp.app.di.modules.GLOBAL_QUALIFIER
 import org.koin.core.module.Module
-import org.koin.dsl.ModuleDeclaration
 import org.koin.dsl.ScopeDSL
 
-val String.toCiceroneQualifier get() = DIQualifiers.ciceroneQualifier(this)
-val String.toNavigationHolderQualifier get() = DIQualifiers.navigationHolderQualifier(this)
-val String.toRouterQualifier get() = DIQualifiers.routerQualifier(this)
-
 // Биндит глобальный роутер на всё приложение
-fun Module.bindGlobalNavigation(globalQualifier: String) {
-    single(globalQualifier.toCiceroneQualifier) {
+fun Module.bindGlobalNavigation() {
+    single {
         Cicerone.create(GlobalRouter())
     }
 
-    single(globalQualifier.toNavigationHolderQualifier) {
-        get<Cicerone<GlobalRouter>>(globalQualifier.toCiceroneQualifier).getNavigatorHolder()
+    single {
+        get<Cicerone<GlobalRouter>>().getNavigatorHolder()
     }
 
-    single(GLOBAL_QUALIFIER.toRouterQualifier) {
-        get<Cicerone<GlobalRouter>>(globalQualifier.toCiceroneQualifier).router
+    single {
+        get<Cicerone<GlobalRouter>>().router
     }
 }
 
@@ -41,7 +34,7 @@ inline fun <reified T> flowModule(
 
 fun ScopeDSL.bindFlowNavigation() {
     scoped {
-        Cicerone.create(FlowRouter(get(GLOBAL_QUALIFIER.toRouterQualifier)))
+        Cicerone.create(FlowRouter(get()))
     }
     scoped {
         get<Cicerone<FlowRouter>>().getNavigatorHolder()
