@@ -5,15 +5,12 @@ import org.koin.android.ext.android.getKoin
 import org.koin.android.scope.getScopeOrNull
 import org.koin.core.component.getScopeName
 import org.koin.core.scope.Scope
-import java.util.UUID
 
 /**
  * В отличие от встроенного в Koin fragmentScope(), этот скоуп будет переживать пересоздание
  * app/activity/fragment, но его уничтожение лежит на нашей ответственности.
  * Лучше всего скоуп уничтожать в функции onRealDestroy() у фрагмента.
  */
-fun Fragment.getOrCreateFragmentScope(uuid: UUID): Scope = getOrCreateFragmentScope(uuid.toString())
-
 fun Fragment.getOrCreateFragmentScope(id: String): Scope {
     val fragmentScope = getScopeOrNullById(id) ?: createScopeById(id)
     val activityScope = activity?.getScopeOrNull()

@@ -18,11 +18,12 @@ import com.zakrodionov.common.extensions.showSnackbar
 import com.zakrodionov.common.extensions.showToast
 import com.zakrodionov.practicalapp.R
 import kotlinx.coroutines.flow.collect
+import org.koin.core.component.KoinScopeComponent
 
 @Suppress("TooManyFunctions")
 abstract class BaseDialogFragment<STATE : Parcelable, SIDE_EFFECT : Any>(
     @LayoutRes contentLayoutId: Int,
-) : DialogFragment(contentLayoutId) {
+) : DialogFragment(contentLayoutId), KoinScopeComponent {
 
     abstract val viewModel: BaseViewModel<STATE, SIDE_EFFECT>
     abstract val binding: ViewBinding

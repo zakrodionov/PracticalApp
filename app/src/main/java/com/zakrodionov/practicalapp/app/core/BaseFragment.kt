@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.core.view.doOnLayout
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
@@ -30,14 +29,10 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinScopeComponent
 import org.koin.core.scope.Scope
-import java.util.UUID
-import kotlin.properties.Delegates
-
-const val KEY_UNIQUE_ID = "KEY_UNIQUE_ID"
 
 @Suppress("TooManyFunctions")
 abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes contentLayoutId: Int) :
-    Fragment(contentLayoutId), BackButtonListener, AnimationScreen, KoinScopeComponent {
+    BaseRealDestroyFragment(contentLayoutId), BackButtonListener, AnimationScreen, KoinScopeComponent {
 
     abstract val viewModel: BaseViewModel<STATE, SIDE_EFFECT>
     abstract val binding: ViewBinding
@@ -47,21 +42,14 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
 
     override val screenAnimationStrategy: ScreenAnimationStrategy = SLIDE_HORIZONTAL
 
-    // По умолчанию родительский скоуп Koin`a.
-    // Можно переопрделелить на собственный getOrCreateFragmentScope(), но и уничтожение скоупа тоже надо будет реализовать.
+    // По умолчанию Koin скоуп родительского флоу фргамента.
+    // Можно переопрделелить на собственный getOrCreateFragmentScope(),
+    // но и уничтожение скоупа тоже надо будет реализовать.
     override val scope: Scope
         get() = (parentFragment as BaseFlowFragment).scope
 
-    private var instanceStateSaved: Boolean = false
     private var snackBar: Snackbar? = null
     private var viewCreatedTime: Long = 0
-
-    protected var uniqueId: UUID by Delegates.notNull()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        uniqueId = savedInstanceState?.getSerializable(KEY_UNIQUE_ID) as? UUID ?: UUID.randomUUID()
-    }
 
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -92,62 +80,6 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
             view.requestApplyInsets()
         }
     }
-
-    @CallSuper
-    override fun onStart() {
-        super.onStart()
-        instanceStateSaved = false
-    }
-
-    @CallSuper
-    override fun onResume() {
-        super.onResume()
-        instanceStateSaved = false
-    }
-
-    @CallSuper
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putSerializable(KEY_UNIQUE_ID, uniqueId)
-        instanceStateSaved = true
-    }
-
-    override fun onDestroyView() {
-        clearViews()
-        super.onDestroyView()
-    }
-
-    // Checking to destroy a fragment from
-    // https://github.com/moxy-community/Moxy/blob/develop/moxy-androidx/src/main/java/moxy/MvpAppCompatFragment.java
-    @CallSuper
-    override fun onDestroy() {
-        super.onDestroy()
-        // We leave the screen and respectively all fragments will be destroyed
-        if (requireActivity().isFinishing) {
-            onRealDestroy()
-            return
-        }
-
-        // When we rotate device isRemoving() return true for fragment placed in backstack
-        // http://stackoverflow.com/questions/34649126/fragment-back-stack-and-isremoving
-        if (instanceStateSaved) {
-            instanceStateSaved = false
-            return
-        }
-
-        var anyParentIsRemoving = false
-        var parent = parentFragment
-        while (!anyParentIsRemoving && parent != null) {
-            anyParentIsRemoving = parent.isRemoving
-            parent = parent.parentFragment
-        }
-
-        if (isRemoving || anyParentIsRemoving) {
-            onRealDestroy()
-        }
-    }
-
-    open fun onRealDestroy() = Unit
 
     // Метод для инициализации вью
     open fun setupViews(view: View, savedInstanceState: Bundle?) = Unit

@@ -24,7 +24,7 @@ class BottomTabsFragment :
     }
 
     override val scope: Scope by lazy {
-        getOrCreateFragmentScope(uniqueId.toString())
+        getOrCreateFragmentScope(uniqueId)
     }
 
     override val viewModel: BottomTabsViewModel by stateViewModel()
