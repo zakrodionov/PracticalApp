@@ -15,10 +15,13 @@ import com.zakrodionov.common.extensions.showDialog
 import com.zakrodionov.common.extensions.showIfNotAlreadyShown
 import com.zakrodionov.common.extensions.showToast
 import com.zakrodionov.practicalapp.R
+import com.zakrodionov.practicalapp.app.core.navigation.FlowRouter
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy
 import com.zakrodionov.practicalapp.app.features.StubFragment
 import com.zakrodionov.practicalapp.app.features.StubViewModel
+import com.zakrodionov.practicalapp.app.features.login.LoginScreens
 import com.zakrodionov.practicalapp.databinding.FragmentFavoriteBinding
+import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @Suppress("MagicNumber")
@@ -31,15 +34,11 @@ class FavoriteFragment : StubFragment(R.layout.fragment_favorite) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Test dialogs
-        binding.tvShowCommonDialog.setOnClickListener {
-            showDialog(
-                childFragmentManager,
-                "CommonDialog",
-                TextResource.fromText("Hello"),
-                TextResource.fromText("World!")
-            )
+        // Test nested flow navigation
+        binding.tvNestedFlowNavigation.setOnClickListener {
+            get<FlowRouter>().navigateTo(LoginScreens.LoginFlowScreen())
         }
+        // Test dialogs
         binding.tvShowCustomCommonDialog.setOnClickListener {
             showDialog(
                 childFragmentManager,

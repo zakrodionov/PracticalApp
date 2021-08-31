@@ -10,10 +10,6 @@ class FlowRouter(private val globalRouter: GlobalRouter) : Router() {
 
     fun newRootFlow(screen: Screen) = globalRouter.newRootScreen(screen)
 
-    fun finishFlow() {
-        globalRouter.exit()
-    }
-
     fun finishApp() {
         globalRouter.finishChain()
     }

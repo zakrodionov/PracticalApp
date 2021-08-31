@@ -31,12 +31,12 @@
             android:textSize="40sp" />
 
         <TextView
-            android:id="@+id/tvShowCommonDialog"
+            android:id="@+id/tvNestedFlowNavigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:gravity="center"
-            android:text="Show Common Dialog"
+            android:text="Test nested flow navigation"
             android:textSize="20sp" />
 
         <TextView

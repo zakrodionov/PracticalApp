@@ -25,7 +25,7 @@ class PasswordFragment : StubFragment(R.layout.fragment_password) {
         binding.btnNext.setOnClickListener {
             binding.etPassword.hideKeyboard()
             get<AppPreferences>().isLogged = true
-            viewModel.finish()
+            finishFlow()
         }
     }
 
@@ -40,8 +40,4 @@ class PasswordFragment : StubFragment(R.layout.fragment_password) {
     }
 }
 
-class PasswordViewModel(private val flowRouter: FlowRouter) : StubViewModel() {
-    fun finish() {
-        flowRouter.finishFlow()
-    }
-}
+class PasswordViewModel(private val flowRouter: FlowRouter) : StubViewModel()
