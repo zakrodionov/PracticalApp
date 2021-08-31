@@ -4,10 +4,11 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
+import com.zakrodionov.common.extensions.isDebug
 import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.FlipperInitializer
 import com.zakrodionov.practicalapp.R
-import com.zakrodionov.practicalapp.app.di.appModule
+import com.zakrodionov.practicalapp.app.di.modules.appScopeModules
 import com.zakrodionov.practicalapp.app.features.about.di.aboutModule
 import com.zakrodionov.practicalapp.app.features.favorite.di.favoriteModule
 import com.zakrodionov.practicalapp.app.features.login.di.loginModule
@@ -31,12 +32,15 @@ class App : Application() {
         initDefaultNotificationChannel()
     }
 
+    @Suppress("SpreadOperator")
     private fun initKoin() {
         startKoin {
             androidContext(this@App)
-            androidLogger(Level.ERROR)
+            if (isDebug) {
+                androidLogger(Level.DEBUG)
+            }
             modules(
-                appModule,
+                *appScopeModules.toTypedArray(),
                 aboutModule,
                 loginModule,
                 favoriteModule,

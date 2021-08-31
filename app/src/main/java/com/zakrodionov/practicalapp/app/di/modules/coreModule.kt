@@ -1,4 +1,4 @@
-package com.zakrodionov.practicalapp.app.di.initializer
+package com.zakrodionov.practicalapp.app.di.modules
 
 import com.zakrodionov.practicalapp.app.core.ErrorHandler
 import com.zakrodionov.practicalapp.app.core.ErrorHandlerImpl
@@ -9,19 +9,14 @@ import com.zakrodionov.practicalapp.app.core.dispatchers.DispatchersProviderImpl
 import com.zakrodionov.practicalapp.app.core.eventbus.EventBus
 import com.zakrodionov.practicalapp.app.core.eventbus.EventProvider
 import com.zakrodionov.practicalapp.app.core.eventbus.EventPublisher
-import org.koin.core.module.Module
+import org.koin.dsl.module
 
-object CoreInitializer : Initializer {
+val coreModule = module {
+    single<DispatchersProvider> { DispatchersProviderImpl }
+    single<ErrorHandler> { ErrorHandlerImpl(get()) }
+    single<Executor> { ExecutorImpl(get(), get()) }
 
-    override fun initialize(appModule: Module) {
-        appModule.apply {
-            single<DispatchersProvider> { DispatchersProviderImpl }
-            single<ErrorHandler> { ErrorHandlerImpl(get()) }
-            single<Executor> { ExecutorImpl(get(), get()) }
-
-            val eventBus = EventBus()
-            single<EventProvider> { eventBus }
-            single<EventPublisher> { eventBus }
-        }
-    }
+    val eventBus = EventBus()
+    single<EventProvider> { eventBus }
+    single<EventPublisher> { eventBus }
 }
