@@ -9,8 +9,8 @@ import java.util.UUID
 
 /**
  * В отличие от встроенного в Koin fragmentScope(), этот скоуп будет переживать пересоздание
- * app/activity/fragment, но его уничтожение лежит на нашей ответсвенности.
- * Лучше всего скоуп уничтожать в onRealDestroy()
+ * app/activity/fragment, но его уничтожение лежит на нашей ответственности.
+ * Лучше всего скоуп уничтожать в функции onRealDestroy() у фрагмента.
  */
 fun Fragment.getOrCreateFragmentScope(uuid: UUID): Scope = getOrCreateFragmentScope(uuid.toString())
 
