@@ -11,6 +11,7 @@ import com.zakrodionov.common.extensions.showKeyboard
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.BaseFragment
 import com.zakrodionov.practicalapp.databinding.FragmentPhoneBinding
+import dev.chrisbanes.insetter.applyInsetter
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
 
 class PhoneFragment : BaseFragment<PhoneState, PhoneEvent>(R.layout.fragment_phone) {
@@ -45,4 +46,12 @@ class PhoneFragment : BaseFragment<PhoneState, PhoneEvent>(R.layout.fragment_pho
     }
 
     override fun sideEffect(event: PhoneEvent) = Unit
+
+    override fun applyInsets() {
+        view?.applyInsetter {
+            type(statusBars = true) {
+                margin()
+            }
+        }
+    }
 }
