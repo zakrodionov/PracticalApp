@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import com.zakrodionov.common.ui.rv.addLoadingItem
 import com.zakrodionov.common.ui.rv.removeLoadingItem
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
+import com.zakrodionov.practicalapp.app.core.dispatchers.DispatchersProvider
 import com.zakrodionov.practicalapp.app.core.navigation.FlowRouter
 import com.zakrodionov.practicalapp.app.core.onFailure
 import com.zakrodionov.practicalapp.app.core.onSuccess
@@ -17,8 +18,9 @@ import kotlin.random.Random
 class PostsViewModel(
     savedStateHandle: SavedStateHandle,
     private val postRepository: PostRepository,
-    private val flowRouter: FlowRouter
-) : BaseViewModel<PostsState, PostsEvent>(PostsState(), savedStateHandle) {
+    private val flowRouter: FlowRouter,
+    private val dispatchersProvider: DispatchersProvider
+) : BaseViewModel<PostsState, PostsEvent>(PostsState(), savedStateHandle, dispatchersProvider) {
 
     private var loadingPostsJob: Job = Job()
 

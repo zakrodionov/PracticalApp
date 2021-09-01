@@ -11,7 +11,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import retrofit2.Retrofit
 
 val postsModule = flowModule<PostsFlowFragment> {
-    viewModel { PostsViewModel(get(), get(), get()) }
+    viewModel { PostsViewModel(get(), get(), get(), get()) }
     viewModel { parameters -> PostDetailViewModel(get(), get(), parameters.get()) }
 
     scoped<ApiPosts> { get<Retrofit>().create(ApiPosts::class.java) }

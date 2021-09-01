@@ -5,6 +5,7 @@ import com.zakrodionov.common.ui.lce.ContentState
 import com.zakrodionov.common.ui.lce.EmptyState
 import com.zakrodionov.common.ui.lce.ErrorState
 import com.zakrodionov.practicalapp.CoroutinesTestExtension
+import com.zakrodionov.practicalapp.InstantTaskExecutorExtension
 import com.zakrodionov.practicalapp.app.core.NetworkConnectionError
 import com.zakrodionov.practicalapp.app.core.Result
 import com.zakrodionov.practicalapp.app.features.posts.domain.PostRepository
@@ -25,6 +26,10 @@ class PostsViewModelTest {
     @RegisterExtension
     val coroutinesTestExtension = CoroutinesTestExtension()
 
+    @JvmField
+    @RegisterExtension
+    val instantTaskExecutorExtension = InstantTaskExecutorExtension()
+
     @MockK
     lateinit var postRepository: PostRepository
 
@@ -37,7 +42,8 @@ class PostsViewModelTest {
         postsViewModel = PostsViewModel(
             savedStateHandle = SavedStateHandle(),
             postRepository = postRepository,
-            flowRouter = mockk()
+            flowRouter = mockk(),
+            dispatchersProvider = coroutinesTestExtension.testDispatchersProvider
         )
     }
 
@@ -70,7 +76,7 @@ class PostsViewModelTest {
     @Test
     fun `verify state when PostRepository returns NetworkConnectionError`() {
         // given
-        coEvery { postRepository.getPosts(0) } returns Result.Failure(NetworkConnectionError())
+        coEvery { postRepository.getPosts(0) } returns Result.Failure(NetworkConnectionError)
 
         // when
         postsViewModel.loadPosts(initial = true)

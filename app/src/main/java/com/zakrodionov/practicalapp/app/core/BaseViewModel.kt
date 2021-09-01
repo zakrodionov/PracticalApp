@@ -5,7 +5,8 @@ import android.os.Parcelable
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
+import com.zakrodionov.practicalapp.app.core.dispatchers.DispatchersProvider
+import com.zakrodionov.practicalapp.app.core.dispatchers.DispatchersProviderImpl
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +19,8 @@ import kotlinx.coroutines.launch
 @Suppress("TooManyFunctions")
 abstract class BaseViewModel<STATE : Parcelable, EVENT : Any>(
     initialState: STATE,
-    private val savedStateHandle: SavedStateHandle? = null
+    private val savedStateHandle: SavedStateHandle? = null,
+    private val dispatchersProvider: DispatchersProvider = DispatchersProviderImpl,
 ) : ViewModel() {
 
     companion object {
@@ -54,11 +56,11 @@ abstract class BaseViewModel<STATE : Parcelable, EVENT : Any>(
         _showEventFlow.emit(showEvent)
     }
 
-    protected fun launch(block: suspend () -> Unit): Job = viewModelScope.launch(Dispatchers.Main) {
+    protected fun launch(block: suspend () -> Unit): Job = viewModelScope.launch(dispatchersProvider.main) {
         block.invoke()
     }
 
-    protected fun launchIo(block: suspend () -> Unit): Job = viewModelScope.launch(Dispatchers.IO) {
+    protected fun launchIo(block: suspend () -> Unit): Job = viewModelScope.launch(dispatchersProvider.io) {
         block.invoke()
     }
 
