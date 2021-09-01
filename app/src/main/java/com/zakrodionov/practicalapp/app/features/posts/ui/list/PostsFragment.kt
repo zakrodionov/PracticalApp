@@ -42,11 +42,9 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
     private fun setupRvPosts() = with(binding) {
         val layoutManager = LinearLayoutManager(context)
         rvPosts.setup(adapter, layoutManager = layoutManager)
-        rvPosts.addOnScrollListener(object : EndlessScroll(layoutManager) {
-            override fun onLoadMore() {
-                viewModel.loadPosts()
-            }
-        })
+        rvPosts.addOnScrollListener(
+            EndlessScroll(layoutManager) { viewModel.loadPosts() }
+        )
 
         srlPosts.setOnRefreshListener {
             viewModel.loadPosts(true)

@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 // Based on CodePath (https://gist.github.com/nesquena/d09dc68ff07e845cc622)
-abstract class EndlessScroll(
+open class EndlessScroll(
     private val layoutManager: RecyclerView.LayoutManager,
-    private var visibleThreshold: Int = DEFAULT_VISIBLE_THRESHOLD
+    private var visibleThreshold: Int = DEFAULT_VISIBLE_THRESHOLD,
+    private val onLoadMore: () -> Unit,
 ) : RecyclerView.OnScrollListener() {
 
     private var loading = false
@@ -57,8 +58,6 @@ abstract class EndlessScroll(
     fun setLoading(loading: Boolean) {
         this.loading = loading
     }
-
-    abstract fun onLoadMore()
 
     companion object {
         // The minimum amount of items to have below your current scroll position before loading more.
