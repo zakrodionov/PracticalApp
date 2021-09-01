@@ -81,6 +81,16 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        view?.hideKeyboard()
+    }
+
+    override fun onDestroyView() {
+        clearViews()
+        super.onDestroyView()
+    }
+
     // Метод для инициализации вью
     open fun setupViews(view: View, savedInstanceState: Bundle?) = Unit
 
@@ -120,11 +130,6 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
                 margin()
             }
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        view?.hideKeyboard()
     }
 
     override fun onBackPressed(): Boolean = true
