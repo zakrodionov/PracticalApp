@@ -7,6 +7,6 @@ import com.zakrodionov.practicalapp.app.features.login.ui.phone.PhoneViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 
 val loginModule = flowModule<LoginFlowFragment> {
-    viewModel { PasswordViewModel(get()) }
+    viewModel { PasswordViewModel() }
     viewModel { PhoneViewModel(get(), get()) }
 }
