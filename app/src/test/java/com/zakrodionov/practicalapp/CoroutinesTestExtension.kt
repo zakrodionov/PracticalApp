@@ -1,5 +1,6 @@
 package com.zakrodionov.practicalapp
 
+import com.zakrodionov.practicalapp.app.core.dispatchers.DispatchersProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
@@ -23,8 +24,15 @@ import org.junit.jupiter.api.extension.ExtensionContext
 */
 @ExperimentalCoroutinesApi
 class CoroutinesTestExtension(
-    private val testCoroutineDispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
+    private val testCoroutineDispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher(),
 ) : BeforeEachCallback, AfterEachCallback, TestCoroutineScope by TestCoroutineScope(testCoroutineDispatcher) {
+
+    val testDispatchersProvider = object : DispatchersProvider {
+        override val default = testCoroutineDispatcher
+        override val main = testCoroutineDispatcher
+        override val unconfined = testCoroutineDispatcher
+        override val io = testCoroutineDispatcher
+    }
 
     override fun beforeEach(context: ExtensionContext?) {
         Dispatchers.setMain(testCoroutineDispatcher)

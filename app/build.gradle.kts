@@ -11,6 +11,7 @@ import Libs.androidx_app_compat
 import Libs.androidx_core
 import Libs.androidx_material
 import Libs.androidx_security_crypto
+import Libs.assertk
 import Libs.coroutines
 import Libs.coroutines_test
 import Libs.desugar_jdk
@@ -133,6 +134,7 @@ dependencies {
     testImplementation(junit_jupiter_engine)
     testImplementation(mockk)
     testImplementation(coroutines_test)
+    testImplementation(assertk)
 
     // AndroidX
     implementation(androidx_core)

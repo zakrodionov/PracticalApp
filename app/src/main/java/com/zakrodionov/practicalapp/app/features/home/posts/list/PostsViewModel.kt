@@ -5,6 +5,7 @@ import com.zakrodionov.common.models.Loading
 import com.zakrodionov.common.ui.addLoadingItem
 import com.zakrodionov.common.ui.removeLoadingItem
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
+import com.zakrodionov.practicalapp.app.core.dispatchers.DispatchersProvider
 import com.zakrodionov.practicalapp.app.core.onFailure
 import com.zakrodionov.practicalapp.app.core.onSuccess
 import com.zakrodionov.practicalapp.app.domain.repositories.PostRepository
@@ -13,7 +14,8 @@ import kotlinx.coroutines.Job
 class PostsViewModel(
     savedStateHandle: SavedStateHandle,
     private val postRepository: PostRepository,
-) : BaseViewModel<PostsState, PostsEvent>(PostsState(), savedStateHandle) {
+    private val dispatchersProvider: DispatchersProvider,
+) : BaseViewModel<PostsState, PostsEvent>(PostsState(), savedStateHandle, dispatchersProvider) {
 
     private var loadingPostsJob: Job = Job()
 
