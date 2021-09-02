@@ -1,6 +1,12 @@
 package com.zakrodionov.practicalapp.app.features.posts.ui.list
 
 import androidx.lifecycle.SavedStateHandle
+import assertk.assertThat
+import assertk.assertions.isEmpty
+import assertk.assertions.isEqualTo
+import assertk.assertions.isInstanceOf
+import assertk.assertions.isNotEmpty
+import assertk.assertions.isNotNull
 import com.zakrodionov.common.ui.lce.ContentState
 import com.zakrodionov.common.ui.lce.EmptyState
 import com.zakrodionov.common.ui.lce.ErrorState
@@ -17,7 +23,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
-import kotlin.test.assertEquals
 
 @ExperimentalCoroutinesApi
 class PostsViewModelTest {
@@ -30,7 +35,7 @@ class PostsViewModelTest {
     @RegisterExtension
     val instantTaskExecutorExtension = InstantTaskExecutorExtension()
 
-    @MockK
+    @MockK(relaxed = true)
     lateinit var postRepository: PostRepository
 
     lateinit var postsViewModel: PostsViewModel
@@ -50,39 +55,39 @@ class PostsViewModelTest {
     @Test
     fun `verify state when PostRepository returns empty list`() {
         // given
-        coEvery { postRepository.getPosts(0) } returns Result.Success(emptyList())
+        coEvery { postRepository.getPosts(any()) } returns Result.Success(emptyList())
 
         // when
         postsViewModel.loadPosts(initial = true)
 
         // then
-        assert(postsViewModel.state.posts?.isEmpty() ?: false)
-        assertEquals(EmptyState, postsViewModel.state.lceState)
+        assertThat(postsViewModel.state.posts).isNotNull().isEmpty()
+        assertThat(postsViewModel.state.lceState).isEqualTo(EmptyState)
     }
 
     @Test
     fun `verify state when PostRepository returns non empty list`() {
         // given
-        coEvery { postRepository.getPosts(0) } returns Result.Success(listOf(mockk(), mockk()))
+        coEvery { postRepository.getPosts(any()) } returns Result.Success(listOf(mockk(), mockk()))
 
         // when
         postsViewModel.loadPosts(initial = true)
 
         // then
-        assert(postsViewModel.state.posts?.isNotEmpty() ?: false)
-        assert(postsViewModel.state.lceState is ContentState)
+        assertThat(postsViewModel.state.posts).isNotNull().isNotEmpty()
+        assertThat(postsViewModel.state.lceState).isInstanceOf(ContentState::class)
     }
 
     @Test
     fun `verify state when PostRepository returns NetworkConnectionError`() {
         // given
-        coEvery { postRepository.getPosts(0) } returns Result.Failure(NetworkConnectionError)
+        coEvery { postRepository.getPosts(any()) } returns Result.Failure(NetworkConnectionError)
 
         // when
         postsViewModel.loadPosts(initial = true)
 
         // then
-        assert(postsViewModel.state.error != null)
-        assert(postsViewModel.state.lceState is ErrorState)
+        assertThat(postsViewModel.state.error).isNotNull()
+        assertThat(postsViewModel.state.lceState).isInstanceOf(ErrorState::class)
     }
 }

@@ -16,6 +16,7 @@ import Libs.androidx_fragment
 import Libs.androidx_material
 import Libs.androidx_security_crypto
 import Libs.androidx_swipe_refresh_layout
+import Libs.assertk
 import Libs.cicerone
 import Libs.coroutines
 import Libs.coroutines_test
@@ -145,6 +146,7 @@ dependencies {
     testImplementation(junit_jupiter_engine)
     testImplementation(mockk)
     testImplementation(coroutines_test)
+    testImplementation(assertk)
 
     // AndroidX
     implementation(androidx_core)
