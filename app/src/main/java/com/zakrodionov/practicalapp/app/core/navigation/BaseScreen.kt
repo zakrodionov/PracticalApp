@@ -9,7 +9,7 @@ import com.zakrodionov.common.extensions.OnLaunched
 import com.zakrodionov.practicalapp.app.ui.theme.StatusBarColor
 
 abstract class BaseScreen : AndroidScreen() {
-    open val statusBarColor: Color = StatusBarColor
+    open fun statusBarColor(): Color = StatusBarColor // Should be fun for non-Serializable data for state restoration
     open val useDarkIconsInStatusBar: Boolean = false
 
     @Composable
@@ -21,7 +21,7 @@ abstract class BaseScreen : AndroidScreen() {
     @Composable
     private fun applyStatusBarColor(): Boolean {
         val systemUiController = rememberSystemUiController()
-        OnLaunched { systemUiController.setStatusBarColor(statusBarColor, useDarkIconsInStatusBar) }
+        OnLaunched { systemUiController.setStatusBarColor(statusBarColor(), useDarkIconsInStatusBar) }
         return true
     }
 }
