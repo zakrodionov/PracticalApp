@@ -192,7 +192,7 @@ dependencies {
     implementation(Libs.accompanist_insets)
     implementation(Libs.accompanist_system_ui_controller)
 
-    val voyager = "1.0.0-beta09" // Todo
+    val voyager = "1.0.0-beta10" // Todo
     implementation("cafe.adriel.voyager:voyager-navigator:$voyager")
     implementation("cafe.adriel.voyager:voyager-tab-navigator:$voyager")
     implementation("cafe.adriel.voyager:voyager-transitions:$voyager")

@@ -37,7 +37,7 @@ data class PostDetailsScreen(
     private val args: ArgsPostDetail,
 ) : BaseScreen() {
 
-    override fun statusBarColor(): Color = Color.Transparent
+    override val statusBarColor: Color = Color.Transparent
 
     @Composable
     override fun Content() {
