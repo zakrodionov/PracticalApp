@@ -38,11 +38,7 @@ class PostsViewModel(
                     .getPosts(state.page)
                     .onSuccess { posts ->
                         val newPosts = if (refresh) posts else state.posts.orEmpty().plus(posts)
-                        reduce {
-                            state.copy(
-                                posts = newPosts, error = null, page = state.increasePage()
-                            )
-                        }
+                        reduce { state.copy(posts = newPosts, error = null, page = state.increasePage()) }
                     }
                     .onFailure {
                         reduce { state.copy(error = it) }
