@@ -13,11 +13,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -63,13 +63,17 @@ fun Error(error: UiError, tryAgain: () -> Unit) {
     Column(verticalArrangement = Arrangement.Center, modifier = Modifier.fillMaxSize()) {
         Text(
             text = error.title.asString(LocalContext.current.resources),
-            modifier = Modifier.padding(horizontal = 20.dp).fillMaxWidth(),
+            modifier = Modifier
+                .padding(horizontal = 20.dp)
+                .fillMaxWidth(),
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(20.dp))
         Text(
             text = error.message.asString(LocalContext.current.resources),
-            modifier = Modifier.padding(horizontal = 20.dp).fillMaxWidth(),
+            modifier = Modifier
+                .padding(horizontal = 20.dp)
+                .fillMaxWidth(),
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -86,7 +90,7 @@ fun Loading(isTranslucent: Boolean) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize().clickable { }.run {
-            if (isTranslucent) background(color = Color.White) else this
+            if (isTranslucent) background(color = MaterialTheme.colors.background) else this
         }
     ) {
         CircularProgressIndicator()
