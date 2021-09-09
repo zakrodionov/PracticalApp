@@ -19,7 +19,7 @@ class PostsViewModel(
     savedStateHandle: SavedStateHandle,
     private val postRepository: PostRepository,
     private val flowRouter: FlowRouter,
-    private val dispatchersProvider: DispatchersProvider
+    dispatchersProvider: DispatchersProvider,
 ) : BaseViewModel<PostsState, PostsEvent>(PostsState(), savedStateHandle, dispatchersProvider) {
 
     private var loadingPostsJob: Job = Job()
@@ -43,11 +43,7 @@ class PostsViewModel(
                     .getPosts(state.page)
                     .onSuccess { posts ->
                         val newPosts = if (refresh) posts else state.posts.orEmpty().plus(posts)
-                        reduce {
-                            state.copy(
-                                posts = newPosts, error = null, page = state.increasePage()
-                            )
-                        }
+                        reduce { state.copy(posts = newPosts, error = null, page = state.increasePage()) }
                     }
                     .onFailure {
                         reduce { state.copy(error = it) }
@@ -57,7 +53,7 @@ class PostsViewModel(
         }
     }
 
-    fun navigateToPost(post: Post) {
+    fun navigateToPostDetail(post: Post) {
         val id = post.id
         if (id != null) {
             // Для теста разного поведения передаем или сразу весь Post или только id для загрузки поста с сервера
