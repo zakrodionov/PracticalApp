@@ -29,6 +29,7 @@ class BottomTabsFragment :
 
     override val viewModel: BottomTabsViewModel by stateViewModel()
     override val binding by viewBinding(FragmentBottomTabsBinding::bind)
+    override val statusBarColor: Int = R.color.transparent
 
     private val navigatorHolder: NavigatorHolder by inject()
     private val navigator: TabFlowNavigator by lazy {

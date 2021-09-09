@@ -18,6 +18,8 @@ class RootActivity : BaseActivity() {
         BaseNavigator(this, supportFragmentManager, R.id.fragmentContainerView)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_PracticalApp)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_fragment_container)
 

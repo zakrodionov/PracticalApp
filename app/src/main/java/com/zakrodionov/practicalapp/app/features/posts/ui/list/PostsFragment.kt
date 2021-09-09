@@ -14,6 +14,7 @@ import com.zakrodionov.practicalapp.app.core.BaseFragment
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.NONE
 import com.zakrodionov.practicalapp.databinding.FragmentPostsBinding
+import dev.chrisbanes.insetter.applyInsetter
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
 
 class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_posts) {
@@ -25,12 +26,14 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
     override val viewModel: PostsViewModel by stateViewModel()
     override val binding: FragmentPostsBinding by viewBinding(FragmentPostsBinding::bind)
     override val screenAnimationStrategy: ScreenAnimationStrategy = NONE
+    override val statusBarColor: Int = R.color.transparent
+    override val statusBarLightMode: Boolean = true
 
     private val adapter by lazy {
         AsyncListDifferDelegationAdapter(
             DiffCallback,
             loadingDelegate(),
-            postDelegate { viewModel.navigateToPost(it) }
+            postDelegate { viewModel.navigateToPostDetail(it) }
         )
     }
 
@@ -59,6 +62,14 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
 
     override fun clearViews() {
         binding.rvPosts.adapter = null
+    }
+
+    override fun applyInsets() {
+        binding.rvPosts.applyInsetter {
+            type(statusBars = true) {
+                padding()
+            }
+        }
     }
 
     override fun render(state: PostsState) {
