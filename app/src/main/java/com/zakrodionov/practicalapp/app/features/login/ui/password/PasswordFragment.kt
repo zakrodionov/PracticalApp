@@ -11,6 +11,7 @@ import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences
 import com.zakrodionov.practicalapp.app.features.StubFragment
 import com.zakrodionov.practicalapp.app.features.StubViewModel
 import com.zakrodionov.practicalapp.databinding.FragmentPasswordBinding
+import dev.chrisbanes.insetter.applyInsetter
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -36,6 +37,14 @@ class PasswordFragment : StubFragment(R.layout.fragment_password) {
     // Test custom onBackPressed
     override fun onBackPressed(): Boolean {
         return binding.etPassword.textString != "42"
+    }
+
+    override fun applyInsets() {
+        view?.applyInsetter {
+            type(statusBars = true) {
+                margin()
+            }
+        }
     }
 }
 
