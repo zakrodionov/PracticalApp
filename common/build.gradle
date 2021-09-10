@@ -13,6 +13,8 @@ dependencies {
     implementation(Libs.retrofit)
     implementation(Libs.okhttp_logging_interceptor)
     implementation(Libs.compose_ui)
+    implementation(Libs.compose_foundation)
 
     api(Libs.androidx_security_crypto)
+    api(Libs.accompanist_insets)
 }

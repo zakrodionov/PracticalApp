@@ -3,7 +3,6 @@ package com.zakrodionov.practicalapp.app.features.home.posts.list
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -17,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -25,6 +25,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import coil.compose.rememberImagePainter
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import com.zakrodionov.common.extensions.edgeToEdgeStatusBarPadding
 import com.zakrodionov.common.ui.LoadingItem
 import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
 import com.zakrodionov.practicalapp.app.domain.model.Posts.Post
@@ -32,13 +33,16 @@ import com.zakrodionov.practicalapp.app.features.home.posts.detail.ArgsPostDetai
 import com.zakrodionov.practicalapp.app.features.home.posts.detail.PostDetailsScreen
 import com.zakrodionov.practicalapp.app.ui.components.Lce
 import com.zakrodionov.practicalapp.app.ui.components.LoadingItem
-import com.zakrodionov.practicalapp.app.ui.defaultInsetsPadding
 import org.koin.androidx.compose.getStateViewModel
 import kotlin.random.Random
 
 const val PAGINATION_THRESHOLD = 5
 
 class PostsScreen : BaseScreen() {
+
+    override fun statusBarColor(): Color = Color.Transparent
+    override val useDarkIconsInStatusBar: Boolean = true
+
     @Composable
     override fun Content() {
         super.Content()
@@ -51,7 +55,6 @@ class PostsScreen : BaseScreen() {
             SwipeRefresh(
                 state = rememberSwipeRefreshState(state.loading.fromSwipeRefresh),
                 onRefresh = { viewModel.loadPosts(refresh = true) },
-                modifier = Modifier.defaultInsetsPadding()
             ) {
                 val listState = rememberLazyListState()
                 if (listState.layoutInfo.totalItemsCount != 0 &&
@@ -64,7 +67,7 @@ class PostsScreen : BaseScreen() {
                 LazyColumn(
                     state = listState,
                     verticalArrangement = Arrangement.spacedBy(15.dp), // Расстояние между айтемами
-                    contentPadding = PaddingValues(20.dp) // Отступы всего LazyColumn
+                    contentPadding = edgeToEdgeStatusBarPadding(20.dp, 20.dp) // Отступы всего LazyColumn, + insets
                 ) {
                     items(state.posts.orEmpty(), key = { it.itemId }) { item ->
                         when (item) {

@@ -9,6 +9,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
@@ -16,6 +17,8 @@ import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
 
 class HomeScreen : BaseScreen() {
+
+    override fun statusBarColor(): Color = Color.Transparent
 
     @Composable
     override fun Content() {

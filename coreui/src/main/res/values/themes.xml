@@ -6,7 +6,7 @@
     <style name="Theme.PracticalApp" parent="Theme.Material.DayNight.NoActionBar">
         <item name="android:colorPrimary">#ff00ff</item>
         <item name="android:colorAccent">#ff00ff</item>
-        <item name="android:statusBarColor">@color/color_statusbar</item>
+        <item name="android:statusBarColor">@color/transparent</item>
     </style>
 
 </resources>
