@@ -6,5 +6,5 @@ import com.zakrodionov.practicalapp.app.features.bottom.ui.tabs.BottomTabsViewMo
 import org.koin.androidx.viewmodel.dsl.viewModel
 
 val bottomTabsModule = tabFlowModule<BottomTabsFragment> {
-    viewModel { BottomTabsViewModel(get(), get()) }
+    viewModel { parameters ->  BottomTabsViewModel(get(), parameters.get(), get(), get(), get()) }
 }

@@ -2,6 +2,7 @@ package com.zakrodionov.practicalapp.app.core.navigation
 
 import com.github.terrakok.cicerone.Command
 import com.github.terrakok.cicerone.Router
+import com.zakrodionov.common.extensions.debug
 import com.zakrodionov.practicalapp.app.core.navigation.BackTabStrategy.BACK_TO_DEFAULT_TAB
 import com.zakrodionov.practicalapp.app.core.navigation.BackTabStrategy.BACK_TO_FIRST_TAB
 import com.zakrodionov.practicalapp.app.core.navigation.BackTabStrategy.BY_SHOW_ORDER
@@ -55,6 +56,8 @@ class TabFlowRouter(private val backTabStrategy: BackTabStrategy = BY_SHOW_ORDER
             tabsHistory.remove(it)
         }
         tabsHistory.add(it)
+    }.onEach {
+        debug("router - $it")
     }
 
     override fun switchTab(tab: Tab) {

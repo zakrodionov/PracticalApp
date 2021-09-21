@@ -9,6 +9,9 @@ import com.zakrodionov.practicalapp.app.core.dispatchers.DispatchersProviderImpl
 import com.zakrodionov.practicalapp.app.core.eventbus.EventBus
 import com.zakrodionov.practicalapp.app.core.eventbus.EventProvider
 import com.zakrodionov.practicalapp.app.core.eventbus.EventPublisher
+import com.zakrodionov.practicalapp.app.features.bottom.base.BottomTabsEventBus
+import com.zakrodionov.practicalapp.app.features.bottom.base.BottomTabsEventProvider
+import com.zakrodionov.practicalapp.app.features.bottom.base.BottomTabsEventPublisher
 import org.koin.dsl.module
 
 val coreModule = module {
@@ -19,4 +22,8 @@ val coreModule = module {
     val eventBus = EventBus()
     single<EventProvider> { eventBus }
     single<EventPublisher> { eventBus }
+
+    val bottomTabsEventBus = BottomTabsEventBus()
+    single<BottomTabsEventProvider> { bottomTabsEventBus }
+    single<BottomTabsEventPublisher> { bottomTabsEventBus }
 }

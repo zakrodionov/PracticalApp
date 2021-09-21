@@ -5,6 +5,9 @@ import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.google.android.material.navigation.NavigationBarView
+import com.zakrodionov.common.extensions.debug
+import com.zakrodionov.common.extensions.initialArguments
+import com.zakrodionov.common.extensions.withInitialArguments
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.BaseFragment
 import com.zakrodionov.practicalapp.app.core.navigation.TabFlowNavigator
@@ -14,20 +17,21 @@ import com.zakrodionov.practicalapp.app.features.bottom.base.Tab
 import com.zakrodionov.practicalapp.databinding.FragmentBottomTabsBinding
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
+import org.koin.core.parameter.parametersOf
 import org.koin.core.scope.Scope
 
 class BottomTabsFragment :
     BaseFragment<BottomTabsState, BottomTabsEvent>(R.layout.fragment_bottom_tabs), TabHost {
 
     companion object {
-        fun newInstance() = BottomTabsFragment()
+        fun newInstance(args: ArgsBottomTabs) = BottomTabsFragment().withInitialArguments(args)
     }
 
     override val scope: Scope by lazy {
         getOrCreateFragmentScope(uniqueId)
     }
 
-    override val viewModel: BottomTabsViewModel by stateViewModel()
+    override val viewModel: BottomTabsViewModel by stateViewModel { parametersOf(initialArguments()) }
     override val binding by viewBinding(FragmentBottomTabsBinding::bind)
     override val statusBarColor: Int = R.color.transparent
 
@@ -65,7 +69,8 @@ class BottomTabsFragment :
     override fun applyInsets() = Unit
 
     override fun render(state: BottomTabsState) {
-        state.currentTab?.let {
+        state.currentTab.let {
+            debug("$it")
             binding.bottomNavigation.setOnItemSelectedListener(null)
             binding.bottomNavigation.selectedItemId = it.menuItemId
             binding.bottomNavigation.setOnItemSelectedListener(bottomNavigationItemSelectedListener)
