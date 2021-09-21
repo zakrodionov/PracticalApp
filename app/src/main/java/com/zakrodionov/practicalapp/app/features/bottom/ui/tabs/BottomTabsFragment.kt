@@ -64,12 +64,10 @@ class BottomTabsFragment :
     // Игнорируем инсеты для экрана с BottomNavigationView
     override fun applyInsets() = Unit
 
-    override fun render(state: BottomTabsState) {
-        state.currentTab?.let {
-            binding.bottomNavigation.setOnItemSelectedListener(null)
-            binding.bottomNavigation.selectedItemId = it.menuItemId
-            binding.bottomNavigation.setOnItemSelectedListener(bottomNavigationItemSelectedListener)
-        }
+    override fun render(state: BottomTabsState) = with(binding) {
+        bottomNavigation.setOnItemSelectedListener(null)
+        bottomNavigation.selectedItemId = state.currentTab.menuItemId
+        bottomNavigation.setOnItemSelectedListener(bottomNavigationItemSelectedListener)
     }
 
     override fun onBackTab() {
