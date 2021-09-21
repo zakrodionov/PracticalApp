@@ -6,8 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class BottomTabsState(
-    val currentTab: Tab? = null,
-    val tabsIsInitialized: Boolean = false
+    val currentTab: Tab = Tab.POSTS,
 ) : Parcelable
 
 sealed class BottomTabsEvent

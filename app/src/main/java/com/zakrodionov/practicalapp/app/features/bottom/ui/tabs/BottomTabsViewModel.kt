@@ -10,13 +10,13 @@ import kotlinx.coroutines.flow.onEach
 
 class BottomTabsViewModel(
     savedStateHandle: SavedStateHandle,
-    private val tabFlowRouter: TabFlowRouter
+    private val tabFlowRouter: TabFlowRouter,
 ) : BaseViewModel<BottomTabsState, BottomTabsEvent>(BottomTabsState(), savedStateHandle) {
 
     init {
-        observeSelectedTab()
-
         initTabs()
+
+        observeSelectedTab()
     }
 
     private fun observeSelectedTab() {
@@ -28,10 +28,7 @@ class BottomTabsViewModel(
     }
 
     private fun initTabs() {
-        if (!state.tabsIsInitialized) {
-            tabFlowRouter.resetAllTabsAndOpenNewTab(Tab.POSTS)
-            reduce { state.copy(tabsIsInitialized = true) }
-        }
+        switchTab(state.currentTab)
     }
 
     fun switchTab(tab: Tab) {
