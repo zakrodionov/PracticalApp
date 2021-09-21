@@ -2,7 +2,6 @@ package com.zakrodionov.practicalapp.app.core.navigation
 
 import com.github.terrakok.cicerone.Command
 import com.github.terrakok.cicerone.Router
-import com.zakrodionov.common.extensions.debug
 import com.zakrodionov.practicalapp.app.core.navigation.BackTabStrategy.BACK_TO_DEFAULT_TAB
 import com.zakrodionov.practicalapp.app.core.navigation.BackTabStrategy.BACK_TO_FIRST_TAB
 import com.zakrodionov.practicalapp.app.core.navigation.BackTabStrategy.BY_SHOW_ORDER
@@ -11,7 +10,6 @@ import com.zakrodionov.practicalapp.app.features.bottom.base.Tab
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.onEach
 
 data class SwitchToTab(val tab: Tab) : Command
 data class ResetTab(val tab: Tab) : Command
@@ -51,14 +49,7 @@ class TabFlowRouter(private val backTabStrategy: BackTabStrategy = BY_SHOW_ORDER
     private val tabsHistory = mutableListOf<Tab>()
 
     private val _selectedTab = MutableStateFlow<Tab?>(null)
-    override val selectedTab: Flow<Tab> = _selectedTab.filterNotNull().onEach {
-        if (tabsHistory.contains(it)) {
-            tabsHistory.remove(it)
-        }
-        tabsHistory.add(it)
-    }.onEach {
-        debug("router - $it")
-    }
+    override val selectedTab: Flow<Tab> = _selectedTab.filterNotNull()
 
     override fun switchTab(tab: Tab) {
         if (_selectedTab.value == tab) {
@@ -66,7 +57,7 @@ class TabFlowRouter(private val backTabStrategy: BackTabStrategy = BY_SHOW_ORDER
             return
         }
         executeCommands(SwitchToTab(tab))
-        _selectedTab.value = tab
+        innerSelectTab(tab)
     }
 
     override fun reloadTab(tab: Tab) {
@@ -94,12 +85,21 @@ class TabFlowRouter(private val backTabStrategy: BackTabStrategy = BY_SHOW_ORDER
             ResetAllTabs,
             SwitchToTab(tab)
         )
-        _selectedTab.value = tab
+        innerSelectTab(tab)
     }
 
     override fun resetAllTabs() {
         executeCommands(ResetAllTabs)
         _selectedTab.value = null
+    }
+
+    private fun innerSelectTab(tab: Tab) {
+        _selectedTab.value = tab
+
+        if (tabsHistory.contains(tab)) {
+            tabsHistory.remove(tab)
+        }
+        tabsHistory.add(tab)
     }
 
     override fun onBackTab() {
