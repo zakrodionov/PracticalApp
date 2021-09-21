@@ -50,6 +50,7 @@ class BottomTabsViewModel(
     }
 
     private fun initTabs() {
+        switchTab(Tab.POSTS) // Always preload first tab
         switchTab(state.currentTab)
     }
 
