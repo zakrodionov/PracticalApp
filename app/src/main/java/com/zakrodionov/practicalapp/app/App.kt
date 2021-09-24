@@ -22,8 +22,8 @@ class App : Application() {
         super.onCreate()
         initKoin()
 
-        setupFlipper()
-        setupTimber()
+        initFlipper()
+        initTimber()
 
         initDefaultNotificationChannel()
     }
@@ -38,11 +38,11 @@ class App : Application() {
         }
     }
 
-    private fun setupFlipper() {
+    private fun initFlipper() {
         FlipperInitializer.initFlipperPlugins(this)
     }
 
-    private fun setupTimber() {
+    private fun initTimber() {
         if (BuildConfig.DEBUG) Timber.plant(DebugTree())
     }
 
