@@ -2,6 +2,7 @@ package com.zakrodionov.practicalapp.app.core
 
 import android.os.Bundle
 import android.os.Parcelable
+import androidx.core.os.bundleOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,8 +20,8 @@ import kotlinx.coroutines.launch
 @Suppress("TooManyFunctions")
 abstract class BaseViewModel<STATE : Parcelable, EVENT : Any>(
     initialState: STATE,
-    private val savedStateHandle: SavedStateHandle? = null,
-    private val dispatchersProvider: DispatchersProvider = DispatchersProviderImpl,
+    protected open val savedStateHandle: SavedStateHandle? = null,
+    protected open val dispatchersProvider: DispatchersProvider = DispatchersProviderImpl,
 ) : ViewModel() {
 
     companion object {
@@ -71,7 +72,7 @@ abstract class BaseViewModel<STATE : Parcelable, EVENT : Any>(
 
     private fun setSavedStateProvider() {
         savedStateHandle?.setSavedStateProvider(BUNDLE_STATE) {
-            Bundle().apply { putParcelable(KEY_STATE, state) }
+            bundleOf(KEY_STATE to state)
         }
     }
 
