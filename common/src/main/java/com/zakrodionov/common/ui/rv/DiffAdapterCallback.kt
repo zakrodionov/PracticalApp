@@ -1,5 +1,6 @@
 package com.zakrodionov.common.ui.rv
 
+import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil
 
 /**
@@ -14,8 +15,9 @@ open class DiffAdapterCallback<T> : DiffUtil.ItemCallback<T>() {
             false
         }
 
+    @SuppressLint("DiffUtilEquals")
     override fun areContentsTheSame(oldItem: T, newItem: T): Boolean =
-        oldItem.hashCode() == newItem.hashCode()
+        oldItem?.equals(newItem) ?: false
 }
 
 object DiffCallback : DiffAdapterCallback<DiffItem>()
