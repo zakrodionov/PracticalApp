@@ -60,5 +60,4 @@ Android Studio имеет достаточно неплохой встроенн
 
  Как выглядит сэмпл:  
    
-<img src="https://user-images.githubusercontent.com/27068529/119772938-9c4d9980-bec8-11eb-9512-319c4f427e4b.jpg" alt="Пример, как выглядит сэмпл" width="30%">
-
+<img src="https://user-images.githubusercontent.com/27068529/136216529-48764e6f-9146-48cf-b99a-d61a6acc6cf7.jpg" alt="Пример, как выглядит сэмпл" width="30%">
