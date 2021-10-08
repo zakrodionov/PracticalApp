@@ -21,7 +21,7 @@ class PostDetailViewModel(
     savedStateHandle
 ) {
 
-    init {//12
+    init {//123
         if (state.post == null) loadPostDetails()
     }
 
