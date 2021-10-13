@@ -104,5 +104,5 @@ object Libs {
     const val junit_jupiter_engine = "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
     const val espresso_core = "androidx.test.espresso:espresso-core:3.3.0"
     const val mockk = "io.mockk:mockk:1.12.0"
-    const val assertk = "com.willowtreeapps.assertk:assertk-jvm:0.24"
+    const val assertk = "com.willowtreeapps.assertk:assertk-jvm:0.25"
 }

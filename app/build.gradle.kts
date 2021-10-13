@@ -47,7 +47,7 @@ plugins {
     id("kotlin-kapt")
     id("kotlin-parcelize")
     id("de.mannodermaus.android-junit5")
-    id("com.starter.easylauncher").version("4.1.0")
+    id("com.starter.easylauncher").version("4.1.1")
     id(Plugins.detekt_plugin)
     id(Plugins.ktlint_plugin)
 }
@@ -192,7 +192,7 @@ dependencies {
     implementation(Libs.accompanist_insets)
     implementation(Libs.accompanist_system_ui_controller)
 
-    val voyager = "1.0.0-beta10" // Todo
+    val voyager = "1.0.0-beta12" // Todo
     implementation("cafe.adriel.voyager:voyager-navigator:$voyager")
     implementation("cafe.adriel.voyager:voyager-tab-navigator:$voyager")
     implementation("cafe.adriel.voyager:voyager-transitions:$voyager")

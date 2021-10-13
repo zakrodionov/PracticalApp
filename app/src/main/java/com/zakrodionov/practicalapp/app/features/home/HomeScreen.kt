@@ -15,6 +15,7 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
+import com.zakrodionov.practicalapp.app.ui.theme.BottomBarColor
 
 class HomeScreen : BaseScreen() {
 
@@ -32,7 +33,7 @@ class HomeScreen : BaseScreen() {
                     }
                 },
                 bottomBar = {
-                    BottomNavigation {
+                    BottomNavigation(backgroundColor = BottomBarColor) {
                         TabNavigationItem(PostsTab)
                         TabNavigationItem(FavoritesTab)
                         TabNavigationItem(AboutTab)
