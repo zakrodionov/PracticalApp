@@ -13,7 +13,7 @@ import com.zakrodionov.practicalapp.app.di.getOrCreateFragmentScope
 import com.zakrodionov.practicalapp.app.features.bottom.base.Tab
 import com.zakrodionov.practicalapp.databinding.FragmentBottomTabsBinding
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.stateViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.scope.Scope
 
 class BottomTabsFragment :
@@ -27,7 +27,7 @@ class BottomTabsFragment :
         getOrCreateFragmentScope(uniqueId)
     }
 
-    override val viewModel: BottomTabsViewModel by stateViewModel()
+    override val viewModel: BottomTabsViewModel by viewModel()
     override val binding by viewBinding(FragmentBottomTabsBinding::bind)
     override val statusBarColor: Int = R.color.transparent
 

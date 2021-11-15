@@ -12,11 +12,11 @@ import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.BaseFragment
 import com.zakrodionov.practicalapp.databinding.FragmentPhoneBinding
 import dev.chrisbanes.insetter.applyInsetter
-import org.koin.androidx.viewmodel.ext.android.stateViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PhoneFragment : BaseFragment<PhoneState, PhoneEvent>(R.layout.fragment_phone) {
     override val binding: FragmentPhoneBinding by viewBinding(FragmentPhoneBinding::bind)
-    override val viewModel: PhoneViewModel by stateViewModel()
+    override val viewModel: PhoneViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
