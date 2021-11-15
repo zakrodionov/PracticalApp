@@ -10,12 +10,12 @@ import com.zakrodionov.practicalapp.app.core.BaseFragment
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.NONE
 import com.zakrodionov.practicalapp.databinding.FragmentAboutBinding
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.stateViewModel
 
 class AboutFragment : BaseFragment<AboutState, AboutEvent>(R.layout.fragment_about) {
 
     override val binding: FragmentAboutBinding by viewBinding(FragmentAboutBinding::bind)
-    override val viewModel: AboutViewModel by viewModel()
+    override val viewModel: AboutViewModel by stateViewModel()
     override val screenAnimationStrategy: ScreenAnimationStrategy = NONE
 
     @SuppressLint("SetTextI18n")

@@ -15,7 +15,7 @@ import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.NONE
 import com.zakrodionov.practicalapp.databinding.FragmentPostsBinding
 import dev.chrisbanes.insetter.applyInsetter
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.stateViewModel
 
 class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_posts) {
 
@@ -23,7 +23,7 @@ class PostsFragment : BaseFragment<PostsState, PostsEvent>(R.layout.fragment_pos
         fun newInstance() = PostsFragment()
     }
 
-    override val viewModel: PostsViewModel by viewModel()
+    override val viewModel: PostsViewModel by stateViewModel()
     override val binding: FragmentPostsBinding by viewBinding(FragmentPostsBinding::bind)
     override val screenAnimationStrategy: ScreenAnimationStrategy = NONE
     override val statusBarColor: Int = R.color.transparent

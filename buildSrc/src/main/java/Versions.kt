@@ -12,7 +12,7 @@ object Versions {
     const val flipperVersion = "0.119.0"
     const val hyperionVersion = "0.9.34"
 
-    const val koinVersion = "3.1.3"
+    const val koinVersion = "3.1.2"
 
     const val lifecycleVersion = "2.4.0"
 
