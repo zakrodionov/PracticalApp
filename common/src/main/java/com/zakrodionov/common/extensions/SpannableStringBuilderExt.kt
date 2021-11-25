@@ -3,10 +3,13 @@ package com.zakrodionov.common.extensions
 import android.content.Context
 import android.graphics.Typeface
 import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.text.style.TextAppearanceSpan
 import android.view.View
+import androidx.annotation.ColorRes
 import androidx.annotation.StyleRes
+import androidx.core.content.ContextCompat
 import com.zakrodionov.common.custom.TouchableSpan
 
 fun SpannableStringBuilder.spanBold(boldString: String): SpannableStringBuilder {
@@ -20,10 +23,26 @@ fun SpannableStringBuilder.spanBold(boldString: String): SpannableStringBuilder 
     return this
 }
 
+fun SpannableStringBuilder.spanColor(
+    context: Context,
+    coloredString: String,
+    @ColorRes color: Int,
+): SpannableStringBuilder {
+    if (isEmpty() || coloredString.isEmpty()) {
+        return this
+    }
+    val startIndex = indexOf(coloredString)
+    val lastIndex = startIndex + coloredString.length
+    if (startIndex != -1) {
+        setSpan(ForegroundColorSpan(ContextCompat.getColor(context, color)), startIndex, lastIndex, 0)
+    }
+    return this
+}
+
 fun SpannableStringBuilder.spanTextAppearance(
     context: Context,
     string: String,
-    @StyleRes style: Int
+    @StyleRes style: Int,
 ): SpannableStringBuilder {
     if (isEmpty() || string.isEmpty()) {
         return this
@@ -40,7 +59,7 @@ inline fun SpannableStringBuilder.spanClickable(
     normalColor: Int,
     pressedColor: Int,
     withUnderLine: Boolean = true,
-    crossinline func: (link: String) -> Unit
+    crossinline func: (link: String) -> Unit,
 ): SpannableStringBuilder {
 
     if (!contains(link) || isEmpty() || link.isEmpty()) {
