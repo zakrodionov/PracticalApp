@@ -8,7 +8,6 @@ class CommonJwtDecoder(private val moshi: Moshi) : JwtDecoder() {
 
     fun getJwt(jwt: String): JwtPayload? =
         moshi.adapter(JwtPayload::class.java).fromJson(getPayload(jwt))
-
 }
 
 @JsonClass(generateAdapter = true)

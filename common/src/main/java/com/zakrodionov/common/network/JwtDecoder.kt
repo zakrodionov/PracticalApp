@@ -2,7 +2,6 @@ package com.zakrodionov.common.network
 
 import android.util.Base64
 
-
 abstract class JwtDecoder {
 
     protected fun getHeader(jwt: String): String = splitJwt(jwt)[0].decodeBase64String()
@@ -15,10 +14,4 @@ abstract class JwtDecoder {
         val decodedBytes: ByteArray = Base64.decode(this, Base64.URL_SAFE)
         return String(decodedBytes, charset("UTF-8"))
     }
-
 }
-
-
-
-
-

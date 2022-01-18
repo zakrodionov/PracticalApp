@@ -121,7 +121,7 @@ fun View.clickWithDebounce(debounceTime: Long = 600L, action: () -> Unit) {
 
 fun View.isInTouchArea(event: MotionEvent): Boolean {
     return event.x.toInt() in left..right &&
-            event.y.toInt() in top..bottom
+        event.y.toInt() in top..bottom
 }
 
 @Suppress("LongParameterList")
