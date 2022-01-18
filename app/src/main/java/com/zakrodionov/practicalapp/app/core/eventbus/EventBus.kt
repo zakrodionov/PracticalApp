@@ -5,23 +5,23 @@ import kotlinx.coroutines.flow.SharedFlow
 
 interface Event
 
-interface EventProvider {
-    fun provide(): SharedFlow<Event>
+interface EventSubscriber {
+    fun subscribe(): SharedFlow<Event>
 }
 
-interface EventPublisher {
-    suspend fun publish(event: Event)
+interface EventSender {
+    suspend fun send(event: Event)
 }
 
 // EventBus для общих событий, если нужна какая-нибидь специализированная логика(например кеширование)
 // создаем отдельный EventBus
-open class EventBus : EventProvider, EventPublisher {
+open class EventBus : EventSubscriber, EventSender {
 
     private val events = MutableSharedFlow<Event>()
 
-    override fun provide(): SharedFlow<Event> = events
+    override fun subscribe(): SharedFlow<Event> = events
 
-    override suspend fun publish(event: Event) {
+    override suspend fun send(event: Event) {
         events.emit(event)
     }
 }
