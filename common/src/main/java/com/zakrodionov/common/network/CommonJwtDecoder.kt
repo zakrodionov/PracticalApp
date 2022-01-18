@@ -6,7 +6,7 @@ import com.squareup.moshi.Moshi
 
 class CommonJwtDecoder(private val moshi: Moshi) : JwtDecoder() {
 
-    private fun getJwt(jwt: String): JwtPayload? =
+    fun getJwt(jwt: String): JwtPayload? =
         moshi.adapter(JwtPayload::class.java).fromJson(getPayload(jwt))
 
 }

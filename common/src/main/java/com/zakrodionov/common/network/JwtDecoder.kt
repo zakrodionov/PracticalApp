@@ -9,7 +9,7 @@ abstract class JwtDecoder {
 
     protected fun getPayload(jwt: String): String = splitJwt(jwt)[1].decodeBase64String()
 
-    private fun splitJwt(jwt: String): Array<String> = jwt.split("\\.".toRegex()).toTypedArray()
+    private fun splitJwt(jwt: String): List<String> = jwt.split("\\.".toRegex())
 
     private fun String.decodeBase64String(): String {
         val decodedBytes: ByteArray = Base64.decode(this, Base64.URL_SAFE)
