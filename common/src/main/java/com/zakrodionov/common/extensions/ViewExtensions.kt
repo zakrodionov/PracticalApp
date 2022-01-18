@@ -2,6 +2,7 @@
 
 package com.zakrodionov.common.extensions
 
+import android.content.Context
 import android.content.res.Resources
 import android.graphics.Outline
 import android.graphics.Rect
@@ -13,6 +14,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
+import android.view.inputmethod.InputMethodManager
 import android.webkit.WebView
 import android.widget.FrameLayout
 import android.widget.LinearLayout
@@ -66,14 +68,27 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View =
 /** Requests focus and shows keyboard for [this] view if it is possible.
  *  To display at startup, you need to set [setSoftInputModeAlwaysVisible]
  * */
-fun View.showKeyboard() {
-    ViewCompat.getWindowInsetsController(this)
-        ?.show(WindowInsetsCompat.Type.ime())
+fun View.showKeyboard(newMethod: Boolean = false) {
+    if (newMethod) {
+        ViewCompat.getWindowInsetsController(this)
+            ?.show(WindowInsetsCompat.Type.ime())
+    } else {
+        requestFocus()
+
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+    }
 }
 
-fun View.hideKeyboard() {
-    ViewCompat.getWindowInsetsController(this)
-        ?.hide(WindowInsetsCompat.Type.ime())
+fun View.hideKeyboard(newMethod: Boolean = false) {
+    if (newMethod) {
+        ViewCompat.getWindowInsetsController(this)
+            ?.hide(WindowInsetsCompat.Type.ime())
+    } else {
+        val inputMethodManager =
+            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
+    }
 }
 
 fun View.imeVisibilityListener(onVisibilityChanged: (Boolean) -> Unit) {
@@ -106,7 +121,7 @@ fun View.clickWithDebounce(debounceTime: Long = 600L, action: () -> Unit) {
 
 fun View.isInTouchArea(event: MotionEvent): Boolean {
     return event.x.toInt() in left..right &&
-        event.y.toInt() in top..bottom
+            event.y.toInt() in top..bottom
 }
 
 @Suppress("LongParameterList")
