@@ -2,7 +2,7 @@ package com.zakrodionov.common.network
 
 import android.util.Base64
 
-abstract class JwtDecoder {
+open class JwtDecoder {
 
     protected fun getHeader(jwt: String): String = splitJwt(jwt)[0].decodeBase64String()
 
