@@ -32,7 +32,7 @@ class App : Application() {
         startKoin {
             androidContext(this@App)
             if (isDebug) {
-                androidLogger(Level.DEBUG)
+                androidLogger(Level.ERROR)
             }
             modules(allModules)
         }

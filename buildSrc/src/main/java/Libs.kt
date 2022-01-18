@@ -12,11 +12,11 @@ import Versions.retrofitVersion
 
 object Libs {
     //AndroidX
-    const val androidx_app_compat = "androidx.appcompat:appcompat:1.3.1"
-    const val androidx_material = "com.google.android.material:material:1.4.0"
-    const val androidx_core = "androidx.core:core-ktx:1.6.0"
-    const val androidx_constraint_layout = "androidx.constraintlayout:constraintlayout:2.1.1"
-    const val androidx_fragment = "androidx.fragment:fragment-ktx:1.3.6"
+    const val androidx_app_compat = "androidx.appcompat:appcompat:1.4.1"
+    const val androidx_material = "com.google.android.material:material:1.5.0"
+    const val androidx_core = "androidx.core:core-ktx:1.7.0"
+    const val androidx_constraint_layout = "androidx.constraintlayout:constraintlayout:2.1.3"
+    const val androidx_fragment = "androidx.fragment:fragment-ktx:1.4.0"
     const val androidx_swipe_refresh_layout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     const val androidx_security_crypto = "androidx.security:security-crypto:1.0.0"
 
@@ -50,7 +50,7 @@ object Libs {
 
     const val timber = "com.jakewharton.timber:timber:5.0.1"
 
-    const val leak_canary = "com.squareup.leakcanary:leakcanary-android:2.7"
+    const val leak_canary = "com.squareup.leakcanary:leakcanary-android:2.8.1"
 
     // Hyperion
     const val hyperion_core = "com.willowtreeapps.hyperion:hyperion-core:$hyperionVersion"
@@ -85,12 +85,12 @@ object Libs {
     const val glide = "com.github.bumptech.glide:glide:$glideVersion"
     const val glide_compiler = "com.github.bumptech.glide:compiler:$glideVersion"
 
-    const val insetter = "dev.chrisbanes.insetter:insetter:0.6.0"
+    const val insetter = "dev.chrisbanes.insetter:insetter:0.6.1"
 
     //Test
     const val junit_jupiter_api = "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
     const val junit_jupiter_engine = "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
     const val espresso_core = "androidx.test.espresso:espresso-core:3.3.0"
-    const val mockk = "io.mockk:mockk:1.12.0"
-    const val assertk = "com.willowtreeapps.assertk:assertk-jvm:0.24"
+    const val mockk = "io.mockk:mockk:1.12.2"
+    const val assertk = "com.willowtreeapps.assertk:assertk-jvm:0.25"
 }
