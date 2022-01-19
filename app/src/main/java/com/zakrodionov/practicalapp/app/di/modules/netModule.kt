@@ -2,6 +2,7 @@ package com.zakrodionov.practicalapp.app.di.modules
 
 import com.squareup.moshi.Moshi
 import com.zakrodionov.common.extensions.isDebug
+import com.zakrodionov.common.network.CommonJwtDecoder
 import com.zakrodionov.common.network.ConnectionService
 import com.zakrodionov.common.network.ConnectionServiceImpl
 import com.zakrodionov.practicalapp.BuildConfig
@@ -33,6 +34,8 @@ val netModule = module {
 
     // Api for refresh tokens. Used in authenticator
     single { buildAuthApi(get()) }
+
+    single { CommonJwtDecoder(get()) }
 }
 
 private fun buildMoshi(): Moshi = Moshi.Builder().build()
