@@ -13,7 +13,7 @@ import Versions.retrofitVersion
 
 object Libs {
     //AndroidX
-    const val androidx_app_compat = "androidx.appcompat:appcompat:1.4.0-rc01"
+    const val androidx_app_compat = "androidx.appcompat:appcompat:1.4.1"
     const val androidx_material = "com.google.android.material:material:1.4.0"
     const val androidx_core = "androidx.core:core-ktx:1.7.0"
     const val androidx_security_crypto = "androidx.security:security-crypto:1.0.0"
@@ -47,7 +47,7 @@ object Libs {
     const val flipper = "com.facebook.flipper:flipper:$flipperVersion"
     const val flipper_network = "com.facebook.flipper:flipper-network-plugin:$flipperVersion"
     const val flipper_no_op = "com.facebook.flipper:flipper-noop:$flipperVersion"
-    const val flipper_soloader = "com.facebook.soloader:soloader:0.10.1"
+    const val flipper_soloader = "com.facebook.soloader:soloader:0.10.3"
 
     const val timber = "com.jakewharton.timber:timber:5.0.1"
 

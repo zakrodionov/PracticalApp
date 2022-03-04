@@ -19,8 +19,7 @@ import com.zakrodionov.practicalapp.app.ui.components.CommonCenteredText
 import com.zakrodionov.practicalapp.app.ui.components.CommonFillSpacer
 import com.zakrodionov.practicalapp.app.ui.components.CommonSpacer
 import com.zakrodionov.practicalapp.app.ui.defaultInsetsPadding
-import kotlinx.coroutines.flow.collect
-import org.koin.androidx.compose.getStateViewModel
+import org.koin.androidx.compose.getViewModel
 
 class AboutScreen : BaseScreen() {
     @Composable
@@ -28,7 +27,7 @@ class AboutScreen : BaseScreen() {
         super.Content()
 
         val globalNavigator = LocalGlobalNavigator.current
-        val viewModel = getStateViewModel<AboutViewModel>()
+        val viewModel = getViewModel<AboutViewModel>()
         val state by viewModel.stateFlow.collectAsState()
 
         OnLaunched {

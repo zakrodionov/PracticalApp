@@ -33,7 +33,7 @@ import com.zakrodionov.practicalapp.app.features.home.posts.detail.ArgsPostDetai
 import com.zakrodionov.practicalapp.app.features.home.posts.detail.PostDetailsScreen
 import com.zakrodionov.practicalapp.app.ui.components.Lce
 import com.zakrodionov.practicalapp.app.ui.components.LoadingItem
-import org.koin.androidx.compose.getStateViewModel
+import org.koin.androidx.compose.getViewModel
 import kotlin.random.Random
 
 const val PAGINATION_THRESHOLD = 5
@@ -48,7 +48,7 @@ class PostsScreen : BaseScreen() {
         super.Content()
 
         val navigator = LocalNavigator.currentOrThrow
-        val viewModel = getStateViewModel<PostsViewModel>()
+        val viewModel = getViewModel<PostsViewModel>()
         val state by viewModel.stateFlow.collectAsState()
 
         Lce(lceState = state.lceState, tryAgain = { viewModel.loadPosts() }) {

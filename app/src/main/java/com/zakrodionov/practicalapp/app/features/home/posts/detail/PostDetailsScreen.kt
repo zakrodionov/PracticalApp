@@ -30,7 +30,7 @@ import com.zakrodionov.common.ui.lce.LceState
 import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
 import com.zakrodionov.practicalapp.app.domain.model.Posts.Post
 import com.zakrodionov.practicalapp.app.ui.components.Lce
-import org.koin.androidx.compose.getStateViewModel
+import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
 data class PostDetailsScreen(
@@ -43,7 +43,7 @@ data class PostDetailsScreen(
     override fun Content() {
         super.Content()
 
-        val viewModel = getStateViewModel<PostDetailViewModel> { parametersOf(args) }
+        val viewModel = getViewModel<PostDetailViewModel> { parametersOf(args) }
         val state by viewModel.stateFlow.collectAsState()
 
         PostDetailsScreen(

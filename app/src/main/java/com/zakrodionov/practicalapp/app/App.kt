@@ -33,7 +33,7 @@ class App : Application() {
             androidContext(this@App)
             modules(allModules)
             if (isDebug) {
-                androidLogger(Level.DEBUG)
+                androidLogger(Level.ERROR)
             }
         }
     }
