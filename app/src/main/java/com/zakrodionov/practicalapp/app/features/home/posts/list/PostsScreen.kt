@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.zakrodionov.common.extensions.edgeToEdgeStatusBarPadding
@@ -98,7 +98,7 @@ fun PostItem(post: Post, onClick: (Post) -> Unit) {
     Card(onClick = { onClick(post) }) {
         Column {
             Image(
-                painter = rememberImagePainter(post.image.orEmpty()),
+                painter = rememberAsyncImagePainter(post.image.orEmpty()),
                 contentDescription = "Post Image",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier

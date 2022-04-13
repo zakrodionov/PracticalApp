@@ -18,7 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
 import com.google.accompanist.insets.imePadding
 import com.zakrodionov.common.extensions.capitalizeFirstLetter
 import com.zakrodionov.common.extensions.dtfDateTimeFullMonth
@@ -65,7 +65,7 @@ private fun PostDetailsScreen(lceState: LceState, post: Post?, tryAgain: () -> U
                 .imePadding()
         ) {
             Image(
-                painter = rememberImagePainter(post?.image.orEmpty()),
+                painter = rememberAsyncImagePainter(post?.image.orEmpty()),
                 contentDescription = "Post Image",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
