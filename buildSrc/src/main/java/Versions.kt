@@ -8,7 +8,7 @@ object Versions {
     const val moshiVersion = "1.13.0"
 
     const val detektVersion = "1.18.1"
-    const val ktlintVersion = "10.2.0"
+    const val ktlintVersion = "10.2.1"
     const val libsVersionsPluginVersion = "0.42.0"
 
     const val flipperVersion = "0.142.0"
