@@ -53,13 +53,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion(COMPILE_SDK_VERSION)
-    buildToolsVersion(BUILD_TOOLS_VERSION)
+    compileSdk = COMPILE_SDK_VERSION
+    buildToolsVersion = BUILD_TOOLS_VERSION
 
     defaultConfig {
         applicationId = APPLICATION_ID
-        minSdkVersion(MIN_SDK_VERSION)
-        targetSdkVersion(TARGET_SDK_VERSION)
+        minSdk =MIN_SDK_VERSION
+        targetSdk = TARGET_SDK_VERSION
         versionCode = VERSION_CODE
         versionName = VERSION_NAME
 
