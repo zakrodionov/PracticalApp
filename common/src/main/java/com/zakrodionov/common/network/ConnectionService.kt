@@ -8,7 +8,6 @@ import android.net.NetworkRequest
 import androidx.core.content.getSystemService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
@@ -20,7 +19,6 @@ interface ConnectionService {
     fun hasConnection(): Boolean
 }
 
-@ExperimentalCoroutinesApi
 class ConnectionServiceImpl(context: Context, dispatcher: CoroutineDispatcher) : ConnectionService {
 
     private val connectivityManager: ConnectivityManager? by lazy {
