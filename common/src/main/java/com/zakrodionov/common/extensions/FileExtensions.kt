@@ -18,12 +18,12 @@ fun File.contentUri(context: Context): Uri =
 
 fun Context.getFileName(uri: Uri): String? = when (uri.scheme) {
     ContentResolver.SCHEME_FILE -> uri.lastPathSegment
-    ContentResolver.SCHEME_CONTENT -> getCursorContent(uri)
+    ContentResolver.SCHEME_CONTENT -> getCursorName(uri)
     else -> null
 }
 
 @SuppressLint("Range")
-private fun Context.getCursorContent(uri: Uri): String? {
+private fun Context.getCursorName(uri: Uri): String? {
     return contentResolver.query(uri, null, null, null, null)?.use { cursor ->
         if (cursor.moveToFirst()) cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)) else null
     }
