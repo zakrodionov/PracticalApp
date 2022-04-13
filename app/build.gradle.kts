@@ -58,7 +58,7 @@ android {
 
     defaultConfig {
         applicationId = APPLICATION_ID
-        minSdk =MIN_SDK_VERSION
+        minSdk = MIN_SDK_VERSION
         targetSdk = TARGET_SDK_VERSION
         versionCode = VERSION_CODE
         versionName = VERSION_NAME
