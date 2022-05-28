@@ -94,7 +94,7 @@ fun <T : Parcelable> Fragment.initialArguments(): T {
 fun DialogFragment.showIfNotAlreadyShown(
     fragmentManager: FragmentManager,
     tag: String,
-    now: Boolean = true
+    now: Boolean = true,
 ) {
     if (fragmentManager.findFragmentByTag(tag) == null) {
         if (now) showNow(fragmentManager, tag) else show(fragmentManager, tag)
@@ -104,7 +104,7 @@ fun DialogFragment.showIfNotAlreadyShown(
 fun DialogFragment.showWithPreventMultiple(
     fragmentManager: FragmentManager,
     tag: String,
-    now: Boolean = true
+    now: Boolean = true,
 ) {
     (fragmentManager.findFragmentByTag(tag) as? DialogFragment)?.dismiss()
 
@@ -123,7 +123,7 @@ fun showDialog(
     cancelable: Boolean = false,
     payload: Parcelable? = null,
     @StyleRes theme: Int? = R.style.AlertDialog,
-    @StyleRes messageTextAppearance: Int? = null
+    @StyleRes messageTextAppearance: Int? = null,
 ) {
     CommonDialog.Builder()
         .title(title)
@@ -146,6 +146,14 @@ fun FragmentTransaction.setHorizontalSlideAnimations() =
         R.anim.slide_out_left,
         R.anim.slide_in_left,
         R.anim.slide_out_right
+    )
+
+fun FragmentTransaction.setHorizontalSlideAnimationsReverse() =
+    setCustomAnimations(
+        R.anim.slide_in_left,
+        R.anim.slide_out_right,
+        R.anim.slide_in_right,
+        R.anim.slide_out_left
     )
 
 fun FragmentTransaction.setVerticalSlideAnimations() =

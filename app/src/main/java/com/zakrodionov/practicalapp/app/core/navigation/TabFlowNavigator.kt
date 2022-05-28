@@ -7,6 +7,8 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.commitNow
 import com.github.terrakok.cicerone.Command
 import com.github.terrakok.cicerone.androidx.AppNavigator
+import com.zakrodionov.common.extensions.setHorizontalSlideAnimations
+import com.zakrodionov.common.extensions.setHorizontalSlideAnimationsReverse
 import com.zakrodionov.practicalapp.app.core.BaseTabFragment
 import com.zakrodionov.practicalapp.app.core.navigation.TransactionStrategy.ATTACH_DETACH
 import com.zakrodionov.practicalapp.app.core.navigation.TransactionStrategy.SHOW_HIDE
@@ -56,7 +58,7 @@ class TabFlowNavigator(
 
     private fun openTab(tab: Tab) {
         val currentFragment = currentTabFragment
-        val newFragment = fragmentManager.findFragmentByTag(tab.name)
+        var newFragment = fragmentManager.findFragmentByTag(tab.name)
 
         if (currentFragment != null && newFragment != null && currentFragment == newFragment) {
             return
@@ -64,7 +66,17 @@ class TabFlowNavigator(
 
         fragmentManager.commitNow {
             if (newFragment == null) {
-                add(containerId, tab.getFragment(), tab.name)
+                val frag = tab.getFragment()
+                newFragment = frag
+                add(containerId, frag, tab.name)
+            }
+
+            newFragment?.let { newFragment ->
+                if ((currentFragment?.let { Tab.from(it).ordinal } ?: 0) > Tab.from(newFragment).ordinal) {
+                    setHorizontalSlideAnimationsReverse()
+                } else {
+                    setHorizontalSlideAnimations()
+                }
             }
 
             currentFragment?.let {
