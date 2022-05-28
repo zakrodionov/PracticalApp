@@ -7,6 +7,7 @@ import com.zakrodionov.common.extensions.hideKeyboard
 import com.zakrodionov.common.extensions.showKeyboard
 import com.zakrodionov.common.extensions.textString
 import com.zakrodionov.practicalapp.R
+import com.zakrodionov.practicalapp.app.core.navigation.FlowRouter
 import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences
 import com.zakrodionov.practicalapp.app.features.StubFragment
 import com.zakrodionov.practicalapp.app.features.StubViewModel
@@ -25,7 +26,7 @@ class PasswordFragment : StubFragment(R.layout.fragment_password) {
         binding.btnNext.setOnClickListener {
             binding.etPassword.hideKeyboard()
             get<AppPreferences>().isLogged = true
-            finishFlow()
+            viewModel.finishFlow()
         }
     }
 
@@ -48,4 +49,8 @@ class PasswordFragment : StubFragment(R.layout.fragment_password) {
     }
 }
 
-class PasswordViewModel : StubViewModel()
+class PasswordViewModel(private val flowRouter: FlowRouter) : StubViewModel() {
+    fun finishFlow() {
+        flowRouter.finishFlow()
+    }
+}

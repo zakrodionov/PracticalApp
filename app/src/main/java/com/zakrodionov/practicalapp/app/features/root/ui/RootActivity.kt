@@ -6,13 +6,11 @@ import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.BaseActivity
 import com.zakrodionov.practicalapp.app.core.navigation.BaseNavigator
-import com.zakrodionov.practicalapp.app.core.navigation.GlobalRouter
 import com.zakrodionov.practicalapp.app.features.bottom.BottomScreens.BottomTabsScreen
 import org.koin.android.ext.android.inject
 
 class RootActivity : BaseActivity() {
 
-    private val globalRouter: GlobalRouter by inject()
     private val navigatorHolder: NavigatorHolder by inject()
     private val navigator: AppNavigator =
         BaseNavigator(this, supportFragmentManager, R.id.fragmentContainerView)
@@ -24,7 +22,7 @@ class RootActivity : BaseActivity() {
         setContentView(R.layout.layout_fragment_container)
 
         if (savedInstanceState == null) {
-            globalRouter.newRootScreen(BottomTabsScreen())
+            globalRouter.newAppRoot(BottomTabsScreen())
         }
     }
 

@@ -20,6 +20,7 @@ open class BaseNavigator(
     fragmentManager: FragmentManager,
     @IdRes containerId: Int
 ) : AppNavigator(activity, containerId, fragmentManager) {
+
     override fun setupFragmentTransaction(
         screen: FragmentScreen,
         fragmentTransaction: FragmentTransaction,
@@ -33,6 +34,19 @@ open class BaseNavigator(
                 SLIDE_VERTICAL -> fragmentTransaction.setVerticalSlideAnimations()
                 NONE, null -> fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_NONE)
             }
+        }
+    }
+
+    override fun back() {
+        if (localStackCopy.size > 1) {
+            fragmentManager.popBackStack()
+            localStackCopy.removeAt(localStackCopy.lastIndex)
+        } else {
+            if (localStackCopy.isNotEmpty()) {
+                fragmentManager.popBackStack()
+                localStackCopy.removeAt(localStackCopy.lastIndex)
+            }
+            activityBack()
         }
     }
 }

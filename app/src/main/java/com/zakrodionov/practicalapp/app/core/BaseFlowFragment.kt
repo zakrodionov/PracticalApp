@@ -66,18 +66,9 @@ abstract class BaseFlowFragment(
             if (needBack) {
                 when {
                     childFragmentManager.backStackEntryCount <= 1 &&
-                        requireActivity().supportFragmentManager.backStackEntryCount < 1 -> {
-                        when (parentFragment) {
-                            is TabHost -> {
-                                (parentFragment as TabHost).onBackTab()
-                            }
-                            is BaseFlowFragment -> {
-                                finishFlow()
-                            }
-                            else -> {
-                                flowRouter.finishApp()
-                            }
-                        }
+                        requireActivity().supportFragmentManager.backStackEntryCount <= 1 &&
+                        parentFragment is TabHost -> {
+                        (parentFragment as TabHost).onBackTab()
                     }
                     childFragmentManager.backStackEntryCount <= 1 -> {
                         finishFlow()
@@ -91,8 +82,8 @@ abstract class BaseFlowFragment(
     }
 
     fun finishFlow() {
-        (parentFragment as? BaseFlowFragment)?.childFragmentManager?.popBackStack()
-            ?: requireActivity().supportFragmentManager.popBackStack()
+        (parentFragment as? BaseFlowFragment)?.flowRouter?.exit()
+            ?: (requireActivity() as? BaseActivity)?.globalRouter?.exit()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -144,8 +144,4 @@ abstract class BaseFragment<STATE : Parcelable, SIDE_EFFECT : Any>(@LayoutRes co
             block.invoke()
         }
     }
-
-    fun finishFlow() {
-        (parentFragment as? BaseFlowFragment)?.finishFlow()
-    }
 }
