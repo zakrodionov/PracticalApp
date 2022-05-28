@@ -57,7 +57,7 @@ import Libs.venom
 import Libs.venom_no_op
 import Libs.viewbinding_property_delegate
 import java.io.FileInputStream
-import java.util.*
+import java.util.Properties
 
 plugins {
     id("com.android.application")

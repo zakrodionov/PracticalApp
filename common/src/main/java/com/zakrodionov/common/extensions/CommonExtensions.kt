@@ -9,7 +9,7 @@ import timber.log.Timber
 val isDebug: Boolean
     get() = BuildConfig.DEBUG
 
-inline fun <reified T : Any> T.debug(string: String) = Timber.d("Log__: $string")
+inline fun <reified T : Any> T.debug(string: String) = Timber.d("Log__debug: $string")
 
 inline fun <reified T : Any> T.checkThread(string: String = "") =
     debug("${Thread.currentThread().name}, is main = ${Looper.getMainLooper().isCurrentThread} $string")

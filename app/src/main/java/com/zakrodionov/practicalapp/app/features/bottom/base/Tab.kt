@@ -1,13 +1,16 @@
 package com.zakrodionov.practicalapp.app.features.bottom.base
 
+import android.os.Parcelable
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.features.about.ui.AboutFlowFragment
 import com.zakrodionov.practicalapp.app.features.favorite.ui.FavoriteFlowFragment
 import com.zakrodionov.practicalapp.app.features.posts.ui.PostsFlowFragment
+import kotlinx.parcelize.Parcelize
 
-enum class Tab(val menuItemId: Int) {
+@Parcelize
+enum class Tab(val menuItemId: Int) : Parcelable {
     POSTS(R.id.posts) {
         override fun getFragment(): Fragment = PostsFlowFragment.newInstance()
     },

@@ -1,7 +1,10 @@
 package com.zakrodionov.practicalapp.app.core.navigation
 
+import android.os.Bundle
 import com.github.terrakok.cicerone.Command
 import com.github.terrakok.cicerone.Router
+import com.zakrodionov.common.extensions.debug
+import com.zakrodionov.practicalapp.app.core.InstanceStateSaver
 import com.zakrodionov.practicalapp.app.core.navigation.BackTabStrategy.BACK_TO_DEFAULT_TAB
 import com.zakrodionov.practicalapp.app.core.navigation.BackTabStrategy.BACK_TO_FIRST_TAB
 import com.zakrodionov.practicalapp.app.core.navigation.BackTabStrategy.BY_SHOW_ORDER
@@ -44,7 +47,15 @@ interface TabsRouter {
 
 // Для навигации во флоу боттом экране
 @Suppress("TooManyFunctions")
-class TabFlowRouter(private val backTabStrategy: BackTabStrategy = BY_SHOW_ORDER) : Router(), TabsRouter {
+class TabFlowRouter(private val backTabStrategy: BackTabStrategy = BY_SHOW_ORDER) :
+    Router(),
+    TabsRouter,
+    InstanceStateSaver {
+
+    companion object {
+        const val KEY_TABS_HISTORY = "KEY_TABS_HISTORY"
+        const val KEY_SELECTED_TAB = "KEY_SELECTED_TAB"
+    }
 
     private val firstTab = Tab.values().first()
     private val tabsHistory = mutableListOf<Tab>()
@@ -153,5 +164,25 @@ class TabFlowRouter(private val backTabStrategy: BackTabStrategy = BY_SHOW_ORDER
     private fun closeTabFlow() {
         finishChain()
         _selectedTab.value = null
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelableArrayList(KEY_TABS_HISTORY, arrayListOf(*tabsHistory.toTypedArray()))
+        outState.putParcelable(KEY_SELECTED_TAB, _selectedTab.value)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        val savedHistory = savedInstanceState?.getParcelableArrayList<Tab>(KEY_TABS_HISTORY)
+        debug("$savedHistory")
+        if (savedHistory != null && savedHistory.isNotEmpty()) {
+            tabsHistory.clear()
+            tabsHistory.addAll(savedHistory)
+        }
+
+        val savedSelectedTab = savedInstanceState?.getParcelable<Tab>(KEY_SELECTED_TAB)
+        debug("$savedSelectedTab")
+        if (savedSelectedTab != null) {
+            _selectedTab.value = savedSelectedTab
+        }
     }
 }

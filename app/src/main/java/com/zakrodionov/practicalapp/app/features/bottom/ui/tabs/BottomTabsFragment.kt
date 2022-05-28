@@ -8,6 +8,7 @@ import com.google.android.material.navigation.NavigationBarView
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.BaseFragment
 import com.zakrodionov.practicalapp.app.core.navigation.TabFlowNavigator
+import com.zakrodionov.practicalapp.app.core.navigation.TabFlowRouter
 import com.zakrodionov.practicalapp.app.core.navigation.TabHost
 import com.zakrodionov.practicalapp.app.di.getOrCreateFragmentScope
 import com.zakrodionov.practicalapp.app.features.bottom.base.Tab
@@ -31,6 +32,7 @@ class BottomTabsFragment :
     override val binding by viewBinding(FragmentBottomTabsBinding::bind)
     override val statusBarColor: Int = R.color.transparent
 
+    private val tabFlowRouter: TabFlowRouter by inject()
     private val navigatorHolder: NavigatorHolder by inject()
     private val navigator: TabFlowNavigator by lazy {
         TabFlowNavigator(requireActivity(), childFragmentManager, R.id.bottomFragmentContainerView)
@@ -41,6 +43,11 @@ class BottomTabsFragment :
             viewModel.switchTab(Tab.from(item))
             true
         }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        tabFlowRouter.onRestoreInstanceState(savedInstanceState)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -75,6 +82,11 @@ class BottomTabsFragment :
     }
 
     override fun sideEffect(event: BottomTabsEvent) = Unit
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        tabFlowRouter.onSaveInstanceState(outState)
+    }
 
     override fun onRealDestroy() {
         closeScope()
