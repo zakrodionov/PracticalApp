@@ -21,4 +21,6 @@ object Versions {
     const val glideVersion = "4.12.0"
 
     const val junitJupiterVersion = "5.8.2"
+
+    const val venomVersion = "0.5.0"
 }

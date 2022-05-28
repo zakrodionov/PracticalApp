@@ -4,6 +4,7 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
+import com.github.venom.Venom
 import com.zakrodionov.common.extensions.isDebug
 import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.FlipperInitializer
@@ -26,6 +27,8 @@ class App : Application() {
         initTimber()
 
         initDefaultNotificationChannel()
+
+        initVenom()
     }
 
     private fun initKoin() {
@@ -54,5 +57,11 @@ class App : Application() {
                 NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT)
             )
         }
+    }
+
+    private fun initVenom() {
+        val venom = Venom.createInstance(this)
+        venom.initialize()
+        venom.start()
     }
 }

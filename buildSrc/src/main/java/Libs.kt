@@ -9,6 +9,7 @@ import Versions.kotlinVersion
 import Versions.lifecycleVersion
 import Versions.moshiVersion
 import Versions.retrofitVersion
+import Versions.venomVersion
 
 object Libs {
     //AndroidX
@@ -86,6 +87,10 @@ object Libs {
     const val glide_compiler = "com.github.bumptech.glide:compiler:$glideVersion"
 
     const val insetter = "dev.chrisbanes.insetter:insetter:0.6.1"
+
+    //Venom
+    val venom = "com.github.YarikSOffice.Venom:venom:$venomVersion"
+    val venom_no_op = "com.github.YarikSOffice.Venom:venom-no-op:$venomVersion"
 
     //Test
     const val junit_jupiter_api = "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"

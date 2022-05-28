@@ -53,9 +53,11 @@ import Libs.okhttp_logging_interceptor
 import Libs.retrofit
 import Libs.retrofit_moshi
 import Libs.timber
+import Libs.venom
+import Libs.venom_no_op
 import Libs.viewbinding_property_delegate
 import java.io.FileInputStream
-import java.util.Properties
+import java.util.*
 
 plugins {
     id("com.android.application")
@@ -209,4 +211,8 @@ dependencies {
     implementation(cicerone)
 
     implementation(insetter)
+
+    // Venom
+    debugImplementation(venom)
+    releaseImplementation(venom_no_op)
 }
