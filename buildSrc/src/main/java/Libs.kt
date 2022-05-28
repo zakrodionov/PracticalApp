@@ -17,7 +17,7 @@ object Libs {
     const val androidx_material = "com.google.android.material:material:1.5.0"
     const val androidx_core = "androidx.core:core-ktx:1.7.0"
     const val androidx_constraint_layout = "androidx.constraintlayout:constraintlayout:2.1.3"
-    const val androidx_fragment = "androidx.fragment:fragment-ktx:1.4.0"
+    const val androidx_fragment = "androidx.fragment:fragment-ktx:1.4.1"
     const val androidx_swipe_refresh_layout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     const val androidx_security_crypto = "androidx.security:security-crypto:1.0.0"
 
@@ -69,7 +69,7 @@ object Libs {
 
     const val desugar_jdk = "com.android.tools:desugar_jdk_libs:1.1.5"
 
-    const val viewbinding_property_delegate = "com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.4.7"
+    const val viewbinding_property_delegate = "com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.6"
 
     //AdapterDelegates
     const val adapter_delegates = "com.hannesdorfmann:adapterdelegates4:$adapterDelegatesVersion"
