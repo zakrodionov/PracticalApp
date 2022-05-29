@@ -20,6 +20,7 @@ fun Module.bindGlobalNavigation() {
 }
 
 // Отличается от обычного модуля только тем, что дополнительно биндится FlowNavigation(FlowRouter)
+// Так же скоуп доступен дочерним фрагментам, через переопределение KoinScopeComponent
 inline fun <reified T> flowModule(
     createdAtStart: Boolean = false,
     moduleDeclaration: ScopeDSL.() -> Unit,
@@ -45,6 +46,7 @@ fun ScopeDSL.bindFlowNavigation() {
 }
 
 // Отличается от обычного модуля только тем, что дополнительно биндится TabFlowNavigation(TabFlowRouter)
+// Так же скоуп доступен дочерним фрагментам, через переопределение KoinScopeComponent
 inline fun <reified T> tabFlowModule(
     createdAtStart: Boolean = false,
     moduleDeclaration: ScopeDSL.() -> Unit,
