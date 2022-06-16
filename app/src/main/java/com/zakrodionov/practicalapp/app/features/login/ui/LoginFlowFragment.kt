@@ -10,7 +10,6 @@ import com.zakrodionov.common.extensions.setSoftInputModeAdjustPan
 import com.zakrodionov.common.extensions.setSoftInputModeAlwaysVisible
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.BaseFlowFragment
-import com.zakrodionov.practicalapp.app.core.navigation.GlobalRouter
 import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences
 import com.zakrodionov.practicalapp.app.features.bottom.BottomScreens
 import com.zakrodionov.practicalapp.app.features.login.LoginScreens.PhoneScreen

@@ -21,4 +21,3 @@ fun Fragment.getOrCreateFragmentScope(id: String): Scope {
 fun Fragment.getScopeOrNullById(id: String): Scope? = getKoin().getScopeOrNull(id)
 
 fun Fragment.createScopeById(id: String): Scope = getKoin().createScope(id, getScopeName(), null)
-

@@ -13,7 +13,6 @@ import com.zakrodionov.practicalapp.app.features.StubFragment
 import com.zakrodionov.practicalapp.app.features.StubViewModel
 import com.zakrodionov.practicalapp.app.features.login.ui.LoginFlowFragment
 import com.zakrodionov.practicalapp.databinding.FragmentPasswordBinding
-import dev.chrisbanes.insetter.applyInsetter
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
