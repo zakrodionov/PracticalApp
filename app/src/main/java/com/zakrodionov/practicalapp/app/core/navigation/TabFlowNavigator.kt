@@ -64,7 +64,7 @@ class TabFlowNavigator(
             return
         }
 
-        fragmentManager.commitNow {
+        fragmentManager.commit {
             if (newFragment == null) {
                 val frag = tab.getFragment()
                 newFragment = frag

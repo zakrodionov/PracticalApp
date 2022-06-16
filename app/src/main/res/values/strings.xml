@@ -8,6 +8,7 @@
     <string name="stub" translatable="false">Stub</string>
     <string name="posts" translatable="false">Posts</string>
     <string name="about" translatable="false">About</string>
+    <string name="skip">Skip</string>
 
     <string name="logout" translatable="false">Logout</string>
     <string name="login" translatable="false">Login</string>

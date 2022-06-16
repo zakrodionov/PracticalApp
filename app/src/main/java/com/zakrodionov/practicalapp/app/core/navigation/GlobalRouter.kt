@@ -6,9 +6,4 @@ import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.Screen
 
 // Для навигация во всем приложение, обычно полноэкранные фичи. Создается в 1 экземпляре.
-class GlobalRouter : Router() {
-
-    fun newAppRoot(screen: Screen) {
-        executeCommands(BackTo(null), Forward(screen))
-    }
-}
+class GlobalRouter : Router()

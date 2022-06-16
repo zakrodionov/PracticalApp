@@ -36,7 +36,7 @@ class FavoriteFragment : StubFragment(R.layout.fragment_favorite) {
 
         // Test nested flow navigation
         binding.tvNestedFlowNavigation.setOnClickListener {
-            get<FlowRouter>().navigateTo(LoginScreens.LoginFlowScreen())
+            get<FlowRouter>().navigateTo(LoginScreens.LoginFlowScreen(false))
         }
         // Test dialogs
         binding.tvShowCustomCommonDialog.setOnClickListener {
