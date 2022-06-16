@@ -1,4 +1,5 @@
 @file:Suppress("TooManyFunctions")
+
 package com.zakrodionov.common.extensions
 
 import android.content.Context
@@ -15,31 +16,27 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.view.isVisible
 import androidx.core.widget.TextViewCompat
 
 fun TextView.setTextOrHide(value: String?) {
-    if (value.isNullOrEmpty()) {
-        gone()
-    } else {
-        show()
+    isVisible = !value.isNullOrEmpty()
+    if (!value.isNullOrEmpty()) {
         text = value
     }
 }
 
-fun TextView.setTextOrHide(value: String?, predicate: () -> Boolean) {
-    if (value?.isNotEmpty() == true && predicate.invoke()) {
-        show()
-        text = value
+fun TextView.setTextOrHide(predicate: () -> Boolean, value: () -> String?) {
+    if (predicate.invoke()) {
+        setTextOrHide(value.invoke())
     } else {
         gone()
     }
 }
 
 fun TextView.setTextOrHideParent(value: String?, parent: View?) {
-    if (value.isNullOrEmpty()) {
-        parent?.gone()
-    } else {
-        parent?.show()
+    parent?.isVisible = !value.isNullOrEmpty()
+    if (!value.isNullOrEmpty()) {
         text = value
     }
 }
