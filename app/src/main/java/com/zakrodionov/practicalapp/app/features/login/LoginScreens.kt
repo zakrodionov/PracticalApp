@@ -7,8 +7,8 @@ import com.zakrodionov.practicalapp.app.features.login.ui.phone.PhoneFragment
 
 @Suppress("FunctionName")
 object LoginScreens {
-    fun LoginFlowScreen() = FragmentScreen("LoginFlowScreen") {
-        LoginFlowFragment.newInstance()
+    fun LoginFlowScreen(fromLaunchScreen: Boolean) = FragmentScreen("LoginFlowScreen") {
+        LoginFlowFragment.newInstance(fromLaunchScreen)
     }
 
     fun PhoneScreen() = FragmentScreen("PhoneScreen") {

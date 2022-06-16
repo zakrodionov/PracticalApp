@@ -11,8 +11,8 @@ import com.zakrodionov.practicalapp.app.core.navigation.FlowRouter
 import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences
 import com.zakrodionov.practicalapp.app.features.StubFragment
 import com.zakrodionov.practicalapp.app.features.StubViewModel
+import com.zakrodionov.practicalapp.app.features.login.ui.LoginFlowFragment
 import com.zakrodionov.practicalapp.databinding.FragmentPasswordBinding
-import dev.chrisbanes.insetter.applyInsetter
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -26,7 +26,7 @@ class PasswordFragment : StubFragment(R.layout.fragment_password) {
         binding.btnNext.setOnClickListener {
             binding.etPassword.hideKeyboard()
             get<AppPreferences>().isLogged = true
-            viewModel.finishFlow()
+            (parentFragment as? LoginFlowFragment)?.closeLoginFlow()
         }
     }
 
@@ -40,13 +40,7 @@ class PasswordFragment : StubFragment(R.layout.fragment_password) {
         return binding.etPassword.textString != "42"
     }
 
-    override fun applyInsets() {
-        view?.applyInsetter {
-            type(statusBars = true) {
-                margin()
-            }
-        }
-    }
+    override fun applyInsets() = Unit
 }
 
 class PasswordViewModel(private val flowRouter: FlowRouter) : StubViewModel() {

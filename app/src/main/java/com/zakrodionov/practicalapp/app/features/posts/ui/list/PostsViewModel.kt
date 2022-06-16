@@ -22,14 +22,14 @@ class PostsViewModel(
     dispatchersProvider: DispatchersProvider,
 ) : BaseViewModel<PostsState, PostsEvent>(PostsState(), savedStateHandle, dispatchersProvider) {
 
-    private var loadingPostsJob: Job = Job()
+    private var loadingPostsJob: Job = Job().apply { complete() }
 
     init {
-        if (state.posts == null) loadPosts(initial = true)
+        if (state.posts == null) loadPosts()
     }
 
-    fun loadPosts(refresh: Boolean = false, initial: Boolean = false) {
-        if (loadingPostsJob.isCompleted || initial) {
+    fun loadPosts(refresh: Boolean = false) {
+        if (loadingPostsJob.isCompleted) {
             loadingPostsJob = launchIo {
                 if (refresh) reduce { state.copy(page = 0) }
 

@@ -13,7 +13,7 @@ import com.zakrodionov.common.extensions.getCurrentFragment
 import com.zakrodionov.practicalapp.app.core.navigation.AnimationScreen
 import com.zakrodionov.practicalapp.app.core.navigation.BackButtonListener
 import com.zakrodionov.practicalapp.app.core.navigation.BackTabStrategy
-import com.zakrodionov.practicalapp.app.core.navigation.BaseNavigator
+import com.zakrodionov.practicalapp.app.core.navigation.BaseFlowNavigator
 import com.zakrodionov.practicalapp.app.core.navigation.FlowRouter
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy
 import com.zakrodionov.practicalapp.app.core.navigation.ScreenAnimationStrategy.SLIDE_HORIZONTAL
@@ -43,7 +43,7 @@ abstract class BaseFlowFragment(
     private val navigator by lazy { createNavigator() }
 
     protected open fun createNavigator() =
-        object : BaseNavigator(requireActivity(), childFragmentManager, containerId) {
+        object : BaseFlowNavigator(requireActivity(), childFragmentManager, containerId) {
             override fun activityBack() {
                 onBackPressedCallback.handleOnBackPressed()
             }

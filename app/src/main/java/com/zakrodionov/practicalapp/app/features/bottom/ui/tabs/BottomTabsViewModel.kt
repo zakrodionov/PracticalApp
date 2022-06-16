@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
 import com.zakrodionov.practicalapp.app.core.navigation.TabFlowRouter
 import com.zakrodionov.practicalapp.app.features.bottom.base.Tab
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -28,7 +29,12 @@ class BottomTabsViewModel(
     }
 
     private fun initTabs() {
-        switchTab(state.currentTab)
+        launch {
+            // При смене экрана на BottomTabsFragment
+            // наблюдается лаг в TabFlowNavigator -> newFragment -> add. Пока такой фикс(
+            delay(200)
+            switchTab(state.currentTab)
+        }
     }
 
     fun switchTab(tab: Tab) {

@@ -44,10 +44,10 @@ class AboutViewModel(
     }
 
     private fun logout() {
-        appPreferences.isLogged = false
+        appPreferences.clear()
     }
 
     private fun navigateToLoginFlow() {
-        flowRouter.externalNavigateTo(LoginFlowScreen())
+        flowRouter.externalNavigateTo(LoginFlowScreen(false))
     }
 }
