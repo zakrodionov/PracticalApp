@@ -11,14 +11,14 @@ import com.zakrodionov.common.extensions.debug
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun Tab.TabContent(startScreen: Screen) {
+fun Tab.TabContent(vararg startScreen: Screen) {
     val tabTitle = options.title
     OnLaunched(
         block = { debug("Navigator - Start tab $tabTitle") },
         onDispose = { debug("Navigator - Dispose tab $tabTitle") }
     )
 
-    Navigator(screen = startScreen) { navigator ->
+    Navigator(screens = startScreen.toList()) { navigator ->
         SlideTransition(navigator) { screen ->
             screen.Content()
         }
