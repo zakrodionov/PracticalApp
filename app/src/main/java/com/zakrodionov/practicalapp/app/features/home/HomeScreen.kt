@@ -17,7 +17,9 @@ import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
 import com.zakrodionov.practicalapp.app.ui.theme.BottomBarColor
 
-class HomeScreen : BaseScreen() {
+class HomeScreen(
+    private val tab: Tab = PostsTab
+) : BaseScreen() {
 
     override fun statusBarColor(): Color = Color.Transparent
 
@@ -25,7 +27,7 @@ class HomeScreen : BaseScreen() {
     override fun Content() {
         super.Content()
 
-        TabNavigator(PostsTab) {
+        TabNavigator(tab) {
             Scaffold(
                 content = {
                     Box(modifier = Modifier.padding(it)) {
@@ -35,7 +37,7 @@ class HomeScreen : BaseScreen() {
                 bottomBar = {
                     BottomNavigation(backgroundColor = BottomBarColor) {
                         TabNavigationItem(PostsTab)
-                        TabNavigationItem(FavoritesTab)
+                        TabNavigationItem(FavoritesTab())
                         TabNavigationItem(AboutTab)
                     }
                 }
