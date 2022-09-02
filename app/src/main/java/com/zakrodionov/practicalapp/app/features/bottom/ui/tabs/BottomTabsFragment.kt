@@ -62,6 +62,7 @@ class BottomTabsFragment :
         if (!initialScreen.isNullOrEmpty() && savedInstanceState == null && !initialScreenHandled) {
             when (initialScreen) {
                 "favorite" -> viewModel.switchTab(Tab.FAVORITE)
+                "about" -> viewModel.switchTab(Tab.ABOUT)
             }
         }
         initialScreenHandled = true
