@@ -31,12 +31,12 @@ class FirebaseMsgService : FirebaseMessagingService() {
 
         val intent = Intent(this, RootActivity::class.java).apply {
             putExtra(ARG_PUSH_DATA, screen)
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
 
         val pendingIntent = PendingIntent.getActivity(
             this, 0, intent,
-            PendingIntent.FLAG_ONE_SHOT
+            PendingIntent.FLAG_UPDATE_CURRENT
         )
 
         val channelId = getString(R.string.default_notification_channel_id)
