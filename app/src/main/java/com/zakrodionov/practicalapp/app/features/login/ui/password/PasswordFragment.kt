@@ -3,6 +3,8 @@ package com.zakrodionov.practicalapp.app.features.login.ui.password
 import android.os.Bundle
 import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.firebase.messaging.FirebaseMessaging
+import com.zakrodionov.common.extensions.debug
 import com.zakrodionov.common.extensions.hideKeyboard
 import com.zakrodionov.common.extensions.showKeyboard
 import com.zakrodionov.common.extensions.textString
@@ -26,6 +28,18 @@ class PasswordFragment : StubFragment(R.layout.fragment_password) {
         binding.btnNext.setOnClickListener {
             binding.etPassword.hideKeyboard()
             get<AppPreferences>().isLogged = true
+            getFirebaseToken()
+        }
+    }
+
+    private fun getFirebaseToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                debug("PasswordFragment - fetching FCM registration token failed - ${task.exception}")
+            }
+
+            debug("PasswordFragment - token - ${task.result}")
+
             (parentFragment as? LoginFlowFragment)?.closeLoginFlow()
         }
     }
@@ -43,8 +57,4 @@ class PasswordFragment : StubFragment(R.layout.fragment_password) {
     override fun applyInsets() = Unit
 }
 
-class PasswordViewModel(private val flowRouter: FlowRouter) : StubViewModel() {
-    fun finishFlow() {
-        flowRouter.finishFlow()
-    }
-}
+class PasswordViewModel(private val flowRouter: FlowRouter) : StubViewModel()

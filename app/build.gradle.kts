@@ -66,6 +66,7 @@ plugins {
     id("kotlin-parcelize")
     id("de.mannodermaus.android-junit5")
     id("com.starter.easylauncher").version("5.0.0")
+    id("com.google.gms.google-services")
     id(Plugins.detekt_plugin)
     id(Plugins.ktlint_plugin)
 }
@@ -215,4 +216,9 @@ dependencies {
     // Venom
     debugImplementation(venom)
     releaseImplementation(venom_no_op)
+
+    // TODO Firebase
+    implementation(platform("com.google.firebase:firebase-bom:30.3.2"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-messaging")
 }

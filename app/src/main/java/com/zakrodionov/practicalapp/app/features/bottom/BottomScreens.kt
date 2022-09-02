@@ -5,7 +5,7 @@ import com.zakrodionov.practicalapp.app.features.bottom.ui.tabs.BottomTabsFragme
 
 @Suppress("FunctionName")
 object BottomScreens {
-    fun BottomTabsScreen() = FragmentScreen("BottomTabsScreen") {
-        BottomTabsFragment.newInstance()
+    fun BottomTabsScreen(initialScreen: String = "") = FragmentScreen("BottomTabsScreen") {
+        BottomTabsFragment.newInstance(initialScreen)
     }
 }

@@ -2,6 +2,7 @@ package com.zakrodionov.practicalapp.app.features.bottom.ui.tabs
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.google.android.material.navigation.NavigationBarView
@@ -21,7 +22,12 @@ class BottomTabsFragment :
     BaseFragment<BottomTabsState, BottomTabsEvent>(R.layout.fragment_bottom_tabs), TabHost {
 
     companion object {
-        fun newInstance() = BottomTabsFragment()
+        const val ARG_INITIAL_SCREEN = "ARG_INITIAL_SCREEN"
+        const val KEY_INITIAL_SCREEN_HANDLED = "KEY_INITIAL_SCREEN_HANDLED"
+
+        fun newInstance(initialScreen: String) = BottomTabsFragment().apply {
+            arguments = bundleOf(ARG_INITIAL_SCREEN to initialScreen)
+        }
     }
 
     override val scope: Scope by lazy {
@@ -44,9 +50,21 @@ class BottomTabsFragment :
             true
         }
 
+    private var initialScreenHandled = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         tabFlowRouter.onRestoreInstanceState(savedInstanceState)
+
+        // TODO deeplink test
+        val initialScreen = arguments?.getString(ARG_INITIAL_SCREEN)
+        initialScreenHandled = savedInstanceState?.getBoolean(KEY_INITIAL_SCREEN_HANDLED) ?: false
+        if (!initialScreen.isNullOrEmpty() && savedInstanceState == null && !initialScreenHandled) {
+            when (initialScreen) {
+                "favorite" -> viewModel.switchTab(Tab.FAVORITE)
+            }
+        }
+        initialScreenHandled = true
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -86,6 +104,7 @@ class BottomTabsFragment :
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         tabFlowRouter.onSaveInstanceState(outState)
+        outState.putBoolean(KEY_INITIAL_SCREEN_HANDLED, initialScreenHandled)
     }
 
     override fun onRealDestroy() {
