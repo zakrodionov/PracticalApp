@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 // Если нужно чтоб state переживал "убийство" процесса приложения
@@ -45,8 +46,8 @@ abstract class BaseViewModel<STATE : Parcelable, EVENT : Any>(
         setSavedStateProvider()
     }
 
-    fun reduce(state: () -> STATE) {
-        _stateFlow.value = state()
+    fun update(function: (prevState: STATE) -> STATE) {
+        _stateFlow.update(function)
     }
 
     protected suspend fun postEvent(event: EVENT) {

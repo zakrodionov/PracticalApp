@@ -31,25 +31,33 @@ class PostsViewModel(
     fun loadPosts(refresh: Boolean = false) {
         if (loadingPostsJob.isCompleted) {
             loadingPostsJob = launchIo {
-                if (refresh) reduce { state.copy(page = 0) }
+                if (refresh) update { state.copy(page = 0) }
 
                 if (state.page > 0) {
-                    reduce { state.copy(posts = state.posts?.addLoadingItem()) }
+                    update { it.copy(posts = it.posts?.addLoadingItem()) }
                 } else if (!refresh) {
-                    reduce { state.copy(isLoading = true) }
+                    update { it.copy(isLoading = true) }
                 }
 
                 postRepository
                     .getPosts(state.page)
                     .onSuccess { posts ->
-                        val newPosts = if (refresh) posts else state.posts.orEmpty().plus(posts)
-                        reduce { state.copy(posts = newPosts, error = null, page = state.increasePage()) }
+                        update {
+                            val newPosts = if (refresh) posts else it.posts.orEmpty().plus(posts)
+                            it.copy(posts = newPosts, error = null, page = it.increasePage())
+                        }
                     }
-                    .onFailure {
-                        reduce { state.copy(error = it) }
+                    .onFailure { error ->
+                        update {
+                            if (refresh) {
+                                it.copy(page = 0, posts = emptyList(), error = error)
+                            } else {
+                                it.copy(error = error)
+                            }
+                        }
                     }
-                reduce { state.copy(posts = state.posts?.removeLoadingItem(), isLoading = false) }
             }
+            update { it.copy(posts = it.posts?.removeLoadingItem(), isLoading = false) }
         }
     }
 

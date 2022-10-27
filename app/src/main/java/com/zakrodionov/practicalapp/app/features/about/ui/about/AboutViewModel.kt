@@ -11,23 +11,23 @@ import com.zakrodionov.practicalapp.app.features.login.LoginScreens.LoginFlowScr
 class AboutViewModel(
     savedStateHandle: SavedStateHandle,
     private val appPreferences: AppPreferences,
-    private val flowRouter: FlowRouter
+    private val flowRouter: FlowRouter,
 ) : BaseViewModel<AboutState, AboutEvent>(AboutState(), savedStateHandle) {
 
     init {
-        getIsLogged()
+        updateUserIsLogged()
     }
 
     private val settingsListener = preferenceListener(KEY_IS_LOGGED) {
-        getIsLogged()
+        updateUserIsLogged()
     }
 
     init {
         subscribePreferences()
     }
 
-    private fun getIsLogged() {
-        reduce { state.copy(isLogged = appPreferences.isLogged) }
+    private fun updateUserIsLogged() {
+        update { it.copy(isLogged = appPreferences.isLogged) }
     }
 
     private fun subscribePreferences() {

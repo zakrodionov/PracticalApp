@@ -26,15 +26,15 @@ class PostDetailViewModel(
     }
 
     fun loadPostDetails() = launchIo {
-        reduce { state.copy(isLoading = true) }
+        update { it.copy(isLoading = true) }
         postRepository
             .getPost(args.postId)
             .onSuccess { post ->
-                reduce { state.copy(post = post, error = null) }
+                update { it.copy(post = post, error = null) }
             }
-            .onFailure {
-                reduce { state.copy(error = it) }
+            .onFailure { error ->
+                update { it.copy(error = error) }
             }
-        reduce { state.copy(isLoading = false) }
+        update { it.copy(isLoading = false) }
     }
 }

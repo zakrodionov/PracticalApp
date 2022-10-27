@@ -22,8 +22,8 @@ class BottomTabsViewModel(
 
     private fun observeSelectedTab() {
         tabFlowRouter.selectedTab
-            .onEach {
-                reduce { state.copy(currentTab = it) }
+            .onEach { tab ->
+                update { it.copy(currentTab = tab) }
             }
             .launchIn(viewModelScope)
     }
