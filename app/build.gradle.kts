@@ -47,7 +47,7 @@ plugins {
     id("kotlin-kapt")
     id("kotlin-parcelize")
     id("de.mannodermaus.android-junit5")
-    id("com.starter.easylauncher").version("5.0.1")
+    id("com.starter.easylauncher").version("6.0.0")
     id(Plugins.detekt_plugin)
     id(Plugins.ktlint_plugin)
 }
@@ -182,6 +182,7 @@ dependencies {
     implementation(Libs.compose_material_icons_extended)
     androidTestImplementation(Libs.compose_ui_test)
 
+    implementation(Libs.androidx_activity)
     implementation(Libs.androidx_activity_compose)
     implementation(Libs.androidx_navigation_compose)
 

@@ -13,12 +13,13 @@ import Versions.retrofitVersion
 
 object Libs {
     //AndroidX
-    const val androidx_app_compat = "androidx.appcompat:appcompat:1.4.1"
-    const val androidx_material = "com.google.android.material:material:1.5.0"
-    const val androidx_core = "androidx.core:core-ktx:1.7.0"
+    const val androidx_app_compat = "androidx.appcompat:appcompat:1.6.0-rc01"
+    const val androidx_material = "com.google.android.material:material:1.7.0"
+    const val androidx_core = "androidx.core:core-ktx:1.9.0"
     const val androidx_security_crypto = "androidx.security:security-crypto:1.0.0"
-    const val androidx_activity_compose = "androidx.activity:activity-compose:1.4.0"
-    const val androidx_navigation_compose = "androidx.navigation:navigation-compose:2.4.2"
+    const val androidx_activity = "androidx.activity:activity-ktx:1.6.1"
+    const val androidx_activity_compose = "androidx.activity:activity-compose:1.6.1"
+    const val androidx_navigation_compose = "androidx.navigation:navigation-compose:$lifecycleVersion"
 
     //Kotlin
     const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
@@ -30,7 +31,7 @@ object Libs {
     const val retrofit_moshi = "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
     const val moshi = "com.squareup.moshi:moshi:$moshiVersion"
     const val moshi_codegen = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
-    const val okhttp_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:4.9.1"
+    const val okhttp_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:4.10.0"
 
     //Lifecycle
     const val lifecycle_extensions = "androidx.lifecycle:lifecycle-extensions:2.2.0"
@@ -51,7 +52,7 @@ object Libs {
 
     const val timber = "com.jakewharton.timber:timber:5.0.1"
 
-    const val leak_canary = "com.squareup.leakcanary:leakcanary-android:2.8.1"
+    const val leak_canary = "com.squareup.leakcanary:leakcanary-android:2.10"
 
     // Hyperion
     const val hyperion_core = "com.willowtreeapps.hyperion:hyperion-core:$hyperionVersion"
@@ -65,9 +66,9 @@ object Libs {
     const val hyperion_shared_preferences = "com.willowtreeapps.hyperion:hyperion-shared-preferences:$hyperionVersion"
     const val hyperion_timber = "com.willowtreeapps.hyperion:hyperion-timber:$hyperionVersion"
 
-    const val okhttp = "com.squareup.okhttp3:okhttp:4.9.0"
+    const val okhttp = "com.squareup.okhttp3:okhttp:4.10.0"
 
-    const val desugar_jdk = "com.android.tools:desugar_jdk_libs:1.1.5"
+    const val desugar_jdk = "com.android.tools:desugar_jdk_libs:1.2.2"
 
     // Compose
     const val compose_ui = "androidx.compose.ui:ui:$composeVersion"

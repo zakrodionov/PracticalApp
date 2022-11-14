@@ -146,9 +146,9 @@ class PickFiles(private val allowMultiple: Boolean = false) : ActivityResultCont
         val defaultMimeTypes = arrayOf("image/*", "application/pdf")
     }
 
-    override fun createIntent(context: Context, mimeTypes: Array<String>) = fileChooserIntent(mimeTypes, allowMultiple)
+    override fun createIntent(context: Context, input: Array<String>) = fileChooserIntent(input, allowMultiple)
 
-    override fun parseResult(resultCode: Int, result: Intent?): List<Uri> {
-        return obtainFilesResult(resultCode, result)
+    override fun parseResult(resultCode: Int, intent: Intent?): List<Uri> {
+        return obtainFilesResult(resultCode, intent)
     }
 }

@@ -9,6 +9,6 @@ import java.util.Locale
 val currentLocale: Locale get() = Locale.getDefault()
 
 // Default Locale of your phone
-val currentDeviceLocale: Locale get() = ConfigurationCompat.getLocales(Resources.getSystem().configuration)[0]
+val currentDeviceLocale: Locale? get() = ConfigurationCompat.getLocales(Resources.getSystem().configuration)[0]
 
 val currentZoneId: ZoneId get() = ZoneId.systemDefault()
