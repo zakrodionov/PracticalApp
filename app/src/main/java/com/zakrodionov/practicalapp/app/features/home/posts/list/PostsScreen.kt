@@ -3,9 +3,11 @@ package com.zakrodionov.practicalapp.app.features.home.posts.list
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -25,7 +27,6 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import coil.compose.rememberAsyncImagePainter
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import com.zakrodionov.common.extensions.edgeToEdgeStatusBarPadding
 import com.zakrodionov.common.ui.LoadingItem
 import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
 import com.zakrodionov.practicalapp.app.domain.model.Posts.Post
@@ -67,7 +68,8 @@ class PostsScreen : BaseScreen() {
                 LazyColumn(
                     state = listState,
                     verticalArrangement = Arrangement.spacedBy(15.dp), // Расстояние между айтемами
-                    contentPadding = edgeToEdgeStatusBarPadding(20.dp, 20.dp) // Отступы всего LazyColumn, + insets
+                    contentPadding = PaddingValues(all = 20.dp), // Отступы всего LazyColumn
+                    modifier = Modifier.statusBarsPadding() // TODO
                 ) {
                     items(state.posts.orEmpty(), key = { it.itemId }) { item ->
                         when (item) {

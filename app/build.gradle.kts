@@ -191,7 +191,6 @@ dependencies {
     implementation(Libs.coil_compose)
 
     implementation(Libs.accompanist_swipe_refresh)
-    implementation(Libs.accompanist_insets)
     implementation(Libs.accompanist_system_ui_controller)
 
     // Todo

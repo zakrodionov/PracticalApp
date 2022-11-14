@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
-import com.google.accompanist.insets.ProvideWindowInsets
 import com.zakrodionov.common.extensions.disableFitsSystemWindows
 import com.zakrodionov.practicalapp.app.features.notifications.FirebaseMsgService.Companion.ARG_PUSH_DATA
 import com.zakrodionov.practicalapp.app.ui.theme.PracticalAppTheme
@@ -24,9 +23,7 @@ class RootActivity : ComponentActivity() {
 
         setContent {
             PracticalAppTheme {
-                ProvideWindowInsets {
-                    RootScreen()
-                }
+                RootScreen()
             }
         }
 
