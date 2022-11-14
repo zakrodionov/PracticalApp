@@ -47,6 +47,7 @@ plugins {
     id("kotlin-kapt")
     id("kotlin-parcelize")
     id("de.mannodermaus.android-junit5")
+    id("com.google.gms.google-services")
     // id("com.starter.easylauncher").version("6.0.0") TODO fix crash in new version
     id(Plugins.detekt_plugin)
     id(Plugins.ktlint_plugin)
@@ -198,4 +199,9 @@ dependencies {
     implementation("cafe.adriel.voyager:voyager-tab-navigator:${Versions.voyagerVersion}")
     implementation("cafe.adriel.voyager:voyager-transitions:${Versions.voyagerVersion}")
     implementation("cafe.adriel.voyager:voyager-androidx:${Versions.voyagerVersion}")
+
+    // TODO Firebase
+    implementation(platform("com.google.firebase:firebase-bom:30.3.2"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-messaging")
 }
