@@ -47,7 +47,7 @@ plugins {
     id("kotlin-kapt")
     id("kotlin-parcelize")
     id("de.mannodermaus.android-junit5")
-    id("com.starter.easylauncher").version("6.0.0")
+    // id("com.starter.easylauncher").version("6.0.0") TODO fix crash in new version
     id(Plugins.detekt_plugin)
     id(Plugins.ktlint_plugin)
 }

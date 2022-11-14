@@ -1,6 +1,5 @@
 package com.zakrodionov.practicalapp.app.features.home.posts.list
 
-import androidx.lifecycle.SavedStateHandle
 import com.zakrodionov.common.models.Loading
 import com.zakrodionov.common.ui.addLoadingItem
 import com.zakrodionov.common.ui.removeLoadingItem
@@ -12,10 +11,10 @@ import com.zakrodionov.practicalapp.app.domain.repositories.PostRepository
 import kotlinx.coroutines.Job
 
 class PostsViewModel(
-    savedStateHandle: SavedStateHandle,
+    // savedStateHandle: SavedStateHandle,
     private val postRepository: PostRepository,
     dispatchersProvider: DispatchersProvider,
-) : BaseViewModel<PostsState, PostsEvent>(PostsState(), savedStateHandle, dispatchersProvider) {
+) : BaseViewModel<PostsState, PostsEvent>(PostsState(), null, dispatchersProvider) {
 
     private var loadingPostsJob: Job = Job()
 
