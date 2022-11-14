@@ -4,10 +4,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.safeContent
+import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -27,6 +30,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import coil.compose.rememberAsyncImagePainter
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import com.zakrodionov.common.ui.EndlessScrollListener
 import com.zakrodionov.common.ui.LoadingItem
 import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
 import com.zakrodionov.practicalapp.app.domain.model.Posts.Post
@@ -36,8 +40,6 @@ import com.zakrodionov.practicalapp.app.ui.components.Lce
 import com.zakrodionov.practicalapp.app.ui.components.LoadingItem
 import org.koin.androidx.compose.getViewModel
 import kotlin.random.Random
-
-const val PAGINATION_THRESHOLD = 5
 
 class PostsScreen : BaseScreen() {
 
@@ -57,11 +59,9 @@ class PostsScreen : BaseScreen() {
                 state = rememberSwipeRefreshState(state.loading.fromSwipeRefresh),
                 onRefresh = { viewModel.loadPosts(refresh = true) },
             ) {
+
                 val listState = rememberLazyListState()
-                if (listState.layoutInfo.totalItemsCount != 0 &&
-                    listState.firstVisibleItemIndex + PAGINATION_THRESHOLD >
-                    listState.layoutInfo.totalItemsCount
-                ) {
+                EndlessScrollListener(listState = listState) {
                     viewModel.loadPosts()
                 }
 
@@ -69,8 +69,10 @@ class PostsScreen : BaseScreen() {
                     state = listState,
                     verticalArrangement = Arrangement.spacedBy(15.dp), // Расстояние между айтемами
                     contentPadding = PaddingValues(all = 20.dp), // Отступы всего LazyColumn
-                    modifier = Modifier.statusBarsPadding() // TODO
                 ) {
+                    item {
+                        Spacer(modifier = Modifier.windowInsetsTopHeight(WindowInsets.safeContent))
+                    }
                     items(state.posts.orEmpty(), key = { it.itemId }) { item ->
                         when (item) {
                             is Post -> PostItem(item) {
