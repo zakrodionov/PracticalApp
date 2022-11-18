@@ -57,10 +57,7 @@ class ConnectionServiceImpl(context: Context, dispatcher: CoroutineDispatcher) :
 
     override fun observeConnectionState(): Flow<Boolean> = connectionFlow
 
-    override fun hasConnection(): Boolean {
-        val connectedNetwork = connectivityManager?.isCurrentlyConnected()
-        return connectedNetwork != null
-    }
+    override fun hasConnection(): Boolean = connectivityManager.isCurrentlyConnected()
 
     private fun ConnectivityManager?.isCurrentlyConnected() = when (this) {
         null -> false
