@@ -8,13 +8,18 @@ import android.media.RingtoneManager
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.squareup.moshi.Moshi
 import com.zakrodionov.common.extensions.debug
+import com.zakrodionov.common.extensions.fromJson
 import com.zakrodionov.common.extensions.getStringField
 import com.zakrodionov.common.extensions.safelyParseJson
 import com.zakrodionov.practicalapp.R
+import com.zakrodionov.practicalapp.app.features.root.DeepLinkNavigation
 import com.zakrodionov.practicalapp.app.features.root.RootActivity
 
 class FirebaseMsgService : FirebaseMessagingService() {
+
+    private val moshi = Moshi.Builder().build()
 
     companion object {
         const val ARG_PUSH_DATA = "ARG_PUSH_DATA"
@@ -27,10 +32,10 @@ class FirebaseMsgService : FirebaseMessagingService() {
 
         val title = data.getStringField("title")
         val message = data.getStringField("text")
-        val screen = data.getStringField("screen")
+        val screen = data.getStringField("deepLinkNavigation")
 
         val intent = Intent(this, RootActivity::class.java).apply {
-            putExtra(ARG_PUSH_DATA, screen)
+            putExtra(ARG_PUSH_DATA, screen.fromJson<DeepLinkNavigation>(moshi))
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
 

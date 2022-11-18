@@ -11,13 +11,13 @@ import com.zakrodionov.practicalapp.app.core.navigation.Flow
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun Flow.FlowContent(startScreen: Screen) {
+fun Flow.FlowContent(vararg startScreen: Screen) {
     OnLaunched(
         block = { debug("Navigator - Start flow $title") },
         onDispose = { debug("Navigator - Dispose flow $title") }
     )
 
-    Navigator(screen = startScreen) { navigator ->
+    Navigator(screens = startScreen.toList()) { navigator ->
         SlideTransition(navigator) { screen ->
             screen.Content()
         }

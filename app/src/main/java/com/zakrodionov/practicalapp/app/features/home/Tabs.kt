@@ -7,7 +7,7 @@ import androidx.compose.material.icons.filled.More
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
-import cafe.adriel.voyager.androidx.AndroidScreen
+import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.zakrodionov.practicalapp.app.features.home.about.AboutScreen
@@ -15,7 +15,7 @@ import com.zakrodionov.practicalapp.app.features.home.favorite.FavoriteScreen
 import com.zakrodionov.practicalapp.app.features.home.posts.list.PostsScreen
 import com.zakrodionov.practicalapp.app.ui.components.TabContent
 
-object PostsTab : Tab {
+data class PostsTab(private val innerScreens: List<Screen> = listOf(PostsScreen())) : Tab {
     override val options: TabOptions
         @Composable
         get() {
@@ -25,11 +25,11 @@ object PostsTab : Tab {
 
     @Composable
     override fun Content() {
-        TabContent(PostsScreen())
+        TabContent(startScreen = innerScreens.toTypedArray())
     }
 }
 
-data class FavoritesTab(private val deepLinkScreens: List<AndroidScreen> = emptyList()) : Tab {
+data class FavoritesTab(private val innerScreens: List<Screen> = listOf(FavoriteScreen())) : Tab {
     override val options: TabOptions
         @Composable
         get() {
@@ -41,11 +41,11 @@ data class FavoritesTab(private val deepLinkScreens: List<AndroidScreen> = empty
 
     @Composable
     override fun Content() {
-        TabContent(startScreen = (listOf(FavoriteScreen()) + deepLinkScreens).toTypedArray())
+        TabContent(startScreen = innerScreens.toTypedArray())
     }
 }
 
-object AboutTab : Tab {
+data class AboutTab(private val innerScreens: List<Screen> = listOf(AboutScreen())) : Tab {
     override val options: TabOptions
         @Composable
         get() {
@@ -55,6 +55,6 @@ object AboutTab : Tab {
 
     @Composable
     override fun Content() {
-        TabContent(AboutScreen())
+        TabContent(startScreen = innerScreens.toTypedArray())
     }
 }

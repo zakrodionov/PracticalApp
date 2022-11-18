@@ -18,7 +18,7 @@ import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
 import com.zakrodionov.practicalapp.app.ui.theme.BottomBarColor
 
 class HomeScreen(
-    private val tab: Tab = PostsTab
+    private val tab: Tab = PostsTab(),
 ) : BaseScreen() {
 
     override fun statusBarColor(): Color = Color.Transparent
@@ -36,9 +36,9 @@ class HomeScreen(
                 },
                 bottomBar = {
                     BottomNavigation(backgroundColor = BottomBarColor) {
-                        TabNavigationItem(PostsTab)
+                        TabNavigationItem(PostsTab())
                         TabNavigationItem(FavoritesTab())
-                        TabNavigationItem(AboutTab)
+                        TabNavigationItem(AboutTab())
                     }
                 }
             )

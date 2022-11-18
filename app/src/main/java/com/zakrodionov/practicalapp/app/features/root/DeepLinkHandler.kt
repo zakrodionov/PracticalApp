@@ -1,10 +1,12 @@
 package com.zakrodionov.practicalapp.app.features.root
 
+import android.os.Parcelable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.Navigator
+import com.squareup.moshi.JsonClass
 import com.zakrodionov.practicalapp.app.core.navigation.LocalGlobalNavigator
 import com.zakrodionov.practicalapp.app.features.home.FavoritesTab
 import com.zakrodionov.practicalapp.app.features.home.HomeScreen
@@ -12,16 +14,38 @@ import com.zakrodionov.practicalapp.app.features.home.posts.detail.ArgsPostDetai
 import com.zakrodionov.practicalapp.app.features.home.posts.detail.PostDetailsScreen
 import com.zakrodionov.practicalapp.app.features.home.posts.list.PostsScreen
 import com.zakrodionov.practicalapp.app.features.login.LoginFlow
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+@JsonClass(generateAdapter = true)
+data class DeepLinkNavigation(
+    val feature: NavigationScreen = NavigationScreen(),
+    val screens: List<NavigationScreen> = emptyList(),
+) : Parcelable {
+
+    companion object {
+        val empty = DeepLinkNavigation()
+    }
+
+    val isEmpty: Boolean
+        get() = this == empty
+}
+
+@Parcelize
+@JsonClass(generateAdapter = true)
+data class NavigationScreen(
+    val name: String = "",
+    val argument: String = "",
+) : Parcelable
 
 object DeepLinkHandler {
 
     @Composable
-    fun handleDeepLink(deepLinkScreens: List<String>) {
-        if (deepLinkScreens.isEmpty()) {
+    fun HandleDeepLink(deepLinkNavigation: DeepLinkNavigation) {
+        if (deepLinkNavigation.isEmpty) {
             RootNavigator(startScreen = HomeScreen())
         } else {
-            // TODO
-            RootNavigator(startScreen = HomeScreen(FavoritesTab(listOf(LoginFlow()))))
+            RootNavigator(startScreen = deepLinkNavigation.parseNavigation())
         }
     }
 
@@ -34,11 +58,16 @@ object DeepLinkHandler {
             }
         }
 
-    private fun String.getScreen(): Screen? = when (this) {
-        "tab_favorites" -> FavoritesTab()
-        "flow_login" -> LoginFlow()
+    private fun DeepLinkNavigation.parseNavigation(): Screen {
+        val innerScreens = screens.mapNotNull { it.getScreen() }
+        return feature.getScreen(innerScreens) ?: HomeScreen()
+    }
+
+    private fun NavigationScreen.getScreen(innerScreens: List<Screen> = emptyList()): Screen? = when (name) {
+        "flow_favorites" -> FavoritesTab(innerScreens)
+        "flow_login" -> LoginFlow(innerScreens)
         "screen_posts" -> PostsScreen()
-        "screen_post_detail" -> PostDetailsScreen(ArgsPostDetail(""))
+        "screen_post_detail" -> PostDetailsScreen(ArgsPostDetail(argument))
         else -> null
     }
 }
