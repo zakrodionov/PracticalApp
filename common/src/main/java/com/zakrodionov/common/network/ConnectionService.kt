@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
+import android.os.Build
 import androidx.core.content.getSystemService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -57,12 +58,15 @@ class ConnectionServiceImpl(context: Context, dispatcher: CoroutineDispatcher) :
     override fun observeConnectionState(): Flow<Boolean> = connectionFlow
 
     override fun hasConnection(): Boolean {
-        val connectedNetwork = connectivityManager?.allNetworks?.firstOrNull { it.isConnected() }
+        val connectedNetwork = connectivityManager?.isCurrentlyConnected()
         return connectedNetwork != null
     }
 
-    private fun Network.isConnected(): Boolean {
-        val networkCapabilities = connectivityManager?.getNetworkCapabilities(this)
-        return networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) ?: false
+    private fun ConnectivityManager?.isCurrentlyConnected() = when (this) {
+        null -> false
+        else -> activeNetwork
+            ?.let(::getNetworkCapabilities)
+            ?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+            ?: false
     }
 }
