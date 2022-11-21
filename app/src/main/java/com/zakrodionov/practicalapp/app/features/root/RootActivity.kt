@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import com.zakrodionov.common.extensions.disableFitsSystemWindows
+import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.features.notifications.FirebaseMsgService.Companion.ARG_PUSH_DATA
 import com.zakrodionov.practicalapp.app.ui.theme.PracticalAppTheme
 
@@ -16,6 +17,8 @@ class RootActivity : ComponentActivity() {
     private val deepLinkNavigation: MutableState<DeepLinkNavigation> = mutableStateOf(DeepLinkNavigation.empty)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_PracticalApp_Main)
+
         super.onCreate(savedInstanceState)
 
         window?.disableFitsSystemWindows()

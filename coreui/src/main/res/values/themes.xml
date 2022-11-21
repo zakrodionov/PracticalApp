@@ -3,10 +3,17 @@
 
     <style name="Theme.Material.DayNight.NoActionBar" parent="@android:style/Theme.Material.Light.NoActionBar" />
 
-    <style name="Theme.PracticalApp" parent="Theme.Material.DayNight.NoActionBar">
+    <style name="Theme.PracticalApp" parent="Theme.Material.DayNight.NoActionBar" />
+
+    <style name="Theme.PracticalApp.Main">
         <item name="android:colorPrimary">#ff00ff</item>
         <item name="android:colorAccent">#ff00ff</item>
         <item name="android:statusBarColor">@color/transparent</item>
+    </style>
+
+    <!-- The launcher theme. It sets the main window background to the launch_screen drawable -->
+    <style name="Theme.PracticalApp.Launcher">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
     </style>
 
 </resources>
