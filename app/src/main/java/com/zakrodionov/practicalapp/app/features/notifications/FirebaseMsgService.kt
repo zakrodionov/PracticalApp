@@ -11,8 +11,7 @@ import com.google.firebase.messaging.RemoteMessage
 import com.squareup.moshi.Moshi
 import com.zakrodionov.common.extensions.debug
 import com.zakrodionov.common.extensions.fromJson
-import com.zakrodionov.common.extensions.getStringField
-import com.zakrodionov.common.extensions.safelyParseJson
+import com.zakrodionov.common.extensions.tryOrReturnDefault
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.features.root.DeepLinkNavigation
 import com.zakrodionov.practicalapp.app.features.root.RootActivity
@@ -28,20 +27,23 @@ class FirebaseMsgService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         debug("AppFirebaseMessagingService - onMessageReceived - $remoteMessage")
 
-        val data = remoteMessage.data["data"].safelyParseJson()
+        val title = remoteMessage.data["title"]
+        val message = remoteMessage.data["message"]
+        val deepLinks = remoteMessage.data["deepLinkNavigation"]
 
-        val title = data.getStringField("title")
-        val message = data.getStringField("text")
-        val screen = data.getStringField("deepLinkNavigation")
+        val deepLinkNavigation = tryOrReturnDefault(
+            block = { deepLinks?.fromJson(moshi) },
+            default = { DeepLinkNavigation.empty }
+        )
 
         val intent = Intent(this, RootActivity::class.java).apply {
-            putExtra(ARG_PUSH_DATA, screen.fromJson<DeepLinkNavigation>(moshi))
+            putExtra(ARG_PUSH_DATA, deepLinkNavigation)
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
 
         val pendingIntent = PendingIntent.getActivity(
             this, 0, intent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
 
         val channelId = getString(R.string.default_notification_channel_id)

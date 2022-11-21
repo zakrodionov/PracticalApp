@@ -14,6 +14,7 @@ import com.zakrodionov.practicalapp.app.features.home.posts.detail.ArgsPostDetai
 import com.zakrodionov.practicalapp.app.features.home.posts.detail.PostDetailsScreen
 import com.zakrodionov.practicalapp.app.features.home.posts.list.PostsScreen
 import com.zakrodionov.practicalapp.app.features.login.LoginFlow
+import com.zakrodionov.practicalapp.app.features.login.phone.PhoneScreen
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -43,29 +44,30 @@ object DeepLinkHandler {
     @Composable
     fun HandleDeepLink(deepLinkNavigation: DeepLinkNavigation) {
         if (deepLinkNavigation.isEmpty) {
-            RootNavigator(startScreen = HomeScreen())
+            RootNavigator(startScreens = listOf(HomeScreen()))
         } else {
-            RootNavigator(startScreen = deepLinkNavigation.parseNavigation())
+            RootNavigator(startScreens = deepLinkNavigation.parseNavigation())
         }
     }
 
     @Composable
-    private fun RootNavigator(startScreen: Screen) =
-        Navigator(screen = startScreen) { navigator ->
+    private fun RootNavigator(startScreens: List<Screen>) =
+        Navigator(screens = startScreens) { navigator ->
             // Root aka global navigator
             CompositionLocalProvider(LocalGlobalNavigator provides navigator) {
                 CurrentScreen()
             }
         }
 
-    private fun DeepLinkNavigation.parseNavigation(): Screen {
+    private fun DeepLinkNavigation.parseNavigation(): List<Screen> {
         val innerScreens = screens.mapNotNull { it.getScreen() }
-        return feature.getScreen(innerScreens) ?: HomeScreen()
+        return feature.getScreen(innerScreens)?.let { listOf(HomeScreen()).plus(it) } ?: listOf(HomeScreen())
     }
 
     private fun NavigationScreen.getScreen(innerScreens: List<Screen> = emptyList()): Screen? = when (name) {
         "flow_favorites" -> FavoritesTab(innerScreens)
         "flow_login" -> LoginFlow(innerScreens)
+        "screen_phone" -> PhoneScreen()
         "screen_posts" -> PostsScreen()
         "screen_post_detail" -> PostDetailsScreen(ArgsPostDetail(argument))
         else -> null

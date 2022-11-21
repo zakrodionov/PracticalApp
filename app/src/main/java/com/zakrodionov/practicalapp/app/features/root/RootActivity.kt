@@ -5,15 +5,15 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import com.zakrodionov.common.extensions.disableFitsSystemWindows
 import com.zakrodionov.practicalapp.app.features.notifications.FirebaseMsgService.Companion.ARG_PUSH_DATA
 import com.zakrodionov.practicalapp.app.ui.theme.PracticalAppTheme
 
 class RootActivity : ComponentActivity() {
 
-    private var deepLinkNavigation: DeepLinkNavigation = DeepLinkNavigation.empty
+    private val deepLinkNavigation: MutableState<DeepLinkNavigation> = mutableStateOf(DeepLinkNavigation.empty)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,14 +39,12 @@ class RootActivity : ComponentActivity() {
         val deepLinkNavigation = intent?.extras?.getParcelable(ARG_PUSH_DATA) as? DeepLinkNavigation
 
         if (savedInstanceState == null && deepLinkNavigation != null) {
-            this.deepLinkNavigation = deepLinkNavigation
+            this.deepLinkNavigation.value = deepLinkNavigation
         }
     }
 
     @Composable
     fun RootScreen() {
-        val deepLinkNavigation = rememberSaveable { deepLinkNavigation }
-
-        DeepLinkHandler.HandleDeepLink(deepLinkNavigation = deepLinkNavigation)
+        DeepLinkHandler.HandleDeepLink(deepLinkNavigation = deepLinkNavigation.value)
     }
 }
