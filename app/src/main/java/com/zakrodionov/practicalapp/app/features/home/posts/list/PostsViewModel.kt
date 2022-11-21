@@ -25,28 +25,30 @@ class PostsViewModel(
     fun loadPosts(refresh: Boolean = false, initial: Boolean = false) {
         if (loadingPostsJob.isCompleted || initial) {
             loadingPostsJob = launchIo {
-                if (refresh) reduce { state.copy(page = 0) }
+                if (refresh) update { it.copy(page = 0) }
 
                 if (state.page > 0) {
-                    reduce { state.copy(posts = state.posts?.addLoadingItem()) } // Show pagination loading
+                    update { it.copy(posts = it.posts?.addLoadingItem()) } // Show pagination loading
                 } else {
-                    reduce { state.copy(loading = Loading(true, refresh)) }
+                    update { it.copy(loading = Loading(true, refresh)) }
                 }
 
                 postRepository
                     .getPosts(state.page)
                     .onSuccess { posts ->
-                        val newPosts = if (refresh) posts else state.posts.orEmpty().plus(posts)
-                        reduce { state.copy(posts = newPosts, error = null, page = state.increasePage()) }
+                        update {
+                            val newPosts = if (refresh) posts else it.posts.orEmpty().plus(posts)
+                            it.copy(posts = newPosts, error = null, page = it.increasePage())
+                        }
                     }
-                    .onFailure {
-                        reduce { state.copy(error = it) }
+                    .onFailure { error ->
+                        update { it.copy(error = error) }
                     }
 
                 // Hide all loaders
-                reduce {
-                    state.copy(
-                        posts = state.posts?.removeLoadingItem(),
+                update {
+                    it.copy(
+                        posts = it.posts?.removeLoadingItem(),
                         loading = Loading(isLoading = false, fromSwipeRefresh = false)
                     )
                 }

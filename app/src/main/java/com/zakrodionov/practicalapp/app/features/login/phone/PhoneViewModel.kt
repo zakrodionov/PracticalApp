@@ -7,6 +7,6 @@ class PhoneViewModel(
 ) : BaseViewModel<PhoneState, PhoneEvent>(PhoneState(), null) {
 
     fun setFormattedPhone(phone: String) {
-        reduce { state.copy(formattedPhone = phone) }
+        update { it.copy(formattedPhone = phone) }
     }
 }

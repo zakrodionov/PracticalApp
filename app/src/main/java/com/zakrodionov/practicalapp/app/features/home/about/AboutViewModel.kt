@@ -23,7 +23,7 @@ class AboutViewModel(
     }
 
     private fun getIsLogged() {
-        reduce { state.copy(isLogged = appPreferences.isLogged) }
+        update { it.copy(isLogged = appPreferences.isLogged) }
     }
 
     private fun subscribePreferences() {
