@@ -2,6 +2,7 @@ package com.zakrodionov.practicalapp.app.features.home.posts.list
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -17,9 +18,13 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -28,8 +33,6 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import coil.compose.rememberAsyncImagePainter
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.zakrodionov.common.ui.EndlessScrollListener
 import com.zakrodionov.common.ui.LoadingItem
 import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
@@ -46,6 +49,7 @@ class PostsScreen : BaseScreen() {
     override fun statusBarColor(): Color = Color.Transparent
     override val useDarkIconsInStatusBar: Boolean = true
 
+    @OptIn(ExperimentalMaterialApi::class)
     @Composable
     override fun Content() {
         super.Content()
@@ -55,11 +59,11 @@ class PostsScreen : BaseScreen() {
         val state by viewModel.stateFlow.collectAsState()
 
         Lce(lceState = state.lceState, tryAgain = { viewModel.loadPosts() }) {
-            SwipeRefresh(
-                state = rememberSwipeRefreshState(state.loading.fromSwipeRefresh),
-                onRefresh = { viewModel.loadPosts(refresh = true) },
-            ) {
+            val pullRefreshState = rememberPullRefreshState(state.loading.fromSwipeRefresh, {
+                viewModel.loadPosts(refresh = true)
+            })
 
+            Box(Modifier.pullRefresh(pullRefreshState)) {
                 val listState = rememberLazyListState()
                 EndlessScrollListener(listState = listState) {
                     viewModel.loadPosts()
@@ -82,6 +86,12 @@ class PostsScreen : BaseScreen() {
                         }
                     }
                 }
+
+                PullRefreshIndicator(
+                    state.loading.fromSwipeRefresh,
+                    pullRefreshState,
+                    Modifier.align(Alignment.TopCenter)
+                )
             }
         }
     }
