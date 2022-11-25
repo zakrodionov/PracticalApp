@@ -47,21 +47,17 @@ object DeepLinkHandler {
 
     @Composable
     fun HandleDeepLink(deepLinkNavigation: DeepLinkNavigation) {
-        if (deepLinkNavigation.isEmpty) {
-            RootNavigator(startScreens = listOf(HomeScreen()))
-        } else {
-            RootNavigator(startScreens = deepLinkNavigation.parseNavigation())
-        }
-    }
-
-    @Composable
-    private fun RootNavigator(startScreens: List<Screen>) =
-        Navigator(screens = startScreens) { navigator ->
+        Navigator(screens = listOf(HomeScreen())) { navigator ->
             // Root aka global navigator
             CompositionLocalProvider(LocalGlobalNavigator provides navigator) {
                 CurrentScreen()
+
+                if (!deepLinkNavigation.isEmpty) {
+                    navigator.replaceAll(deepLinkNavigation.parseNavigation())
+                }
             }
         }
+    }
 
     private fun DeepLinkNavigation.parseNavigation(): List<Screen> {
         val tabInnerScreens = tab.screens.mapNotNull { it.getScreen() }
