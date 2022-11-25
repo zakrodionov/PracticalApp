@@ -7,10 +7,12 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.lifecycleScope
 import com.zakrodionov.common.extensions.disableFitsSystemWindows
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.features.notifications.FirebaseMsgService.Companion.ARG_PUSH_DATA
 import com.zakrodionov.practicalapp.app.ui.theme.PracticalAppTheme
+import kotlinx.coroutines.delay
 
 class RootActivity : ComponentActivity() {
 
@@ -28,6 +30,8 @@ class RootActivity : ComponentActivity() {
                 RootScreen()
             }
         }
+
+        testDeepLink()
 
         handleIntent(intent, savedInstanceState)
     }
@@ -49,5 +53,31 @@ class RootActivity : ComponentActivity() {
     @Composable
     fun RootScreen() {
         DeepLinkHandler.HandleDeepLink(deepLinkNavigation = deepLinkNavigation.value)
+    }
+
+    private fun testDeepLink() {
+        lifecycleScope.launchWhenCreated {
+//            delay(3000)
+//            deepLinkNavigation.value =
+//                DeepLinkNavigation(
+//                    feature = NavigationScreen(
+//                        name = "flow_login",
+//                        screens = listOf(
+//                            NavigationScreen("screen_phone"),
+//                        )),
+//                    tab = NavigationScreen("tab_about"),
+//                )
+            delay(4000)
+            deepLinkNavigation.value =
+                DeepLinkNavigation(
+                    tab = NavigationScreen(
+                        name = "tab_posts",
+                        screens = listOf(
+                            NavigationScreen("screen_posts"),
+                            NavigationScreen("screen_post_detail", argument = "60d21b4667d0d8992e610c85"),
+                        )
+                    ),
+                )
+        }
     }
 }
