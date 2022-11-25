@@ -23,13 +23,14 @@ import com.zakrodionov.common.core.asString
 
 @Composable
 fun PhoneTextField(
+    initial: String = "",
     label: TextResource = TextResource.fromText("Enter phone"),
     onValueChanged: (String) -> Unit,
     requestFocus: Boolean = true,
 ) {
     val focusRequester = remember { FocusRequester() }
 
-    var phone by rememberSaveable { mutableStateOf("") }
+    var phone by rememberSaveable { mutableStateOf(initial) }
     onValueChanged.invoke(phone)
 
     OutlinedTextField(
