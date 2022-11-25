@@ -46,6 +46,7 @@ object DeepLinkHandler {
         if (deepLinkNavigation.isEmpty) {
             RootNavigator(startScreens = listOf(HomeScreen()))
         } else {
+
             RootNavigator(startScreens = deepLinkNavigation.parseNavigation())
         }
     }
