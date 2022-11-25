@@ -6,7 +6,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -20,6 +19,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.zakrodionov.common.core.TextResource
 import com.zakrodionov.common.core.asString
+import com.zakrodionov.common.extensions.OnLaunched
 
 @Composable
 fun PhoneTextField(
@@ -45,9 +45,8 @@ fun PhoneTextField(
     )
 
     if (requestFocus) {
-        DisposableEffect(Unit) {
+        OnLaunched {
             focusRequester.requestFocus()
-            onDispose { }
         }
     }
 }
