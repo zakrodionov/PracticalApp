@@ -11,6 +11,7 @@ import timber.log.Timber
 
 class Ref(var value: Int)
 
+@Suppress("TopLevelPropertyNaming")
 const val EnableDebugCompositionLogs = false
 
 /**
@@ -23,6 +24,7 @@ const val EnableDebugCompositionLogs = false
  * @param tag Log tag used for [Log.d]
  */
 @Composable
+@Suppress("MagicNumber", "UnusedPrivateMember")
 inline fun LogCompositions(tag: String) {
     if (EnableDebugCompositionLogs && isDebug) {
         val ref = remember { Ref(0) }

@@ -55,6 +55,7 @@ class RootActivity : ComponentActivity() {
         DeepLinkHandler.HandleDeepLink(deepLinkNavigation = deepLinkNavigation.value)
     }
 
+    @Suppress("MagicNumber", "UnusedPrivateMember")
     private fun testDeepLink(savedInstanceState: Bundle?) {
         if (savedInstanceState == null)
             lifecycleScope.launchWhenCreated {
