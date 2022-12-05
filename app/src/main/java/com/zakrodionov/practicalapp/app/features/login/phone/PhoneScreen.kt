@@ -18,7 +18,6 @@ import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
 import com.zakrodionov.practicalapp.app.features.login.password.PasswordScreen
 import com.zakrodionov.practicalapp.app.ui.components.PhoneTextField
 import com.zakrodionov.practicalapp.app.ui.components.PrimaryButton
-import com.zakrodionov.practicalapp.app.ui.defaultInsetsPadding
 import org.koin.androidx.compose.getViewModel
 
 class PhoneScreen : BaseScreen() {
@@ -34,7 +33,6 @@ class PhoneScreen : BaseScreen() {
             verticalArrangement = Arrangement.Center,
             modifier = Modifier
                 .fillMaxSize()
-                .defaultInsetsPadding()
         ) {
             PhoneTextField(
                 initial = state.formattedPhone,

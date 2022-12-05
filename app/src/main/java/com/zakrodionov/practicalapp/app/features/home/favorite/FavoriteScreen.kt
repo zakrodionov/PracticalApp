@@ -38,7 +38,7 @@ class FavoriteScreen : BaseScreen() {
             CommonSpacer()
             CommonCenteredButton(
                 text = "Test Nested Login Navigation",
-                onClick = { navigator.push(LoginFlow()) }
+                onClick = { navigator.push(LoginFlow(false)) }
             )
         }
     }

@@ -9,16 +9,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.zakrodionov.common.core.TextResource
 import com.zakrodionov.common.extensions.debug
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
+import com.zakrodionov.practicalapp.app.core.navigation.LocalGlobalNavigator
 import com.zakrodionov.practicalapp.app.core.navigation.popRoot
 import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences
+import com.zakrodionov.practicalapp.app.features.home.HomeScreen
+import com.zakrodionov.practicalapp.app.features.login.LoginFlow
 import com.zakrodionov.practicalapp.app.ui.components.PasswordTextField
 import com.zakrodionov.practicalapp.app.ui.components.PrimaryButton
-import com.zakrodionov.practicalapp.app.ui.defaultInsetsPadding
 import org.koin.androidx.compose.get
 
 class PasswordScreen : BaseScreen() {
@@ -26,6 +29,7 @@ class PasswordScreen : BaseScreen() {
     override fun Content() {
         super.Content()
 
+        val globalNavigator = LocalGlobalNavigator.current
         val navigator = LocalNavigator.currentOrThrow
         val appPreferences = get<AppPreferences>()
 
@@ -33,17 +37,33 @@ class PasswordScreen : BaseScreen() {
             verticalArrangement = Arrangement.Center,
             modifier = Modifier
                 .fillMaxSize()
-                .defaultInsetsPadding()
         ) {
             PasswordTextField(onValueChanged = { debug(it) })
             Spacer(modifier = Modifier.height(20.dp))
             PrimaryButton(
                 text = TextResource.fromStringId(R.string.next),
                 onClick = {
-                    appPreferences.isLogged = true
-                    navigator.popRoot()
+                    loginAndNavigate(
+                        appPreferences = appPreferences,
+                        globalNavigator = globalNavigator,
+                        navigator = navigator
+                    )
                 }
             )
+        }
+    }
+
+    private fun loginAndNavigate(
+        appPreferences: AppPreferences,
+        globalNavigator: Navigator,
+        navigator: Navigator,
+    ) {
+        appPreferences.isLogged = true
+
+        if ((navigator.parent?.lastItem as? LoginFlow)?.fromLaunchScreen != false) {
+            globalNavigator.replaceAll(HomeScreen())
+        } else {
+            navigator.popRoot()
         }
     }
 }

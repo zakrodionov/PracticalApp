@@ -9,6 +9,7 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import com.squareup.moshi.JsonClass
 import com.zakrodionov.practicalapp.app.core.navigation.LocalGlobalNavigator
+import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences
 import com.zakrodionov.practicalapp.app.features.home.AboutTab
 import com.zakrodionov.practicalapp.app.features.home.FavoritesTab
 import com.zakrodionov.practicalapp.app.features.home.HomeScreen
@@ -19,6 +20,7 @@ import com.zakrodionov.practicalapp.app.features.home.posts.list.PostsScreen
 import com.zakrodionov.practicalapp.app.features.login.LoginFlow
 import com.zakrodionov.practicalapp.app.features.login.phone.PhoneScreen
 import kotlinx.parcelize.Parcelize
+import org.koin.androidx.compose.get
 
 @Parcelize
 @JsonClass(generateAdapter = true)
@@ -47,12 +49,16 @@ object DeepLinkHandler {
 
     @Composable
     fun HandleDeepLink(deepLinkNavigation: DeepLinkNavigation) {
-        Navigator(screens = listOf(HomeScreen())) { navigator ->
+        val appPreferences = get<AppPreferences>()
+        val skipLoginScreen = appPreferences.isLogged || appPreferences.isSkipLoginFlow
+
+        val startScreen = if (skipLoginScreen) HomeScreen() else LoginFlow(true)
+        Navigator(screens = listOf(startScreen)) { navigator ->
             // Root aka global navigator
             CompositionLocalProvider(LocalGlobalNavigator provides navigator) {
                 CurrentScreen()
 
-                if (!deepLinkNavigation.isEmpty) {
+                if (!deepLinkNavigation.isEmpty && !skipLoginScreen) {
                     navigator.replaceAll(deepLinkNavigation.parseNavigation())
                 }
             }
@@ -68,7 +74,7 @@ object DeepLinkHandler {
     }
 
     private fun NavigationScreen.getScreen(innerScreens: List<Screen> = emptyList()): Screen? = when (name) {
-        "flow_login" -> LoginFlow(innerScreens)
+        "flow_login" -> LoginFlow(false, innerScreens)
         "screen_phone" -> PhoneScreen()
         "screen_posts" -> PostsScreen()
         "screen_post_detail" -> PostDetailsScreen(ArgsPostDetail(argument))

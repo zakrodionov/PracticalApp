@@ -33,7 +33,7 @@ class AboutScreen : BaseScreen() {
         OnLaunched {
             viewModel.eventFlow.collect {
                 when (it) {
-                    NavigateToLoginFlow -> globalNavigator.push(LoginFlow())
+                    NavigateToLoginFlow -> globalNavigator.push(LoginFlow(false))
                 }
             }
         }
