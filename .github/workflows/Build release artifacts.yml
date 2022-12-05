@@ -1,8 +1,8 @@
-name: Build release artifacts on main
+name: Build release artifacts
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, feature/compose_voyager_navigation ]
 
 jobs:
   build_apk_aab:
