@@ -49,7 +49,7 @@ Android Studio has a pretty good built-in linter, launched using the `gradlew li
 
 • Gradle Modules
 
-What the sample looks like:
+*What the sample looks like:*
    
 <img src="https://user-images.githubusercontent.com/27068529/119772938-9c4d9980-bec8-11eb-9512-319c4f427e4b.jpg" alt="Пример, как выглядит сэмпл" width="30%">
 
