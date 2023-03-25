@@ -11,7 +11,7 @@ const val PAGINATION_THRESHOLD = 5
 fun EndlessScrollListener(
     listState: LazyListState,
     paginationThreshold: Int = PAGINATION_THRESHOLD,
-    onLoadMore: () -> Unit,
+    onLoadMore: () -> Unit
 ) {
     val totalItemsCount = remember { derivedStateOf { listState.layoutInfo.totalItemsCount } }
     val firstVisibleItemIndex = remember { derivedStateOf { listState.firstVisibleItemIndex } }

@@ -14,7 +14,7 @@ import kotlinx.coroutines.Job
 class PostsViewModel(
     savedStateHandle: SavedStateHandle,
     private val postRepository: PostRepository,
-    dispatchersProvider: DispatchersProvider,
+    dispatchersProvider: DispatchersProvider
 ) : BaseViewModel<PostsState, PostsEvent>(PostsState(), savedStateHandle, dispatchersProvider) {
 
     private var loadingPostsJob: Job = Job().apply { complete() }

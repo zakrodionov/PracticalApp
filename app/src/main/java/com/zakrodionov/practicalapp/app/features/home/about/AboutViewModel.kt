@@ -8,7 +8,7 @@ import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences.Companio
 
 class AboutViewModel(
     savedStateHandle: SavedStateHandle,
-    private val appPreferences: AppPreferences,
+    private val appPreferences: AppPreferences
 ) : BaseViewModel<AboutState, AboutEvent>(AboutState(), savedStateHandle) {
 
     init {

@@ -89,7 +89,7 @@ fun Context.actionApplicationSettings() {
 
 fun obtainFilesResult(
     resultCode: Int,
-    data: Intent?,
+    data: Intent?
 ): List<Uri> {
     if (resultCode == Activity.RESULT_OK && data != null) {
         val uris = mutableListOf<Uri>()

@@ -39,7 +39,7 @@ import Libs.retrofit
 import Libs.retrofit_moshi
 import Libs.timber
 import java.io.FileInputStream
-import java.util.Properties
+import java.util.*
 
 plugins {
     id("com.android.application")
@@ -111,6 +111,9 @@ android {
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
+
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     buildFeatures {
@@ -119,6 +122,10 @@ android {
 
     composeOptions {
         kotlinCompilerExtensionVersion = Versions.composeVersion
+    }
+
+    kotlin {
+        jvmToolchain(11)
     }
 }
 

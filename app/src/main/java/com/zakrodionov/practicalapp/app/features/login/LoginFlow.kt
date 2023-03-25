@@ -26,17 +26,17 @@ import com.zakrodionov.practicalapp.app.features.home.HomeScreen
 import com.zakrodionov.practicalapp.app.features.login.phone.PhoneScreen
 import com.zakrodionov.practicalapp.app.ui.components.FlowContent
 import com.zakrodionov.practicalapp.app.ui.theme.Purple500
-import org.koin.androidx.compose.get
+import org.koin.compose.koinInject
 
 class LoginFlow(
     val fromLaunchScreen: Boolean,
-    private val innerScreens: List<Screen> = listOf(PhoneScreen()),
+    private val innerScreens: List<Screen> = listOf(PhoneScreen())
 ) : Flow() {
     override val title: String = "LoginFlow"
 
     @Composable
     override fun Content() {
-        val appPreferences = get<AppPreferences>()
+        val appPreferences = koinInject<AppPreferences>()
         val globalNavigator = LocalGlobalNavigator.current
         val navigator = LocalNavigator.currentOrThrow
 
@@ -60,7 +60,7 @@ class LoginFlow(
                                 navigator = navigator
                             )
                         }
-                        .padding(horizontal = 20.dp, vertical = 10.dp),
+                        .padding(horizontal = 20.dp, vertical = 10.dp)
                 )
             }
             FlowContent(startScreen = innerScreens.toTypedArray())
@@ -70,7 +70,7 @@ class LoginFlow(
     private fun closeLoginFlow(
         appPreferences: AppPreferences,
         globalNavigator: Navigator,
-        navigator: Navigator,
+        navigator: Navigator
     ) {
         appPreferences.isSkipLoginFlow = true
         if (fromLaunchScreen) {

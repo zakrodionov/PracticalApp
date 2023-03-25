@@ -34,7 +34,7 @@ import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
 data class PostDetailsScreen(
-    private val args: ArgsPostDetail,
+    private val args: ArgsPostDetail
 ) : BaseScreen() {
 
     override fun statusBarColor(): Color = Color.Transparent

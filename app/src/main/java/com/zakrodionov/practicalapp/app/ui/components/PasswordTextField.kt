@@ -26,7 +26,7 @@ import com.zakrodionov.common.core.asString
 fun PasswordTextField(
     label: TextResource = TextResource.fromText("Enter password"),
     onValueChanged: (String) -> Unit,
-    requestFocus: Boolean = true,
+    requestFocus: Boolean = true
 ) {
     val focusRequester = remember { FocusRequester() }
 

@@ -22,7 +22,7 @@ import com.zakrodionov.practicalapp.app.features.home.HomeScreen
 import com.zakrodionov.practicalapp.app.features.login.LoginFlow
 import com.zakrodionov.practicalapp.app.ui.components.PasswordTextField
 import com.zakrodionov.practicalapp.app.ui.components.PrimaryButton
-import org.koin.androidx.compose.get
+import org.koin.compose.koinInject
 
 class PasswordScreen : BaseScreen() {
     @Composable
@@ -31,7 +31,7 @@ class PasswordScreen : BaseScreen() {
 
         val globalNavigator = LocalGlobalNavigator.current
         val navigator = LocalNavigator.currentOrThrow
-        val appPreferences = get<AppPreferences>()
+        val appPreferences = koinInject<AppPreferences>()
 
         Column(
             verticalArrangement = Arrangement.Center,
@@ -56,7 +56,7 @@ class PasswordScreen : BaseScreen() {
     private fun loginAndNavigate(
         appPreferences: AppPreferences,
         globalNavigator: Navigator,
-        navigator: Navigator,
+        navigator: Navigator
     ) {
         appPreferences.isLogged = true
 

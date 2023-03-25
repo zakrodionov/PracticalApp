@@ -34,7 +34,7 @@ fun Handler.postDelayed(delay: Long, func: () -> Unit): Runnable {
 
 fun preferenceListener(
     propertyKey: String,
-    propertyUpdated: (key: String) -> Unit,
+    propertyUpdated: (key: String) -> Unit
 ): SharedPreferences.OnSharedPreferenceChangeListener {
     return SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
         if (propertyKey == key) {

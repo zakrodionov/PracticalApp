@@ -26,7 +26,7 @@ fun PhoneTextField(
     initial: String = "",
     label: TextResource = TextResource.fromText("Enter phone"),
     onValueChanged: (String) -> Unit,
-    requestFocus: Boolean = true,
+    requestFocus: Boolean = true
 ) {
     val focusRequester = remember { FocusRequester() }
 

@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 abstract class BaseViewModel<STATE : Parcelable, EVENT : Any>(
     initialState: STATE,
     protected open val savedStateHandle: SavedStateHandle? = null,
-    protected open val dispatchersProvider: DispatchersProvider = DispatchersProviderImpl,
+    protected open val dispatchersProvider: DispatchersProvider = DispatchersProviderImpl
 ) : ViewModel() {
 
     companion object {

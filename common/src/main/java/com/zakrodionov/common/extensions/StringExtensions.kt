@@ -72,8 +72,9 @@ fun String?.parseColor(): Int? {
 
 fun String.formatPhone(defaultCountryIso: String = currentLocale.country): String {
     var phone = this
-    if (defaultCountryIso == "RU" && !phone.startsWith("8") && !phone.startsWith("+7"))
+    if (defaultCountryIso == "RU" && !phone.startsWith("8") && !phone.startsWith("+7")) {
         phone = "+7$phone"
+    }
 
     phone = PhoneNumberUtils.formatNumber(phone, defaultCountryIso)
 

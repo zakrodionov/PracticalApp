@@ -1,8 +1,11 @@
 package com.zakrodionov.practicalapp.app.features.root
 
 import android.os.Parcelable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.Navigator
@@ -20,13 +23,13 @@ import com.zakrodionov.practicalapp.app.features.home.posts.list.PostsScreen
 import com.zakrodionov.practicalapp.app.features.login.LoginFlow
 import com.zakrodionov.practicalapp.app.features.login.phone.PhoneScreen
 import kotlinx.parcelize.Parcelize
-import org.koin.androidx.compose.get
+import org.koin.compose.koinInject
 
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class DeepLinkNavigation(
     val tab: NavigationScreen = NavigationScreen(),
-    val flow: NavigationScreen = NavigationScreen(),
+    val flow: NavigationScreen = NavigationScreen()
 ) : Parcelable {
 
     companion object {
@@ -42,21 +45,23 @@ data class DeepLinkNavigation(
 data class NavigationScreen(
     val name: String = "",
     val argument: String = "",
-    val screens: List<NavigationScreen> = emptyList(),
+    val screens: List<NavigationScreen> = emptyList()
 ) : Parcelable
 
 object DeepLinkHandler {
 
     @Composable
     fun HandleDeepLink(deepLinkNavigation: DeepLinkNavigation) {
-        val appPreferences = get<AppPreferences>()
+        val appPreferences = koinInject<AppPreferences>()
         val skipLoginScreen = appPreferences.isLogged || appPreferences.isSkipLoginFlow
 
         val startScreen = if (skipLoginScreen) HomeScreen() else LoginFlow(true)
         Navigator(screens = listOf(startScreen)) { navigator ->
             // Root aka global navigator
             CompositionLocalProvider(LocalGlobalNavigator provides navigator) {
-                CurrentScreen()
+                Box(modifier = Modifier.navigationBarsPadding()) {
+                    CurrentScreen()
+                }
 
                 if (!deepLinkNavigation.isEmpty && !skipLoginScreen) {
                     navigator.replaceAll(deepLinkNavigation.parseNavigation())

@@ -57,19 +57,18 @@ class RootActivity : ComponentActivity() {
 
     @Suppress("MagicNumber", "UnusedPrivateMember")
     private fun testDeepLink(savedInstanceState: Bundle?) {
-        if (savedInstanceState == null)
+        if (savedInstanceState == null) {
             lifecycleScope.launchWhenCreated {
-
                 delay(3000)
                 deepLinkNavigation.value =
                     DeepLinkNavigation(
                         flow = NavigationScreen(
                             name = "flow_login",
                             screens = listOf(
-                                NavigationScreen("screen_phone"),
+                                NavigationScreen("screen_phone")
                             )
                         ),
-                        tab = NavigationScreen("tab_about"),
+                        tab = NavigationScreen("tab_about")
                     )
 
                 delay(4000)
@@ -79,10 +78,11 @@ class RootActivity : ComponentActivity() {
                             name = "tab_posts",
                             screens = listOf(
                                 NavigationScreen("screen_posts"),
-                                NavigationScreen("screen_post_detail", argument = "60d21b4667d0d8992e610c85"),
+                                NavigationScreen("screen_post_detail", argument = "60d21b4667d0d8992e610c85")
                             )
-                        ),
+                        )
                     )
             }
+        }
     }
 }

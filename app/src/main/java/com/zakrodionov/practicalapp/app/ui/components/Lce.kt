@@ -36,7 +36,7 @@ import com.zakrodionov.practicalapp.R
 fun Lce(
     lceState: LceState,
     tryAgain: () -> Unit,
-    content: @Composable () -> Unit,
+    content: @Composable () -> Unit
 ) {
     when (lceState) {
         ContentState -> content()

@@ -17,7 +17,7 @@ data class PostsState(
     val posts: List<DiffItem>? = null,
     val page: Int = 0,
     val error: BaseError? = null,
-    val loading: Loading = Loading(),
+    val loading: Loading = Loading()
 ) : Parcelable {
     val lceState: LceState
         get() = when {

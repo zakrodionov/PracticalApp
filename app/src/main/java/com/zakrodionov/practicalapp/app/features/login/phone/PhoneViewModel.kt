@@ -5,7 +5,7 @@ import com.zakrodionov.common.extensions.debug
 import com.zakrodionov.practicalapp.app.core.BaseViewModel
 
 class PhoneViewModel(
-    savedStateHandle: SavedStateHandle,
+    savedStateHandle: SavedStateHandle
 ) : BaseViewModel<PhoneState, PhoneEvent>(PhoneState(), savedStateHandle) {
 
     init {

@@ -19,5 +19,5 @@ data class ShowDialog(
     val tag: String? = null,
     val cancelable: Boolean = false,
     @StyleRes val messageTextAppearance: Int? = null,
-    @StyleRes val theme: Int? = null,
+    @StyleRes val theme: Int? = null
 ) : BaseShowEvent()

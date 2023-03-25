@@ -56,7 +56,7 @@ fun basicOkHttpBuilder(): OkHttpClient.Builder {
 
 private fun buildOkHttp(
     requestHeaderInterceptor: RequestHeaderInterceptor,
-    requestTokenAuthenticator: RequestTokenAuthenticator,
+    requestTokenAuthenticator: RequestTokenAuthenticator
 ): OkHttpClient {
     val okHttpClientBuilder = basicOkHttpBuilder()
     okHttpClientBuilder.addInterceptor(requestHeaderInterceptor)

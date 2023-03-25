@@ -13,5 +13,5 @@ val allModules = listOf(
     netModule,
     storagesModule,
     apiModule,
-    repositoryModule,
+    repositoryModule
 )

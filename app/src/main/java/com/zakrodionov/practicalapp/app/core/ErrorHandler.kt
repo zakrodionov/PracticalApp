@@ -41,7 +41,7 @@ class ErrorHandlerImpl(private val connectionService: ConnectionService) : Error
             is SocketException,
             is SocketTimeoutException,
             is UnknownHostException,
-            is ProtocolException,
+            is ProtocolException
             -> true
             else -> false
         }

@@ -20,7 +20,7 @@ object NetworkConnectionError : BaseError() {
 @Parcelize
 data class HttpError(
     val code: Int = 0,
-    val status: TextResource = TextResource.empty,
+    val status: TextResource = TextResource.empty
 ) : BaseError()
 
 @Parcelize

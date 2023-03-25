@@ -6,7 +6,7 @@ import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences
 import okhttp3.Request
 
 class RequestHeaderInterceptor(
-    private val appPreferences: AppPreferences,
+    private val appPreferences: AppPreferences
 ) : RequestInterceptor() {
 
     override fun interceptRequest(requestBuilder: Request.Builder) {

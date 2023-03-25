@@ -20,7 +20,7 @@ data class Posts(
     @Json(name = "page")
     val page: Int?,
     @Json(name = "total")
-    val total: Int?,
+    val total: Int?
 ) {
     @JsonClass(generateAdapter = true)
     @Parcelize
@@ -40,7 +40,7 @@ data class Posts(
         @Json(name = "tags")
         val tags: List<String?>? = null,
         @Json(name = "text")
-        val text: String? = null,
+        val text: String? = null
     ) : DiffItem, WaitFixForParcelable {
         @JsonClass(generateAdapter = true)
         @Parcelize
@@ -56,7 +56,7 @@ data class Posts(
             @Json(name = "picture")
             val picture: String?,
             @Json(name = "title")
-            val title: String?,
+            val title: String?
         ) : Parcelable, WaitFixForParcelable
 
         override val itemId: String

@@ -72,7 +72,7 @@ class PostsScreen : BaseScreen() {
                 LazyColumn(
                     state = listState,
                     verticalArrangement = Arrangement.spacedBy(15.dp), // Расстояние между айтемами
-                    contentPadding = PaddingValues(all = 20.dp), // Отступы всего LazyColumn
+                    contentPadding = PaddingValues(all = 20.dp) // Отступы всего LazyColumn
                 ) {
                     item {
                         Spacer(modifier = Modifier.windowInsetsTopHeight(WindowInsets.safeContent))

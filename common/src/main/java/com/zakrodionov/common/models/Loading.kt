@@ -7,5 +7,5 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Loading(
     val isLoading: Boolean = false,
-    val fromSwipeRefresh: Boolean = false,
+    val fromSwipeRefresh: Boolean = false
 ) : Parcelable

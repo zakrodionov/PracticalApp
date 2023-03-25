@@ -1,5 +1,5 @@
 object Plugins {
-    const val android_gradle_plugin = "com.android.tools.build:gradle:7.3.1"
+    const val android_gradle_plugin = "com.android.tools.build:gradle:7.4.2"
     const val kotlin_gradle_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlinVersion}"
     const val google_services_plugin = "com.google.gms:google-services:4.3.13"
     const val junit5_plugin = "de.mannodermaus.gradle.plugins:android-junit5:1.8.2.0"

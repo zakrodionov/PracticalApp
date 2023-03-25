@@ -16,9 +16,10 @@ data class ArgsPostDetail(val postId: String, val post: Post? = null) : Parcelab
 class PostDetailViewModel(
     savedStateHandle: SavedStateHandle,
     private val postRepository: PostRepository,
-    private val args: ArgsPostDetail,
+    private val args: ArgsPostDetail
 ) : BaseViewModel<PostDetailsState, PostDetailsEvent>(
-    PostDetailsState(post = args.post), savedStateHandle
+    PostDetailsState(post = args.post),
+    savedStateHandle
 ) {
 
     init {

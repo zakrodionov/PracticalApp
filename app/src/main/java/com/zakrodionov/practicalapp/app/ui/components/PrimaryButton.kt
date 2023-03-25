@@ -17,7 +17,7 @@ fun PrimaryButton(text: TextResource, onClick: () -> Unit) {
         onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 20.dp),
+            .padding(horizontal = 20.dp)
     ) {
         Text(text = text.asString(LocalContext.current.resources))
     }

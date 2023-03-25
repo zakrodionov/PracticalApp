@@ -15,7 +15,7 @@ import retrofit2.http.POST
 // Used to get 401 errors and updates the token
 class RequestTokenAuthenticator(
     private val api: ApiAuthRefreshTokens,
-    private val appPreferences: AppPreferences,
+    private val appPreferences: AppPreferences
 ) : TokenAuthenticator() {
 
     override fun getAccessToken(): String = appPreferences.accessToken

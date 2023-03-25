@@ -10,7 +10,7 @@ import kotlinx.parcelize.Parcelize
 data class PhoneState(
     val formattedPhone: String = "",
     val error: BaseError? = null,
-    val isLoading: Boolean = false,
+    val isLoading: Boolean = false
 ) : Parcelable {
     private val phone: String
         get() = formattedPhone.extractDigits()
