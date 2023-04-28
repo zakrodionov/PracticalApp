@@ -16,7 +16,6 @@ import com.zakrodionov.common.extensions.debug
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
 import com.zakrodionov.practicalapp.app.core.navigation.LocalGlobalNavigator
-import com.zakrodionov.practicalapp.app.core.navigation.popRoot
 import com.zakrodionov.practicalapp.app.core.ui.components.PasswordTextField
 import com.zakrodionov.practicalapp.app.core.ui.components.PrimaryButton
 import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences
@@ -63,7 +62,7 @@ class PasswordScreen : BaseScreen() {
         if ((navigator.parent?.lastItem as? LoginFlow)?.fromLaunchScreen != false) {
             globalNavigator.replaceAll(HomeScreen())
         } else {
-            navigator.popRoot()
+            navigator.parent?.pop()
         }
     }
 }

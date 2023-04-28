@@ -20,7 +20,6 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.zakrodionov.practicalapp.app.core.navigation.Flow
 import com.zakrodionov.practicalapp.app.core.navigation.LocalGlobalNavigator
-import com.zakrodionov.practicalapp.app.core.navigation.popRoot
 import com.zakrodionov.practicalapp.app.core.ui.components.FlowContent
 import com.zakrodionov.practicalapp.app.core.ui.theme.Purple500
 import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences
@@ -38,7 +37,7 @@ class LoginFlow(
     override fun Content() {
         val appPreferences = koinInject<AppPreferences>()
         val globalNavigator = LocalGlobalNavigator.current
-        val navigator = LocalNavigator.currentOrThrow
+        val parentNavigator = LocalNavigator.currentOrThrow
 
         Column(
             modifier = Modifier
@@ -57,7 +56,7 @@ class LoginFlow(
                             closeLoginFlow(
                                 appPreferences = appPreferences,
                                 globalNavigator = globalNavigator,
-                                navigator = navigator
+                                parentNavigator = parentNavigator
                             )
                         }
                         .padding(horizontal = 20.dp, vertical = 10.dp)
@@ -70,13 +69,13 @@ class LoginFlow(
     private fun closeLoginFlow(
         appPreferences: AppPreferences,
         globalNavigator: Navigator,
-        navigator: Navigator
+        parentNavigator: Navigator
     ) {
         appPreferences.isSkipLoginFlow = true
         if (fromLaunchScreen) {
             globalNavigator.replaceAll(HomeScreen())
         } else {
-            navigator.popRoot()
+            parentNavigator.pop()
         }
     }
 }
