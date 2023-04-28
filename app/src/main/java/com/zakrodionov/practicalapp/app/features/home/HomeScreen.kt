@@ -15,7 +15,7 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
-import com.zakrodionov.practicalapp.app.ui.theme.BottomBarColor
+import com.zakrodionov.practicalapp.app.core.ui.theme.BottomBarColor
 
 class HomeScreen(
     private val tab: Tab = PostsTab()

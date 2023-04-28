@@ -20,8 +20,8 @@ import com.zakrodionov.practicalapp.app.core.navigation.popRoot
 import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences
 import com.zakrodionov.practicalapp.app.features.home.HomeScreen
 import com.zakrodionov.practicalapp.app.features.login.LoginFlow
-import com.zakrodionov.practicalapp.app.ui.components.PasswordTextField
-import com.zakrodionov.practicalapp.app.ui.components.PrimaryButton
+import com.zakrodionov.practicalapp.app.core.ui.components.PasswordTextField
+import com.zakrodionov.practicalapp.app.core.ui.components.PrimaryButton
 import org.koin.compose.koinInject
 
 class PasswordScreen : BaseScreen() {

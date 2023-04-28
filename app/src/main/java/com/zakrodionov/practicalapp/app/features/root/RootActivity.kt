@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import com.zakrodionov.common.extensions.disableFitsSystemWindows
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.features.notifications.FirebaseMsgService.Companion.ARG_PUSH_DATA
-import com.zakrodionov.practicalapp.app.ui.theme.PracticalAppTheme
+import com.zakrodionov.practicalapp.app.core.ui.theme.PracticalAppTheme
 import kotlinx.coroutines.delay
 
 class RootActivity : ComponentActivity() {

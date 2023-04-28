@@ -1,6 +1,6 @@
 @file:Suppress("MagicNumber")
 
-package com.zakrodionov.practicalapp.app.ui.theme
+package com.zakrodionov.practicalapp.app.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 import kotlin.random.Random

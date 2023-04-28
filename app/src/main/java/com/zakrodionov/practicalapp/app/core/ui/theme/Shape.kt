@@ -1,4 +1,4 @@
-package com.zakrodionov.practicalapp.app.ui.theme
+package com.zakrodionov.practicalapp.app.core.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

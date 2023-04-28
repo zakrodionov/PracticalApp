@@ -16,8 +16,8 @@ import com.zakrodionov.common.core.TextResource
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
 import com.zakrodionov.practicalapp.app.features.login.password.PasswordScreen
-import com.zakrodionov.practicalapp.app.ui.components.PhoneTextField
-import com.zakrodionov.practicalapp.app.ui.components.PrimaryButton
+import com.zakrodionov.practicalapp.app.core.ui.components.PhoneTextField
+import com.zakrodionov.practicalapp.app.core.ui.components.PrimaryButton
 import org.koin.androidx.compose.getViewModel
 
 class PhoneScreen : BaseScreen() {

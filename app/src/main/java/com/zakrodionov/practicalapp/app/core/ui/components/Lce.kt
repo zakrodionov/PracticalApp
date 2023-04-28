@@ -1,4 +1,4 @@
-package com.zakrodionov.practicalapp.app.ui.components
+package com.zakrodionov.practicalapp.app.core.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

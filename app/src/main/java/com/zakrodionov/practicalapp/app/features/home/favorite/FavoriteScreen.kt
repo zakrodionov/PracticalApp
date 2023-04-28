@@ -11,10 +11,10 @@ import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
 import com.zakrodionov.practicalapp.app.features.home.posts.detail.ArgsPostDetail
 import com.zakrodionov.practicalapp.app.features.home.posts.detail.PostDetailsScreen
 import com.zakrodionov.practicalapp.app.features.login.LoginFlow
-import com.zakrodionov.practicalapp.app.ui.components.CommonCenteredButton
-import com.zakrodionov.practicalapp.app.ui.components.CommonCenteredText
-import com.zakrodionov.practicalapp.app.ui.components.CommonSpacer
-import com.zakrodionov.practicalapp.app.ui.defaultInsetsPadding
+import com.zakrodionov.practicalapp.app.core.ui.components.CommonCenteredButton
+import com.zakrodionov.practicalapp.app.core.ui.components.CommonCenteredText
+import com.zakrodionov.practicalapp.app.core.ui.components.CommonSpacer
+import com.zakrodionov.practicalapp.app.core.ui.defaultInsetsPadding
 
 class FavoriteScreen : BaseScreen() {
     @Composable

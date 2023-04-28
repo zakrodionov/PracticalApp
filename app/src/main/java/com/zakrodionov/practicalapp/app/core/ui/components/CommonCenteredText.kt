@@ -1,4 +1,4 @@
-package com.zakrodionov.practicalapp.app.ui.components
+package com.zakrodionov.practicalapp.app.core.ui.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
