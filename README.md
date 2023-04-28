@@ -15,11 +15,11 @@ For the convenience of debugging code during development, several libraries are 
 Flipper, Hyperion allow you to intercept network calls, view the contents of SharedPrefernces, DataBases, have built-in layout inspectors, color pickers and other tools for developers.
 
 # Compliance with code-style
-**Detekt, Ktlint** libraries are used to maintain a uniform code style. Before pushing, you should check the new code for compliance with the rules using the `gradlew ktFormat && gradlew detekt` command, or configure
+**Detekt, Ktlint** libraries are used to maintain a uniform code style. Before pushing, you should check the new code for compliance with the rules using the `./gradlew ktFormat && ./gradlew detekt` command, or configure
 task in Android Studio. CI is also configured with Detekt, Ktlint to check the project with Push, Pull Request.
 
 # Code cleanliness
-Android Studio has a pretty good built-in linter, launched using the `gradlew lint` command. Allows you to identify Deprecated APIs, unused resources, security, performance, usability, accessibility issues, etc....
+Android Studio has a pretty good built-in linter, launched using the `./gradlew lint` command. Allows you to identify Deprecated APIs, unused resources, security, performance, usability, accessibility issues, etc....
 
 
 ## Stack
