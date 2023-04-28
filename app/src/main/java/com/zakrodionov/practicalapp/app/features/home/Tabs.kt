@@ -10,10 +10,10 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import com.zakrodionov.practicalapp.app.core.ui.components.TabContent
 import com.zakrodionov.practicalapp.app.features.home.about.AboutScreen
 import com.zakrodionov.practicalapp.app.features.home.favorite.FavoriteScreen
 import com.zakrodionov.practicalapp.app.features.home.posts.list.PostsScreen
-import com.zakrodionov.practicalapp.app.core.ui.components.TabContent
 
 data class PostsTab(private val innerScreens: List<Screen> = listOf(PostsScreen())) : Tab {
     override val options: TabOptions

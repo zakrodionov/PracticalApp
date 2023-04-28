@@ -21,11 +21,11 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.zakrodionov.practicalapp.app.core.navigation.Flow
 import com.zakrodionov.practicalapp.app.core.navigation.LocalGlobalNavigator
 import com.zakrodionov.practicalapp.app.core.navigation.popRoot
+import com.zakrodionov.practicalapp.app.core.ui.components.FlowContent
+import com.zakrodionov.practicalapp.app.core.ui.theme.Purple500
 import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences
 import com.zakrodionov.practicalapp.app.features.home.HomeScreen
 import com.zakrodionov.practicalapp.app.features.login.phone.PhoneScreen
-import com.zakrodionov.practicalapp.app.core.ui.components.FlowContent
-import com.zakrodionov.practicalapp.app.core.ui.theme.Purple500
 import org.koin.compose.koinInject
 
 class LoginFlow(

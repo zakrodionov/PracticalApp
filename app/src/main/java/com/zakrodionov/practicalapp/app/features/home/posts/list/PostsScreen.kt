@@ -36,11 +36,11 @@ import coil.compose.rememberAsyncImagePainter
 import com.zakrodionov.common.ui.EndlessScrollListener
 import com.zakrodionov.common.ui.LoadingItem
 import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
+import com.zakrodionov.practicalapp.app.core.ui.components.Lce
+import com.zakrodionov.practicalapp.app.core.ui.components.LoadingItem
 import com.zakrodionov.practicalapp.app.domain.model.Posts.Post
 import com.zakrodionov.practicalapp.app.features.home.posts.detail.ArgsPostDetail
 import com.zakrodionov.practicalapp.app.features.home.posts.detail.PostDetailsScreen
-import com.zakrodionov.practicalapp.app.core.ui.components.Lce
-import com.zakrodionov.practicalapp.app.core.ui.components.LoadingItem
 import org.koin.androidx.compose.getViewModel
 import kotlin.random.Random
 

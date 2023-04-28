@@ -48,7 +48,7 @@ plugins {
     id("kotlin-parcelize")
     id("de.mannodermaus.android-junit5")
     id("com.google.gms.google-services")
-    // id("com.starter.easylauncher").version("6.0.0") TODO fix crash in new version
+    // id("com.starter.easylauncher").version("6.0.0") TODO wait fix crash in new version
     id(Plugins.detekt_plugin)
     id(Plugins.ktlint_plugin)
 }
@@ -121,7 +121,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.composeVersion
+        kotlinCompilerExtensionVersion = Versions.composeCompilerVersion
     }
 
     kotlin {

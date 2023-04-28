@@ -17,8 +17,8 @@ object Libs {
     const val androidx_material = "com.google.android.material:material:1.8.0"
     const val androidx_core = "androidx.core:core-ktx:1.9.0"
     const val androidx_security_crypto = "androidx.security:security-crypto:1.0.0"
-    const val androidx_activity = "androidx.activity:activity-ktx:1.7.0"
-    const val androidx_activity_compose = "androidx.activity:activity-compose:1.7.0"
+    const val androidx_activity = "androidx.activity:activity-ktx:1.7.1"
+    const val androidx_activity_compose = "androidx.activity:activity-compose:1.7.1"
     const val androidx_navigation_compose = "androidx.navigation:navigation-compose:2.6.0-alpha08"
 
     //Kotlin
@@ -40,7 +40,7 @@ object Libs {
 
     // Koin
     const val koin = "io.insert-koin:koin-android:$koinVersion"
-    const val koin_compose = "io.insert-koin:koin-androidx-compose:3.4.3"
+    const val koin_compose = "io.insert-koin:koin-androidx-compose:3.4.4"
     const val koin_test = "io.insert-koin:koin-test:$koinVersion"
 
     // Inspect & Debug tools
@@ -66,7 +66,7 @@ object Libs {
     const val hyperion_shared_preferences = "com.willowtreeapps.hyperion:hyperion-shared-preferences:$hyperionVersion"
     const val hyperion_timber = "com.willowtreeapps.hyperion:hyperion-timber:$hyperionVersion"
 
-    const val okhttp = "com.squareup.okhttp3:okhttp:4.10.0"
+    const val okhttp = "com.squareup.okhttp3:okhttp:4.11.0"
 
     const val desugar_jdk = "com.android.tools:desugar_jdk_libs:2.0.2"
 

@@ -28,8 +28,8 @@ import com.zakrodionov.common.extensions.toLocaleDateTimeApplyZone
 import com.zakrodionov.common.ui.lce.ContentState
 import com.zakrodionov.common.ui.lce.LceState
 import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
-import com.zakrodionov.practicalapp.app.domain.model.Posts.Post
 import com.zakrodionov.practicalapp.app.core.ui.components.Lce
+import com.zakrodionov.practicalapp.app.domain.model.Posts.Post
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 

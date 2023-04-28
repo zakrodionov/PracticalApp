@@ -13,12 +13,12 @@ import com.zakrodionov.practicalapp.BuildConfig
 import com.zakrodionov.practicalapp.R
 import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
 import com.zakrodionov.practicalapp.app.core.navigation.LocalGlobalNavigator
-import com.zakrodionov.practicalapp.app.features.login.LoginFlow
 import com.zakrodionov.practicalapp.app.core.ui.components.CommonCenteredButton
 import com.zakrodionov.practicalapp.app.core.ui.components.CommonCenteredText
 import com.zakrodionov.practicalapp.app.core.ui.components.CommonFillSpacer
 import com.zakrodionov.practicalapp.app.core.ui.components.CommonSpacer
 import com.zakrodionov.practicalapp.app.core.ui.defaultInsetsPadding
+import com.zakrodionov.practicalapp.app.features.login.LoginFlow
 import org.koin.androidx.compose.getViewModel
 
 class AboutScreen : BaseScreen() {
