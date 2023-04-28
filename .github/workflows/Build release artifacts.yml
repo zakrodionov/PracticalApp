@@ -2,7 +2,7 @@ name: Build release artifacts
 
 on:
   push:
-    branches: [ main, feature/compose_voyager_navigation ]
+    branches: [ main, main-** ]
 
 jobs:
   build_apk_aab:
