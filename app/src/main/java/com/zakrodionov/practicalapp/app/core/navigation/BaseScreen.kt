@@ -1,5 +1,6 @@
 package com.zakrodionov.practicalapp.app.core.navigation
 
+import android.os.Parcelable
 import androidx.annotation.CallSuper
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -8,7 +9,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.zakrodionov.common.extensions.OnLaunched
 import com.zakrodionov.practicalapp.app.core.ui.theme.StatusBarColor
 
-abstract class BaseScreen : AndroidScreen() {
+abstract class BaseScreen : AndroidScreen(), Parcelable {
     open fun statusBarColor(): Color = StatusBarColor // Should be fun for non-Serializable data for state restoration
     open val useDarkIconsInStatusBar: Boolean = false
 

@@ -25,5 +25,5 @@ object Versions {
 
     const val junitJupiterVersion = "5.8.1"
 
-    const val voyagerVersion = "1.0.0-rc04"
+    const val voyagerVersion = "1.0.0-rc05"
 }

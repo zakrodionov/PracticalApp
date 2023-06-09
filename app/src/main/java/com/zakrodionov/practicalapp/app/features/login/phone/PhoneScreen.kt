@@ -18,8 +18,9 @@ import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
 import com.zakrodionov.practicalapp.app.core.ui.components.PhoneTextField
 import com.zakrodionov.practicalapp.app.core.ui.components.PrimaryButton
 import com.zakrodionov.practicalapp.app.features.login.password.PasswordScreen
+import kotlinx.parcelize.Parcelize
 import org.koin.androidx.compose.getViewModel
-
+@Parcelize
 class PhoneScreen : BaseScreen() {
     @Composable
     override fun Content() {

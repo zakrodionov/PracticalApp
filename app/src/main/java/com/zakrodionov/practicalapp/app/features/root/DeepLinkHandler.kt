@@ -9,6 +9,8 @@ import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.Navigator
+import cafe.adriel.voyager.navigator.internal.LocalNavigatorSaver
+import cafe.adriel.voyager.navigator.internal.parcelableNavigatorSaver
 import cafe.adriel.voyager.navigator.tab.Tab
 import com.squareup.moshi.JsonClass
 import com.zakrodionov.practicalapp.app.core.navigation.LocalGlobalNavigator
@@ -56,15 +58,17 @@ object DeepLinkHandler {
         val skipLoginScreen = appPreferences.isLogged || appPreferences.isSkipLoginFlow
 
         val startScreen = if (skipLoginScreen) HomeScreen() else LoginFlow(true)
-        Navigator(screens = listOf(startScreen)) { navigator ->
-            // Root aka global navigator
-            CompositionLocalProvider(LocalGlobalNavigator provides navigator) {
-                Box(modifier = Modifier.navigationBarsPadding()) {
-                    CurrentScreen()
-                }
+        CompositionLocalProvider(LocalNavigatorSaver provides parcelableNavigatorSaver()) {
+            Navigator(screens = listOf(startScreen)) { navigator ->
+                // Root aka global navigator
+                CompositionLocalProvider(LocalGlobalNavigator provides navigator) {
+                    Box(modifier = Modifier.navigationBarsPadding()) {
+                        CurrentScreen()
+                    }
 
-                if (!deepLinkNavigation.isEmpty && !skipLoginScreen) {
-                    navigator.replaceAll(deepLinkNavigation.parseNavigation())
+                    if (!deepLinkNavigation.isEmpty && !skipLoginScreen) {
+                        navigator.replaceAll(deepLinkNavigation.parseNavigation())
+                    }
                 }
             }
         }

@@ -6,12 +6,11 @@ import com.zakrodionov.practicalapp.app.core.BaseViewModel
 import com.zakrodionov.practicalapp.app.core.onFailure
 import com.zakrodionov.practicalapp.app.core.onSuccess
 import com.zakrodionov.practicalapp.app.domain.model.Posts.Post
-import com.zakrodionov.practicalapp.app.domain.model.WaitFixForParcelable
 import com.zakrodionov.practicalapp.app.domain.repositories.PostRepository
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class ArgsPostDetail(val postId: String, val post: Post? = null) : Parcelable, WaitFixForParcelable
+data class ArgsPostDetail(val postId: String, val post: Post? = null) : Parcelable
 
 class PostDetailViewModel(
     savedStateHandle: SavedStateHandle,

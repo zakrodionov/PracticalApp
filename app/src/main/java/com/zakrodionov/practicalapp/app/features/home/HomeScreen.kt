@@ -16,7 +16,9 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.zakrodionov.practicalapp.app.core.navigation.BaseScreen
 import com.zakrodionov.practicalapp.app.core.ui.theme.BottomBarColor
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 class HomeScreen(
     private val tab: Tab = PostsTab()
 ) : BaseScreen() {

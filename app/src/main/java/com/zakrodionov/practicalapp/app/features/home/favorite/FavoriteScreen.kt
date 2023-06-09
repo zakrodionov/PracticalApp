@@ -15,7 +15,9 @@ import com.zakrodionov.practicalapp.app.core.ui.defaultInsetsPadding
 import com.zakrodionov.practicalapp.app.features.home.posts.detail.ArgsPostDetail
 import com.zakrodionov.practicalapp.app.features.home.posts.detail.PostDetailsScreen
 import com.zakrodionov.practicalapp.app.features.login.LoginFlow
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 class FavoriteScreen : BaseScreen() {
     @Composable
     override fun Content() {

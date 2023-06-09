@@ -21,8 +21,9 @@ import com.zakrodionov.practicalapp.app.core.ui.components.PrimaryButton
 import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences
 import com.zakrodionov.practicalapp.app.features.home.HomeScreen
 import com.zakrodionov.practicalapp.app.features.login.LoginFlow
+import kotlinx.parcelize.Parcelize
 import org.koin.compose.koinInject
-
+@Parcelize
 class PasswordScreen : BaseScreen() {
     @Composable
     override fun Content() {

@@ -25,12 +25,17 @@ import com.zakrodionov.practicalapp.app.core.ui.theme.Purple500
 import com.zakrodionov.practicalapp.app.data.preferences.AppPreferences
 import com.zakrodionov.practicalapp.app.features.home.HomeScreen
 import com.zakrodionov.practicalapp.app.features.login.phone.PhoneScreen
+import kotlinx.parcelize.IgnoredOnParcel
+import kotlinx.parcelize.Parcelize
 import org.koin.compose.koinInject
 
+@Parcelize
 class LoginFlow(
     val fromLaunchScreen: Boolean,
     private val innerScreens: List<Screen> = listOf(PhoneScreen())
 ) : Flow() {
+
+    @IgnoredOnParcel
     override val title: String = "LoginFlow"
 
     @Composable

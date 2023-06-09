@@ -41,12 +41,16 @@ import com.zakrodionov.practicalapp.app.core.ui.components.LoadingItem
 import com.zakrodionov.practicalapp.app.domain.model.Posts.Post
 import com.zakrodionov.practicalapp.app.features.home.posts.detail.ArgsPostDetail
 import com.zakrodionov.practicalapp.app.features.home.posts.detail.PostDetailsScreen
+import kotlinx.parcelize.IgnoredOnParcel
+import kotlinx.parcelize.Parcelize
 import org.koin.androidx.compose.getViewModel
 import kotlin.random.Random
-
+@Parcelize
 class PostsScreen : BaseScreen() {
 
     override fun statusBarColor(): Color = Color.Transparent
+
+    @IgnoredOnParcel
     override val useDarkIconsInStatusBar: Boolean = true
 
     @OptIn(ExperimentalMaterialApi::class)

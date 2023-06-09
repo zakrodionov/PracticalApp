@@ -19,8 +19,9 @@ import com.zakrodionov.practicalapp.app.core.ui.components.CommonFillSpacer
 import com.zakrodionov.practicalapp.app.core.ui.components.CommonSpacer
 import com.zakrodionov.practicalapp.app.core.ui.defaultInsetsPadding
 import com.zakrodionov.practicalapp.app.features.login.LoginFlow
+import kotlinx.parcelize.Parcelize
 import org.koin.androidx.compose.getViewModel
-
+@Parcelize
 class AboutScreen : BaseScreen() {
     @Composable
     override fun Content() {

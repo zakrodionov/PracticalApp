@@ -1,5 +1,6 @@
 package com.zakrodionov.practicalapp.app.features.home
 
+import android.os.Parcelable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.List
@@ -14,8 +15,10 @@ import com.zakrodionov.practicalapp.app.core.ui.components.TabContent
 import com.zakrodionov.practicalapp.app.features.home.about.AboutScreen
 import com.zakrodionov.practicalapp.app.features.home.favorite.FavoriteScreen
 import com.zakrodionov.practicalapp.app.features.home.posts.list.PostsScreen
+import kotlinx.parcelize.Parcelize
 
-data class PostsTab(private val innerScreens: List<Screen> = listOf(PostsScreen())) : Tab {
+@Parcelize
+data class PostsTab(private val innerScreens: List<Screen> = listOf(PostsScreen())) : Tab, Parcelable {
     override val options: TabOptions
         @Composable
         get() {
@@ -29,7 +32,8 @@ data class PostsTab(private val innerScreens: List<Screen> = listOf(PostsScreen(
     }
 }
 
-data class FavoritesTab(private val innerScreens: List<Screen> = listOf(FavoriteScreen())) : Tab {
+@Parcelize
+data class FavoritesTab(private val innerScreens: List<Screen> = listOf(FavoriteScreen())) : Tab, Parcelable {
     override val options: TabOptions
         @Composable
         get() {
@@ -45,7 +49,8 @@ data class FavoritesTab(private val innerScreens: List<Screen> = listOf(Favorite
     }
 }
 
-data class AboutTab(private val innerScreens: List<Screen> = listOf(AboutScreen())) : Tab {
+@Parcelize
+data class AboutTab(private val innerScreens: List<Screen> = listOf(AboutScreen())) : Tab, Parcelable {
     override val options: TabOptions
         @Composable
         get() {
