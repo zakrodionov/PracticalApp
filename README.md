@@ -1,4 +1,4 @@
-# PracticalApp - Compose [WIP] [![Build](https://github.com/zakrodionov/PracticalApp/actions/workflows/Build.yml/badge.svg)](https://github.com/zakrodionov/PracticalApp/actions/workflows/Build.yml)
+# PracticalApp - Compose [![Build](https://github.com/zakrodionov/PracticalApp/actions/workflows/Build.yml/badge.svg)](https://github.com/zakrodionov/PracticalApp/actions/workflows/Build.yml)
 
 PracticalApp is an application architecture example for commercial/outsourced development. Main goals: efficiency, ease of maintaining the code, the use of tools that do not require long study (Android Architecture Components, Koin, Coroutines). The principles of Clean Architecture are followed, but without strict fanaticism, not at the expense of performance (without abstractions for the sake of abstractions).
 
